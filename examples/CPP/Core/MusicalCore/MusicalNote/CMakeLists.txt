@@ -1,0 +1,3 @@
+add_subdirectory(1_NoteCreation)
+
+add_subdirectory(NotePitch)

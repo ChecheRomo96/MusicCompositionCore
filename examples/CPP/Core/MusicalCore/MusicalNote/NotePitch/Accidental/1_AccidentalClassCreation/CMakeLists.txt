@@ -1,0 +1,2 @@
+add_executable(AccidentalClassCreation main.cpp)
+target_link_libraries(AccidentalClassCreation MCC)

@@ -1,0 +1,2 @@
+add_subdirectory(UtilityCore)
+add_subdirectory(MusicalCore)
