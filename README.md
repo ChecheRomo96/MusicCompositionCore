@@ -1,0 +1,2 @@
+# MusicCompositionCore
+ 
