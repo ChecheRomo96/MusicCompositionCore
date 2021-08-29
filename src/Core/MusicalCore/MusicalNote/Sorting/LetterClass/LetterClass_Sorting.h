@@ -3,7 +3,7 @@
 
 	#include <MCC_BuildSettings.h>
 	
-	#include "../../NoteClass.h"
+	#include "../../Note_Class.h"
 
 	namespace MusicCompositionCore
 	{
@@ -17,8 +17,8 @@
 					{
 						namespace LetterClass
 						{
-							int8_t Ascending(const LetterClass& Element, const LetterClass& Pivot);
-							int8_t Descending(const LetterClass& Element, const LetterClass& Pivot);
+                        int8_t Ascending(const Pitch::Letter::LetterClass& Element, const Pitch::Letter::LetterClass& Pivot);
+                        int8_t Descending(const Pitch::Letter::LetterClass& Element, const Pitch::Letter::LetterClass& Pivot);
 						}
 					}
 				}

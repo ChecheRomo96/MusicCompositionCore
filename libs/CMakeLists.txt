@@ -48,8 +48,9 @@
 	if(EXISTS ${CMAKE_CURRENT_LIST_DIR}/rtmidi)
 		set( BUILD_EXAMPLES "OFF" )
 		set( INSTALL "OFF" )
-
+		set(RTMIDI_BUILD_TESTING OFF)
 		message("Using the RtMidi Source on: MusicCompositonCore/libs/rtmidi")
+		
 		add_subdirectory(rtmidi)
 	else()
 

@@ -3,7 +3,7 @@
 
 	#include <MCC_BuildSettings.h>
 	
-	#include "../../NoteClass.h"
+	#include "../../Note_Class.h"
 
 	namespace MusicCompositionCore
 	{
@@ -17,8 +17,8 @@
 					{
 						namespace AccidentalClass
 						{
-							int8_t Ascending(const AccidentalClass& Element, const AccidentalClass& Pivot);
-							int8_t Descending(const AccidentalClass& Element, const AccidentalClass& Pivot);
+                        int8_t Ascending(const Pitch::Accidental::AccidentalClass& Element, const Pitch::Accidental::AccidentalClass& Pivot);
+                        int8_t Descending(const Pitch::Accidental::AccidentalClass& Element, const Pitch::Accidental::AccidentalClass& Pivot);
 						}
 					}
 				}
