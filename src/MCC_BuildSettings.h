@@ -14,7 +14,7 @@
             
             #define PROGMEM_MACRO PROGMEM
             
-            #define MCC_VERSION 0.0.1
+            #define MCC_VERSION "0.0.1"
 
             #define MCC_CORE_ENABLED
     //
