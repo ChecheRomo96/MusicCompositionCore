@@ -265,7 +265,7 @@ char Flash::Buffer[24];
 			{
 				
 				#if defined(ARDUINO)
-					buff[0] = pgm_read_byte(pgm_read_word(&NoteNames[Letter][0]));
+					buff[0] = pgm_read_byte(pgm_read_word(&NoteNames[Letter]));
 					if((Accidental == Pitch::Accidental::Natural) && (Format.NaturalMode() == MusicCompositionCore::Disabled)){buff[1]='\0';}
 					else
 					{
