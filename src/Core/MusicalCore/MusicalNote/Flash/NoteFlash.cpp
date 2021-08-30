@@ -116,11 +116,11 @@ char Flash::Buffer[24];
 			case NoteFormat::SpaceJustified:
 			{
 				#if defined(ARDUINO_IDE)
-					buff[0] = pgm_read_byte(pgm_read_word(&NoteNames[Letter.ID()]));
+					buff[0] = pgm_read_byte(pgm_read_word(&NoteNames[Letter]));
 					if((Accidental == Pitch::Accidental::Natural) && (Format.NaturalMode() == MusicCompositionCore::Disabled)){}
 					else
 					{
-						strcpy_P(buff + 1, (PGM_P)pgm_read_word(&(AccidentalNames[Accidental.ID() + 4][Format.AccidentalMode()])));
+						strcpy_P(buff + 1, (PGM_P)pgm_read_word(&(AccidentalNames[Accidental + 4][Format.AccidentalMode()])));
 					}	
 				#else
                 buff[0] = MCC_MusicalNoteFlash::NoteNames[Letter][0];
@@ -219,11 +219,11 @@ char Flash::Buffer[24];
 			case NoteFormat::SpaceEnabled:
 			{
 				#if defined(ARDUINO)
-					buff[0] = pgm_read_byte(pgm_read_word(&NoteNames[Letter.ID()]));
+					buff[0] = pgm_read_byte(pgm_read_word(&NoteNames[Letter]));
 					if((Accidental == Pitch::Accidental::Natural) && (Format.NaturalMode() == MusicCompositionCore::Disabled)){buff[1]='\0';}
 					else
 					{
-						strcpy_P(buff + 2, (PGM_P)pgm_read_word(&(AccidentalNames[Accidental.ID() + 4][Format.AccidentalMode()])));
+						strcpy_P(buff + 2, (PGM_P)pgm_read_word(&(AccidentalNames[Accidental + 4][Format.AccidentalMode()])));
 					}	
 				#else
 					buff[0] = NoteNames[Letter][0];
