@@ -13,6 +13,8 @@
             #include <CPString.h>
             
             #define PROGMEM_MACRO PROGMEM
+
+            #define MCC_CORE_ENABLED
     //
     ///////////////////////////////////////////////////////////////////////////////////
     // PSOC Creator
