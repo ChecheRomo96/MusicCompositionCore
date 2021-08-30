@@ -1,7 +1,5 @@
 #include <MCC.h>
 
-using namespace MCC_MusicalNote;
-
 void setup()
 {
 
