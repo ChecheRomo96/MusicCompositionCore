@@ -1,4 +1,0 @@
-add_subdirectory(Accidental)
-add_subdirectory(Letter)
-
-add_subdirectory(1_PitchClass_Creation)
