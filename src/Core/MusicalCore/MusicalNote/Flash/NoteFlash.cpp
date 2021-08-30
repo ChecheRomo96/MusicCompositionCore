@@ -75,13 +75,13 @@ char Flash::Buffer[24];
 
 	char* Flash::GetName(char* buff, const Pitch::Letter::LetterClass& Letter, const Pitch::Accidental::AccidentalClass& Accidental, int8_t octave, const NoteFormat::Format& Format)
 	{
-        return GetName(buff, Letter, Accidental, octave, Format);
+        return GetName(buff, Letter.ID(), Accidental.ID(), octave, Format);
 	}
 
 	const char* Flash::GetName(const Pitch::Letter::LetterClass& Letter, const Pitch::Accidental::AccidentalClass& Accidental, int8_t octave, const NoteFormat::Format& Format)
 	{
 
-        return GetName(Flash::Buffer, Letter, Accidental, octave, Format);
+        return GetName(Flash::Buffer, Letter.ID(), Accidental.ID(), octave, Format);
 	}
 //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
