@@ -1,0 +1,2 @@
+add_executable(GetName_Simple main.cpp)
+target_link_libraries(GetName_Simple MCC)
