@@ -28,7 +28,7 @@ void setup()
     // MusicalNote::Note( PitchClass, Octave )
 
         auto accidental = Pitch::Accidental::Flat;
-        letter = Pitch::Letter::B;
+        auto letter = Pitch::Letter::B;
         Pitch = Pitch::PitchClass( letter, accidental );
         myNote = Note( Pitch, 1 );
         Serial.println( myNote.Name() );
