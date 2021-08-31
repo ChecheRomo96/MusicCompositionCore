@@ -1,0 +1,2 @@
+add_executable(GetName_wNoteFormat main.cpp)
+target_link_libraries(GetName_wNoteFormat MCC)

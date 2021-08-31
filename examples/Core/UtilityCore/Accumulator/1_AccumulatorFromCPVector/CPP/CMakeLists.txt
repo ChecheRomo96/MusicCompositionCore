@@ -1,0 +1,2 @@
+add_executable(AccumulatorFromVector main.cpp)
+target_link_libraries(AccumulatorFromVector MCC)

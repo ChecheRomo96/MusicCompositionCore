@@ -11,7 +11,7 @@
        		{
        			namespace MusicalNote
        			{
-       				namespace NoteFormat
+       				namespace TextFormat
        				{
 						class Format;
                         
@@ -49,7 +49,7 @@
 		}
 	}
 
-	namespace MCC_MusicalNoteFormat = MusicCompositionCore::Core::MusicalCore::MusicalNote::NoteFormat;
+	namespace MCC_MusicalNoteFormat = MusicCompositionCore::Core::MusicalCore::MusicalNote::TextFormat;
 
 	#include "NoteFormat_Class.h"
 	

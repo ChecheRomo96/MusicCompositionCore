@@ -9,12 +9,12 @@ char Flash::Buffer[24];
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Note + Format
 
-	char* Flash::GetName(char* buff, const Note& source, const NoteFormat::Format& Format)
+	char* Flash::GetName(char* buff, const Note& source, const TextFormat::Format& Format)
 	{
 		return GetName(buff, source.Letter(), source.Accidental(), source.Octave(), Format);
 	}
 
-	const char* Flash::GetName(const Note& source, const NoteFormat::Format& Format)
+	const char* Flash::GetName(const Note& source, const TextFormat::Format& Format)
 	{
 		return GetName(Flash::Buffer, source.Letter(), source.Accidental(), source.Octave(), Format);
 	}
@@ -22,17 +22,17 @@ char Flash::Buffer[24];
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // PitchClass + Format
 
-	char* Flash::GetName(char* buff, const Pitch::PitchClass& source, const NoteFormat::Format& Format)
+	char* Flash::GetName(char* buff, const Pitch::PitchClass& source, const TextFormat::Format& Format)
 	{
-		NoteFormat::Format tmp = Format;
+		TextFormat::Format tmp = Format;
         tmp.Set_OctaveDisabled();
 
 		return GetName(buff, source.Letter(), source.Accidental(), 0, tmp);
 	}
 
-	const char* Flash::GetName(const Pitch::PitchClass& source, const NoteFormat::Format& Format)
+	const char* Flash::GetName(const Pitch::PitchClass& source, const TextFormat::Format& Format)
 	{
-		NoteFormat::Format tmp = Format;
+		TextFormat::Format tmp = Format;
 		tmp.Set_OctaveDisabled();
 
 		return GetName(Flash::Buffer, source.Letter(), source.Accidental(), 0, tmp);
@@ -41,12 +41,12 @@ char Flash::Buffer[24];
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // PitchClass + Octave + Format
 
-	char* Flash::GetName(char* buff, const Pitch::PitchClass& source, int8_t octave, const NoteFormat::Format& Format)
+	char* Flash::GetName(char* buff, const Pitch::PitchClass& source, int8_t octave, const TextFormat::Format& Format)
 	{
 		return GetName(buff, source.Letter(), source.Accidental(), octave, Format);
 	}
 
-	const char* Flash::GetName(const Pitch::PitchClass& source, int8_t octave, const NoteFormat::Format& Format)
+	const char* Flash::GetName(const Pitch::PitchClass& source, int8_t octave, const TextFormat::Format& Format)
 	{
 		return GetName(Flash::Buffer, source.Letter(), source.Accidental(), octave, Format);
 	}
@@ -54,17 +54,17 @@ char Flash::Buffer[24];
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // LetterClass + AccidentalClass + Format
 
-	char* Flash::GetName(char* buff, const Pitch::Letter::LetterClass& Letter, const Pitch::Accidental::AccidentalClass& Accidental, const NoteFormat::Format& Format)
+	char* Flash::GetName(char* buff, const Pitch::Letter::LetterClass& Letter, const Pitch::Accidental::AccidentalClass& Accidental, const TextFormat::Format& Format)
 	{
-        NoteFormat::Format tmp = Format;
+        TextFormat::Format tmp = Format;
         tmp.Set_OctaveDisabled();
 
 		return GetName(buff, Letter, Accidental, tmp);
 	}
 
-	const char* Flash::GetName(const Pitch::Letter::LetterClass& Letter, const Pitch::Accidental::AccidentalClass& Accidental, const NoteFormat::Format& Format)
+	const char* Flash::GetName(const Pitch::Letter::LetterClass& Letter, const Pitch::Accidental::AccidentalClass& Accidental, const TextFormat::Format& Format)
 	{
-        NoteFormat::Format tmp = Format;
+        TextFormat::Format tmp = Format;
         tmp.Set_OctaveDisabled();
         
 		return GetName(Flash::Buffer, Letter, Accidental, tmp);
@@ -73,12 +73,12 @@ char Flash::Buffer[24];
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // LetterClass + AccidentalClass + Octave + Format
 
-	char* Flash::GetName(char* buff, const Pitch::Letter::LetterClass& Letter, const Pitch::Accidental::AccidentalClass& Accidental, int8_t octave, const NoteFormat::Format& Format)
+	char* Flash::GetName(char* buff, const Pitch::Letter::LetterClass& Letter, const Pitch::Accidental::AccidentalClass& Accidental, int8_t octave, const TextFormat::Format& Format)
 	{
         return GetName(buff, Letter.ID(), Accidental.ID(), octave, Format);
 	}
 
-	const char* Flash::GetName(const Pitch::Letter::LetterClass& Letter, const Pitch::Accidental::AccidentalClass& Accidental, int8_t octave, const NoteFormat::Format& Format)
+	const char* Flash::GetName(const Pitch::Letter::LetterClass& Letter, const Pitch::Accidental::AccidentalClass& Accidental, int8_t octave, const TextFormat::Format& Format)
 	{
 
         return GetName(Flash::Buffer, Letter.ID(), Accidental.ID(), octave, Format);
@@ -87,17 +87,17 @@ char Flash::Buffer[24];
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // LetterType + AccidentalType + Format
 
-	char* Flash::GetName(char* buff, const Pitch::LetterType& Letter, const Pitch::AccidentalType& Accidental, const NoteFormat::Format& Format)
+	char* Flash::GetName(char* buff, const Pitch::LetterType& Letter, const Pitch::AccidentalType& Accidental, const TextFormat::Format& Format)
 	{
-		NoteFormat::Format tmp = Format;
+		TextFormat::Format tmp = Format;
         tmp.Set_OctaveDisabled();
 
 		return GetName(buff,Letter,Accidental,0,tmp);
 	}
 
-	const char* Flash::GetName(const Pitch::LetterType& Letter, const Pitch::AccidentalType& Accidental, const NoteFormat::Format& Format)
+	const char* Flash::GetName(const Pitch::LetterType& Letter, const Pitch::AccidentalType& Accidental, const TextFormat::Format& Format)
 	{
-		NoteFormat::Format tmp = Format;
+		TextFormat::Format tmp = Format;
         tmp.Set_OctaveDisabled();
         
 		return GetName(Flash::Buffer,Letter,Accidental,0,tmp);
@@ -106,14 +106,14 @@ char Flash::Buffer[24];
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // LetterType + AccidentalType + Octave + Format
 
-	char* Flash::GetName(char* buff, const Pitch::LetterType& Letter, const Pitch::AccidentalType& Accidental, int8_t octave, const NoteFormat::Format& Format)
+	char* Flash::GetName(char* buff, const Pitch::LetterType& Letter, const Pitch::AccidentalType& Accidental, int8_t octave, const TextFormat::Format& Format)
 	{
 		if((Letter == Pitch::Letter::Count)||(Accidental < Pitch::Accidental::Min)||(Accidental > Pitch::Accidental::Max)){buff[0] = '\0'; return buff;}
 	    
 		switch(Format.SpaceMode())
 		{
 			
-			case NoteFormat::SpaceJustified:
+			case TextFormat::SpaceJustified:
 			{
 				#if defined(ARDUINO_IDE)
 					buff[0] = pgm_read_byte(pgm_read_word(&NoteNames[Letter]));
@@ -133,7 +133,7 @@ char Flash::Buffer[24];
 				
 				uint8_t offset;
 
-				if(Format.AccidentalMode() == NoteFormat::AccidentalShort)
+				if(Format.AccidentalMode() == TextFormat::AccidentalShort)
 				{
 					switch(Accidental)
 					{
@@ -191,7 +191,7 @@ char Flash::Buffer[24];
 					offset = 18;
 				}
 
-	            if(Format.OctaveEnabled() == NoteFormat::OctaveEnabled)
+	            if(Format.OctaveEnabled() == TextFormat::OctaveEnabled)
 				{
 	                
 	                CPString::string tmp(octave);
@@ -216,7 +216,7 @@ char Flash::Buffer[24];
 			}
 			break;
 			
-			case NoteFormat::SpaceEnabled:
+			case TextFormat::SpaceEnabled:
 			{
 				#if defined(ARDUINO)
 					buff[0] = pgm_read_byte(pgm_read_word(&NoteNames[Letter]));
@@ -239,7 +239,7 @@ char Flash::Buffer[24];
 				#endif
 
 
-				if(Format.OctaveEnabled() == NoteFormat::OctaveEnabled)
+				if(Format.OctaveEnabled() == TextFormat::OctaveEnabled)
 				{
 	                buff[1] = ' ';
 					uint8_t offset = strlen(buff);
@@ -261,7 +261,7 @@ char Flash::Buffer[24];
 			}
 			break;
 			
-			case NoteFormat::SpaceDisabled:
+			case TextFormat::SpaceDisabled:
 			{
 				
 				#if defined(ARDUINO)
@@ -280,7 +280,7 @@ char Flash::Buffer[24];
 					}
 				#endif
 
-				if(Format.OctaveEnabled() == NoteFormat::OctaveEnabled)
+				if(Format.OctaveEnabled() == TextFormat::OctaveEnabled)
 				{
 					uint8_t offset = strlen(buff);
 	                CPString::string tmp(octave);
@@ -301,14 +301,14 @@ char Flash::Buffer[24];
 		return buff;
 	}
 
-	const char* Flash::GetName(const Pitch::LetterType& Letter, const Pitch::AccidentalType& Accidental, int8_t octave, const NoteFormat::Format& Format)
+	const char* Flash::GetName(const Pitch::LetterType& Letter, const Pitch::AccidentalType& Accidental, int8_t octave, const TextFormat::Format& Format)
     {
         return GetName(Flash::Buffer, Letter,Accidental,octave,Format);
     }
 //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Get Accidental Name
-	char* Flash::GetAccidentalName(char* buff, const Pitch::Accidental::AccidentalClass& Accidental, const NoteFormat::Format& Format)
+	char* Flash::GetAccidentalName(char* buff, const Pitch::Accidental::AccidentalClass& Accidental, const TextFormat::Format& Format)
 	{
 	    #if defined(ARDUINO_IDE)
 	        if((Accidental == Pitch::Accidental::Natural) && (Format.NaturalMode() == MusicCompositionCore::Disabled)){}
@@ -326,7 +326,7 @@ char Flash::Buffer[24];
 	    return buff;
 	}
 
-	const char* Flash::GetAccidentalName(const Pitch::Accidental::AccidentalClass& Accidental, const NoteFormat::Format& Format)
+	const char* Flash::GetAccidentalName(const Pitch::Accidental::AccidentalClass& Accidental, const TextFormat::Format& Format)
 	{
 	    return GetAccidentalName(Flash::Buffer, Accidental, Format);
 	}
@@ -334,7 +334,7 @@ char Flash::Buffer[24];
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Get Letter Name
 
-	char* Flash::GetLetterName(char* buff, const Pitch::Letter::LetterClass& letter, const NoteFormat::Format& Format)
+	char* Flash::GetLetterName(char* buff, const Pitch::Letter::LetterClass& letter, const TextFormat::Format& Format)
 	{
 	    #if defined(ARDUINO_IDE)
 	        strcpy_P(buff, (PGM_P)pgm_read_word(&(NoteNames[letter.ID() + 4][Format.AccidentalMode()])));
@@ -344,7 +344,7 @@ char Flash::Buffer[24];
 	    return buff;
 	}
 
-	const char* Flash::GetLetterName(const Pitch::Letter::LetterClass& letter, const NoteFormat::Format& Format)
+	const char* Flash::GetLetterName(const Pitch::Letter::LetterClass& letter, const TextFormat::Format& Format)
 	{
 	    return GetLetterName(Flash::Buffer, letter, Format);
 	}

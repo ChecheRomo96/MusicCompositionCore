@@ -13,7 +13,7 @@
        		{
        			namespace MusicalNote
        			{
-       				namespace NoteFormat
+       				namespace TextFormat
        				{
        					class Format
        					{

@@ -1,0 +1,2 @@
+add_subdirectory(1_GetName_Simple)
+add_subdirectory(2_GetName_wFormat)
