@@ -4,7 +4,7 @@
     #include <MCC_BuildSettings.h>
 
     #include "../Pitch/NotePitch.h"
-    #include "../Format/NoteFormat.h"
+    #include "../TextFormat/TextFormat.h"
 
     #include "NotePitch_Class.h"
     #include "NotePitch_Definitions.h"
@@ -60,8 +60,8 @@
                                 void Set_Accidental(const Accidental::AccidentalClass& source);
                                 const Accidental::AccidentalClass& Accidental() const;
                                 
-                                const char* Name(MusicalNote::NoteFormat::Format& Format = MusicalNote::NoteFormat::DefaultFormat)const;
-                                char* Name(char* buff, MusicalNote::NoteFormat::Format& Format = MusicalNote::NoteFormat::DefaultFormat) const;
+                                const char* Name(MusicalNote::TextFormat::Format& Format = MusicalNote::TextFormat::DefaultFormat)const;
+                                char* Name(char* buff, MusicalNote::TextFormat::Format& Format = MusicalNote::TextFormat::DefaultFormat) const;
                             
                                 const uint8_t NotePitch() const;
                                 const uint8_t MidiPitch() const;

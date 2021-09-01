@@ -1,0 +1,2 @@
+add_executable(NoteFunctionality main.cpp)
+target_link_libraries(NoteFunctionality MCC)

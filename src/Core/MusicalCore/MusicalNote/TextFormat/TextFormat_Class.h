@@ -3,7 +3,7 @@
 
 	#include <MCC_BuildSettings.h>
 
-	#include "NoteFormat.h"
+	#include "TextFormat.h"
 
 	namespace MusicCompositionCore
 	{

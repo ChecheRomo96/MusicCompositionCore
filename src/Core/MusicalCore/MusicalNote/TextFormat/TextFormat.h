@@ -51,6 +51,6 @@
 
 	namespace MCC_MusicalNoteFormat = MusicCompositionCore::Core::MusicalCore::MusicalNote::TextFormat;
 
-	#include "NoteFormat_Class.h"
+	#include "TextFormat_Class.h"
 	
 #endif//MCC_NOTE_FORMAT_H

@@ -1,0 +1,2 @@
+add_executable(GetName_wTextFormat main.cpp)
+target_link_libraries(GetName_wTextFormat MCC)

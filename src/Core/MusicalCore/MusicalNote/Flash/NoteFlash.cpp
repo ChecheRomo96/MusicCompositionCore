@@ -337,11 +337,14 @@ char Flash::Buffer[24];
 	char* Flash::GetLetterName(char* buff, const Pitch::Letter::LetterClass& letter, const TextFormat::Format& Format)
 	{
 	    #if defined(ARDUINO_IDE)
-	        strcpy_P(buff, (PGM_P)pgm_read_word(&(NoteNames[letter.ID() + 4][Format.AccidentalMode()])));
+	        strcpy_P(buff, (PGM_P)pgm_read_word(&(NoteNames[letter.ID()])));
 	    #else
-	        strcpy(buff, &NoteNames[letter.ID() + 4][Format.AccidentalMode()]);
+	        memcpy(buff, NoteNames[letter.ID()], 1);
 	    #endif
-	    return buff;
+		
+		buff[1] = '\0';
+	    
+		return buff;
 	}
 
 	const char* Flash::GetLetterName(const Pitch::Letter::LetterClass& letter, const TextFormat::Format& Format)

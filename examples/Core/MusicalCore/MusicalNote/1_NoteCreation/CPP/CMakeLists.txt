@@ -1,2 +1,2 @@
-add_executable( NAME main.cpp )
-target_link_libraries( NAME MCC )
+add_executable( NoteCreation main.cpp )
+target_link_libraries( NoteCreation MCC )

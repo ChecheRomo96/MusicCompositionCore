@@ -11,7 +11,7 @@
 /////////////////////////////////////////////////////////////////////////
 // Compare Mode
 
-        bool MCC_MusicalNote::CompareMode::CurrentMode = CompareMode::Name;
+        bool MCC_MusicalNote::CompareMode::CurrentMode = MCC_MusicalNote::CompareMode::Name;
 
 		void MCC_MusicalNote::CompareNames()
 		{
@@ -474,12 +474,12 @@
 		///////////////////////////////////////////////////////////////////////
 		// API
 			
-			const char* Note::Name(const NoteFormat::Format& Format)const
+			const char* Note::Name(const TextFormat::Format& Format)const
 			{
 			    return Flash::GetName((*this),Format);
 			}
 
-			char* Note::Name(char* buff, const NoteFormat::Format& Format)
+			char* Note::Name(char* buff, const TextFormat::Format& Format)
 			{
 			    return Flash::GetName(buff, (*this), Format);
 			}

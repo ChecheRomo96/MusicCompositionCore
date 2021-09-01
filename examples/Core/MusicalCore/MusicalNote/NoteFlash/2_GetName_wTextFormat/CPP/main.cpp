@@ -10,7 +10,7 @@ int main()
     // Default initializator, contents of TextFormat::DefaultFormat are copyied
     MCC_MusicalNote::TextFormat::Format myFormat; 
     
-    char* Text = GetName( MCC_MusicalNote::Pitch::Letter::C, MCC_MusicalNote::Pitch::Accidental::Natural, 3, myFormat );
+    const char* Text = GetName( MCC_MusicalNote::Pitch::Letter::C, MCC_MusicalNote::Pitch::Accidental::Natural, 3, myFormat );
     std::cout<<Text<<std::endl;
 
     myFormat.Set_OctaveDisabled();
@@ -18,8 +18,8 @@ int main()
     Text = GetName( MCC_MusicalNote::Pitch::Letter::C, MCC_MusicalNote::Pitch::Accidental::Natural, 3, myFormat );
     std::cout<<Text<<std::endl;
 
-
     myFormat.Set_AccidentalLong();
+    myFormat.Set_SpaceEnabled();
 
     Text = GetName( MCC_MusicalNote::Pitch::Letter::C, MCC_MusicalNote::Pitch::Accidental::Natural, 3, myFormat );
     std::cout<<Text<<std::endl;

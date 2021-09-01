@@ -1,4 +1,4 @@
-#include "NoteFormat.h"
+#include "TextFormat.h"
 #include <MCC.h>
 
 using namespace MusicCompositionCore::Core::MusicalCore::MusicalNote;

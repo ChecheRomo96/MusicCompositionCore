@@ -3,7 +3,7 @@
 #include "Letter/Letter.h"
 #include "Accidental/Accidental.h"
 #include "../Note_Class.h"
-#include "../Format/NoteFormat.h"
+#include "../TextFormat/TextFormat.h"
 //#include "../../MusicalInterval/MusicalInterval.h"
 
 /////////////////////////////////////////////////////////////////////////
@@ -370,7 +370,7 @@ void PitchClass::Previous()
     return _Letter.Previous();
 }
 
-const char* PitchClass::Name(MusicalNote::NoteFormat::Format& Format)const
+const char* PitchClass::Name(MusicalNote::TextFormat::Format& Format)const
 {
     bool flag = 0;
     if(Format.OctaveEnabled())
@@ -379,9 +379,9 @@ const char* PitchClass::Name(MusicalNote::NoteFormat::Format& Format)const
         Format.Set_OctaveDisabled();
     }
     
-    if(Format.AccidentalMode() == MusicalNote::NoteFormat::AccidentalShort)
+    if(Format.AccidentalMode() == MusicalNote::TextFormat::AccidentalShort)
     {
-        if(Format.SpaceMode() != NoteFormat::SpaceDisabled)
+        if(Format.SpaceMode() != TextFormat::SpaceDisabled)
         {
             uint8_t space_mode = Format.SpaceMode();
             Format.Set_SpaceDisabled();
@@ -395,7 +395,7 @@ const char* PitchClass::Name(MusicalNote::NoteFormat::Format& Format)const
     }
     else
     {
-        if(Format.SpaceMode() != NoteFormat::SpaceEnabled)
+        if(Format.SpaceMode() != TextFormat::SpaceEnabled)
         {
             uint8_t space_mode = Format.SpaceMode();
             Format.Set_SpaceEnabled();
@@ -413,7 +413,7 @@ const char* PitchClass::Name(MusicalNote::NoteFormat::Format& Format)const
     return Flash::Buffer;
 }
 
-char* PitchClass::Name(char* buff, MusicalNote::NoteFormat::Format& Format)const
+char* PitchClass::Name(char* buff, MusicalNote::TextFormat::Format& Format)const
 {
     bool flag = 0;
     if(Format.OctaveEnabled())
@@ -422,9 +422,9 @@ char* PitchClass::Name(char* buff, MusicalNote::NoteFormat::Format& Format)const
         Format.Set_OctaveDisabled();
     }
     
-    if(Format.AccidentalMode() == MusicalNote::NoteFormat::AccidentalShort)
+    if(Format.AccidentalMode() == MusicalNote::TextFormat::AccidentalShort)
     {
-        if(Format.SpaceMode() != NoteFormat::SpaceDisabled)
+        if(Format.SpaceMode() != TextFormat::SpaceDisabled)
         {
             uint8_t space_mode = Format.SpaceMode();
             Format.Set_SpaceDisabled();
@@ -438,7 +438,7 @@ char* PitchClass::Name(char* buff, MusicalNote::NoteFormat::Format& Format)const
     }
     else
     {
-        if(Format.SpaceMode() != NoteFormat::SpaceEnabled)
+        if(Format.SpaceMode() != TextFormat::SpaceEnabled)
         {
             uint8_t space_mode = Format.SpaceMode();
             Format.Set_SpaceEnabled();

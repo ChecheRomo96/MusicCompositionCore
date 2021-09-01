@@ -5,7 +5,7 @@
 	
 
   	#include "Pitch/NotePitch.h"
-	#include "Format/NoteFormat.h"
+	#include "TextFormat/TextFormat.h"
 	#include "Flash/NoteFlash.h"
 	//struct MusicCompositionCore::Core::MidiCore::MidiNote;
 

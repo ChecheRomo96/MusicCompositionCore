@@ -20,7 +20,7 @@
 	namespace MCC_MusicalNote = MusicCompositionCore::Core::MusicalCore::MusicalNote;
 
 	#include "Flash/NoteFlash.h"
-	#include "Format/NoteFormat.h"
+	#include "TextFormat/TextFormat.h"
 	#include "Pitch/NotePitch.h"
 	
 	#include "Note_Class.h"

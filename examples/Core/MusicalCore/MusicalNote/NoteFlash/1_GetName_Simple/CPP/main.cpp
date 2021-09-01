@@ -7,7 +7,7 @@ int main()
 {
 	MCC::Start();
     
-    char* Text = GetName( MCC_MusicalNote::Pitch::Letter::C, MCC_MusicalNote::Pitch::Accidental::Natural );
+    const char* Text = GetName( MCC_MusicalNote::Pitch::Letter::C, MCC_MusicalNote::Pitch::Accidental::Natural );
     
     std::cout<<Text<<std::endl;
 

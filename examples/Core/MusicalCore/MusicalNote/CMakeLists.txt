@@ -1,1 +1,5 @@
-add_subdirectory(NoteCreation)
+add_subdirectory(NoteFlash)
+add_subdirectory(NotePitch)
+
+add_subdirectory(1_NoteCreation)
+add_subdirectory(2_NoteFunctionality)

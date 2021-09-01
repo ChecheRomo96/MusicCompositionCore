@@ -1,0 +1,2 @@
+add_executable(GetAccidental main.cpp)
+target_link_libraries(GetAccidental MCC)
