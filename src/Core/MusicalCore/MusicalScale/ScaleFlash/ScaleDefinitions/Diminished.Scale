@@ -1,0 +1,25 @@
+// Diminished Scale
+
+static const char DiminishedStr[] PROGMEM_MACRO = {'D','i','m','i','n','i','s','h','e','d','\0'};
+
+static const uint8_t DiminishedNumbers[] PROGMEM_MACRO =
+{
+    MCC_MusicalInterval::Numbers::Second,
+    MCC_MusicalInterval::Numbers::Third,
+    MCC_MusicalInterval::Numbers::Fourth,
+    MCC_MusicalInterval::Numbers::Fourth,
+    MCC_MusicalInterval::Numbers::Fifth,
+    MCC_MusicalInterval::Numbers::Sixth,
+    MCC_MusicalInterval::Numbers::Seventh
+};
+
+static constexpr uint8_t DiminishedScaleID = 23u;
+
+const Container_Mapping Diminished PROGMEM_MACRO =
+{
+    DiminishedScaleID,
+    (ScaleProperties::MappingMode::Dynamic_Mapping|ScaleProperties::Location::Flash_Mapping),
+    DiminishedStr,
+    0x8B6D,
+    DiminishedNumbers
+};

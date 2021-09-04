@@ -1,0 +1,24 @@
+// Minor Blues
+
+static const char MinorBluesStr[] PROGMEM_MACRO = {'M','i','n','o','r',' ','B','l','u','e','s','\0'};
+
+
+static const uint8_t MinorBluesNumbers[] PROGMEM_MACRO =
+{
+    MCC_MusicalInterval::Numbers::Third,
+    MCC_MusicalInterval::Numbers::Fourth,
+    MCC_MusicalInterval::Numbers::Fifth,
+    MCC_MusicalInterval::Numbers::Fifth,
+    MCC_MusicalInterval::Numbers::Seventh
+};
+
+static constexpr uint8_t MinorBluesScaleID = 10u;
+
+const Container_Mapping MinorBlues PROGMEM_MACRO =
+{
+    MinorBluesScaleID,
+    (ScaleProperties::MappingMode::Dynamic_Mapping|ScaleProperties::Location::Flash_Mapping),
+    MinorBluesStr,
+    0x6972,
+    MinorBluesNumbers
+};                   

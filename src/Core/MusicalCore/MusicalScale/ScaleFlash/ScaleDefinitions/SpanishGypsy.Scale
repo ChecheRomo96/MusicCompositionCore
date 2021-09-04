@@ -1,0 +1,24 @@
+// Spanish Gypsy Scale
+
+static const char SpanishGypsyStr[] PROGMEM_MACRO = {'S','p','a','n','i','s','h',' ','G','y','p','s','y','\0'};
+
+static const uint8_t SpanishGypsyNumbers[] PROGMEM_MACRO =
+{
+    MCC_MusicalInterval::Numbers::Second,
+    MCC_MusicalInterval::Numbers::Third,
+    MCC_MusicalInterval::Numbers::Fourth,
+    MCC_MusicalInterval::Numbers::Fifth,
+    MCC_MusicalInterval::Numbers::Sixth,
+    MCC_MusicalInterval::Numbers::Seventh
+};
+
+static constexpr uint8_t SpanishGypsyScaleID = 35u;
+
+const Container_Mapping SpanishGypsy PROGMEM_MACRO =
+{
+    SpanishGypsyScaleID,
+    (ScaleProperties::MappingMode::Dynamic_Mapping|ScaleProperties::Location::Flash_Mapping),
+    SpanishGypsyStr,
+    0x7CDA,
+    SpanishGypsyNumbers
+};

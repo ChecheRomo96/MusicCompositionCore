@@ -1,0 +1,35 @@
+// Major Scale
+
+static const char MajorStr[] PROGMEM_MACRO = {'M','a','j','o','r','\0'};
+static const char IonianStr[] PROGMEM_MACRO = {'I','o','n','i','a','n','\0'};
+
+static const uint8_t MajorNumbers[] PROGMEM_MACRO =
+{
+    MusicalInterval::Numbers::Second,
+    MusicalInterval::Numbers::Third,
+    MusicalInterval::Numbers::Fourth,
+    MusicalInterval::Numbers::Fifth,
+    MusicalInterval::Numbers::Sixth,
+    MusicalInterval::Numbers::Seventh
+};
+
+static constexpr uint8_t MajorScaleID = 2u;
+static constexpr uint8_t IonianScaleID = 3u;
+
+const Container_Mapping Major PROGMEM_MACRO =
+{
+    MajorScaleID,
+    (ScaleProperties::MappingMode::Dynamic_Mapping|ScaleProperties::Location::Flash_Mapping),
+    MajorStr,
+    0x7AD5,
+    MajorNumbers
+};
+
+const Container_Mapping Ionian PROGMEM_MACRO =
+{
+    IonianScaleID,
+    (ScaleProperties::MappingMode::Dynamic_Mapping|ScaleProperties::Location::Flash_Mapping),
+    IonianStr,
+    0x7AD5,
+    MajorNumbers
+};

@@ -1,0 +1,22 @@
+// Minor Pentatonic
+
+static const char MinorPentatonicStr[] PROGMEM_MACRO = {'M','i','n','o','r',' ','P','e','n','t','a','t','o','n','i','c','\0'};
+
+static const uint8_t MinorPentatonicNumbers[] PROGMEM_MACRO =
+{
+    MCC_MusicalInterval::Numbers::Third,
+    MCC_MusicalInterval::Numbers::Fourth,
+    MCC_MusicalInterval::Numbers::Fifth,
+    MCC_MusicalInterval::Numbers::Seventh,
+};
+
+static constexpr uint8_t MinorPentatonicScaleID = 9u;
+
+const Container_Mapping MinorPentatonic PROGMEM_MACRO =
+{
+    MinorPentatonicScaleID,
+    (ScaleProperties::MappingMode::Dynamic_Mapping|ScaleProperties::Location::Flash_Mapping),
+    MinorPentatonicStr,
+    0x5952,
+    MinorPentatonicNumbers
+};

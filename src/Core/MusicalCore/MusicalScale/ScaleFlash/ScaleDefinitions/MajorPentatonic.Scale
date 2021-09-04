@@ -1,0 +1,22 @@
+// Major Pentatonic
+
+static const char MajorPentatonicStr[] PROGMEM_MACRO = {'M','a','j','o','r',' ','P','e','n','t','a','t','o','n','i','c','\0'};
+
+static const uint8_t MajorPentatonicNumbers[] PROGMEM_MACRO =
+{
+    MCC_MusicalInterval::Numbers::Second,
+    MCC_MusicalInterval::Numbers::Third,
+    MCC_MusicalInterval::Numbers::Fifth,
+    MCC_MusicalInterval::Numbers::Sixth,
+};
+
+static constexpr uint8_t MajorPentatonicScaleID = 8u;
+
+const Container_Mapping MajorPentatonic PROGMEM_MACRO =
+{
+    MajorPentatonicScaleID,
+    (ScaleProperties::MappingMode::Dynamic_Mapping|ScaleProperties::Location::Flash_Mapping),
+    MajorPentatonicStr,
+    0x5A94,
+    MajorPentatonicNumbers
+};

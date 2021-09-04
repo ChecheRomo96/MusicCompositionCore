@@ -4,7 +4,7 @@
 #include "Accidental/Accidental.h"
 #include "../Note_Class.h"
 #include "../TextFormat/TextFormat.h"
-//#include "../../MusicalInterval/MusicalInterval.h"
+#include "../../MusicalInterval/MusicalInterval.h"
 
 /////////////////////////////////////////////////////////////////////////
 //  Notes Array
@@ -71,8 +71,6 @@ PitchClass& PitchClass::operator=(const PitchClass& source)
     return (*this);
 }
 
-
-/*
 PitchClass& PitchClass::operator+=(const MusicalInterval::Interval &rhs)
 {
     PitchClass_Buffer = (*this)+rhs;
@@ -294,8 +292,7 @@ PitchClass PitchClass::operator-(const MusicalInterval::Interval &rhs) const
     }
 
     return tmp;
-}*/
-
+}
 
 PitchClass::PitchClass(const Letter::LetterClass& source)
 {

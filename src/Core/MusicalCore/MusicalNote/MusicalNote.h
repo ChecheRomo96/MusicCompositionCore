@@ -22,6 +22,7 @@
 	#include "Flash/NoteFlash.h"
 	#include "TextFormat/TextFormat.h"
 	#include "Pitch/NotePitch.h"
+	#include "Sorting/MusicalNote_Sorting.h"
 	
 	#include "Note_Class.h"
 

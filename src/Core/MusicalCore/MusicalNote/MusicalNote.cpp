@@ -1,6 +1,6 @@
 #include "MusicalNote.h"
 
-//#include "../MusicalInterval/MusicalInterval.h"
+#include "../MusicalInterval/MusicalInterval.h"
 
 /////////////////////////////////////////////////////////////////////////
 // Note Buffer
@@ -75,12 +75,12 @@
 			    return (*this);
 			}
 
-			/*Note::Note(const Note& Source, const MCC_MusicalInterval::Interval& interval)
+			Note::Note(const Note& Source, const MCC_MusicalInterval::Interval& interval)
 			{
 			    noteData = Source.Pitch();
 			    SetOctave(Source.Octave());
 			    (*this)+=interval;
-			}*/
+			}
 
 		//
 		///////////////////////////////////////////////////////////////////////
@@ -235,7 +235,7 @@
 			    return 1;
 			}
 
-			/*Note& Note::operator+=(const MCC_MusicalInterval::Interval &rhs)
+			Note& Note::operator+=(const MCC_MusicalInterval::Interval &rhs)
 			{
 			    NoteBuffer = (*this)+rhs;
 			    (*this) = NoteBuffer;
@@ -468,7 +468,7 @@
 			    }
 
 			    return tmp;
-			}*/
+			}
 			
 		//
 		///////////////////////////////////////////////////////////////////////

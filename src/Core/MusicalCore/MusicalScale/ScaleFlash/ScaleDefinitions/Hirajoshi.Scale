@@ -1,0 +1,22 @@
+// Hirajoshi Scale
+
+static const char HirajoshiStr[] PROGMEM_MACRO = {'H','i','r','a','j','o','s','h','i','\0'};
+
+static const uint8_t HirajoshiNumbers[] PROGMEM_MACRO =
+{
+    MCC_MusicalInterval::Numbers::Second,
+    MCC_MusicalInterval::Numbers::Third,
+    MCC_MusicalInterval::Numbers::Fifth,
+    MCC_MusicalInterval::Numbers::Sixth,
+};
+
+static constexpr uint8_t HirajoshiScaleID = 29u;
+
+const Container_Mapping Hirajoshi PROGMEM_MACRO =
+{
+    HirajoshiScaleID,
+    (ScaleProperties::MappingMode::Dynamic_Mapping|ScaleProperties::Location::Flash_Mapping),
+    HirajoshiStr,
+    0x5C62,
+    HirajoshiNumbers
+};

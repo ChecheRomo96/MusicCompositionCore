@@ -25,6 +25,6 @@
   #include "Interval_Class.h"
 
   #include "../MusicalNote/MusicalNote.h"
-  #include "IntervalFlash/IntervalFlash.h"
+  #include "Flash/IntervalFlash.h"
 
 #endif//MCC_MUSICAL_INTERVAL_H
