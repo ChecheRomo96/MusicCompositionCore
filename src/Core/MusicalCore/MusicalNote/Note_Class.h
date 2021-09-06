@@ -22,7 +22,14 @@
                 
        			namespace MusicalNote
        			{
-                 
+					class Note;
+
+					namespace Reference
+					{
+						extern MusicalNote::Note Note;
+						extern float Frequency;
+					}
+
 					class Note
 					{
 						Pitch::PitchClass noteData;
@@ -67,6 +74,8 @@
 
 								const int16_t NotePitch() const;
 								const uint8_t MidiPitch() const;
+
+								const float Frequency( const Note& ReferenceNote = Reference::Note, float ReferenceFrequeny = Reference::Frequency ) const;
 
 								///////////////////////////////////////////////////////////////////////
 								// Octaves
@@ -119,7 +128,6 @@
 					bool operator == (const Note& lhs, const Note& rhs);
 					bool operator != (const Note& lhs, const Note& rhs);
 
-
 					// Compare Mode is for checking for equalities and inequalities
 
        				namespace CompareMode 
@@ -132,6 +140,11 @@
        				void CompareNames();
        				void ComparePitches();
        				void SetCompareMode(bool newMode);
+
+       				// Reference Note for computing Frequency
+
+                    void SetReferenceNote(const Note& Note, const float& Frequency);
+                    void SetReferenceNote(const Pitch::LetterType& Letter, const Pitch::AccidentalType& Accidental, const float& Frequency);
 				}
 			}
 		}

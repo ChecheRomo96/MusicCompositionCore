@@ -11,7 +11,7 @@
        		{
        			namespace MusicalNote
        			{
-       				
+       				void Start();
 				}
 			}
 		}

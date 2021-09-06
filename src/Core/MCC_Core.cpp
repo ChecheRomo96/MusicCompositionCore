@@ -2,6 +2,7 @@
 
 void MusicCompositionCore::Core::Start()
 {
+    MCC_MusicalNote::Start();
     //MCC_MidiStart();
 }
 

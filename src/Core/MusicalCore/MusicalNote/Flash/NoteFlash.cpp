@@ -116,19 +116,23 @@ char Flash::Buffer[24];
 			case TextFormat::SpaceJustified:
 			{
 				#if defined(ARDUINO_IDE)
+
 					buff[0] = pgm_read_byte(pgm_read_word(&NoteNames[Letter]));
 					if((Accidental == Pitch::Accidental::Natural) && (Format.NaturalMode() == MusicCompositionCore::Disabled)){}
 					else
 					{
 						strcpy_P(buff + 1, (PGM_P)pgm_read_word(&(AccidentalNames[Accidental + 4][Format.AccidentalMode()])));
 					}	
+
 				#else
-                buff[0] = MCC_MusicalNoteFlash::NoteNames[Letter][0];
+
+                	buff[0] = MCC_MusicalNoteFlash::NoteNames[Letter][0];
 					if((Accidental == Pitch::Accidental::Natural) && (Format.NaturalMode() == MusicCompositionCore::Disabled)){}
 					else
 					{
 						strcpy(buff + 1, MCC_MusicalNoteFlash::AccidentalNames[Accidental + 4][Format.AccidentalMode()]);
 					}
+
 				#endif
 				
 				uint8_t offset;
@@ -193,12 +197,18 @@ char Flash::Buffer[24];
 
 	            if(Format.OctaveEnabled() == TextFormat::OctaveEnabled)
 				{
-	                
+					uint8_t max_chars = 3;
+	                if(octave >= 0)
+	                {
+	                	buff[offset++] = ' ';
+	                	max_chars--;
+	                }
+
 	                CPString::string tmp(octave);
 
-					for(uint8_t i = 0; i<4; i++)
+					for(uint8_t i = 0; i<max_chars; i++)
 					{
-						if(i<tmp.length())
+						if(i<tmp.length()-1)
 	 					{
 							buff[offset+i] = tmp[i];
 						}

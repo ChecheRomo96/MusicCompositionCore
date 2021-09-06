@@ -11,6 +11,18 @@
 /////////////////////////////////////////////////////////////////////////
 // Compare Mode
 
+    void MCC_MusicalNote::Start()
+    {
+    	MCC_MusicalNote::NoteBuffer.SetLetter(MCC_MusicalNote::Pitch::Letter::A);
+    	MCC_MusicalNote::NoteBuffer.SetAccidental(MCC_MusicalNote::Pitch::Accidental::Natural);
+    	MCC_MusicalNote::NoteBuffer.SetOctave(4);
+
+    	MCC_MusicalNote::SetReferenceNote(MCC_MusicalNote::NoteBuffer,440);
+    }
+//
+/////////////////////////////////////////////////////////////////////////
+// Compare Mode
+
         bool MCC_MusicalNote::CompareMode::CurrentMode = MCC_MusicalNote::CompareMode::Name;
 
 		void MCC_MusicalNote::CompareNames()
@@ -34,6 +46,23 @@
 		        CompareNames();
 		    }
 		}
+//
+/////////////////////////////////////////////////////////////////////////
+// Reference Mode
+
+        MCC_MusicalNote::Note MCC_MusicalNote::Reference::Note(MCC_MusicalNote::Pitch::A_Natural, 4);
+        float MCC_MusicalNote::Reference::Frequency = 440;
+
+        void MCC_MusicalNote::SetReferenceNote(const Note& Note, const float& Frequency)
+        {
+        	Reference::Note = Note;
+        	Reference::Frequency = Frequency;
+        }
+
+        void MCC_MusicalNote::SetReferenceNote(const Pitch::LetterType& Letter, const Pitch::AccidentalType& Accidental, const float& Frequency)
+        {
+
+        }
 //
 /////////////////////////////////////////////////////////////////////////
 // Note Class
@@ -512,6 +541,15 @@
 			    }
 			    return note_pitch;
 			}
+
+			const float Note::Frequency( const Note& ReferenceNote, float ReferenceFrequeny) const
+			{
+				int16_t semitones = NotePitch() - ReferenceNote.NotePitch();
+				float freq = ReferenceFrequeny * pow(2.0, (semitones / 12.0));
+
+				return freq;
+			}
+ 
 
 			///////////////////////////////////////////////////////////////////
 			// Octaves

@@ -13,7 +13,7 @@
             CPP_Start();
 		#endif
 
-		//Core::Start();
+		Core::Start();
 		//Communications::Start();
 	}
 
