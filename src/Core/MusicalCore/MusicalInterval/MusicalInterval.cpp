@@ -251,7 +251,7 @@
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Interval Number
 
-        void Interval::SetNumber(uint8_t id)
+        void Interval::SetNumber(NumberType id)
         {
             if(id < Numbers::Count)
             {
@@ -259,7 +259,7 @@
             }
         }
 
-        const uint8_t Interval::Number() const
+        const NumberType Interval::Number() const
         {
             return _Number;
         }
@@ -267,7 +267,7 @@
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Interval Quality
 
-        void Interval::SetQuality(uint8_t id)
+        void Interval::SetQuality(QualityType id)
         {
             if(id < Qualities::Count)
             {
@@ -275,7 +275,7 @@
             }
         }
 
-        const uint8_t Interval::Quality() const
+        const QualityType Interval::Quality() const
         {
             return _Quality;
         }
