@@ -27,7 +27,7 @@
         _Quality = quality;
     }
 
-    Interval::Interval(int16_t _NotePitch_A, int16_t _NotePitch_B, uint8_t _GenericInterval)
+    Interval::Interval(int16_t _NotePitch_A, int16_t _NotePitch_B, NumberType _GenericInterval)
     {
         uint8_t i = 0;
         _Number = Numbers::InvalidNumber;
