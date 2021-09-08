@@ -14,7 +14,6 @@
 
                     namespace Numbers
                     {
-
                         static constexpr NumberType Prime = 0u;
                         static constexpr NumberType Second = 1u;
                         static constexpr NumberType Third = 2u;
@@ -35,7 +34,6 @@
 
                     namespace Qualities
                     {
-
                         static constexpr QualityType QuadruplyDiminished = 0u;
                         static constexpr QualityType TriplyDiminished = 1u;
                         static constexpr QualityType DoublyDiminished = 2u;

@@ -53,14 +53,14 @@
                                 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                 // Generic Interval
 
-                                    void SetNumber(uint8_t id);
-                                    const uint8_t Number() const;
+                                    void SetNumber(NumberType id);
+                                    const NumberType Number() const;
                                 //
                                 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                 // Interval Quality
 
-                                    void SetQuality(uint8_t id);
-                                    const uint8_t Quality() const;
+                                    void SetQuality(QualityType id);
+                                    const QualityType Quality() const;
                                 //
                                 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                             //
