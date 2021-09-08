@@ -5,7 +5,7 @@
 
     #include "ScaleFlash_Definitions.h"
 
-    #include "../Scale_Class.h"
+    #include "../MusicalScale.h"
     #include "ScaleDefinitions/ScaleDefinitions.h"
 
     namespace MusicCompositionCore
