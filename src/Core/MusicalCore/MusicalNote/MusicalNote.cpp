@@ -518,13 +518,13 @@
 			    Pitch::Letter::LetterClass note = noteData.Letter();
 			    Pitch::Accidental::AccidentalClass accidental = noteData.Accidental();
 			    
-			    if((note.ID() >= Pitch::Letter::Count)||(accidental.ID() < Pitch::Accidental::Min)||(accidental > Pitch::Accidental::Max))
+			    if((note.ID() >= Pitch::Letter::Count)||(accidental < Pitch::Accidental::Min)||(accidental > Pitch::Accidental::Max))
 			    {
 			        return MusicalNote::InvalidNotePitch;
 			    }
 			    else
 			    {
-		            int16_t note_pitch = MusicalNote::Pitch::NotesArray[note.ID()] + accidental.ID() + (octave*12);
+		            int16_t note_pitch = MusicalNote::Pitch::NotesArray[note.ID()] + accidental + (octave*12);
 			        
 			        if((note == MusicalNote::Pitch::Letter::B) && (accidental >= MusicalNote::Pitch::Accidental::Sharp)){return note_pitch-12;}
 			        if((note == MusicalNote::Pitch::Letter::A) && (accidental >= MusicalNote::Pitch::Accidental::TripleSharp)){return note_pitch-12;}
