@@ -321,13 +321,19 @@ char Flash::Buffer[24];
 	char* Flash::GetAccidentalName(char* buff, const Pitch::Accidental::AccidentalClass& Accidental, const TextFormat::Format& Format)
 	{
 	    #if defined(ARDUINO)
-	        if((Accidental == Pitch::Accidental::Natural) && (Format.NaturalMode() == MusicCompositionCore::Disabled)){}
+	        if((Accidental == Pitch::Accidental::Natural) && (Format.NaturalMode() == TextFormat::NaturalMode::Enabled) && (Format.AccidentalMode() == TextFormat::AccidentalMode::Short))
+	        {
+	        	buff[0] = '\0';
+	        }
 	        else
 	        {
 				strcpy_P(buff, (PGM_P)pgm_read_word(&(AccidentalNames[Accidental + 4][Format.AccidentalMode()])));
 	        }
 	    #else
-	        if((Accidental == Pitch::Accidental::Natural) && (Format.NaturalMode() == MusicCompositionCore::Disabled)){}
+	        if((Accidental == Pitch::Accidental::Natural) && (Format.NaturalMode() == TextFormat::NaturalMode::Enabled) && (Format.AccidentalMode() == TextFormat::AccidentalMode::Short))
+	        {
+	        	buff[0] = '\0';
+	        }
 	        else
 	        {
 	            strcpy(buff, AccidentalNames[Accidental + 4][Format.AccidentalMode()]);
