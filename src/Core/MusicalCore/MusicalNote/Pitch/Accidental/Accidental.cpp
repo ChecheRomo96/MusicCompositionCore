@@ -61,7 +61,7 @@ AccidentalClass& AccidentalClass::operator=(const PitchClass& token)
 	return (*this);
 }
 
-AccidentalClass::operator int8_t() const
+AccidentalClass::operator AccidentalType() const
 {
 	return _ID;
 }
@@ -92,16 +92,9 @@ bool AccidentalClass::operator!=(const AccidentalClass& rhs) const
 
 		bool MusicCompositionCore::Core::MusicalCore::MusicalNote::Pitch::Accidental::operator < (const AccidentalClass &lhs, const AccidentalType &rhs)
 		{
-		    if(lhs < rhs){return 1;}
+		    if(lhs.ID() < rhs){return 1;}
 		    return 0;
 		}
-
-		bool MusicCompositionCore::Core::MusicalCore::MusicalNote::Pitch::Accidental::operator < (const AccidentalType &lhs, const AccidentalType &rhs)
-		{
-		    if(lhs < rhs){return 1;}
-		    return 0;
-		}
-
 	//
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//
@@ -123,13 +116,6 @@ bool AccidentalClass::operator!=(const AccidentalClass& rhs) const
 		    if(lhs.ID() <= rhs){return 1;}
 		    return 0;
 		}
-
-		bool MusicCompositionCore::Core::MusicalCore::MusicalNote::Pitch::Accidental::operator <= (const AccidentalType &lhs, const AccidentalType &rhs)
-		{
-		    if(lhs <= rhs){return 1;}
-		    return 0;
-		}
-
 	//
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//
@@ -150,13 +136,6 @@ bool AccidentalClass::operator!=(const AccidentalClass& rhs) const
 		    if(lhs.ID() > rhs){return 1;}
 		    return 0;
 		}
-
-		bool MusicCompositionCore::Core::MusicalCore::MusicalNote::Pitch::Accidental::operator > (const AccidentalType &lhs, const AccidentalType &rhs)
-		{
-		    if(lhs > rhs){return 1;}
-		    return 0;
-		}
-
 	//
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//
@@ -177,13 +156,6 @@ bool AccidentalClass::operator!=(const AccidentalClass& rhs) const
 		    if(lhs.ID() >= rhs){return 1;}
 		    return 0;
 		}
-
-		bool MusicCompositionCore::Core::MusicalCore::MusicalNote::Pitch::Accidental::operator >= (const AccidentalType &lhs, const AccidentalType &rhs)
-		{
-		    if(lhs >= rhs){return 1;}
-		    return 0;
-		}
-
 	//
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//
@@ -206,14 +178,6 @@ bool AccidentalClass::operator!=(const AccidentalClass& rhs) const
 		    if(lhs.ID() == rhs){return 1;}
 		    return 0;
 		}
-
-
-		bool MusicCompositionCore::Core::MusicalCore::MusicalNote::Pitch::Accidental::operator == (const AccidentalType &lhs, const AccidentalType &rhs)
-		{
-		    if(lhs == rhs){return 1;}
-		    return 0;
-		}
-
 	//
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//
@@ -232,12 +196,6 @@ bool AccidentalClass::operator!=(const AccidentalClass& rhs) const
 		bool MusicCompositionCore::Core::MusicalCore::MusicalNote::Pitch::Accidental::operator != (const AccidentalClass &lhs, const AccidentalType &rhs)
 		{
 		    if(lhs.ID() == rhs){return 0;}
-		    return 1;
-		}
-
-		bool MusicCompositionCore::Core::MusicalCore::MusicalNote::Pitch::Accidental::operator != (const AccidentalType &lhs, const AccidentalType &rhs)
-		{
-		    if(lhs == rhs){return 0;}
 		    return 1;
 		}
 	//

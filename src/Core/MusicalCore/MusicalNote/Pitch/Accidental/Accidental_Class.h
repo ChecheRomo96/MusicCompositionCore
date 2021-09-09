@@ -38,7 +38,7 @@
                                     AccidentalClass(const PitchClass& source);
                                     AccidentalClass& operator=(const PitchClass& source);
                                     
-                                    operator int8_t() const;
+                                    operator AccidentalType() const;
 
                                     bool operator!=(const AccidentalClass& rhs) const;
 
@@ -81,34 +81,28 @@
                             extern AccidentalClass AccidentalID_Buffer;
 
                             bool operator < (const AccidentalClass& lhs, const AccidentalClass& rhs);
-                            bool operator < (const AccidentalType& lhs, const AccidentalClass& rhs);
-                            bool operator < (const AccidentalClass& lhs, const AccidentalType& rhs);
-                            bool operator < (const AccidentalType& lhs, const AccidentalType& rhs);
+                            bool operator < (const Pitch::AccidentalType& lhs, const AccidentalClass& rhs);
+                            bool operator < (const AccidentalClass& lhs, const Pitch::AccidentalType& rhs);
 
                             bool operator <= (const AccidentalClass& lhs, const AccidentalClass& rhs);
                             bool operator <= (const AccidentalType& lhs, const AccidentalClass& rhs);
                             bool operator <= (const AccidentalClass& lhs, const AccidentalType& rhs);
-                            bool operator <= (const AccidentalType& lhs, const AccidentalType& rhs);
 
                             bool operator > (const AccidentalClass& lhs, const AccidentalClass& rhs);
                             bool operator > (const AccidentalType& lhs, const AccidentalClass& rhs);
                             bool operator > (const AccidentalClass& lhs, const AccidentalType& rhs);
-                            bool operator > (const AccidentalType& lhs, const AccidentalType& rhs);
                             
                             bool operator >= (const AccidentalClass& lhs, const AccidentalClass& rhs);
                             bool operator >= (const AccidentalType& lhs, const AccidentalClass& rhs);
                             bool operator >= (const AccidentalClass& lhs, const AccidentalType& rhs);
-                            bool operator >= (const AccidentalType& lhs, const AccidentalType& rhs);
 
                             bool operator == (const AccidentalClass& lhs, const AccidentalClass& rhs);
                             bool operator == (const AccidentalType& lhs, const AccidentalClass& rhs);
                             bool operator == (const AccidentalClass& lhs, const AccidentalType& rhs);
-                            bool operator == (const AccidentalType& lhs, const AccidentalType& rhs);
 
                             bool operator != (const AccidentalClass& lhs, const AccidentalClass& rhs);
                             bool operator != (const AccidentalType& lhs, const AccidentalClass& rhs);
                             bool operator != (const AccidentalClass& lhs, const AccidentalType& rhs);
-                            bool operator != (const AccidentalType& lhs, const AccidentalType& rhs);
                                 
                         }
                     }
