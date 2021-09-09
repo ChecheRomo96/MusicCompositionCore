@@ -37,7 +37,9 @@
                                 
                                     AccidentalClass(const PitchClass& source);
                                     AccidentalClass& operator=(const PitchClass& source);
-                                
+                                    
+                                    operator int8_t() const;
+
                                     bool operator!=(const AccidentalClass& rhs) const;
 
                                     friend bool operator < (const AccidentalClass& lhs, const AccidentalClass& rhs);

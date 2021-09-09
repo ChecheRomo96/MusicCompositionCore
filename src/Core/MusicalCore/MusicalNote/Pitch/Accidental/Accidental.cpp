@@ -61,6 +61,11 @@ AccidentalClass& AccidentalClass::operator=(const PitchClass& token)
 	return (*this);
 }
 
+AccidentalClass::operator int8_t() const
+{
+	return _ID;
+}
+
 bool AccidentalClass::operator!=(const AccidentalClass& rhs) const
 {
 	if(_ID==rhs.ID()){return 0;}
