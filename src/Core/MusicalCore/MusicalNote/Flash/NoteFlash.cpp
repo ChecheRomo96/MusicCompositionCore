@@ -324,7 +324,7 @@ char Flash::Buffer[24];
 	        if((Accidental == Pitch::Accidental::Natural) && (Format.NaturalMode() == MusicCompositionCore::Disabled)){}
 	        else
 	        {
-				strcpy_P(buff, (PGM_P)pgm_read_word(&(AccidentalNames[Accidental + 4][Format.AccidentalMode()])));
+				strcpy_P(buff, (PGM_P)pgm_read_word(&(AccidentalNames[((uint8_t)Accidental) + 4][Format.AccidentalMode()])));
 	        }
 	    #else
 	        if((Accidental == Pitch::Accidental::Natural) && (Format.NaturalMode() == MusicCompositionCore::Disabled)){}
