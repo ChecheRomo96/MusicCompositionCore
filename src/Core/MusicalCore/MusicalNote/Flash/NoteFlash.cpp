@@ -115,7 +115,7 @@ char Flash::Buffer[24];
 			
 			case TextFormat::SpaceJustified:
 			{
-				#if defined(ARDUINO_IDE)
+				#if defined(ARDUINO)
 
 					buff[0] = pgm_read_byte(pgm_read_word(&NoteNames[Letter]));
 					if((Accidental == Pitch::Accidental::Natural) && (Format.NaturalMode() == MusicCompositionCore::Disabled)){}
@@ -320,7 +320,7 @@ char Flash::Buffer[24];
 // Get Accidental Name
 	char* Flash::GetAccidentalName(char* buff, const Pitch::Accidental::AccidentalClass& Accidental, const TextFormat::Format& Format)
 	{
-	    #if defined(ARDUINO_IDE)
+	    #if defined(ARDUINO)
 	        if((Accidental == Pitch::Accidental::Natural) && (Format.NaturalMode() == MusicCompositionCore::Disabled)){}
 	        else
 	        {
@@ -347,7 +347,7 @@ char Flash::Buffer[24];
 
 	char* Flash::GetLetterName(char* buff, const Pitch::Letter::LetterClass& letter, const TextFormat::Format& Format)
 	{
-	    #if defined(ARDUINO_IDE)
+	    #if defined(ARDUINO)
 	        strcpy_P(buff, (PGM_P)pgm_read_word(&(NoteNames[letter.ID()])));
 	    #else
 	        memcpy(buff, NoteNames[letter.ID()], 1);
