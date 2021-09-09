@@ -1,2 +1,2 @@
-add_executable(GetLetter main.cpp)
-target_link_libraries(GetLetter MCC)
+add_executable(MCC_MusicalNote_Flash_GetLetter main.cpp)
+target_link_libraries(MCC_MusicalNote_Flash_GetLetter MCC)

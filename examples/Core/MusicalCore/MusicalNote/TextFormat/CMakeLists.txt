@@ -1,0 +1,4 @@
+add_subdirectory(1_ClassCreation)
+add_subdirectory(2_ClassAPI)
+add_subdirectory(3_BitMasks)
+add_subdirectory(4_DefaultFormat)

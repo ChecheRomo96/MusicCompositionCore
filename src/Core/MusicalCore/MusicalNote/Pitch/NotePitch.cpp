@@ -367,23 +367,25 @@ void PitchClass::Previous()
     return _Letter.Previous();
 }
 
-const char* PitchClass::Name(MusicalNote::TextFormat::Format& Format)const
+const char* PitchClass::Name(MusicalNote::TextFormat::FormatClass& Format) const
 {
     bool flag = 0;
-    if(Format.OctaveEnabled())
+    if(Format.OctaveMode() == TextFormat::OctaveMode::Disabled)
     {
         flag = 1;
-        Format.Set_OctaveDisabled();
+        Format.Octave_Disabled();
     }
     
-    if(Format.AccidentalMode() == MusicalNote::TextFormat::AccidentalShort)
+    if(Format.AccidentalMode() == MusicalNote::TextFormat::AccidentalMode::Symbol)
     {
-        if(Format.SpaceMode() != TextFormat::SpaceDisabled)
+        if(Format.SpacingMode() != TextFormat::SpacingMode::Disabled)
         {
-            uint8_t space_mode = Format.SpaceMode();
-            Format.Set_SpaceDisabled();
+            uint8_t space_mode = Format.SpacingMode();
+
+            Format.Spacing_Disabled();
             Flash::GetName(MusicalNote::Flash::Buffer,MusicalNote::Note(*this),Format);
-            Format.Set_SpacingMode(space_mode);
+            
+            Format.SetSpacingMode(space_mode);
         }
         else
         {
@@ -392,12 +394,14 @@ const char* PitchClass::Name(MusicalNote::TextFormat::Format& Format)const
     }
     else
     {
-        if(Format.SpaceMode() != TextFormat::SpaceEnabled)
+        if(Format.SpacingMode() != TextFormat::SpacingMode::Enabled)
         {
-            uint8_t space_mode = Format.SpaceMode();
-            Format.Set_SpaceEnabled();
+            uint8_t space_mode = Format.SpacingMode();
+
+            Format.Spacing_Enabled();
             Flash::GetName(Flash::Buffer,MusicalNote::Note(*this),Format);
-            Format.Set_SpacingMode(space_mode);
+            
+            Format.SetSpacingMode(space_mode);
         }
         else
         {
@@ -405,28 +409,30 @@ const char* PitchClass::Name(MusicalNote::TextFormat::Format& Format)const
         }
     }
     
-    if(flag){Format.Set_OctaveEnabled();}
+    if(flag){Format.Octave_Enabled();}
     
     return Flash::Buffer;
 }
 
-char* PitchClass::Name(char* buff, MusicalNote::TextFormat::Format& Format)const
+char* PitchClass::Name(char* buff, MusicalNote::TextFormat::FormatClass& Format)const
 {
     bool flag = 0;
-    if(Format.OctaveEnabled())
+    if(Format.OctaveMode())
     {
         flag = 1;
-        Format.Set_OctaveDisabled();
+        Format.Octave_Disabled();
     }
     
-    if(Format.AccidentalMode() == MusicalNote::TextFormat::AccidentalShort)
+    if(Format.AccidentalMode() == MusicalNote::TextFormat::AccidentalMode::Symbol)
     {
-        if(Format.SpaceMode() != TextFormat::SpaceDisabled)
+        if(Format.SpacingMode() != TextFormat::SpacingMode::Disabled)
         {
-            uint8_t space_mode = Format.SpaceMode();
-            Format.Set_SpaceDisabled();
+            uint8_t space_mode = Format.SpacingMode();
+
+            Format.Spacing_Disabled();
             Flash::GetName(buff,MusicalNote::Note(*this),Format);
-            Format.Set_SpacingMode(space_mode);
+
+            Format.SetSpacingMode(space_mode);
         }
         else
         {
@@ -435,12 +441,12 @@ char* PitchClass::Name(char* buff, MusicalNote::TextFormat::Format& Format)const
     }
     else
     {
-        if(Format.SpaceMode() != TextFormat::SpaceEnabled)
+        if(Format.SpacingMode() != TextFormat::SpacingMode::Enabled)
         {
-            uint8_t space_mode = Format.SpaceMode();
-            Format.Set_SpaceEnabled();
+            uint8_t space_mode = Format.SpacingMode();
+            Format.Spacing_Enabled();
             Flash::GetName(buff,MusicalNote::Pitch::PitchClass(*this),Format);
-            Format.Set_SpacingMode(space_mode);
+            Format.SetSpacingMode(space_mode);
         }
         else
         {
@@ -448,7 +454,7 @@ char* PitchClass::Name(char* buff, MusicalNote::TextFormat::Format& Format)const
         }
     }
     
-    if(flag){Format.Set_OctaveEnabled();}
+    if(flag){Format.Octave_Enabled();}
     
     return buff;
 }

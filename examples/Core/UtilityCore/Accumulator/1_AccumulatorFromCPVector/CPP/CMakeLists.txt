@@ -1,2 +1,2 @@
-add_executable(AccumulatorFromVector main.cpp)
-target_link_libraries(AccumulatorFromVector MCC)
+add_executable(MCC_UtilityCore_Accumulator_AccumulatorFromVector main.cpp)
+target_link_libraries(MCC_UtilityCore_Accumulator_AccumulatorFromVector MCC)

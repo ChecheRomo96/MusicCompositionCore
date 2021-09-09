@@ -69,8 +69,8 @@
 							///////////////////////////////////////////////////////////////////////
 							// API
 
-								const char* Name(const TextFormat::Format& format = TextFormat::DefaultFormat)const;
-								char* Name(char* buff, const TextFormat::Format& format = TextFormat::DefaultFormat);
+								const char* Name(const TextFormat::FormatClass& format = TextFormat::DefaultFormat)const;
+								char* Name(char* buff, const TextFormat::FormatClass& format = TextFormat::DefaultFormat);
 
 								const int16_t NotePitch() const;
 								const uint8_t MidiPitch() const;

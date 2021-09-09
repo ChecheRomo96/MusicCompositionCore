@@ -503,12 +503,12 @@
 		///////////////////////////////////////////////////////////////////////
 		// API
 			
-			const char* Note::Name(const TextFormat::Format& Format)const
+			const char* Note::Name(const TextFormat::FormatClass& Format)const
 			{
 			    return Flash::GetName((*this),Format);
 			}
 
-			char* Note::Name(char* buff, const TextFormat::Format& Format)
+			char* Note::Name(char* buff, const TextFormat::FormatClass& Format)
 			{
 			    return Flash::GetName(buff, (*this), Format);
 			}

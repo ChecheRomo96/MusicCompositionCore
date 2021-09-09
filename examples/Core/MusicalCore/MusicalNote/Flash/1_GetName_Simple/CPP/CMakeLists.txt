@@ -1,2 +1,2 @@
-add_executable(GetName_Simple main.cpp)
-target_link_libraries(GetName_Simple MCC)
+add_executable(MCC_MusicalNote_Flash_GetName_Simple main.cpp)
+target_link_libraries(MCC_MusicalNote_Flash_GetName_Simple MCC)

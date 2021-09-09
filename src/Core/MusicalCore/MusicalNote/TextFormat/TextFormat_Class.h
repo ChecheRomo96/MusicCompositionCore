@@ -15,7 +15,7 @@
        			{
        				namespace TextFormat
        				{
-       					class Format
+       					class FormatClass
        					{
 	       					uint8_t data;
 
@@ -23,54 +23,64 @@
 		       					/////////////////////////////////////////////////////////////////////////
 								// Constructors, Destructors and Clear Function
 
-			       					Format();
-			       					~Format();
-			       					void Clear();
+			       					FormatClass();
 			       				//
 		       					/////////////////////////////////////////////////////////////////////////
 								// Copy Constructor and assignment operator
 
-			       					Format(const Format& source);
-			       					Format(uint8_t data);
-			       					Format(bool AccidentalMode, bool OctaveEnabled, uint8_t Spacing, bool NaturalMode = NaturalDisabled);
-			       					Format& operator=(const Format& src);
+			       					FormatClass(const FormatClass& source);
+			       					FormatClass(uint8_t data);
+			       					FormatClass(bool AccidentalMode, bool OctaveEnabled, uint8_t Spacing, bool NaturalMode = TextFormat::NaturalMode::Disabled);
+			       					FormatClass& operator=(const FormatClass& src);
 			       				//
 		       					/////////////////////////////////////////////////////////////////////////
-								// Operators
-						        	operator uint8_t() const;
-						        //
-		       					/////////////////////////////////////////////////////////////////////////
-								// Const Return Functions
-									
-									const uint8_t Data() const;
+								// API
 
-									const bool AccidentalMode() const;
-									const bool NaturalMode() const;
-									const bool OctaveEnabled() const;
-									const uint8_t SpaceMode() const;
-						        //
-		       					/////////////////////////////////////////////////////////////////////////
-								// Setters
+			       					/////////////////////////////////////////////////////////////////////
+			       					// Raw Data 
 
-									void Set_AccidentalMode(bool x);
-									void Set_AccidentalShort();
-									void Set_AccidentalLong();
+										const uint8_t RawData() const;
+										void SetRawData(uint8_t RawData);
+									//
+									/////////////////////////////////////////////////////////////////////
+									// Accidental Mode
 
-									void Set_OctaveMode(bool x);
-									void Set_OctaveEnabled();
-									void Set_OctaveDisabled();
+										const bool AccidentalMode() const;
+										void SetAccidentalMode(bool x);
+										void Accidental_Symbol();
+										void Accidental_Text();
+									//
+									/////////////////////////////////////////////////////////////////////
+									// Octave Mode
 
-									void Set_SpacingMode(uint8_t x);
-									void Set_SpaceEnabled();
-									void Set_SpaceJustified();
-									void Set_SpaceDisabled();
+										const bool OctaveMode() const;
+										void SetOctaveMode(bool x);
+										void Octave_Enabled();
+										void Octave_Disabled();
+									//
+									/////////////////////////////////////////////////////////////////////
+									// Spacing Mode
 
-									void Set_NaturalMode(bool x);
-									void Set_NaturalEnabled();
-									void Set_NaturalDisabled();
+										const uint8_t SpacingMode() const;
+										void SetSpacingMode(uint8_t x);
+										void Spacing_Enabled();
+										void Spacing_Disabled();
+										void Spacing_Justified();
+									//
+									/////////////////////////////////////////////////////////////////////
+									// Natural Mode
+
+										const bool NaturalMode() const;
+										void SetNaturalMode(bool x);
+										void Natural_Enabled();
+										void Natural_Disabled();
+									//
+									/////////////////////////////////////////////////////////////////////
 								//
 		       					/////////////////////////////////////////////////////////////////////////
 	       				};
+
+						extern FormatClass DefaultFormat;
 	       			}
 				}
 			}

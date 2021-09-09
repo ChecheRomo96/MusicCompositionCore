@@ -205,12 +205,12 @@ bool AccidentalClass::operator!=(const AccidentalClass& rhs) const
 
 char* AccidentalClass::Name(char* buff)
 {
-    return MusicalNote::Flash::GetAccidentalName(buff,*this);
+    return MusicalNote::Flash::GetAccidentalText(buff,*this);
 }
 
 const char* AccidentalClass::Name() const
 {
-    return MusicalNote::Flash::GetAccidentalName(*this);
+    return MusicalNote::Flash::GetAccidentalText(*this);
 }
 
 const AccidentalType& AccidentalClass::ID() const

@@ -1,2 +1,2 @@
-add_executable(GetAccidental main.cpp)
-target_link_libraries(GetAccidental MCC)
+add_executable(MCC_MusicalNote_Flash_GetAccidental main.cpp)
+target_link_libraries(MCC_MusicalNote_Flash_GetAccidental MCC)

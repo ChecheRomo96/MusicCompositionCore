@@ -60,8 +60,8 @@
                                 void Set_Accidental(const Accidental::AccidentalClass& source);
                                 const Accidental::AccidentalClass& Accidental() const;
                                 
-                                const char* Name(MusicalNote::TextFormat::Format& Format = MusicalNote::TextFormat::DefaultFormat)const;
-                                char* Name(char* buff, MusicalNote::TextFormat::Format& Format = MusicalNote::TextFormat::DefaultFormat) const;
+                                const char* Name(MusicalNote::TextFormat::FormatClass& Format = MusicalNote::TextFormat::DefaultFormat)const;
+                                char* Name(char* buff, MusicalNote::TextFormat::FormatClass& Format = MusicalNote::TextFormat::DefaultFormat) const;
                             
                                 const uint8_t NotePitch() const;
                                 const uint8_t MidiPitch() const;
