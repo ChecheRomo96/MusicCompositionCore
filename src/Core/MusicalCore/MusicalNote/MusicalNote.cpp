@@ -17,7 +17,7 @@
     	MCC_MusicalNote::NoteBuffer.SetAccidental(MCC_MusicalNote::Pitch::Accidental::Natural);
     	MCC_MusicalNote::NoteBuffer.SetOctave(4);
 
-    	MCC_MusicalNote::SetReferenceNote(MCC_MusicalNote::NoteBuffer,440);
+    	MCC_MusicalNote::SetReferenceNote(MCC_MusicalNote::NoteBuffer,440.0);
     }
 //
 /////////////////////////////////////////////////////////////////////////
