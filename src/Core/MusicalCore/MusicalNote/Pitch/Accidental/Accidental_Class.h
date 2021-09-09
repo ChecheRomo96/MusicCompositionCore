@@ -78,7 +78,7 @@
                                     bool Flat();
                             };
 
-                            extern AccidentalClass AccidentalID_Buffer;
+                            extern AccidentalClass AccidentalClass_Buffer;
 
                             bool operator < (const AccidentalClass& lhs, const AccidentalClass& rhs);
                             bool operator < (const Pitch::AccidentalType& lhs, const AccidentalClass& rhs);

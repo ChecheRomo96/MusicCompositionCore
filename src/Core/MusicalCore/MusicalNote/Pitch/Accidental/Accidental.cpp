@@ -7,7 +7,7 @@
 using namespace MusicCompositionCore::Core::MusicalCore::MusicalNote::Pitch::Accidental;
 using namespace MusicCompositionCore::Core::MusicalCore::MusicalNote::Pitch;
 
-AccidentalClass MusicCompositionCore::Core::MusicalCore::MusicalNote::Pitch::Accidental::AccidentalID_Buffer;
+AccidentalClass MusicCompositionCore::Core::MusicalCore::MusicalNote::Pitch::Accidental::AccidentalClass_Buffer;
 
 AccidentalClass::AccidentalClass()
 {
@@ -50,14 +50,14 @@ AccidentalClass& AccidentalClass::operator=(const AccidentalClass& source)
 	return (*this);
 }
 
-AccidentalClass::AccidentalClass(const PitchClass& token)
+AccidentalClass::AccidentalClass(const PitchClass& Pitch)
 {
-	_ID = token.Accidental().ID();
+	_ID = Pitch.Accidental();
 }
 
-AccidentalClass& AccidentalClass::operator=(const PitchClass& token)
+AccidentalClass& AccidentalClass::operator=(const PitchClass& Pitch)
 {
-	_ID = token.Accidental().ID();
+	_ID = Pitch.Accidental();
 	return (*this);
 }
 
