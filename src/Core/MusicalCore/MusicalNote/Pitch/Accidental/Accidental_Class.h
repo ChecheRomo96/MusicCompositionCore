@@ -43,15 +43,28 @@
                                     bool operator!=(const AccidentalClass& rhs) const;
 
                                     friend bool operator < (const AccidentalClass& lhs, const AccidentalClass& rhs);
+                                    friend bool operator < (const AccidentalType& lhs, const AccidentalClass& rhs);
+                                    friend bool operator < (const AccidentalClass& lhs, const AccidentalType& rhs);
+
                                     friend bool operator <= (const AccidentalClass& lhs, const AccidentalClass& rhs);
+                                    friend bool operator <= (const AccidentalType& lhs, const AccidentalClass& rhs);
+                                    friend bool operator <= (const AccidentalClass& lhs, const AccidentalType& rhs);
+                                    
                                     friend bool operator > (const AccidentalClass& lhs, const AccidentalClass& rhs);
+                                    friend bool operator > (const AccidentalType& lhs, const AccidentalClass& rhs);
+                                    friend bool operator > (const AccidentalClass& lhs, const AccidentalType& rhs);
+                                    
                                     friend bool operator >= (const AccidentalClass& lhs, const AccidentalClass& rhs);
+                                    friend bool operator >= (const AccidentalType& lhs, const AccidentalClass& rhs);
+                                    friend bool operator >= (const AccidentalClass& lhs, const AccidentalType& rhs);
 
                                     friend bool operator == (const AccidentalClass& lhs, const AccidentalClass& rhs);
                                     friend bool operator == (const AccidentalType& lhs, const AccidentalClass& rhs);
                                     friend bool operator == (const AccidentalClass& lhs, const AccidentalType& rhs);
 
                                     friend bool operator != (const AccidentalClass& lhs, const AccidentalClass& rhs);
+                                    friend bool operator != (const AccidentalType& lhs, const AccidentalClass& rhs);
+                                    friend bool operator != (const AccidentalClass& lhs, const AccidentalType& rhs);
                                     
                                     char* Name(char* buff);
                                     const char* Name() const;
@@ -93,6 +106,9 @@
                             bool operator == (const AccidentalType& lhs, const AccidentalType& rhs);
 
                             bool operator != (const AccidentalClass& lhs, const AccidentalClass& rhs);
+                            bool operator != (const AccidentalType& lhs, const AccidentalClass& rhs);
+                            bool operator != (const AccidentalClass& lhs, const AccidentalType& rhs);
+                            bool operator != (const AccidentalType& lhs, const AccidentalType& rhs);
                                 
                         }
                     }
