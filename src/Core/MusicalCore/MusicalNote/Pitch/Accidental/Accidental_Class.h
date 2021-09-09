@@ -68,13 +68,29 @@
                             extern AccidentalClass AccidentalID_Buffer;
 
                             bool operator < (const AccidentalClass& lhs, const AccidentalClass& rhs);
+                            bool operator < (const AccidentalType& lhs, const AccidentalClass& rhs);
+                            bool operator < (const AccidentalClass& lhs, const AccidentalType& rhs);
+                            bool operator < (const AccidentalType& lhs, const AccidentalType& rhs);
+
                             bool operator <= (const AccidentalClass& lhs, const AccidentalClass& rhs);
+                            bool operator <= (const AccidentalType& lhs, const AccidentalClass& rhs);
+                            bool operator <= (const AccidentalClass& lhs, const AccidentalType& rhs);
+                            bool operator <= (const AccidentalType& lhs, const AccidentalType& rhs);
+
                             bool operator > (const AccidentalClass& lhs, const AccidentalClass& rhs);
+                            bool operator > (const AccidentalType& lhs, const AccidentalClass& rhs);
+                            bool operator > (const AccidentalClass& lhs, const AccidentalType& rhs);
+                            bool operator > (const AccidentalType& lhs, const AccidentalType& rhs);
+                            
                             bool operator >= (const AccidentalClass& lhs, const AccidentalClass& rhs);
+                            bool operator >= (const AccidentalType& lhs, const AccidentalClass& rhs);
+                            bool operator >= (const AccidentalClass& lhs, const AccidentalType& rhs);
+                            bool operator >= (const AccidentalType& lhs, const AccidentalType& rhs);
 
                             bool operator == (const AccidentalClass& lhs, const AccidentalClass& rhs);
                             bool operator == (const AccidentalType& lhs, const AccidentalClass& rhs);
                             bool operator == (const AccidentalClass& lhs, const AccidentalType& rhs);
+                            bool operator == (const AccidentalType& lhs, const AccidentalType& rhs);
 
                             bool operator != (const AccidentalClass& lhs, const AccidentalClass& rhs);
                                 
