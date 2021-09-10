@@ -273,10 +273,11 @@ char Flash::Buffer[24];
 //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Get Accidental Name
+    
 	char* Flash::GetAccidentalText(char* buff, const Pitch::Accidental::AccidentalClass& Accidental, const TextFormat::FormatClass& Format)
 	{
 	    #if defined(ARDUINO)
-	        if((Accidental == Pitch::Accidental::Natural) && (Format.NaturalMode() == TextFormat::NaturalMode::Enabled) && (Format.AccidentalMode() == TextFormat::AccidentalMode::Short))
+	        if((Accidental == Pitch::Accidental::Natural) && (Format.NaturalMode() == TextFormat::NaturalMode::Enabled) && (Format.AccidentalMode() == TextFormat::AccidentalMode::Symbol))
 	        {
 	        	buff[0] = '\0';
 	        }

@@ -17,58 +17,17 @@ int main()
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Create TextFormat::FormatClass Object and set it to print as Note Symbol
 
-        TextFormat::FormatClass myFormat;
+        auto AccidentalMode = TextFormat::AccidentalMode::Symbol;
+        auto OctaveMode     = TextFormat::OctaveMode::Enabled;
+        auto SpacingMode    = TextFormat::SpacingMode::Enabled;
+        auto NaturalMode    = TextFormat::NaturalMode::Disabled;
 
-        myFormat.Accidental_Symbol();
-        myFormat.Octave_Disabled();
-        myFormat.Spacing_Disabled();
-        myFormat.Natural_Enabled();
-
-        std::cout << "Note A: " << Flash::GetName(NoteA, myFormat) << std::endl;
-        std::cout << "Note B: " << Flash::GetName(NoteB, myFormat) << std::endl;
-        std::cout << "Note C: " << Flash::GetName(NoteC, myFormat) << std::endl;
-        std::cout << std::endl;
-    //
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // Modify TextFormat::FormatClass Object and set it to print as Note Symbol
-
-        myFormat.Accidental_Symbol();
-        myFormat.Octave_Enabled();
-        myFormat.Spacing_Enabled();
-        myFormat.Natural_Enabled();
+        TextFormat::FormatClass myFormat(AccidentalMode, OctaveMode, SpacingMode, NaturalMode);
 
         std::cout << "Note A: " << Flash::GetName(NoteA, myFormat) << std::endl;
         std::cout << "Note B: " << Flash::GetName(NoteB, myFormat) << std::endl;
         std::cout << "Note C: " << Flash::GetName(NoteC, myFormat) << std::endl;
         std::cout << std::endl;
-    //
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // Modify TextFormat::FormatClass Object and set it to print as Text
-
-        myFormat.Accidental_Text();
-        myFormat.Octave_Enabled();
-        myFormat.Spacing_Enabled();
-        myFormat.Natural_Enabled();
-
-        std::cout << "Note A: " << Flash::GetName(NoteA, myFormat) << std::endl;
-        std::cout << "Note B: " << Flash::GetName(NoteB, myFormat) << std::endl;
-        std::cout << "Note C: " << Flash::GetName(NoteC, myFormat) << std::endl;
-        std::cout << std::endl;
-        
-    //
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // Modify TextFormat::FormatClass Object and set it to print Symbols Justified
-
-        myFormat.Accidental_Symbol();
-        myFormat.Octave_Enabled();
-        myFormat.Spacing_Justified();
-        myFormat.Natural_Enabled();
-
-        std::cout << "Note A: " << Flash::GetName(NoteA, myFormat) << std::endl;
-        std::cout << "Note B: " << Flash::GetName(NoteB, myFormat) << std::endl;
-        std::cout << "Note C: " << Flash::GetName(NoteC, myFormat) << std::endl;
-        std::cout << std::endl;
-
     //
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     

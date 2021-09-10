@@ -1,2 +1,2 @@
-add_executable(MCC_MusicalNote_NoteFunctionality main.cpp)
-target_link_libraries(MCC_MusicalNote_NoteFunctionality MCC)
+add_executable(MCC_MusicalNote_NoteClass_Functionality main.cpp)
+target_link_libraries(MCC_MusicalNote_NoteClass_Functionality MCC)
