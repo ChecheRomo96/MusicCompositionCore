@@ -8,15 +8,35 @@ int main()
 	MCC::Start();
     
     // Default initializator, contents of TextFormat::DefaultFormat are copyied
-    MCC_MusicalNote::TextFormat::Format myFormat;
-    myFormat.Set_AccidentalShort();
-    
-    const char* Text = GetAccidentalName( MCC_MusicalNote::Pitch::Accidental::Sharp , myFormat );
+    MCC_MusicalNote::TextFormat::FormatClass myFormat;
+    myFormat.Accidental_Symbol();
+
+    const char* Text = GetAccidentalText(MCC_MusicalNote::Pitch::Accidental::Flat, myFormat);
     std::cout << "Accidental Short: " << Text << std::endl;
 
-    myFormat.Set_AccidentalLong();
+    myFormat.Accidental_Text();
 
-    Text = GetAccidentalName(MCC_MusicalNote::Pitch::Accidental::Sharp, myFormat);
+    Text = GetAccidentalText(MCC_MusicalNote::Pitch::Accidental::Flat, myFormat);
+    std::cout << "Accidental Long: " << Text << std::endl;
+
+    myFormat.Accidental_Symbol();
+
+    Text = GetAccidentalText(MCC_MusicalNote::Pitch::Accidental::Natural, myFormat);
+    std::cout << "Accidental Short: " << Text << std::endl;
+
+    myFormat.Accidental_Text();
+
+    Text = GetAccidentalText(MCC_MusicalNote::Pitch::Accidental::Natural, myFormat);
+    std::cout << "Accidental Long: " << Text << std::endl;
+
+    myFormat.Accidental_Symbol();
+
+    Text = GetAccidentalText(MCC_MusicalNote::Pitch::Accidental::Sharp, myFormat);
+    std::cout << "Accidental Short: " << Text << std::endl;
+
+    myFormat.Accidental_Text();
+
+    Text = GetAccidentalText(MCC_MusicalNote::Pitch::Accidental::Sharp, myFormat);
     std::cout << "Accidental Long: " << Text << std::endl;
     
     return 0;
