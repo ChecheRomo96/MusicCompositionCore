@@ -113,13 +113,21 @@ char Flash::Buffer[24];
 		if((Letter == Pitch::Letter::Count)||(Accidental < Pitch::Accidental::Min)||(Accidental > Pitch::Accidental::Max)){buff[0] = '\0'; return buff;}
 	    
 		CPString::string LetterStr(Flash::GetLetterText(Letter));
+
+		Serial.println("Checkpoint B");delay(1000);
 		CPString::string AccidentalStr(Flash::GetAccidentalText(Accidental, Format));
+
+		Serial.println("Checkpoint C");delay(1000);
 		CPString::string OctaveStr(Octave);
+
+		Serial.println("Checkpoint D");delay(1000);
 		CPString::string SpaceStr(" ");
+
+		Serial.println("Checkpoint E");delay(1000);
 
 		CPString::string OutputStr;
 
-		Serial.println("Checkpoint B");delay(1000);
+		Serial.println("Checkpoint F");delay(1000);
 
 
 		switch(Format.SpacingMode())
