@@ -266,6 +266,8 @@ char Flash::Buffer[24];
 			break;
 		}
 
+		Serial.println(F("Checkpoint D")); delay(1000);
+		
 		strcpy(buff, OutputStr.c_str());
 
 		return buff;
