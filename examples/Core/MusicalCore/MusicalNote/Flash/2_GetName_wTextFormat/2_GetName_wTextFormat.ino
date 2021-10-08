@@ -15,13 +15,18 @@ void setup()
     const char* Text = GetName( MCC_MusicalNote::Pitch::Letter::C, MCC_MusicalNote::Pitch::Accidental::Natural, 3, myFormat );
     Serial.println(Text);
 
-    myFormat.Set_OctaveDisabled();
+    myFormat.Octave_Disabled();
+
+    Text = GetName( MCC_MusicalNote::Pitch::Letter::C, MCC_MusicalNote::Pitch::Accidental::Natural, 3, myFormat );
+    Serial.println(Text);
+
+    myFormat.Accidental_Text();
+    myFormat.Spacing_Enabled();
 
     Text = GetName( MCC_MusicalNote::Pitch::Letter::C, MCC_MusicalNote::Pitch::Accidental::Natural, 3, myFormat );
     Serial.println(Text);
     
-    myFormat.Set_AccidentalLong();
-    myFormat.Set_SpaceEnabled();
+    myFormat.Spacing_Enabled();
 
     Text = GetName( MCC_MusicalNote::Pitch::Letter::C, MCC_MusicalNote::Pitch::Accidental::Natural, 3, myFormat );
     Serial.println(Text);
