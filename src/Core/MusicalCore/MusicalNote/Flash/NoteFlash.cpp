@@ -108,26 +108,14 @@ char Flash::Buffer[24];
 
 	char* Flash::GetName(char* buff, const Pitch::LetterType& Letter, const Pitch::AccidentalType& Accidental, int8_t Octave, const TextFormat::FormatClass& Format)
 	{
-		Serial.println("Checkpoint A");delay(1000);
-
 		if((Letter == Pitch::Letter::Count)||(Accidental < Pitch::Accidental::Min)||(Accidental > Pitch::Accidental::Max)){buff[0] = '\0'; return buff;}
 	    
 		CPString::string LetterStr(Flash::GetLetterText(Letter));
-
-		Serial.println("Checkpoint B");delay(1000);
 		CPString::string AccidentalStr(Flash::GetAccidentalText(Accidental, Format));
-
-		Serial.println("Checkpoint C");delay(1000);
 		CPString::string OctaveStr(Octave);
-
-		Serial.println("Checkpoint D");delay(1000);
 		CPString::string SpaceStr(" ");
 
-		Serial.println("Checkpoint E");delay(1000);
-
 		CPString::string OutputStr;
-
-		Serial.println("Checkpoint F");delay(1000);
 
 
 		switch(Format.SpacingMode())
@@ -274,9 +262,6 @@ char Flash::Buffer[24];
 		}
 
 		strcpy(buff, OutputStr.c_str());
-
-		Serial.print("Output String: ");
-		Serial.println(OutputStr);
 
 		return buff;
 	}
