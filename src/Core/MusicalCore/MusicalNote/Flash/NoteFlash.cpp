@@ -128,6 +128,8 @@ char Flash::Buffer[24];
 			
 			case TextFormat::SpacingMode::Justified:
 			{
+
+				Serial.println(F("Checkpoint D.1")); delay(1000);
 				OutputStr += LetterStr;
 
 				if (Format.AccidentalMode() == TextFormat::AccidentalMode::Text)
@@ -230,6 +232,8 @@ char Flash::Buffer[24];
 			
 			case TextFormat::SpacingMode::Enabled:
 			{
+
+				Serial.println(F("Checkpoint D.2")); delay(1000);
 				OutputStr += LetterStr;
 
 				if (Format.AccidentalMode() == TextFormat::AccidentalMode::Text)
@@ -249,6 +253,8 @@ char Flash::Buffer[24];
 			
 			case TextFormat::SpacingMode::Disabled:
 			{
+
+				Serial.println(F("Checkpoint D.3")); delay(1000);
 				OutputStr += LetterStr;
 
 				if (Format.AccidentalMode() == TextFormat::AccidentalMode::Text)
@@ -266,7 +272,7 @@ char Flash::Buffer[24];
 			break;
 		}
 
-		Serial.println(F("Checkpoint D")); delay(1000);
+		Serial.println(F("Checkpoint E")); delay(1000);
 		
 		strcpy(buff, OutputStr.c_str());
 
