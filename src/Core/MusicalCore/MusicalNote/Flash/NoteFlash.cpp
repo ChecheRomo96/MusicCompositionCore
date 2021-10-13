@@ -274,7 +274,7 @@ char Flash::Buffer[24];
 
 		Serial.println(F("Checkpoint E")); delay(1000);
 
-		Serial.println(OutputStr);
+		Serial.println(OutputStr.c_str());
 		
 		strcpy(buff, OutputStr.c_str());
 
