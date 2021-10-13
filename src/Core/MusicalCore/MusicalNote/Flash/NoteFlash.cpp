@@ -108,11 +108,11 @@ char Flash::Buffer[24];
 
 	char* Flash::GetName(char* buff, const Pitch::LetterType& Letter, const Pitch::AccidentalType& Accidental, int8_t Octave, const TextFormat::FormatClass& Format)
 	{
-		Serial.println(F("Checkpoint A")); delay(1000);
+		Serial.println(F("Checkpoint A")); 
 
 		if((Letter == Pitch::Letter::Count)||(Accidental < Pitch::Accidental::Min)||(Accidental > Pitch::Accidental::Max)){buff[0] = '\0'; return buff;}
 
-		Serial.println(F("Checkpoint B")); delay(1000);
+		Serial.println(F("Checkpoint B")); 
 
 		CPString::string LetterStr(Flash::GetLetterText(Letter));
 		CPString::string AccidentalStr(Flash::GetAccidentalText(Accidental, Format));
@@ -126,7 +126,7 @@ char Flash::Buffer[24];
 
 		CPString::string OutputStr;
 
-		Serial.println(F("Checkpoint C")); delay(1000);
+		Serial.println(F("Checkpoint C")); 
 
 		switch(Format.SpacingMode())
 		{
@@ -134,7 +134,7 @@ char Flash::Buffer[24];
 			case TextFormat::SpacingMode::Justified:
 			{
 
-				Serial.println(F("Checkpoint D.1")); delay(1000);
+				Serial.println(F("Checkpoint D.1")); 
 				OutputStr += LetterStr;
 
 				if (Format.AccidentalMode() == TextFormat::AccidentalMode::Text)
@@ -238,7 +238,7 @@ char Flash::Buffer[24];
 			case TextFormat::SpacingMode::Enabled:
 			{
 
-				Serial.println(F("Checkpoint D.2")); delay(1000);
+				Serial.println(F("Checkpoint D.2")); 
 				OutputStr += LetterStr;
 
 				if (Format.AccidentalMode() == TextFormat::AccidentalMode::Text)
@@ -259,7 +259,7 @@ char Flash::Buffer[24];
 			case TextFormat::SpacingMode::Disabled:
 			{
 
-				Serial.println(F("Checkpoint D.3")); delay(1000);
+				Serial.println(F("Checkpoint D.3")); 
 
 				Serial.println(OutputStr.c_str());
 		
@@ -286,12 +286,12 @@ char Flash::Buffer[24];
 			break;
 		}
 
-		Serial.println(F("Checkpoint E")); delay(1000);
+		Serial.println(F("Checkpoint E")); 
 
 		
 		strcpy(buff, OutputStr.c_str());
 
-		Serial.println(F("Checkpoint F")); delay(1000);
+		Serial.println(F("Checkpoint F")); 
 
 		return buff;
 	}
