@@ -123,7 +123,7 @@ char Flash::Buffer[24];
 		Serial.println(AccidentalStr.c_str());
 		Serial.println(OctaveStr.c_str());
 		Serial.println(SpaceStr.c_str());
-		
+
 		CPString::string OutputStr;
 
 		Serial.println(F("Checkpoint C")); delay(1000);
@@ -260,11 +260,18 @@ char Flash::Buffer[24];
 			{
 
 				Serial.println(F("Checkpoint D.3")); delay(1000);
+
+				Serial.println(OutputStr.c_str());
+		
 				OutputStr += LetterStr;
+
+				Serial.println(OutputStr.c_str());
 
 				if (Format.AccidentalMode() == TextFormat::AccidentalMode::Text)
 				{
 					OutputStr += SpaceStr;
+
+					Serial.println(OutputStr.c_str());
 				}
 
 				OutputStr += AccidentalStr;
@@ -272,6 +279,8 @@ char Flash::Buffer[24];
 				if(Format.OctaveMode() == TextFormat::OctaveMode::Enabled)
 				{
 					OutputStr += OctaveStr;
+
+					Serial.println(OutputStr.c_str());
 				}
 			}
 			break;
