@@ -119,6 +119,11 @@ char Flash::Buffer[24];
 		CPString::string OctaveStr(Octave);
 		CPString::string SpaceStr(" ");
 
+		Serial.println(LetterStr.c_str());
+		Serial.println(AccidentalStr.c_str());
+		Serial.println(OctaveStr.c_str());
+		Serial.println(SpaceStr.c_str());
+		
 		CPString::string OutputStr;
 
 		Serial.println(F("Checkpoint C")); delay(1000);
@@ -274,7 +279,6 @@ char Flash::Buffer[24];
 
 		Serial.println(F("Checkpoint E")); delay(1000);
 
-		Serial.println(OutputStr.c_str());
 		
 		strcpy(buff, OutputStr.c_str());
 
