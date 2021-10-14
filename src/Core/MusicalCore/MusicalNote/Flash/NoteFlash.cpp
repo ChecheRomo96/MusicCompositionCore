@@ -261,30 +261,21 @@ char Flash::Buffer[24];
 			{
 				OutputStr = LetterStr;
 		
-		Serial.println(OutputStr);
-
 				if (Format.AccidentalMode() == TextFormat::AccidentalMode::Text)
 				{
 					OutputStr += SpaceStr;
-		
-		Serial.println(OutputStr);
 				}
 
 				OutputStr += AccidentalStr;
-		
-		Serial.println(OutputStr);
 
 				if(Format.OctaveMode() == TextFormat::OctaveMode::Enabled)
 				{
 					OutputStr += OctaveStr;
-		
-		Serial.println(OutputStr);
 				}
 			}
 			break;
 		}
-		
-		Serial.println(OutputStr);
+	
 
 		strcpy(buff, OutputStr.c_str());
 
