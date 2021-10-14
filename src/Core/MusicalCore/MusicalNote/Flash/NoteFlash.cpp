@@ -108,33 +108,20 @@ char Flash::Buffer[24];
 
 	char* Flash::GetName(char* buff, const Pitch::LetterType& Letter, const Pitch::AccidentalType& Accidental, int8_t Octave, const TextFormat::FormatClass& Format)
 	{
-		Serial.println(F("Checkpoint A")); 
-
 		if((Letter == Pitch::Letter::Count)||(Accidental < Pitch::Accidental::Min)||(Accidental > Pitch::Accidental::Max)){buff[0] = '\0'; return buff;}
-
-		Serial.println(F("Checkpoint B")); 
 
 		CPString::string LetterStr(Flash::GetLetterText(Letter));
 		CPString::string AccidentalStr(Flash::GetAccidentalText(Accidental, Format));
 		CPString::string OctaveStr(Octave);
 		CPString::string SpaceStr(" ");
 
-		Serial.println(LetterStr.c_str());
-		Serial.println(AccidentalStr.c_str());
-		Serial.println(OctaveStr.c_str());
-		Serial.println(SpaceStr.c_str());
-
 		CPString::string OutputStr;
-
-		Serial.println(F("Checkpoint C")); 
 
 		switch(Format.SpacingMode())
 		{
 			
 			case TextFormat::SpacingMode::Justified:
 			{
-
-				Serial.println(F("Checkpoint D.1")); 
 				OutputStr += LetterStr;
 
 				if (Format.AccidentalMode() == TextFormat::AccidentalMode::Text)
@@ -237,8 +224,6 @@ char Flash::Buffer[24];
 			
 			case TextFormat::SpacingMode::Enabled:
 			{
-
-				Serial.println(F("Checkpoint D.2")); 
 				OutputStr += LetterStr;
 
 				if (Format.AccidentalMode() == TextFormat::AccidentalMode::Text)
@@ -258,20 +243,11 @@ char Flash::Buffer[24];
 			
 			case TextFormat::SpacingMode::Disabled:
 			{
-
-				Serial.println(F("Checkpoint D.3")); 
-
-				Serial.println(OutputStr.c_str());
-		
 				OutputStr += LetterStr;
-
-				Serial.println(OutputStr.c_str());
 
 				if (Format.AccidentalMode() == TextFormat::AccidentalMode::Text)
 				{
 					OutputStr += SpaceStr;
-
-					Serial.println(OutputStr.c_str());
 				}
 
 				OutputStr += AccidentalStr;
@@ -279,19 +255,12 @@ char Flash::Buffer[24];
 				if(Format.OctaveMode() == TextFormat::OctaveMode::Enabled)
 				{
 					OutputStr += OctaveStr;
-
-					Serial.println(OutputStr.c_str());
 				}
 			}
 			break;
 		}
-
-		Serial.println(F("Checkpoint E")); 
-
 		
 		strcpy(buff, OutputStr.c_str());
-
-		Serial.println(F("Checkpoint F")); 
 
 		return buff;
 	}
