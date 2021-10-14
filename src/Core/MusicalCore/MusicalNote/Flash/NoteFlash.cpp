@@ -210,13 +210,16 @@ char Flash::Buffer[24];
 					{
 						OutputStr += SpaceStr;
 						max_chars = 2;
+				Serial.println(OutputStr);
 					}
 
 					OutputStr += OctaveStr;
+				Serial.println(OutputStr);
 
 					for(uint8_t i = OctaveStr.length(); i<max_chars; i++)
 					{
 						OutputStr += SpaceStr;
+				Serial.println(OutputStr);
 					}
 				}
 			}
