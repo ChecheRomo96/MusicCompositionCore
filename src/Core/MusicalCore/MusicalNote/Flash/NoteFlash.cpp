@@ -260,6 +260,8 @@ char Flash::Buffer[24];
 			break;
 		}
 		
+		Serial.println(OutputStr);
+		
 		strcpy(buff, OutputStr.c_str());
 
 		return buff;
