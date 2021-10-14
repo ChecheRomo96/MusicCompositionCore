@@ -123,7 +123,7 @@ char Flash::Buffer[24];
 			
 			case TextFormat::SpacingMode::Justified:
 			{
-				OutputStr += LetterStr;
+				OutputStr = LetterStr;
 
 				if (Format.AccidentalMode() == TextFormat::AccidentalMode::Text)
 				{
