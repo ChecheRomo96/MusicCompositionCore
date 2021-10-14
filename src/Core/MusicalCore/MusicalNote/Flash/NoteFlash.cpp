@@ -117,6 +117,7 @@ char Flash::Buffer[24];
 		CPString::string SpaceStr(" ");
 
 		CPString::string OutputStr;
+		Serial.println("CHK B");
 
 		switch(Format.SpacingMode())
 		{
