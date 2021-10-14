@@ -108,7 +108,6 @@ char Flash::Buffer[24];
 
 	char* Flash::GetName(char* buff, const Pitch::LetterType& Letter, const Pitch::AccidentalType& Accidental, int8_t Octave, const TextFormat::FormatClass& Format)
 	{
-		Serial.println("CHK A");
 		if((Letter == Pitch::Letter::Count)||(Accidental < Pitch::Accidental::Min)||(Accidental > Pitch::Accidental::Max)){buff[0] = '\0'; return buff;}
 
 		Serial.println("CHK B");
