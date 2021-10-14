@@ -212,7 +212,6 @@ char Flash::Buffer[24];
 					{
 						OutputStr += SpaceStr;
 						max_chars = 2;
-				Serial.println(OutputStr);
 					}
 
 					OutputStr += OctaveStr;
@@ -221,7 +220,6 @@ char Flash::Buffer[24];
 					for(uint8_t i = OctaveStr.length(); i<max_chars; i++)
 					{
 						OutputStr += SpaceStr;
-				Serial.println(OutputStr);
 					}
 				}
 			}
@@ -230,14 +228,11 @@ char Flash::Buffer[24];
 			case TextFormat::SpacingMode::Enabled:
 			{
 
-				Serial.println(OutputStr);
 				OutputStr += LetterStr;
-				Serial.println(OutputStr);
 
 				if (Format.AccidentalMode() == TextFormat::AccidentalMode::Text)
 				{
 					OutputStr += SpaceStr;
-				Serial.println(OutputStr);
 				}
 
 				OutputStr += AccidentalStr;
@@ -246,7 +241,6 @@ char Flash::Buffer[24];
 				{
 					OutputStr += SpaceStr;
 					OutputStr += OctaveStr;
-				Serial.println(OutputStr);
 				}
 			}
 			break;
