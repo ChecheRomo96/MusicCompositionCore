@@ -114,6 +114,11 @@ char Flash::Buffer[24];
 		CPString::string AccidentalStr(Flash::GetAccidentalText(Accidental, Format));
 		CPString::string OctaveStr(Octave);
 		CPString::string SpaceStr(" ");
+		
+				Serial.println(LetterStr);
+				Serial.println(AccidentalStr);
+				Serial.println(OctaveStr);
+				Serial.println(SpaceStr);
 
 		CPString::string OutputStr;
 
