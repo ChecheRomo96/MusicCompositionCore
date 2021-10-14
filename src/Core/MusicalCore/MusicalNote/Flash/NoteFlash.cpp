@@ -111,6 +111,7 @@ char Flash::Buffer[24];
 		Serial.println("CHK A");
 		if((Letter == Pitch::Letter::Count)||(Accidental < Pitch::Accidental::Min)||(Accidental > Pitch::Accidental::Max)){buff[0] = '\0'; return buff;}
 
+		Serial.println("CHK B");
 		CPString::string LetterStr(Flash::GetLetterText(Letter));
 		CPString::string AccidentalStr(Flash::GetAccidentalText(Accidental, Format));
 		CPString::string OctaveStr(Octave);
