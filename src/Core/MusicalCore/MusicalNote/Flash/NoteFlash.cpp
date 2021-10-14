@@ -259,7 +259,7 @@ char Flash::Buffer[24];
 			
 			case TextFormat::SpacingMode::Disabled:
 			{
-				OutputStr += LetterStr;
+				OutputStr = LetterStr;
 		
 		Serial.println(OutputStr);
 
