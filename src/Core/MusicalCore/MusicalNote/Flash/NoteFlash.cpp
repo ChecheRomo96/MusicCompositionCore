@@ -224,11 +224,15 @@ char Flash::Buffer[24];
 			
 			case TextFormat::SpacingMode::Enabled:
 			{
+
+				Serial.println(OutputStr);
 				OutputStr += LetterStr;
+				Serial.println(OutputStr);
 
 				if (Format.AccidentalMode() == TextFormat::AccidentalMode::Text)
 				{
 					OutputStr += SpaceStr;
+				Serial.println(OutputStr);
 				}
 
 				OutputStr += AccidentalStr;
@@ -237,6 +241,7 @@ char Flash::Buffer[24];
 				{
 					OutputStr += SpaceStr;
 					OutputStr += OctaveStr;
+				Serial.println(OutputStr);
 				}
 			}
 			break;
@@ -261,7 +266,7 @@ char Flash::Buffer[24];
 		}
 		
 		Serial.println(OutputStr);
-		
+
 		strcpy(buff, OutputStr.c_str());
 
 		return buff;
