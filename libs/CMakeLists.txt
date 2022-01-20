@@ -44,25 +44,30 @@
 #		
 ######################################################################################################
 # RtMidi
+	
+	if(MCC_RTMIDI_STATUS)
 
-	if(EXISTS ${CMAKE_CURRENT_LIST_DIR}/rtmidi)
-		set( BUILD_EXAMPLES "OFF" )
-		set( INSTALL "OFF" )
-		set( RTMIDI_BUILD_TESTING "OFF" )
-		message("Using the RtMidi Source on: MusicCompositonCore/libs/rtmidi")
-		
-		add_subdirectory(rtmidi)
-	else()
+		option(RTMIDI_BUILD_TESTING "Build test programs" OFF)
 
-		find_package(rtmidi)
-
-		if(rtmidi_FOUND)
-			message("Using the RtMidi Package installed on: ${CMAKE_INSTALL_PREFIX}")
+		if(EXISTS ${CMAKE_CURRENT_LIST_DIR}/rtmidi)
+			set( BUILD_EXAMPLES "OFF" )
+			set( INSTALL "OFF" )
+			set( RTMIDI_BUILD_TESTING "OFF" )
+			message("Using the RtMidi Source on: MusicCompositonCore/libs/rtmidi")
+			
+			add_subdirectory(rtmidi)
 		else()
-			message(FATAL_ERROR "RtMidi not found.")
-		endif()
-	endif()
 
-	target_link_libraries(MCC PUBLIC rtmidi)
+			find_package(rtmidi)
+
+			if(rtmidi_FOUND)
+				message("Using the RtMidi Package installed on: ${CMAKE_INSTALL_PREFIX}")
+			else()
+				message(FATAL_ERROR "RtMidi not found.")
+			endif()
+		endif()
+
+		target_link_libraries(MCC PUBLIC rtmidi)
+	endif()
 #
 ######################################################################################################

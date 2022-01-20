@@ -1,4 +1,4 @@
 add_subdirectory(1_GetName_Simple)
-add_subdirectory(2_GetName_wTextFormat)
+add_subdirectory(2_GetName_TextFormat)
 add_subdirectory(3_GetLetter)
 add_subdirectory(4_GetAccidental)

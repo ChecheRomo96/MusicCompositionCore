@@ -1,4 +1,18 @@
-add_subdirectory(BuildTest)
-add_subdirectory(Core)
+######################################################################################################
+# Append Build Test
 
-add_subdirectory(CodeTesting)
+	add_subdirectory(BuildTest)
+#
+######################################################################################################
+# Append Core Examples
+
+	if(${MCC_COMPILE_CORE})
+		add_subdirectory(Core)
+	endif()
+#
+######################################################################################################
+# Append Code Testing Executable
+
+	add_subdirectory(CodeTesting)
+#
+######################################################################################################

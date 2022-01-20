@@ -12,8 +12,10 @@
         #else
             CPP_Start();
 		#endif
-
-		Core::Start();
+		
+		#if defined(MCC_COMPILE_CORE) 
+			Core::Start();
+		#endif
 		//Communications::Start();
 	}
 

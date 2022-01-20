@@ -1,2 +1,17 @@
-add_subdirectory(MusicalCore)
-add_subdirectory(UtilityCore)
+######################################################################################################
+# Append Utility Core Examples
+
+	if(${MCC_COMPILE_UTILITY_CORE})
+		add_subdirectory(UtilityCore)
+	endif()
+#
+######################################################################################################
+# Append Musical Core Examples
+
+	if(${MCC_COMPILE_MUSICAL_CORE})
+		add_subdirectory(MusicalCore)
+	endif()
+#
+######################################################################################################
+
+

@@ -17,10 +17,10 @@ int main()
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Create TextFormat::FormatClass Object and set it to print as Note Symbol
 
-        auto AccidentalMode = TextFormat::AccidentalMode::Symbol;
+        auto AccidentalMode = TextFormat::AccidentalMode::Text;
         auto OctaveMode     = TextFormat::OctaveMode::Enabled;
         auto SpacingMode    = TextFormat::SpacingMode::Enabled;
-        auto NaturalMode    = TextFormat::NaturalMode::Disabled;
+        auto NaturalMode    = TextFormat::NaturalMode::Enabled;
 
         TextFormat::FormatClass myFormat(AccidentalMode, OctaveMode, SpacingMode, NaturalMode);
 

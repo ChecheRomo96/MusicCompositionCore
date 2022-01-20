@@ -10,12 +10,9 @@
 	set( HEADERS_LIST "" )
 #
 ######################################################################################################
-# Append Sources
+# Append Sources and Headers
 
 	list( APPEND MCC_SOURCES "${CMAKE_CURRENT_LIST_DIR}/MCC.cpp")
-#
-######################################################################################################
-# Append Headers
 
 	list( APPEND HEADERS_LIST "${CMAKE_CURRENT_LIST_DIR}/MCC.h")
 	list( APPEND HEADERS_LIST "${CMAKE_CURRENT_LIST_DIR}/MCC_Setup.h")
@@ -26,7 +23,8 @@
 ######################################################################################################
 # Add Subdirectories
 
-	if(MCC_COMPILE_CORE STREQUAL "ON")
+	if(${MCC_COMPILE_CORE})
+		message(STATUS "Compiling MCC::Core...")
 		add_subdirectory(Core)
 	endif()
 #
@@ -38,8 +36,34 @@
 ######################################################################################################
 # Add Compliler Definitions
 
-	if(MCC_COMPILE_CORE STREQUAL "ON")
+	if(${MCC_COMPILE_CORE})
 		target_compile_definitions(MCC PUBLIC MCC_CORE_ENABLED)
+
+		if(${MCC_COMPILE_UTILITY_CORE})
+			target_compile_definitions(MCC PUBLIC MCC_UTILITY_CORE_ENABLED)
+
+			if(${MCC_COMPILE_ACCUMULATOR})
+				target_compile_definitions(MCC PUBLIC MCC_ACCUMULATOR_ENABLED)
+			endif()
+
+		endif()
+
+		if(${MCC_COMPILE_MUSICAL_CORE})
+			target_compile_definitions(MCC PUBLIC MCC_MUSICAL_CORE_ENABLED)
+
+			if(${MCC_COMPILE_MUSICAL_NOTE})
+				target_compile_definitions(MCC PUBLIC MCC_MUSICAL_NOTE_ENABLED)
+			endif()
+
+			if(${MCC_COMPILE_MUSICAL_INERVAL})
+				target_compile_definitions(MCC PUBLIC MCC_MUSICAL_INTERVAL_ENABLED)
+			endif()
+
+			if(${MCC_COMPILE_MUSICAL_SCALE})
+				target_compile_definitions(MCC PUBLIC MCC_MUSICAL_SCALE_ENABLED)
+			endif()
+		endif()
+
 	endif()
 #
 ######################################################################################################

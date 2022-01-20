@@ -433,7 +433,7 @@ CPString::string MusicCompositionCore::Core::MusicalCore::MusicalScale::DefaultN
                         name = _UserName;
                     }
 
-                    (*this) = Scale(root,Intervals,size()-1);
+                    (*this) = Scale(root, Intervals);
 
                     if(name != DefaultName)
                     {

@@ -15,8 +15,14 @@
     
     namespace MCC_Core = MusicCompositionCore::Core;
 
-    #include "UtilityCore/UtilityCore.h"
-    #include "MusicalCore/MusicalCore.h"
+    #if defined(MCC_UTILITY_CORE_ENABLED)
+        #include "UtilityCore/UtilityCore.h"
+    #endif
+
+    #if defined(MCC_MUSICAL_CORE_ENABLED)
+        #include "MusicalCore/MusicalCore.h"
+    #endif
+
     //#include "MidiCore/MidiCore.h"
     //#include "MusicalUtilityCore/MusicalUtilityCore.h"
 

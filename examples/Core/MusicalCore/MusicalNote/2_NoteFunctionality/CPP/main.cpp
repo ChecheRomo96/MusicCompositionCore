@@ -63,18 +63,18 @@ int main(int argc, const char * argv[])
         Note NoteB(Pitch::C_Natural,4);
         
         std::cout<<"Comparing Pitch: ";
-        
-        if(NoteA>NoteB){std::cout<<NoteA.Name()<<" > "<<NoteB.Name()<<"."<<std::endl;}
-        else if(NoteA<NoteB){std::cout<<NoteA.Name()<<" < "<<NoteB.Name()<<"."<<std::endl;}
-        else if(NoteA == NoteB){std::cout<<NoteA.Name()<<" == "<<NoteB.Name()<<"."<<std::endl;}
+
+        if (NoteA > NoteB) { std::cout << NoteA.Name() << " > "; std::cout << NoteB.Name() << "." << std::endl; }
+        else if (NoteA < NoteB) { std::cout << NoteA.Name() << " < "; std::cout << NoteB.Name() << "." << std::endl; }
+        else if (NoteA == NoteB) { std::cout << NoteA.Name() << " == "; std::cout << NoteB.Name() << "." << std::endl; }
         
         SetCompareMode(CompareMode::Name);
         
         std::cout<<"Comparing Name: ";
-        
-        if(NoteA>NoteB){std::cout<<NoteA.Name()<<" > "<<NoteB.Name()<<"."<<std::endl;}
-        else if(NoteA<NoteB){std::cout<<NoteA.Name()<<" < "<<NoteB.Name()<<"."<<std::endl;}
-        else if(NoteA == NoteB){std::cout<<NoteA.Name()<<" == "<<NoteB.Name()<<"."<<std::endl;}
+
+        if (NoteA > NoteB) { std::cout << NoteA.Name() << " > "; std::cout << NoteB.Name() << "." << std::endl; }
+        else if (NoteA < NoteB) { std::cout << NoteA.Name() << " < "; std::cout << NoteB.Name() << "." << std::endl; }
+        else if (NoteA == NoteB) { std::cout << NoteA.Name() << " == "; std::cout << NoteB.Name() << "." << std::endl; }
         
         //////////////////////////////////////////////////////////////////////////////////////////////
         std::cout<<std::endl;
@@ -87,18 +87,19 @@ int main(int argc, const char * argv[])
         NoteB.SetOctave(3);
         
         std::cout<<"Comparing Pitch: ";
+        NoteB.Name();
         
-        if(NoteA>NoteB){std::cout<<NoteA.Name()<<" > "<<NoteB.Name()<<"."<<std::endl;}
-        else if(NoteA<NoteB){std::cout<<NoteA.Name()<<" < "<<NoteB.Name()<<"."<<std::endl;}
-        else if(NoteA == NoteB){std::cout<<NoteA.Name()<<" == "<<NoteB.Name()<<"."<<std::endl;}
+        if (NoteA > NoteB){ std::cout << NoteA.Name() << " > "; std::cout<< NoteB.Name() << "." << std::endl; }
+        else if(NoteA<NoteB) { std::cout << NoteA.Name() << " < "; std::cout << NoteB.Name() << "." << std::endl; }
+        else if(NoteA == NoteB) { std::cout << NoteA.Name() << " == "; std::cout << NoteB.Name() << "." << std::endl; }
         
         SetCompareMode(CompareMode::Name);
         
         std::cout<<"Comparing Name: ";
-        
-        if(NoteA>NoteB){std::cout<<NoteA.Name()<<" > "<<NoteB.Name()<<"."<<std::endl;}
-        else if(NoteA<NoteB){std::cout<<NoteA.Name()<<" < "<<NoteB.Name()<<"."<<std::endl;}
-        else if(NoteA == NoteB){std::cout<<NoteA.Name()<<" == "<<NoteB.Name()<<"."<<std::endl;}
+
+        if (NoteA > NoteB) { std::cout << NoteA.Name() << " > "; std::cout << NoteB.Name() << "." << std::endl; }
+        else if (NoteA < NoteB) { std::cout << NoteA.Name() << " < "; std::cout << NoteB.Name() << "." << std::endl; }
+        else if (NoteA == NoteB) { std::cout << NoteA.Name() << " == "; std::cout << NoteB.Name() << "." << std::endl; }
         
     }
     /////////////////////////////////////////////////////////////////////////////////////////////////////////
