@@ -9,9 +9,10 @@
     // Arduino IDE
 
         #if defined(ARDUINO)
-            
+
+            #include <avr/pgmspace.h>
+
             #define PROGMEM_MACRO PROGMEM
-            
             #define MCC_VERSION "0.0.1"
     //
     ///////////////////////////////////////////////////////////////////////////////////
