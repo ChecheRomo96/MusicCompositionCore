@@ -2,11 +2,12 @@
 #define MCC_USER_SETUP_H
 
 	//////////////////////////////////////////////////////////////////
-	// Hard Coded Compilation 
+	// Compilation Setup
 
-		//#define ARDUINO
-		//#define PSOC_CREATOR
-		//#define CPP
+                #define MCC_CORE_ENABLED
+                        
+                        #define MCC_UTILITY_CORE_ENABLED
+                        #define MCC_MUSICAL_CORE_ENABLED
 	//		
 	//////////////////////////////////////////////////////////////////
 	// Debug 
