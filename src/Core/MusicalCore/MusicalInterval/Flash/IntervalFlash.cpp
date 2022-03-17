@@ -1,5 +1,5 @@
 #include "IntervalFlash.h" 
-#include <cstring>
+#include <string.h>
 
 using namespace MusicCompositionCore::Core::MusicalCore::MusicalInterval;
 
