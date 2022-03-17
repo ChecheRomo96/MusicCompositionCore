@@ -3,6 +3,7 @@
 
     #include "MCC_Setup.h"
     #include "MCC_GlobalDefinitions.h"
+    #include <stdint.h>
 
     ///////////////////////////////////////////////////////////////////////////////////
     // Arduino IDE
