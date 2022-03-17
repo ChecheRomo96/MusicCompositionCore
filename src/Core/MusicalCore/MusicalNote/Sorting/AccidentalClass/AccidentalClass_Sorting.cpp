@@ -1,6 +1,4 @@
-#include <CPVector.h>
 #include "AccidentalClass_Sorting.h"
-
 
 using namespace MusicCompositionCore::Core::MusicalCore::MusicalNote;
 

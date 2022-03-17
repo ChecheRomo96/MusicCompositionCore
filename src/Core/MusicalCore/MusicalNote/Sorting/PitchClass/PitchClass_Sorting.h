@@ -2,6 +2,7 @@
 #define MCC_PITCH_CLASS_SORTING_H
 
 	#include <MCC_BuildSettings.h>
+	#include <CPVector.h>
 	
 	#include "../../Pitch/NotePitch.h"
 

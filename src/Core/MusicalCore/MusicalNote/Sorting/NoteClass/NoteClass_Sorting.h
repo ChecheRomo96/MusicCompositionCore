@@ -2,6 +2,7 @@
 #define MCC_NOTE_CLASS_SORTING_H
 
 	#include <MCC_BuildSettings.h>
+	#include <CPVector.h>
 	
 	#include "../../Note_Class.h"
 
