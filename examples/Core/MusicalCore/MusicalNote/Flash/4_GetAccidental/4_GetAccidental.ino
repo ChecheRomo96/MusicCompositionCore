@@ -12,7 +12,18 @@ void setup()
     // Default initializator, contents of TextFormat::DefaultFormat are copyied
     MCC_MusicalNote::TextFormat::FormatClass myFormat; 
     
-    const char* Text = GetAccidentalText( MCC_MusicalNote::Pitch::Accidental::Flat , myFormat );
+    const char* Text = GetAccidentalText( MCC_MusicalNote::Pitch::Accidental::DoubleFlat , myFormat );
+    Serial.println(Text);
+
+    myFormat.Accidental_Text();
+
+    Text = GetAccidentalText(MCC_MusicalNote::Pitch::Accidental::DoubleFlat, myFormat);
+    Serial.println(Text);
+
+    myFormat.Accidental_Symbol();
+
+    Text = GetAccidentalText(MCC_MusicalNote::Pitch::Accidental::Flat, myFormat);
+    
     Serial.println(Text);
 
     myFormat.Accidental_Text();
@@ -39,6 +50,16 @@ void setup()
     myFormat.Accidental_Text();
 
     Text = GetAccidentalText(MCC_MusicalNote::Pitch::Accidental::Sharp, myFormat);
+    Serial.println(Text);
+
+    myFormat.Accidental_Symbol();
+
+    Text = GetAccidentalText(MCC_MusicalNote::Pitch::Accidental::DoubleSharp, myFormat);
+    Serial.println(Text);
+
+    myFormat.Accidental_Text();
+
+    Text = GetAccidentalText(MCC_MusicalNote::Pitch::Accidental::DoubleSharp, myFormat);
     Serial.println(Text);
 
 }
