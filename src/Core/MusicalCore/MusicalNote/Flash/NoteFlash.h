@@ -2,6 +2,7 @@
 #define MCC_MUSICAL_NOTE_FLASH_H
 
     #include <MCC_BuildSettings.h>
+    #include <CPString.h>
 
     #include "NoteFlash_Definitions.h"
 

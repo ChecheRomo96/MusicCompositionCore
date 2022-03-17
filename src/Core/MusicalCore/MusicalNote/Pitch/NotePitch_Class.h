@@ -54,10 +54,10 @@
                                 
                                 operator uint8_t() const;
                                 
-                                void Set_Letter(const Letter::LetterClass& source);
+                                void SetLetter(const Letter::LetterClass& source);
                                 const Letter::LetterClass& Letter() const;
                                 
-                                void Set_Accidental(const Accidental::AccidentalClass& source);
+                                void SetAccidental(const Accidental::AccidentalClass& source);
                                 const Accidental::AccidentalClass& Accidental() const;
                                 
                                 const char* Name(MusicalNote::TextFormat::FormatClass& Format = MusicalNote::TextFormat::DefaultFormat)const;

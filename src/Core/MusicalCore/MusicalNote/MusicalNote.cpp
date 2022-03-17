@@ -80,8 +80,8 @@
 
 			Note::Note(const Pitch::Letter::LetterClass& Letter, const Pitch::Accidental::AccidentalClass& Accidental, int8_t Octave)
 			{
-			    noteData.Set_Letter(Letter);
-			    noteData.Set_Accidental(Accidental);
+			    noteData.SetLetter(Letter);
+			    noteData.SetAccidental(Accidental);
 			    SetOctave(Octave);
 			}
 
@@ -592,7 +592,7 @@
 
                     void Note::SetAccidental(const Pitch::Accidental::AccidentalClass& src)
 					{
-						noteData.Set_Accidental(src);
+						noteData.SetAccidental(src);
 					}
 
 					const Pitch::Accidental::AccidentalClass& Note::Accidental() const
@@ -616,7 +616,7 @@
 
                     void Note::SetLetter(const Pitch::Letter::LetterClass& src)
 					{
-						noteData.Set_Letter(src);
+						noteData.SetLetter(src);
 					}
 
 					const Pitch::Letter::LetterClass& Note::Letter() const

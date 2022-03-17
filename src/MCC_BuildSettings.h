@@ -9,14 +9,9 @@
 
         #if defined(ARDUINO)
             
-            #include <CPVector.h>
-            #include <CPString.h>
-            
             #define PROGMEM_MACRO PROGMEM
             
             #define MCC_VERSION "0.0.1"
-
-            #define MCC_CORE_ENABLED
     //
     ///////////////////////////////////////////////////////////////////////////////////
     // PSOC Creator
@@ -31,9 +26,6 @@
                 #include "project.h"
             #endif
             
-            #include <CPVector.h>
-            #include <CPString.h>
-
             #define PROGMEM_MACRO
             #define constexpr const
     //
@@ -44,9 +36,6 @@
 
             #include <iostream>
             #include <chrono>
-
-            #include <CPVector.h>
-            #include <CPString.h>
 
             #define PROGMEM_MACRO
                 

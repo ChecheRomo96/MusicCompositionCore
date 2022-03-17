@@ -20,14 +20,10 @@ int main()
         std::cout<< Pitch.Name()<<std::endl;
     //
     ///////////////////////////////////////////////////////////////////////////////////////////
-    // Pitch::LetterType
-    // Pitch::AccidentalType
-    // Pitch::PitchClass( LetterType, AccidentalType )
-    // MusicalNote::Note( PitchClass, Octave )
-    
-        auto letter = Letter::B;
-        auto accidental = Accidental::Flat;
-        Pitch = PitchClass( letter, accidental );
+    // Class Modifiers
+
+        Pitch.SetLetter(Letter::B);
+        Pitch.SetAccidental(Accidental::Flat);
         std::cout<< Pitch.Name()<<std::endl;
     //
     ///////////////////////////////////////////////////////////////////////////////////////////

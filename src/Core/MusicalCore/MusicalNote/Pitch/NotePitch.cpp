@@ -327,7 +327,7 @@ PitchClass::operator uint8_t() const
     return (_Letter.ID() * 5) + _Accidental.ID();
 }
 
-void PitchClass::Set_Letter(const Letter::LetterClass& source)
+void PitchClass::SetLetter(const Letter::LetterClass& source)
 {
     _Letter = source;
 }
@@ -337,7 +337,7 @@ const Letter::LetterClass& PitchClass::Letter() const
     return _Letter;
 }
 
-void PitchClass::Set_Accidental(const Accidental::AccidentalClass& source)
+void PitchClass::SetAccidental(const Accidental::AccidentalClass& source)
 {
     _Accidental = source;
 }
