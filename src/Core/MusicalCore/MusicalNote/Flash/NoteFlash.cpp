@@ -196,7 +196,6 @@ char Flash::Buffer[24];
 					}
 
 					OutputStr += Octave;
-				//Serial.println(OutputStr);
 
 					for(uint8_t i = CPString::string(Octave).length(); i<max_chars; i++)
 					{
@@ -245,6 +244,8 @@ char Flash::Buffer[24];
 			break;
 		}
 	
+
+		Serial.println(OutputStr);
 
 		for (uint8_t i = 0; i < OutputStr.size(); i++)
 		{
