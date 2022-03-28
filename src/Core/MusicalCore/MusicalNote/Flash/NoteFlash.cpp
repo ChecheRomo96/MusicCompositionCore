@@ -110,11 +110,7 @@ char Flash::Buffer[24];
 	{
 		if((Letter == Pitch::Letter::Count)||(Accidental < Pitch::Accidental::Min)||(Accidental > Pitch::Accidental::Max)){buff[0] = '\0'; return buff;}
 
-		CPString::string LetterStr(Flash::GetLetterText(Letter));
-		CPString::string AccidentalStr(Flash::GetAccidentalText(Accidental, Format));
 		CPString::string OctaveStr(Octave);
-		CPString::string SpaceStr(" ");
-
 		CPString::string OutputStr;
 
 		switch(Format.SpacingMode())
@@ -122,14 +118,14 @@ char Flash::Buffer[24];
 			
 			case TextFormat::SpacingMode::Justified:
 			{
-				OutputStr += LetterStr;
+				OutputStr += Flash::GetLetterText(Letter);
 
 				if (Format.AccidentalMode() == TextFormat::AccidentalMode::Text)
 				{
-					OutputStr += SpaceStr;
+					OutputStr += " ";
 				}
 
-				OutputStr += AccidentalStr;
+				OutputStr += Flash::GetAccidentalText(Accidental, Format);
 				
 
 				if(Format.AccidentalMode() == TextFormat::AccidentalMode::Symbol)
@@ -137,13 +133,13 @@ char Flash::Buffer[24];
 					switch(Accidental)
 					{
 						case Pitch::Accidental::Natural:
-							OutputStr += SpaceStr;
+							OutputStr += " ";
 						case Pitch::Accidental::Flat:
 						case Pitch::Accidental::Sharp:
-							OutputStr += SpaceStr;
+							OutputStr += " ";
 	                    case Pitch::Accidental::DoubleFlat:
 	                    case Pitch::Accidental::DoubleSharp:
-							OutputStr += SpaceStr;
+							OutputStr += " ";
 						break;
 					}
 				}
@@ -153,50 +149,38 @@ char Flash::Buffer[24];
 					{
 						case Pitch::Accidental::Flat:
 
-							OutputStr += SpaceStr;
+							OutputStr += " ";
 
 						case Pitch::Accidental::Sharp:
 
-							OutputStr += SpaceStr;
-							OutputStr += SpaceStr;
+							OutputStr += "  ";
 
 						case Pitch::Accidental::Natural:
 
 							if(Format.NaturalMode() == MusicCompositionCore::Disabled)
 							{
-								OutputStr += SpaceStr;
-								OutputStr += SpaceStr;
-								OutputStr += SpaceStr;
-								OutputStr += SpaceStr;
-								OutputStr += SpaceStr;
-								OutputStr += SpaceStr;
-								OutputStr += SpaceStr;
+								OutputStr += "       ";
 							}
 
-							OutputStr += SpaceStr;
-							OutputStr += SpaceStr;
-							OutputStr += SpaceStr;
-							OutputStr += SpaceStr;
+							OutputStr += "    ";
 
 	                    case Pitch::Accidental::DoubleFlat:
 	                    case Pitch::Accidental::TripleFlat:
 
-							OutputStr += SpaceStr;
+							OutputStr += " ";
 
 	                    case Pitch::Accidental::DoubleSharp:
 	                    case Pitch::Accidental::TripleSharp:
 
-							OutputStr += SpaceStr;
+							OutputStr += " ";
 							
 	                    case Pitch::Accidental::QuadrupleFlat:
 
-							OutputStr += SpaceStr;
-							OutputStr += SpaceStr;
-							OutputStr += SpaceStr;
+							OutputStr += "   ";
 							
 	                    case Pitch::Accidental::QuadrupleSharp:
 
-							OutputStr += SpaceStr;
+							OutputStr += " ";
 							
 						break;
 					}
@@ -208,7 +192,7 @@ char Flash::Buffer[24];
 
 					if(Octave >= 0)
 					{
-						OutputStr += SpaceStr;
+						OutputStr += " ";
 						max_chars = 2;
 					}
 
@@ -217,7 +201,7 @@ char Flash::Buffer[24];
 
 					for(uint8_t i = OctaveStr.length(); i<max_chars; i++)
 					{
-						OutputStr += SpaceStr;
+						OutputStr += " ";
 					}
 				}
 			}
@@ -226,33 +210,33 @@ char Flash::Buffer[24];
 			case TextFormat::SpacingMode::Enabled:
 			{
 
-				OutputStr += LetterStr;
+				OutputStr += Flash::GetLetterText(Letter);
 
 				if (Format.AccidentalMode() == TextFormat::AccidentalMode::Text)
 				{
-					OutputStr += SpaceStr;
+					OutputStr += " ";
 				}
 
-				OutputStr += AccidentalStr;
+				OutputStr += Flash::GetAccidentalText(Accidental, Format);
 
 				if (Format.OctaveMode() == TextFormat::OctaveMode::Enabled)
 				{
-					OutputStr += SpaceStr;
-					OutputStr += OctaveStr;
+					OutputStr += " ";
+					OutputStr += Octave;
 				}
 			}
 			break;
 			
 			case TextFormat::SpacingMode::Disabled:
 			{
-				OutputStr = LetterStr;
+				OutputStr = Flash::GetLetterText(Letter);
 		
 				if (Format.AccidentalMode() == TextFormat::AccidentalMode::Text)
 				{
-					OutputStr += SpaceStr;
+					OutputStr += " ";
 				}
 
-				OutputStr += AccidentalStr;
+				OutputStr += Flash::GetAccidentalText(Accidental, Format);
 
 				if(Format.OctaveMode() == TextFormat::OctaveMode::Enabled)
 				{
@@ -263,7 +247,10 @@ char Flash::Buffer[24];
 		}
 	
 
-		strcpy(buff, OutputStr.c_str());
+		for (uint8_t i = 0; i < OutputStr.size(); i++)
+		{
+			buff[i] = OutputStr.at(i);
+		}
 
 		return buff;
 	}
