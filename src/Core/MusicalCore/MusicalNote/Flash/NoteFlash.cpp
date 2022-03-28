@@ -110,7 +110,6 @@ char Flash::Buffer[24];
 	{
 		if((Letter == Pitch::Letter::Count)||(Accidental < Pitch::Accidental::Min)||(Accidental > Pitch::Accidental::Max)){buff[0] = '\0'; return buff;}
 
-		CPString::string OctaveStr(Octave);
 		CPString::string OutputStr;
 
 		switch(Format.SpacingMode())
@@ -196,10 +195,10 @@ char Flash::Buffer[24];
 						max_chars = 2;
 					}
 
-					OutputStr += OctaveStr;
+					OutputStr += Octave;
 				//Serial.println(OutputStr);
 
-					for(uint8_t i = OctaveStr.length(); i<max_chars; i++)
+					for(uint8_t i = CPString::string(Octave).length(); i<max_chars; i++)
 					{
 						OutputStr += " ";
 					}
@@ -240,7 +239,7 @@ char Flash::Buffer[24];
 
 				if(Format.OctaveMode() == TextFormat::OctaveMode::Enabled)
 				{
-					OutputStr += OctaveStr;
+					OutputStr += Octave;
 				}
 			}
 			break;
