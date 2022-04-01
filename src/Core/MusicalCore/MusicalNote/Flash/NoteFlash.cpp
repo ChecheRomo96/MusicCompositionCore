@@ -210,6 +210,8 @@ char Flash::Buffer[24];
 
 				OutputStr += Flash::GetLetterText(Letter);
 
+				Serial.println(OutputStr);
+				
 				if (Format.AccidentalMode() == TextFormat::AccidentalMode::Text)
 				{
 					OutputStr += " ";
