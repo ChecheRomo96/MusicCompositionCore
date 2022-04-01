@@ -245,7 +245,7 @@ char Flash::Buffer[24];
 		}
 	
 
-		Serial.println(OutputStr);
+		\Serial.println(OutputStr);
 
 		for (uint8_t i = 0; i < OutputStr.size(); i++)
 		{
