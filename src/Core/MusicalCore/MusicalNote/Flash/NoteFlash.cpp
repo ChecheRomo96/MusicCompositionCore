@@ -232,9 +232,9 @@ char Flash::Buffer[24];
 			case TextFormat::SpacingMode::Disabled:
 			{
 				Serial.println("Spacing Disabled");
-				/*
+				
 				OutputStr = Flash::GetLetterText(Letter);
-		
+				/*
 				if (Format.AccidentalMode() == TextFormat::AccidentalMode::Text)
 				{
 					OutputStr += " ";
