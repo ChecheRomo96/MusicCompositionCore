@@ -307,7 +307,7 @@ char Flash::Buffer[24];
 	char* Flash::GetLetterText(char* buff, const Pitch::Letter::LetterClass& letter)
 	{
 	    #if defined(ARDUINO)
-	        strcpy_P(buff,  (PGM_P)pgm_read_word(&(PGM_P)pgm_read_word(&(NoteNames[letter.ID()]))) );
+	        memcpy_P(buff,  (PGM_P)pgm_read_word(&(NoteNames[letter.ID()])) );
 	    #else
 	        memcpy(buff, NoteNames[letter.ID()], 1);
 	    #endif
