@@ -117,6 +117,7 @@ char Flash::Buffer[24];
 			
 			case TextFormat::SpacingMode::Justified:
 			{
+				Serial.println("Justified");
 				OutputStr += Flash::GetLetterText(Letter);
 
 				if (Format.AccidentalMode() == TextFormat::AccidentalMode::Text)
@@ -207,11 +208,12 @@ char Flash::Buffer[24];
 			
 			case TextFormat::SpacingMode::Enabled:
 			{
+				Serial.println("Spacing Enabled");
 
 				OutputStr += Flash::GetLetterText(Letter);
 
 				Serial.println(OutputStr);
-				
+
 				if (Format.AccidentalMode() == TextFormat::AccidentalMode::Text)
 				{
 					OutputStr += " ";
@@ -229,6 +231,7 @@ char Flash::Buffer[24];
 			
 			case TextFormat::SpacingMode::Disabled:
 			{
+				Serial.println("Spacing Disabled");
 				OutputStr = Flash::GetLetterText(Letter);
 		
 				if (Format.AccidentalMode() == TextFormat::AccidentalMode::Text)
