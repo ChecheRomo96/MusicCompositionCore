@@ -112,6 +112,8 @@ char Flash::Buffer[24];
 
 		CPString::string OutputStr;
 
+		OutputStr = "";
+
 		switch(Format.SpacingMode())
 		{
 			
