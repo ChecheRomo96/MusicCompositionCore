@@ -112,8 +112,6 @@ char Flash::Buffer[24];
 
 		CPString::string OutputStr;
 
-		OutputStr = "";
-
 		switch(Format.SpacingMode())
 		{
 			
@@ -209,6 +207,7 @@ char Flash::Buffer[24];
 			
 			case TextFormat::SpacingMode::Enabled:
 			{
+
 				OutputStr += Flash::GetLetterText(Letter);
 
 				if (Format.AccidentalMode() == TextFormat::AccidentalMode::Text)
@@ -221,14 +220,15 @@ char Flash::Buffer[24];
 				if (Format.OctaveMode() == TextFormat::OctaveMode::Enabled)
 				{
 					OutputStr += " ";
-					OutputStr += Octave;			
+					OutputStr += Octave;
+				}
 			}
 			break;
 			
 			case TextFormat::SpacingMode::Disabled:
 			{
-				OutputStr += Flash::GetLetterText(Letter);
-				
+				OutputStr = Flash::GetLetterText(Letter);
+		
 				if (Format.AccidentalMode() == TextFormat::AccidentalMode::Text)
 				{
 					OutputStr += " ";
@@ -244,6 +244,8 @@ char Flash::Buffer[24];
 			break;
 		}
 	
+
+		//Serial.println(OutputStr);
 
 		for (uint8_t i = 0; i < OutputStr.size(); i++)
 		{
