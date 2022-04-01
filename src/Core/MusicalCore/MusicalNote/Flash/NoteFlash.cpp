@@ -211,7 +211,7 @@ char Flash::Buffer[24];
 			case TextFormat::SpacingMode::Enabled:
 			{
 				Serial.println("Spacing Enabled");
-				/*
+			
 				OutputStr += Flash::GetLetterText(Letter);
 
 				Serial.println(OutputStr);
@@ -227,7 +227,7 @@ char Flash::Buffer[24];
 				{
 					OutputStr += " ";
 					OutputStr += Octave;
-				}*/
+				
 			}
 			break;
 			
@@ -236,7 +236,7 @@ char Flash::Buffer[24];
 				Serial.println("Spacing Disabled");
 				
 				OutputStr += Flash::GetLetterText(Letter);
-				/*
+				
 				if (Format.AccidentalMode() == TextFormat::AccidentalMode::Text)
 				{
 					OutputStr += " ";
@@ -247,7 +247,7 @@ char Flash::Buffer[24];
 				if(Format.OctaveMode() == TextFormat::OctaveMode::Enabled)
 				{
 					OutputStr += Octave;
-				}*/
+				}
 			}
 			break;
 		}
