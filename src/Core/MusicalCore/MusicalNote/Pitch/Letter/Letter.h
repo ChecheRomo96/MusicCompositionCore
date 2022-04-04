@@ -4,7 +4,6 @@
 	#include <MCC_BuildSettings.h>
 
 	#include "Letter_Class.h"
-	#include "Letter_Definitions.h"
 
 
 #endif//MCC_NOTE_LETTER_H

@@ -2,19 +2,18 @@
 #include "../Accidental/Accidental.h"
 #include "../NotePitch_Class.h"
 
-using namespace MusicCompositionCore::Core::MusicalCore::MusicalNote::Pitch::Letter;
 using namespace MusicCompositionCore::Core::MusicalCore::MusicalNote::Pitch;
 
-LetterClass MusicCompositionCore::Core::MusicalCore::MusicalNote::Pitch::Letter::Letter_Buffer;
+Letter MusicCompositionCore::Core::MusicalCore::MusicalNote::Pitch::Letter::Buffer;
 
-LetterClass::LetterClass()
+Letter::Letter()
 {
     _ID = InvalidID;
 }
 
-LetterClass::LetterClass(LetterType id)
+Letter::Letter(LetterType id)
 {
-    if(id<Count)
+    if( (id <= Letter::MaxIterator) && (id >= Letter::MinIterator) )
     {
         _ID = id;
     }
@@ -24,9 +23,9 @@ LetterClass::LetterClass(LetterType id)
     }
 }
 
-LetterClass& LetterClass::operator=(LetterType id)
+Letter& Letter::operator=(LetterType id)
 {
-    if(id<Count)
+    if ((id <= Letter::MaxIterator) && (id >= Letter::MinIterator))
     {
         _ID = id;
     }
@@ -37,120 +36,124 @@ LetterClass& LetterClass::operator=(LetterType id)
     return (*this);
 }
 
-LetterClass::LetterClass(const LetterClass& source)
+Letter::Letter(const Letter& source)
 {
     _ID = source.ID();
 }
 
-LetterClass& LetterClass::operator=(const LetterClass& source)
+Letter& Letter::operator=(const Letter& source)
 {
     _ID = source.ID();
     return (*this);
 }
 
-LetterClass::LetterClass(const PitchClass& token)
+Letter::Letter(const PitchClass& token)
 {
     _ID = token.Letter().ID();
 }
 
-LetterClass& LetterClass::operator=(const PitchClass& token)
+Letter& Letter::operator=(const PitchClass& token)
 {
     _ID = token.Letter().ID();
     return (*this);
 }
 
-bool LetterClass::operator!=(const LetterClass& rhs) const
+bool Letter::operator!=(const Letter& rhs) const
 {
     if(_ID==rhs.ID()){return 0;}
     else{return 1;}
 }
 
-MusicCompositionCore::Core::MusicalCore::MusicalNote::Pitch::Letter::LetterClass::operator const LetterType() const{return _ID;}
+MusicCompositionCore::Core::MusicalCore::MusicalNote::Pitch::Letter::operator const LetterType() const{return _ID;}
 
-bool MusicCompositionCore::Core::MusicalCore::MusicalNote::Pitch::Letter::operator < (const LetterClass &lhs, const LetterClass &rhs)
+bool MusicCompositionCore::Core::MusicalCore::MusicalNote::Pitch::operator < (const Letter &lhs, const Letter &rhs)
 {
     if(lhs.ID() < rhs.ID()){return 1;}
     return 0;
 }
 
-bool MusicCompositionCore::Core::MusicalCore::MusicalNote::Pitch::Letter::operator <= (const LetterClass &lhs, const LetterClass &rhs)
+bool MusicCompositionCore::Core::MusicalCore::MusicalNote::Pitch::operator <= (const Letter &lhs, const Letter &rhs)
 {
     if(lhs.ID() <= rhs.ID()){return 1;}
     return 0;
 }
 
-bool MusicCompositionCore::Core::MusicalCore::MusicalNote::Pitch::Letter::operator > (const LetterClass &lhs, const LetterClass &rhs)
+bool MusicCompositionCore::Core::MusicalCore::MusicalNote::Pitch::operator > (const Letter &lhs, const Letter &rhs)
 {
     if(lhs.ID() > rhs.ID()){return 1;}
     return 0;
 }
 
-bool MusicCompositionCore::Core::MusicalCore::MusicalNote::Pitch::Letter::operator >= (const LetterClass &lhs, const LetterClass &rhs)
+bool MusicCompositionCore::Core::MusicalCore::MusicalNote::Pitch::operator >= (const Letter &lhs, const Letter &rhs)
 {
     if(lhs.ID() >= rhs.ID()){return 1;}
     return 0;
 }
 
-bool MusicCompositionCore::Core::MusicalCore::MusicalNote::Pitch::Letter::operator == (const LetterClass &lhs, const LetterClass &rhs)
+bool MusicCompositionCore::Core::MusicalCore::MusicalNote::Pitch::operator == (const Letter &lhs, const Letter &rhs)
 {
     if(lhs.ID() == rhs.ID()){return 1;}
     return 0;
 }
 
-bool MusicCompositionCore::Core::MusicalCore::MusicalNote::Pitch::Letter::operator == (const LetterType &lhs, const LetterClass &rhs)
+bool MusicCompositionCore::Core::MusicalCore::MusicalNote::Pitch::operator == (const Letter::LetterType &lhs, const Letter &rhs)
 {
-    if(LetterClass(lhs).ID() == rhs.ID()){return 1;}
+    if(Letter(lhs).ID() == rhs.ID()){return 1;}
     return 0;
 }
 
-bool MusicCompositionCore::Core::MusicalCore::MusicalNote::Pitch::Letter::operator == (const LetterClass &lhs, const LetterType &rhs)
+bool MusicCompositionCore::Core::MusicalCore::MusicalNote::Pitch::operator == (const Letter &lhs, const Letter::LetterType &rhs)
 {
-    if(lhs.ID() == LetterClass(rhs).ID()){return 1;}
+    if(lhs.ID() == Letter(rhs).ID()){return 1;}
     return 0;
 }
 
-bool MusicCompositionCore::Core::MusicalCore::MusicalNote::Pitch::Letter::operator != (const LetterClass &lhs, const LetterClass &rhs)
+bool MusicCompositionCore::Core::MusicalCore::MusicalNote::Pitch::operator != (const Letter &lhs, const Letter &rhs)
 {
     if(lhs.ID() == rhs.ID()){return 0;}
     return 1;
 }
 
-bool MusicCompositionCore::Core::MusicalCore::MusicalNote::Pitch::Letter::operator != (const LetterType &lhs, const LetterClass &rhs)
+bool MusicCompositionCore::Core::MusicalCore::MusicalNote::Pitch::operator != (const Letter::LetterType &lhs, const Letter &rhs)
 {
-    if(LetterClass(lhs).ID() == rhs.ID()){return 0;}
+    if(Letter(lhs).ID() == rhs.ID()){return 0;}
     return 1;
 }
 
-bool MusicCompositionCore::Core::MusicalCore::MusicalNote::Pitch::Letter::operator != (const LetterClass &lhs, const LetterType &rhs)
+bool MusicCompositionCore::Core::MusicalCore::MusicalNote::Pitch::operator != (const Letter &lhs, const Letter::LetterType &rhs)
 {
-    if(lhs.ID() == LetterClass(rhs).ID()){return 0;}
+    if(lhs.ID() == Letter(rhs).ID()){return 0;}
     return 1;
 }
 
-const LetterType& LetterClass::ID() const
+const Letter:: LetterType& Letter::ID() const
 {
     return _ID;
 }
 
-MusicCompositionCore::Core::MusicalCore::MusicalNote::Pitch::PitchClass& LetterClass::GenerateToken(const Accidental::AccidentalClass& source)
+MusicCompositionCore::Core::MusicalCore::MusicalNote::Pitch::PitchClass& Letter::GenerateToken(const Accidental::AccidentalClass& source)
 {
     PitchClass_Buffer = (*this);
     PitchClass_Buffer = source;
     return PitchClass_Buffer;
 }
 
-void LetterClass::Next()
+void Letter::Next()
 {
-    if(++_ID == Count)
+    if(++_ID > Letter::MaxIterator)
     {
-        _ID = 0;
+        _ID = Letter::MinIterator;
     }
 }
 
-void LetterClass::Previous()
+void Letter::Previous()
 {
-    if(_ID-- == 0)
+    if(_ID == Letter::MinIterator)
     {
-        _ID = Count-1;
+        _ID = Letter::MaxIterator;
+    }
+    else
+    {
+        _ID--;
     }
 }

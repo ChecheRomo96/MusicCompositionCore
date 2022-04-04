@@ -86,7 +86,8 @@
 						static constexpr PitchType B_QuadrupleSharp = 62u;
 
 						static constexpr PitchType InvaildPitch = 63u;
-						static constexpr uint8_t Count = 63u;
+						static constexpr uint8_t MinIterator = 0u;
+						static constexpr uint8_t MaxIterator = 63u;
 					}
 	 			}
 	 		}

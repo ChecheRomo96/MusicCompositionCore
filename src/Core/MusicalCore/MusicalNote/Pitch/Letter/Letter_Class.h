@@ -3,8 +3,6 @@
 
     #include <MCC_BuildSettings.h>
 
-    #include "Letter_Definitions.h"
-
     namespace MusicCompositionCore
     {
         namespace Core
@@ -21,38 +19,56 @@
                         {
                             class AccidentalClass;
                         }
-                        
-                        namespace Letter
+                    
+                        class Letter
                         {
-                            class LetterClass
-                            {
-                                LetterType _ID;
-                                
+                            // typrdef and constants declaration
                             public:
-                                LetterClass();
-                                LetterClass(LetterType id);
-                                LetterClass& operator=(LetterType id);
+                                typedef uint8_t LetterType;
+
+                                static Letter Buffer;
+
+                                static constexpr LetterType C = 0u;
+                                static constexpr LetterType D = 1u;
+                                static constexpr LetterType E = 2u;
+                                static constexpr LetterType F = 3u;
+                                static constexpr LetterType G = 4u;
+                                static constexpr LetterType A = 5u;
+                                static constexpr LetterType B = 6u;
+
+                                static constexpr LetterType InvalidID = 7u;
+                                static constexpr uint8_t MinIterator = 0u;
+                                static constexpr uint8_t MaxIterator = 6u;
+                            // Variable Definitions
+
+                            private:
+                                LetterType _ID;
+                            
+                            public:
+                                Letter();
+                                Letter(LetterType id);
+                                Letter& operator=(LetterType id);
                                 
-                                LetterClass(const LetterClass& source);
-                                LetterClass& operator=(const LetterClass& source);
+                                Letter(const Letter& source);
+                                Letter& operator=(const Letter& source);
                                 
-                                LetterClass(const PitchClass& token);
-                                LetterClass& operator=(const PitchClass& token);
+                                Letter(const PitchClass& token);
+                                Letter& operator=(const PitchClass& token);
                                 
-                                bool operator!=(const LetterClass& rhs) const;
+                                bool operator!=(const Letter& rhs) const;
                                 
-                                friend bool operator < (const LetterClass& lhs, const LetterClass& rhs);
-                                friend bool operator <= (const LetterClass& lhs, const LetterClass& rhs);
-                                friend bool operator > (const LetterClass& lhs, const LetterClass& rhs);
-                                friend bool operator >= (const LetterClass& lhs, const LetterClass& rhs);
+                                friend bool operator < (const Letter& lhs, const Letter& rhs);
+                                friend bool operator <= (const Letter& lhs, const Letter& rhs);
+                                friend bool operator > (const Letter& lhs, const Letter& rhs);
+                                friend bool operator >= (const Letter& lhs, const Letter& rhs);
                                 
-                                friend bool operator == (const LetterClass& lhs, const LetterClass& rhs);
-                                friend bool operator == (const LetterType& lhs, const LetterClass& rhs);
-                                friend bool operator == (const LetterClass& lhs, const LetterType& rhs);
+                                friend bool operator == (const Letter& lhs, const Letter& rhs);
+                                friend bool operator == (const LetterType& lhs, const Letter& rhs);
+                                friend bool operator == (const Letter& lhs, const LetterType& rhs);
                                 
-                                friend bool operator != (const LetterClass& lhs, const LetterClass& rhs);
-                                friend bool operator != (const LetterType& lhs, const LetterClass& rhs);
-                                friend bool operator != (const LetterClass& lhs, const LetterType& rhs);
+                                friend bool operator != (const Letter& lhs, const Letter& rhs);
+                                friend bool operator != (const LetterType& lhs, const Letter& rhs);
+                                friend bool operator != (const Letter& lhs, const LetterType& rhs);
                                 
                                 const LetterType& ID() const;
                                 operator const LetterType() const;
@@ -62,22 +78,22 @@
                                 
                                 void Next();
                                 void Previous();
-                            };
-                            extern LetterClass Letter_Buffer;
+                        };
 
-                            bool operator < (const LetterClass& lhs, const LetterClass& rhs);
-                            bool operator <= (const LetterClass& lhs, const LetterClass& rhs);
-                            bool operator > (const LetterClass& lhs, const LetterClass& rhs);
-                            bool operator >= (const LetterClass& lhs, const LetterClass& rhs);
-                            
-                            bool operator == (const LetterClass& lhs, const LetterClass& rhs);
-                            bool operator == (const LetterType& lhs, const LetterClass& rhs);
-                            bool operator == (const LetterClass& lhs, const LetterType& rhs);
-                            
-                            bool operator != (const LetterClass& lhs, const LetterClass& rhs);
-                            bool operator != (const LetterType& lhs, const LetterClass& rhs);
-                            bool operator != (const LetterClass& lhs, const LetterType& rhs);
-                        }
+                        extern Letter Letter_Buffer;
+
+                        bool operator < (const Letter& lhs, const Letter& rhs);
+                        bool operator <= (const Letter& lhs, const Letter& rhs);
+                        bool operator > (const Letter& lhs, const Letter& rhs);
+                        bool operator >= (const Letter& lhs, const Letter& rhs);
+                        
+                        bool operator == (const Letter& lhs, const Letter& rhs);
+                        bool operator == (const Letter::LetterType& lhs, const Letter& rhs);
+                        bool operator == (const Letter& lhs, const Letter::LetterType& rhs);
+                        
+                        bool operator != (const Letter& lhs, const Letter& rhs);
+                        bool operator != (const Letter::LetterType& lhs, const Letter& rhs);
+                        bool operator != (const Letter& lhs, const Letter::LetterType& rhs);
                     }
                 }
             }

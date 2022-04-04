@@ -18,8 +18,8 @@
 					{
 						namespace LetterClass
 						{
-                        int8_t Ascending(const Pitch::Letter::LetterClass& Element, const Pitch::Letter::LetterClass& Pivot);
-                        int8_t Descending(const Pitch::Letter::LetterClass& Element, const Pitch::Letter::LetterClass& Pivot);
+                        int8_t Ascending(const Pitch::Letter& Element, const Pitch::Letter& Pivot);
+                        int8_t Descending(const Pitch::Letter& Element, const Pitch::Letter& Pivot);
 						}
 					}
 				}

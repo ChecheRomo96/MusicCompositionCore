@@ -16,10 +16,7 @@
                     {
                         class PitchClass;
 
-                        namespace Letter
-                        {
-                          class LetterClass;
-                        }
+                        class Letter;
 
                         namespace Accidental
                         {
@@ -72,7 +69,7 @@
                                     void Set_ID(const AccidentalClass& source);
                                     const AccidentalType& ID() const;
                                 
-                                    PitchClass& GenerateToken(const Letter::LetterClass& source);
+                                    PitchClass& GenerateToken(const Letter& source);
                                 
                                     bool Sharp();
                                     bool Flat();

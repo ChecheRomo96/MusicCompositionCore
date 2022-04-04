@@ -1,5 +1,7 @@
 #include "NotePitch.h"
 
+#include "NotePitch_Definitions.h"
+
 #include "Letter/Letter.h"
 #include "Accidental/Accidental.h"
 #include "../Note_Class.h"
@@ -25,9 +27,9 @@ PitchClass::PitchClass()
 
 PitchClass::PitchClass(PitchType token)
 {
-    if(token < Pitch::Count)
+    if(token < Pitch::MaxIterator)
     {
-        _Letter = Letter::LetterClass(token/9);
+        _Letter = Pitch::Letter(token/9);
         _Accidental = Accidental::AccidentalClass((token%9) - 4);
     }
     else
@@ -39,9 +41,9 @@ PitchClass::PitchClass(PitchType token)
 
 PitchClass& PitchClass::operator=(PitchType token)
 {
-    if(token < Pitch::Count)
+    if(token < Pitch::MaxIterator)
     {
-        _Letter = Letter::LetterClass(token/9);
+        _Letter = Pitch::Letter(token/9);
         _Accidental = Accidental::AccidentalClass((token%9) - 4);
     }
     else
@@ -52,7 +54,7 @@ PitchClass& PitchClass::operator=(PitchType token)
     return (*this);
 }
 
-PitchClass::PitchClass(const Letter::LetterClass& note, const Accidental::AccidentalClass& accidental)
+PitchClass::PitchClass(const Pitch::Letter& note, const Accidental::AccidentalClass& accidental)
 {
     _Letter = note;
     _Accidental = accidental;
@@ -294,13 +296,13 @@ PitchClass PitchClass::operator-(const MusicalInterval::Interval &rhs) const
     return tmp;
 }
 
-PitchClass::PitchClass(const Letter::LetterClass& source)
+PitchClass::PitchClass(const Pitch::Letter& source)
 {
     _Letter = source;
     _Accidental = Accidental::InvalidID;
 }
 
-PitchClass& PitchClass::operator=(const Letter::LetterClass& source)
+PitchClass& PitchClass::operator=(const Pitch::Letter& source)
 {
     _Letter = source;
     return (*this);
@@ -322,17 +324,17 @@ PitchClass::operator uint8_t() const
 {
     if((_Letter == Letter::InvalidID)||(_Accidental == Accidental::InvalidID))
     {
-        return Count;
+        return Pitch::InvaildPitch;
     }
     return (_Letter.ID() * 5) + _Accidental.ID();
 }
 
-void PitchClass::SetLetter(const Letter::LetterClass& source)
+void PitchClass::SetLetter(const Pitch::Letter& source)
 {
     _Letter = source;
 }
 
-const Letter::LetterClass& PitchClass::Letter() const
+const Letter& PitchClass::Letter() const
 {
     return _Letter;
 }

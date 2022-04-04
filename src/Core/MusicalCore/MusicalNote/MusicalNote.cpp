@@ -60,7 +60,7 @@
         	Reference::Frequency = Frequency;
         }
 
-        void MCC_MusicalNote::SetReferenceNote(const Pitch::LetterType& Letter, const Pitch::AccidentalType& Accidental, const float& Frequency)
+        void MCC_MusicalNote::SetReferenceNote(const Pitch::Letter::LetterType& Letter, const Pitch::AccidentalType& Accidental, const float& Frequency)
         {
 
         }
@@ -75,11 +75,11 @@
 
 			Note::Note()
 			{
-			    noteData = Pitch::Count;
+				noteData = Pitch::InvaildPitch;
 			    octave = 0;
 			}
 
-			Note::Note(const Pitch::Letter::LetterClass& Letter, const Pitch::Accidental::AccidentalClass& Accidental, int8_t Octave)
+			Note::Note(const Pitch::Letter& Letter, const Pitch::Accidental::AccidentalClass& Accidental, int8_t Octave)
 			{
 			    noteData.SetLetter(Letter);
 			    noteData.SetAccidental(Accidental);
@@ -274,7 +274,7 @@
 
 			Note Note::operator+(const MCC_MusicalInterval::Interval &rhs) const
 			{
-			    Note tmp = (*this);
+				MCC_MusicalNote::Note tmp = (*this);
 			    
 			    int16_t base = NotePitch();
                 
@@ -384,8 +384,8 @@
 
 			Note& Note::operator-=(const MCC_MusicalInterval::Interval &rhs)
 			{
-			    NoteBuffer = (*this)-rhs;
-			    (*this) = NoteBuffer;
+			    MCC_MusicalNote::NoteBuffer = (*this)-rhs;
+			    (*this) = MCC_MusicalNote::NoteBuffer;
 			    return (*this);
 			}
 
@@ -395,7 +395,7 @@
 			    if(rhs.Semitones() == MCC_MusicalInterval::InvalidInterval){return (*this);}
 
 				// Make a copy of this instance into an object called tmp
-			    Note tmp = (*this);
+			    MCC_MusicalNote::Note tmp = (*this);
 			    
 			    // Storing the base Pitch
 			    int16_t base = NotePitch();
@@ -516,10 +516,10 @@
 
 			const int16_t Note::NotePitch() const
 			{
-			    Pitch::Letter::LetterClass note = noteData.Letter();
+			    Pitch::Letter note = noteData.Letter();
 			    Pitch::Accidental::AccidentalClass accidental = noteData.Accidental();
 			    
-			    if((note.ID() >= Pitch::Letter::Count)||(accidental < Pitch::Accidental::Min)||(accidental > Pitch::Accidental::Max))
+			    if((note.ID() != Pitch::Letter::InvalidID)||(accidental < Pitch::Accidental::Min)||(accidental > Pitch::Accidental::Max))
 			    {
 			        return MusicalNote::InvalidNotePitch;
 			    }
@@ -615,12 +615,12 @@
 				// Letter
 
 
-                    void Note::SetLetter(const Pitch::Letter::LetterClass& src)
+                    void Note::SetLetter(const Pitch::Letter& src)
 					{
 						noteData.SetLetter(src);
 					}
 
-					const Pitch::Letter::LetterClass& Note::Letter() const
+					const Pitch::Letter& Note::Letter() const
 					{
 						return noteData.Letter();
 					}

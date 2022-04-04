@@ -218,7 +218,7 @@ const AccidentalType& AccidentalClass::ID() const
 	return _ID;
 }
 
-MusicCompositionCore::Core::MusicalCore::MusicalNote::Pitch::PitchClass& AccidentalClass::GenerateToken(const Pitch::Letter::LetterClass& source)
+MusicCompositionCore::Core::MusicalCore::MusicalNote::Pitch::PitchClass& AccidentalClass::GenerateToken(const Pitch::Letter& source)
 {
     return Pitch::PitchClass_Buffer = PitchClass(source,(*this));
 }

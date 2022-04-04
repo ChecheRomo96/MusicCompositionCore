@@ -6,7 +6,6 @@
     #include "../Pitch/NotePitch.h"
     #include "../TextFormat/TextFormat.h"
 
-    #include "NotePitch_Class.h"
     #include "NotePitch_Definitions.h"
 
     namespace MusicCompositionCore
@@ -25,7 +24,7 @@
                     {
                         class PitchClass
                         {
-                            Letter::LetterClass _Letter;
+                            Letter _Letter;
                             Accidental::AccidentalClass _Accidental;
                             
                             public:
@@ -34,13 +33,13 @@
                                 PitchClass(PitchType token);
                                 PitchClass& operator=(PitchType token);
                                 
-                                PitchClass(const Letter::LetterClass& note, const Accidental::AccidentalClass& accidental);
+                                PitchClass(const Letter& note, const Accidental::AccidentalClass& accidental);
                                 
                                 PitchClass(const PitchClass& source);
                                 PitchClass& operator=(const PitchClass& source);
                                 
-                                PitchClass(const Letter::LetterClass& source);
-                                PitchClass& operator=(const Letter::LetterClass& source);
+                                PitchClass(const Letter& source);
+                                PitchClass& operator=(const Letter& source);
                                 
                                 PitchClass(const Accidental::AccidentalClass& source);
                                 PitchClass& operator=(const Accidental::AccidentalClass& source);
@@ -54,8 +53,8 @@
                                 
                                 operator uint8_t() const;
                                 
-                                void SetLetter(const Letter::LetterClass& source);
-                                const Letter::LetterClass& Letter() const;
+                                void SetLetter(const Letter& source);
+                                const Letter& Letter() const;
                                 
                                 void SetAccidental(const Accidental::AccidentalClass& source);
                                 const Accidental::AccidentalClass& Accidental() const;

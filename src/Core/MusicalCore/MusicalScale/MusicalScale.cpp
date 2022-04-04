@@ -132,7 +132,7 @@ CPString::string MusicCompositionCore::Core::MusicalCore::MusicalScale::DefaultN
                 _Data = Flash::GetScaleProperties(source);
                 _NameID = Flash::GetScaleID(source);
 
-                while(Flash::GetScaleNoteToken(source,count) != MCC_MusicalNote::Pitch::Count)
+                while(Flash::GetScaleNoteToken(source,count) != MCC_MusicalNote::Pitch::InvaildPitch)
                 {
                     count++;
                     if(count == 12){break;}
@@ -162,7 +162,7 @@ CPString::string MusicCompositionCore::Core::MusicalCore::MusicalScale::DefaultN
                 _Data = Flash::GetScaleProperties(source);
                 _NameID = Flash::GetScaleID(source);
 
-                while(Flash::GetScaleNoteToken(source,count) != MCC_MusicalNote::Pitch::Count)
+                while(Flash::GetScaleNoteToken(source,count) != MCC_MusicalNote::Pitch::InvaildPitch)
                 {
                     count++;
                     if(count == 12){break;}

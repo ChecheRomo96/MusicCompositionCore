@@ -15,7 +15,7 @@ static const uint8_t ChromaticNotesSharps[] PROGMEM_MACRO =
     MCC_MusicalNote::Pitch::A_Natural,
     MCC_MusicalNote::Pitch::A_Sharp,
     MCC_MusicalNote::Pitch::B_Natural,
-    MCC_MusicalNote::Pitch::Count
+    MCC_MusicalNote::Pitch::InvaildPitch
 };
 static const uint8_t ChromaticNotesFlats[] PROGMEM_MACRO =
 {
@@ -31,7 +31,7 @@ static const uint8_t ChromaticNotesFlats[] PROGMEM_MACRO =
     MCC_MusicalNote::Pitch::A_Natural,
     MCC_MusicalNote::Pitch::B_Flat,
     MCC_MusicalNote::Pitch::B_Natural,
-    MCC_MusicalNote::Pitch::Count
+    MCC_MusicalNote::Pitch::InvaildPitch
 };
 
 static constexpr uint8_t ChromaticScaleID = 0u;

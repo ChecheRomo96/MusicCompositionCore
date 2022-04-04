@@ -42,7 +42,7 @@
 								Note();
 								
 								Note(const Pitch::PitchClass& _pc, int8_t _octave = 3);
-                                Note(const Pitch::Letter::LetterClass& _letter, const Pitch::Accidental::AccidentalClass& _accidental = Pitch::Accidental::Natural, int8_t _octave = 3);
+                                Note(const Pitch::Letter& _letter, const Pitch::Accidental::AccidentalClass& _accidental = Pitch::Accidental::Natural, int8_t _octave = 3);
 
 								Note(const Note& source);
 								Note& operator=(const Note& source);
@@ -103,8 +103,8 @@
 									///////////////////////////////////////////////////////////////
 									// Letter
 
-										void SetLetter(const Pitch::Letter::LetterClass& src);
-	                                	const Pitch::Letter::LetterClass& Letter() const;
+										void SetLetter(const Pitch::Letter& src);
+	                                	const Pitch::Letter& Letter() const;
 
 										void Next();
 										void Previous();
@@ -144,7 +144,7 @@
        				// Reference Note for computing Frequency
 
                     void SetReferenceNote(const Note& Note, const float& Frequency);
-                    void SetReferenceNote(const Pitch::LetterType& Letter, const Pitch::AccidentalType& Accidental, const float& Frequency);
+                    void SetReferenceNote(const Pitch::Letter::LetterType& Letter, const Pitch::AccidentalType& Accidental, const float& Frequency);
 				}
 			}
 		}

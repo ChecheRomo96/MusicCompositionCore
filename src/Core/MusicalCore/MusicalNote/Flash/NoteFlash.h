@@ -48,26 +48,26 @@
                             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                             // LetterClass + AccidentalClass + Format
                             
-                                char* GetName(char* buff, const Pitch::Letter::LetterClass& note, const MusicalNote::Pitch::Accidental::AccidentalClass& accidental, const TextFormat::FormatClass& format = TextFormat::DefaultFormat);
-                                const char* GetName(const MusicalNote::Pitch::Letter::LetterClass& note, const MusicalNote::Pitch::Accidental::AccidentalClass& accidental, const TextFormat::FormatClass& format = TextFormat::DefaultFormat);
+                                char* GetName(char* buff, const Pitch::Letter& note, const MusicalNote::Pitch::Accidental::AccidentalClass& accidental, const TextFormat::FormatClass& format = TextFormat::DefaultFormat);
+                                const char* GetName(const MusicalNote::Pitch::Letter& note, const MusicalNote::Pitch::Accidental::AccidentalClass& accidental, const TextFormat::FormatClass& format = TextFormat::DefaultFormat);
                             //
                             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                             // LetterClass + AccidentalClass + Octave + Format
                             
-                                char* GetName(char* buff, const Pitch::Letter::LetterClass& note, const MusicalNote::Pitch::Accidental::AccidentalClass& accidental, int8_t octave, const TextFormat::FormatClass& format = TextFormat::DefaultFormat);
-                                const char* GetName(const MusicalNote::Pitch::Letter::LetterClass& note, const MusicalNote::Pitch::Accidental::AccidentalClass& accidental, int8_t octave, const TextFormat::FormatClass& format = TextFormat::DefaultFormat);
+                                char* GetName(char* buff, const Pitch::Letter& note, const MusicalNote::Pitch::Accidental::AccidentalClass& accidental, int8_t octave, const TextFormat::FormatClass& format = TextFormat::DefaultFormat);
+                                const char* GetName(const MusicalNote::Pitch::Letter& note, const MusicalNote::Pitch::Accidental::AccidentalClass& accidental, int8_t octave, const TextFormat::FormatClass& format = TextFormat::DefaultFormat);
                             //
                             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                             // LetterType + AccidentalType + Format
 
-                                char* GetName(char* buff, const Pitch::LetterType& note, const Pitch::AccidentalType& accidental, const TextFormat::FormatClass& format = TextFormat::DefaultFormat);
-                                const char* GetName(const Pitch::LetterType& note, const Pitch::AccidentalType& accidental, const TextFormat::FormatClass& format = TextFormat::DefaultFormat);
+                                char* GetName(char* buff, const Pitch::Letter::LetterType& note, const Pitch::AccidentalType& accidental, const TextFormat::FormatClass& format = TextFormat::DefaultFormat);
+                                const char* GetName(const Pitch::Letter::LetterType& note, const Pitch::AccidentalType& accidental, const TextFormat::FormatClass& format = TextFormat::DefaultFormat);
                             //
                             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                             // LetterType + AccidentalType + Octave + Format
 
-                                char* GetName(char* buff, const Pitch::LetterType& note, const Pitch::AccidentalType& accidental, int8_t octave, const TextFormat::FormatClass& format = TextFormat::DefaultFormat);
-                                const char* GetName(const Pitch::LetterType& note, const Pitch::AccidentalType& accidental, int8_t octave, const TextFormat::FormatClass& format = TextFormat::DefaultFormat);
+                                char* GetName(char* buff, const Pitch::Letter::LetterType& note, const Pitch::AccidentalType& accidental, int8_t octave, const TextFormat::FormatClass& format = TextFormat::DefaultFormat);
+                                const char* GetName(const Pitch::Letter::LetterType& note, const Pitch::AccidentalType& accidental, int8_t octave, const TextFormat::FormatClass& format = TextFormat::DefaultFormat);
                             //
                             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                         //
@@ -80,8 +80,8 @@
                         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                         // Get Letter Name
 
-                            char* GetLetterText(char* buff, const MusicalNote::Pitch::Letter::LetterClass& letter);
-                            const char* GetLetterText(const MusicalNote::Pitch::Letter::LetterClass& letter);
+                            char* GetLetterText(char* buff, const MusicalNote::Pitch::Letter& letter);
+                            const char* GetLetterText(const MusicalNote::Pitch::Letter& letter);
                         //
                         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                     }

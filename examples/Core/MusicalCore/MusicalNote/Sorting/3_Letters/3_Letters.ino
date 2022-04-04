@@ -9,7 +9,7 @@ void setup()
     MCC::Start();
         
     CPVector::vector<MCC_MusicalNote::Note> NoteVector;
-    CPVector::Sorting::SortingArray<MCC_MusicalNote::Note> SortConfiguration;
+    CPVector::Sorting::SortingArray<MCC_MusicalNote::Pitch::Letter::LetterClass> SortConfiguration;
 
     for(uint8_t i = 0; i < 100; i++)
     {
