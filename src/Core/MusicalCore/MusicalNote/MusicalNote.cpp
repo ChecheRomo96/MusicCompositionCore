@@ -1,6 +1,7 @@
 #include "MusicalNote.h"
 
 #include "../MusicalInterval/MusicalInterval.h"
+#include <math.h>
 
 /////////////////////////////////////////////////////////////////////////
 // Note Buffer

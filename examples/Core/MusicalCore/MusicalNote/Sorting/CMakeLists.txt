@@ -1,1 +1,1 @@
-add_subdirectory(1_SortingNotes)
+add_subdirectory(1_Notes)
