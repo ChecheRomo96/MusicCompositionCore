@@ -117,7 +117,7 @@ char Flash::Buffer[24];
 			
 			case TextFormat::SpacingMode::Justified:
 			{
-				OutputStr += Flash::GetLetterText(Letter);
+				OutputStr = Flash::GetLetterText(Letter);
 
 				if (Format.AccidentalMode() == TextFormat::AccidentalMode::Text)
 				{
@@ -208,7 +208,7 @@ char Flash::Buffer[24];
 			case TextFormat::SpacingMode::Enabled:
 			{
 
-				OutputStr += Flash::GetLetterText(Letter);
+				OutputStr = Flash::GetLetterText(Letter);
 
 				if (Format.AccidentalMode() == TextFormat::AccidentalMode::Text)
 				{

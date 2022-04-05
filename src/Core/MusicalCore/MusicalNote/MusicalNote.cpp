@@ -519,17 +519,17 @@
 			    Pitch::Letter note = noteData.GetLetter();
 			    Pitch::Accidental accidental = noteData.GetAccidental();
 			    
-			    if((note.ID() != Pitch::Letter::InvalidID)||(accidental < Pitch::Accidental::MinIterator)||(accidental > Pitch::Accidental::MaxIterator))
+			    if((note.ID() != Pitch::Letter::InvalidID)||(accidental >= Pitch::Accidental::MinIterator)||(accidental <= Pitch::Accidental::MaxIterator))
 			    {
-			        return MusicalNote::InvalidPitch;
+					int16_t note_pitch = MusicalNote::NotesArray[note.ID()] + accidental.ID() + (octave * 12);
+
+					if ((note == MusicalNote::Pitch::Letter::B) && (accidental >= MusicalNote::Pitch::Accidental::Sharp)) { return note_pitch - 12; }
+					if ((note == MusicalNote::Pitch::Letter::A) && (accidental >= MusicalNote::Pitch::Accidental::TripleSharp)) { return note_pitch - 12; }
+					return note_pitch;
 			    }
 			    else
 			    {
-		            int16_t note_pitch = MusicalNote::NotesArray[note.ID()] + accidental.ID() + (octave * 12);
-			        
-			        if((note == MusicalNote::Pitch::Letter::B) && (accidental >= MusicalNote::Pitch::Accidental::Sharp)){return note_pitch-12;}
-			        if((note == MusicalNote::Pitch::Letter::A) && (accidental >= MusicalNote::Pitch::Accidental::TripleSharp)){return note_pitch-12;}
-			        return note_pitch;
+					return MusicalNote::InvalidPitch;
 			    }
 			}
 
