@@ -36,7 +36,7 @@
                                 Interval(int16_t _NotePitch_A, int16_t _NotePitch_B, uint8_t _GenericInterval);
 
                                 Interval(const MCC_MusicalNote::Note &source_a, const MCC_MusicalNote::Note &source_b);
-                                Interval(const MCC_MusicalNote::Pitch::PitchClass& source_a, const MCC_MusicalNote::Pitch::PitchClass& source_b);
+                                Interval(const MCC_MusicalNote::Pitch& source_a, const MCC_MusicalNote::Pitch& source_b);
 
                                 Interval(const Interval& src);
                                 Interval& operator=(const Interval& src);

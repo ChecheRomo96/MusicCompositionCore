@@ -32,7 +32,7 @@
 
 					class Note
 					{
-						Pitch::PitchClass noteData;
+						Pitch noteData;
 						int8_t octave;
 
 						public:
@@ -41,7 +41,7 @@
 							
 								Note();
 								
-								Note(const Pitch::PitchClass& _pc, int8_t _octave = 3);
+								Note(const Pitch& _pc, int8_t _octave = 3);
                                 Note(const Pitch::Letter& _letter, const Pitch::Accidental& _accidental = Pitch::Accidental::Natural, int8_t _octave = 3);
 
 								Note(const Note& source);
@@ -88,8 +88,8 @@
 	                            ///////////////////////////////////////////////////////////////////////
 	                            // Pitch
 									
-									void SetPitch(const Pitch::PitchClass& src);
-									const Pitch::PitchClass& Pitch() const;
+									void SetPitch(const Pitch& src);
+									const Pitch& Pitch() const;
 									
 									///////////////////////////////////////////////////////////////
 									// Accidental

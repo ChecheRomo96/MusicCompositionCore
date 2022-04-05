@@ -22,33 +22,33 @@ char Flash::Buffer[24];
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // PitchClass + Format
 
-	char* Flash::GetName(char* buff, const Pitch::PitchClass& source, const TextFormat::FormatClass& Format)
+	char* Flash::GetName(char* buff, const Pitch& source, const TextFormat::FormatClass& Format)
 	{
 		TextFormat::FormatClass tmp = Format;
         tmp.Octave_Disabled();
 
-		return GetName(buff, source.Letter(), source.Accidental(), 0, tmp);
+		return GetName(buff, source.GetLetter(), source.GetAccidental(), 0, tmp);
 	}
 
-	const char* Flash::GetName(const Pitch::PitchClass& source, const TextFormat::FormatClass& Format)
+	const char* Flash::GetName(const Pitch& source, const TextFormat::FormatClass& Format)
 	{
 		TextFormat::FormatClass tmp = Format;
 		tmp.Octave_Disabled();
 
-		return GetName(Flash::Buffer, source.Letter(), source.Accidental(), 0, tmp);
+		return GetName(Flash::Buffer, source.GetLetter(), source.GetAccidental(), 0, tmp);
 	}
 //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // PitchClass + Octave + Format
 
-	char* Flash::GetName(char* buff, const Pitch::PitchClass& source, int8_t octave, const TextFormat::FormatClass& Format)
+	char* Flash::GetName(char* buff, const Pitch& source, int8_t octave, const TextFormat::FormatClass& Format)
 	{
-		return GetName(buff, source.Letter(), source.Accidental(), octave, Format);
+		return GetName(buff, source.GetLetter(), source.GetAccidental(), octave, Format);
 	}
 
-	const char* Flash::GetName(const Pitch::PitchClass& source, int8_t octave, const TextFormat::FormatClass& Format)
+	const char* Flash::GetName(const Pitch& source, int8_t octave, const TextFormat::FormatClass& Format)
 	{
-		return GetName(Flash::Buffer, source.Letter(), source.Accidental(), octave, Format);
+		return GetName(Flash::Buffer, source.GetLetter(), source.GetAccidental(), octave, Format);
 	}
 //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

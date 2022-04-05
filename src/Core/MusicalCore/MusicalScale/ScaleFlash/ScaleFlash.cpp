@@ -140,12 +140,12 @@
                 return buff;
             }
 
-            const char* MCC_MusicalScaleFlash::GetScaleName(const MCC_MusicalNote::Pitch::PitchClass& root, uint8_t ScaleID)
+            const char* MCC_MusicalScaleFlash::GetScaleName(const MCC_MusicalNote::Pitch& root, uint8_t ScaleID)
             {
                 return GetScaleName(MCC_MusicalScaleFlash::Buffer, root, ScaleID);
             }
 
-            char* MCC_MusicalScaleFlash::GetScaleName(char* buff, const MCC_MusicalNote::Pitch::PitchClass& root, uint8_t ScaleID)
+            char* MCC_MusicalScaleFlash::GetScaleName(char* buff, const MCC_MusicalNote::Pitch& root, uint8_t ScaleID)
             {
                 if(ScaleID>=MCC_MusicalScaleFlash::ScaleArrays::Flash_Size){return buff;}
                 

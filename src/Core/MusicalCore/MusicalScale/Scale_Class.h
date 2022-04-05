@@ -39,7 +39,7 @@
                             uint8_t _NameID;
                             uint8_t _RootOffset;
                             
-                            CPVector::vector<MCC_MusicalNote::Pitch::PitchClass> _Notes;
+                            CPVector::vector<MCC_MusicalNote::Pitch> _Notes;
                         //
                         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -51,25 +51,25 @@
                                 Scale(bool sharps_flats = 0);
 
                                 Scale(const CPVector::vector<MCC_MusicalNote::Note> &notes, CPString::string& name = DefaultName);
-                                Scale(const CPVector::vector<MCC_MusicalNote::Pitch::PitchClass> &noteTokens, CPString::string& name = DefaultName);
+                                Scale(const CPVector::vector<MCC_MusicalNote::Pitch> &noteTokens, CPString::string& name = DefaultName);
 
                                 Scale(const MCC_MusicalNote::Note &root, const CPVector::vector<MCC_MusicalInterval::Interval> &intervals, CPString::string& name = DefaultName);
-                                Scale(const MCC_MusicalNote::Pitch::PitchClass &root, const CPVector::vector<MCC_MusicalInterval::Interval> &intervals, CPString::string& name = DefaultName);
-                                Scale(const MCC_MusicalNote::Pitch::PitchClass &root, const MCC_MusicalInterval::Interval* intervals, uint8_t size, CPString::string& name = DefaultName);
+                                Scale(const MCC_MusicalNote::Pitch &root, const CPVector::vector<MCC_MusicalInterval::Interval> &intervals, CPString::string& name = DefaultName);
+                                Scale(const MCC_MusicalNote::Pitch &root, const MCC_MusicalInterval::Interval* intervals, uint8_t size, CPString::string& name = DefaultName);
                                 
                                 Scale(uint8_t root, const Flash::Container_Notes& source);
                                 Scale(const Flash::Container_Notes& source);
                                 Scale(const MCC_MusicalNote::Note& root, const Flash::Container_Notes& source);
-                                Scale(const MCC_MusicalNote::Pitch::PitchClass& root, const Flash::Container_Notes& source);
+                                Scale(const MCC_MusicalNote::Pitch& root, const Flash::Container_Notes& source);
 
                                 Scale(const MCC_MusicalNote::Note &root, const Flash::Container_Mapping& source);
-                                Scale(const MCC_MusicalNote::Pitch::PitchClass& root, const Flash::Container_Mapping& source);
+                                Scale(const MCC_MusicalNote::Pitch& root, const Flash::Container_Mapping& source);
 
                                 Scale(const MCC_MusicalNote::Note &root, const Flash::Container* source, uint8_t ID);
-                                Scale(const MCC_MusicalNote::Pitch::PitchClass& root, const Flash::Container* source, uint8_t ID);
+                                Scale(const MCC_MusicalNote::Pitch& root, const Flash::Container* source, uint8_t ID);
 
                                 Scale(const MCC_MusicalNote::Note &root, uint8_t ID);
-                                Scale(const MCC_MusicalNote::Pitch::PitchClass&root, uint8_t ID); 
+                                Scale(const MCC_MusicalNote::Pitch&root, uint8_t ID); 
                                 
                                 ~Scale();
                             //
@@ -93,14 +93,14 @@
                                 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                 // Note Token Vector
 
-                                    const CPVector::vector<MCC_MusicalNote::Pitch::PitchClass>& NoteTokenVector() const;
+                                    const CPVector::vector<MCC_MusicalNote::Pitch>& NoteTokenVector() const;
                                     const uint8_t size() const;
                                 //
                                 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                 // Root Note
 
                                     void SetRootNote(const MCC_MusicalNote::Note& root);
-                                    void SetRootNote(const MCC_MusicalNote::Pitch::PitchClass& root);
+                                    void SetRootNote(const MCC_MusicalNote::Pitch& root);
 
                                     const MCC_MusicalNote::Note RootNote() const;
                                 //
@@ -109,7 +109,7 @@
 
                                     void SetRootOffset(uint8_t Offset);
                                     void SetRootOffset(const MCC_MusicalNote::Note& newRoot);
-                                    void SetRootOffset(const MCC_MusicalNote::Pitch::PitchClass& newRoot);
+                                    void SetRootOffset(const MCC_MusicalNote::Pitch& newRoot);
 
                                     const uint8_t RootOffset() const; 
                                 //

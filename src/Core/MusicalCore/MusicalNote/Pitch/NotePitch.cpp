@@ -2,30 +2,32 @@
 
 #include "NotePitch_Definitions.h"
 
-#include "Letter/Letter.h"
-#include "Accidental/Accidental.h"
 #include "../Note_Class.h"
 #include "../TextFormat/TextFormat.h"
 #include "../../MusicalInterval/MusicalInterval.h"
 
+using namespace MusicCompositionCore::Core::MusicalCore;
+using namespace MusicCompositionCore::Core::MusicalCore::MusicalNote;
+
 /////////////////////////////////////////////////////////////////////////
 //  Notes Array
 
-    const int8_t MusicCompositionCore::Core::MusicalCore::MusicalNote::Pitch::NotesArray[7] = {0,2,4,5,7,9,11};
+    const int8_t MusicalNote::NotesArray[7] = {0,2,4,5,7,9,11};
 //
 /////////////////////////////////////////////////////////////////////////
-using namespace MusicCompositionCore::Core::MusicalCore::MusicalNote::Pitch;
-using namespace MusicCompositionCore::Core::MusicalCore::MusicalNote;
+    
 
-PitchClass MusicCompositionCore::Core::MusicalCore::MusicalNote::Pitch::PitchClass_Buffer;
 
-PitchClass::PitchClass()
+Pitch Pitch::PitchBuffer;
+Pitch::PitchType Pitch::Buffer;
+
+Pitch::Pitch()
 {
     _Letter = Letter::InvalidID;
     _Accidental = Accidental::InvalidID;
 }
 
-PitchClass::PitchClass(PitchType token)
+Pitch::Pitch(PitchType token)
 {
     if(token < Pitch::MaxIterator)
     {
@@ -39,7 +41,7 @@ PitchClass::PitchClass(PitchType token)
     }
 }
 
-PitchClass& PitchClass::operator=(PitchType token)
+Pitch& Pitch::operator=(PitchType token)
 {
     if(token < Pitch::MaxIterator)
     {
@@ -54,35 +56,35 @@ PitchClass& PitchClass::operator=(PitchType token)
     return (*this);
 }
 
-PitchClass::PitchClass(const Pitch::Letter& note, const Pitch::Accidental& accidental)
+Pitch::Pitch(const Pitch::Letter& note, const Pitch::Accidental& accidental)
 {
     _Letter = note;
     _Accidental = accidental;
 }
 
-PitchClass::PitchClass(const PitchClass& source)
+Pitch::Pitch(const Pitch& source)
 {
-    _Letter = source.Letter();
-    _Accidental = source.Accidental();
+    _Letter = source.GetLetter();
+    _Accidental = source.GetAccidental();
 }
 
-PitchClass& PitchClass::operator=(const PitchClass& source)
+Pitch& Pitch::operator=(const Pitch& source)
 {
-    _Letter = source.Letter();
-    _Accidental = source.Accidental();
+    _Letter = source.GetLetter();
+    _Accidental = source.GetAccidental();
     return (*this);
 }
 
-PitchClass& PitchClass::operator+=(const MusicalInterval::Interval &rhs)
+Pitch& Pitch::operator+=(const MusicalInterval::Interval &rhs)
 {
-    PitchClass_Buffer = (*this)+rhs;
-    (*this) = PitchClass_Buffer;
+    PitchBuffer = (*this)+rhs;
+    (*this) = PitchBuffer;
     return (*this);
 }
 
-PitchClass PitchClass::operator+(const MusicalInterval::Interval &rhs) const
+Pitch Pitch::operator+(const MusicalInterval::Interval &rhs) const
 {
-    PitchClass tmp = (*this);
+    Pitch tmp = (*this);
     
     int16_t base = NotePitch();
     
@@ -185,20 +187,20 @@ PitchClass PitchClass::operator+(const MusicalInterval::Interval &rhs) const
 }
 
 
-PitchClass& PitchClass::operator-=(const MusicalInterval::Interval &rhs)
+Pitch& Pitch::operator-=(const MusicalInterval::Interval &rhs)
 {
-    PitchClass_Buffer = (*this)-rhs;
-    (*this) = PitchClass_Buffer;
+    PitchBuffer = (*this)-rhs;
+    (*this) = PitchBuffer;
     return (*this);
 }
 
-PitchClass PitchClass::operator-(const MusicalInterval::Interval &rhs) const
+Pitch Pitch::operator-(const MusicalInterval::Interval &rhs) const
 {
     // Checking if the provided interval is valid, else return the note as is
     if(rhs.Semitones() == MCC_MusicalInterval::InvalidInterval){return (*this);}
 
     // Make a copy of this instance into an object called tmp
-    PitchClass tmp = (*this);
+    Pitch tmp = (*this);
     
     // Storing the base Pitch
     int16_t base = NotePitch();
@@ -296,31 +298,31 @@ PitchClass PitchClass::operator-(const MusicalInterval::Interval &rhs) const
     return tmp;
 }
 
-PitchClass::PitchClass(const Pitch::Letter& source)
+Pitch::Pitch(const Pitch::Letter& source)
 {
     _Letter = source;
     _Accidental = Accidental::InvalidID;
 }
 
-PitchClass& PitchClass::operator=(const Pitch::Letter& source)
+Pitch& Pitch::operator=(const Pitch::Letter& source)
 {
     _Letter = source;
     return (*this);
 }
 
-PitchClass::PitchClass(const Pitch::Accidental& source)
+Pitch::Pitch(const Pitch::Accidental& source)
 {
     _Accidental = source;
     _Letter = Letter::InvalidID;
 }
 
-PitchClass& PitchClass::operator=(const Pitch::Accidental& source)
+Pitch& Pitch::operator=(const Pitch::Accidental& source)
 {
     _Accidental = source;
     return(*this);
 }
 
-PitchClass::operator uint8_t() const
+Pitch::operator uint8_t() const
 {
     if((_Letter == Letter::InvalidID)||(_Accidental == Accidental::InvalidID))
     {
@@ -329,47 +331,47 @@ PitchClass::operator uint8_t() const
     return (_Letter.ID() * 5) + _Accidental.ID();
 }
 
-void PitchClass::SetLetter(const Pitch::Letter& source)
+void Pitch::SetLetter(const Pitch::Letter& source)
 {
     _Letter = source;
 }
 
-const Letter& PitchClass::Letter() const
+const Pitch::Letter& Pitch::GetLetter() const
 {
     return _Letter;
 }
 
-void PitchClass::SetAccidental(const Pitch::Accidental& source)
+void Pitch::SetAccidental(const Pitch::Accidental& source)
 {
     _Accidental = source;
 }
 
-const Accidental& PitchClass::Accidental() const
+const Pitch::Accidental& Pitch::GetAccidental() const
 {
     return _Accidental;
 }
 
-bool PitchClass::Sharp()
+bool Pitch::Sharp()
 {
     return _Accidental.AddSharp();
 }
 
-bool PitchClass::Flat()
+bool Pitch::Flat()
 {
     return _Accidental.AddFlat();
 }
 
-void PitchClass::Next()
+void Pitch::Next()
 {
     return _Letter.Next();
 }
 
-void PitchClass::Previous()
+void Pitch::Previous()
 {
     return _Letter.Previous();
 }
 
-const char* PitchClass::Name(MusicalNote::TextFormat::FormatClass& Format) const
+const char* Pitch::Name(MusicalNote::TextFormat::FormatClass& Format) const
 {
     bool flag = 0;
     if(Format.OctaveMode() == TextFormat::OctaveMode::Enabled)
@@ -416,7 +418,7 @@ const char* PitchClass::Name(MusicalNote::TextFormat::FormatClass& Format) const
     return Flash::Buffer;
 }
 
-char* PitchClass::Name(char* buff, MusicalNote::TextFormat::FormatClass& Format)const
+char* Pitch::Name(char* buff, MusicalNote::TextFormat::FormatClass& Format)const
 {
     bool flag = 0;
     if(Format.OctaveMode())
@@ -447,12 +449,12 @@ char* PitchClass::Name(char* buff, MusicalNote::TextFormat::FormatClass& Format)
         {
             uint8_t space_mode = Format.SpacingMode();
             Format.Spacing_Enabled();
-            Flash::GetName(buff,MusicalNote::Pitch::PitchClass(*this),Format);
+            Flash::GetName(buff,MusicalNote::Pitch::Pitch(*this),Format);
             Format.SetSpacingMode(space_mode);
         }
         else
         {
-            Flash::GetName(buff,MusicalNote::Pitch::PitchClass(*this),Format);
+            Flash::GetName(buff,MusicalNote::Pitch::Pitch(*this),Format);
         }
     }
     
@@ -461,7 +463,7 @@ char* PitchClass::Name(char* buff, MusicalNote::TextFormat::FormatClass& Format)
     return buff;
 }
 
-const uint8_t PitchClass::NotePitch() const
+const uint8_t Pitch::NotePitch() const
 {
     if((_Letter == Letter::InvalidID)||(_Accidental == Accidental::InvalidID))
     {
@@ -469,7 +471,7 @@ const uint8_t PitchClass::NotePitch() const
     }
     else
     {
-        int8_t note_pitch = (MusicalNote::Pitch::NotesArray[_Letter.ID()] + _Accidental.ID())%12;
+        int8_t note_pitch = (MusicalNote::NotesArray[_Letter.ID()] + _Accidental.ID())%12;
         
         if(note_pitch<0){note_pitch+=12;}
         
@@ -477,71 +479,71 @@ const uint8_t PitchClass::NotePitch() const
     }
 }
 
-const uint8_t PitchClass::MidiPitch() const
+const uint8_t Pitch::MidiPitch() const
 {
     return NotePitch();
 }
 
-bool MusicCompositionCore::Core::MusicalCore::MusicalNote::Pitch::operator < (const PitchClass &lhs, const PitchClass &rhs)
+bool MusicCompositionCore::Core::MusicalCore::MusicalNote::operator < (const Pitch &lhs, const Pitch &rhs)
 {
     if(lhs.NotePitch() < rhs.NotePitch()){return 1;}
     return 0;
 }
 
-bool MusicCompositionCore::Core::MusicalCore::MusicalNote::Pitch::operator <= (const PitchClass &lhs, const PitchClass &rhs)
+bool MusicCompositionCore::Core::MusicalCore::MusicalNote::operator <= (const Pitch &lhs, const Pitch &rhs)
 {
     if(lhs.NotePitch() <= rhs.NotePitch()){return 1;}
     return 0;
 }
 
-bool MusicCompositionCore::Core::MusicalCore::MusicalNote::Pitch::operator > (const PitchClass &lhs, const PitchClass &rhs)
+bool MusicCompositionCore::Core::MusicalCore::MusicalNote::operator > (const Pitch &lhs, const Pitch &rhs)
 {
     if(lhs.NotePitch() > rhs.NotePitch()){return 1;}
     return 0;
 }
 
-bool MusicCompositionCore::Core::MusicalCore::MusicalNote::Pitch::operator >= (const PitchClass &lhs, const PitchClass &rhs)
+bool MusicCompositionCore::Core::MusicalCore::MusicalNote::operator >= (const Pitch &lhs, const Pitch &rhs)
 {
     if(lhs.NotePitch() >= rhs.NotePitch()){return 1;}
     return 0;
 }
 
-bool MusicCompositionCore::Core::MusicalCore::MusicalNote::Pitch::operator == (const PitchClass &lhs, const PitchClass &rhs)
+bool MusicCompositionCore::Core::MusicalCore::MusicalNote::operator == (const Pitch &lhs, const Pitch &rhs)
 {
     if(lhs.NotePitch() == rhs.NotePitch()){return 1;}
     return 0;
 }
 
-bool MusicCompositionCore::Core::MusicalCore::MusicalNote::Pitch::operator == (const PitchType &lhs, const PitchClass &rhs)
+bool MusicCompositionCore::Core::MusicalCore::MusicalNote::operator == (const Pitch::PitchType& lhs, const Pitch& rhs)
 {
-    if(PitchClass(lhs).NotePitch() == rhs.NotePitch()){return 1;}
+    if(Pitch(lhs).NotePitch() == rhs.NotePitch()){return 1;}
     return 0;
 }
 
-bool MusicCompositionCore::Core::MusicalCore::MusicalNote::Pitch::operator == (const PitchClass &lhs, const PitchType &rhs)
+bool MusicCompositionCore::Core::MusicalCore::MusicalNote::operator == (const Pitch &lhs, const Pitch::PitchType &rhs)
 {
-    if(lhs.NotePitch() == PitchClass(rhs).NotePitch()){return 1;}
+    if(lhs.NotePitch() == Pitch(rhs).NotePitch()){return 1;}
     return 0;
 }
 
-bool MusicCompositionCore::Core::MusicalCore::MusicalNote::Pitch::operator != (const PitchClass &lhs, const PitchClass &rhs)
+bool MusicCompositionCore::Core::MusicalCore::MusicalNote::operator != (const Pitch &lhs, const Pitch &rhs)
 {
     if(lhs.NotePitch() == rhs.NotePitch()){return 0;}
     return 1;
 }
 /*
-PitchClass& PitchClass::operator+=(const MCC_MusicalInterval::Interval &rhs)
+Pitch& Pitch::operator+=(const MCC_MusicalInterval::Interval &rhs)
 {
     
-    PitchClass buffer = (*this)+rhs;
+    Pitch buffer = (*this)+rhs;
     (*this) = buffer;
 
     return (*this);
 }
 
-PitchClass PitchClass::operator+(const MCC_MusicalInterval::Interval &rhs)
+Pitch Pitch::operator+(const MCC_MusicalInterval::Interval &rhs)
 {
-    PitchClass tmp = (*this);
+    Pitch tmp = (*this);
     
     int16_t base = NotePitch();
     
@@ -644,7 +646,7 @@ PitchClass PitchClass::operator+(const MCC_MusicalInterval::Interval &rhs)
 }
 
 
-PitchClass& PitchClass::operator-=(const MCC_MusicalInterval::Interval &rhs)
+Pitch& Pitch::operator-=(const MCC_MusicalInterval::Interval &rhs)
 {
     if(rhs.Semitones() == MCC_MusicalInterval::InvalidInterval){return (*this);}
     
@@ -661,9 +663,9 @@ PitchClass& PitchClass::operator-=(const MCC_MusicalInterval::Interval &rhs)
     return (*this);
 }
 
-PitchClass PitchClass::operator-(const MCC_MusicalInterval::Interval &rhs)
+Pitch Pitch::operator-(const MCC_MusicalInterval::Interval &rhs)
 {
-    PitchClass tmp = (*this);
+    Pitch tmp = (*this);
     
     if(rhs.Semitones() == MCC_MusicalInterval::InvalidInterval){return tmp;}
     

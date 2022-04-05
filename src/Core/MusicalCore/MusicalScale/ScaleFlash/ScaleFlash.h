@@ -26,7 +26,7 @@
                             ////////////////////////////////////////////////////////////////////////////////////////////////////
                             // Fills char Buffer[23] and returns a pointer to it
 
-                                const char* GetScaleName(const MCC_MusicalNote::Pitch::PitchClass& root, uint8_t ScaleID);
+                                const char* GetScaleName(const MCC_MusicalNote::Pitch& root, uint8_t ScaleID);
                                 const char* GetScaleName(const Container_Notes& source);
                                 const char* GetScaleName(const Container_Mapping& source);
                                 const char* GetScaleName(const Container& source);
@@ -36,7 +36,7 @@
                             ////////////////////////////////////////////////////////////////////////////////////////////////////
                             // Fills buff and returns a pointer to it
 
-                                char* GetScaleName(char* buff, const MCC_MusicalNote::Pitch::PitchClass& root, uint8_t ScaleID);
+                                char* GetScaleName(char* buff, const MCC_MusicalNote::Pitch& root, uint8_t ScaleID);
                                 char* GetScaleName(char* buff, const Container_Notes& source);
                                 char* GetScaleName(char* buff, const Container_Mapping& source);
                                 char* GetScaleName(char* buff, const Container& source);

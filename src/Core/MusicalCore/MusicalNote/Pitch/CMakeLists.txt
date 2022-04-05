@@ -3,14 +3,12 @@ set( HEADERS_LIST "" )
 
 # Append Sources
 list( APPEND MCC_SOURCES "${CMAKE_CURRENT_LIST_DIR}/NotePitch.cpp")
+list( APPEND MCC_SOURCES "${CMAKE_CURRENT_LIST_DIR}/Letter.cpp")
+list( APPEND MCC_SOURCES "${CMAKE_CURRENT_LIST_DIR}/Accidental.cpp")
 
 # Append Headers
 list( APPEND HEADERS_LIST "${CMAKE_CURRENT_LIST_DIR}/NotePitch.h")
 list( APPEND HEADERS_LIST "${CMAKE_CURRENT_LIST_DIR}/NotePitch_Definitions.h")
-
-# Add Subdirectories
-add_subdirectory(Accidental)
-add_subdirectory(Letter)
 
 # Refresh Sources List at PARENT_SCOPE
 set(MCC_SOURCES "${MCC_SOURCES}" PARENT_SCOPE)

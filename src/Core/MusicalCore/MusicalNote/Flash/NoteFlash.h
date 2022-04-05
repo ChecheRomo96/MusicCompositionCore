@@ -36,14 +36,14 @@
                             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                             // PitchClass + Format
                                 
-                                char* GetName(char* buff, const Pitch::PitchClass& source, const TextFormat::FormatClass& format = TextFormat::DefaultFormat);
-                                const char* GetName(const Pitch::PitchClass& source, const TextFormat::FormatClass& format = TextFormat::DefaultFormat);
+                                char* GetName(char* buff, const Pitch& source, const TextFormat::FormatClass& format = TextFormat::DefaultFormat);
+                                const char* GetName(const Pitch& source, const TextFormat::FormatClass& format = TextFormat::DefaultFormat);
                             //
                             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                             // PitchClass + Octave + Format
                             
-                                char* GetName(char* buff, const Pitch::PitchClass& source, int8_t octave, const TextFormat::FormatClass& format = TextFormat::DefaultFormat);
-                                const char* GetName(const Pitch::PitchClass& source, int8_t octave, const TextFormat::FormatClass& format = TextFormat::DefaultFormat);
+                                char* GetName(char* buff, const Pitch& source, int8_t octave, const TextFormat::FormatClass& format = TextFormat::DefaultFormat);
+                                const char* GetName(const Pitch& source, int8_t octave, const TextFormat::FormatClass& format = TextFormat::DefaultFormat);
                             //
                             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                             // LetterClass + AccidentalClass + Format

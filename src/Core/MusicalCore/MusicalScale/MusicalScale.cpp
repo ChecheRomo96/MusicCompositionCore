@@ -42,7 +42,7 @@ CPString::string MusicCompositionCore::Core::MusicalCore::MusicalScale::DefaultN
             _Data.SetMappingMode(ScaleProperties::MappingMode::Dynamic);
         }
 
-        MCC_MusicalScale::Scale::Scale(const CPVector::vector<MCC_MusicalNote::Pitch::PitchClass> &Tokens, CPString::string& name): _Data(0)
+        MCC_MusicalScale::Scale::Scale(const CPVector::vector<MCC_MusicalNote::Pitch> &Tokens, CPString::string& name): _Data(0)
         {
             _Notes.resize(Tokens.size());
             _RootOffset = 0;
@@ -81,7 +81,7 @@ CPString::string MusicCompositionCore::Core::MusicalCore::MusicalScale::DefaultN
             _Data.SetMappingMode(ScaleProperties::MappingMode::Fixed);
         }
 
-        MCC_MusicalScale::Scale::Scale(const MCC_MusicalNote::Pitch::PitchClass& root, const CPVector::vector <MCC_MusicalInterval::Interval>& intervals, CPString::string & name) : _Data(0)
+        MCC_MusicalScale::Scale::Scale(const MCC_MusicalNote::Pitch& root, const CPVector::vector <MCC_MusicalInterval::Interval>& intervals, CPString::string & name) : _Data(0)
         {
             _Notes.resize(intervals.size() + 1);
             
@@ -100,7 +100,7 @@ CPString::string MusicCompositionCore::Core::MusicalCore::MusicalScale::DefaultN
             _Data.SetMappingMode(ScaleProperties::MappingMode::Fixed);
         }
 
-        MCC_MusicalScale::Scale::Scale(const MCC_MusicalNote::Pitch::PitchClass& root, const MCC_MusicalInterval::Interval* intervals, uint8_t intervals_size, CPString::string &name) : _Data(0)
+        MCC_MusicalScale::Scale::Scale(const MCC_MusicalNote::Pitch& root, const MCC_MusicalInterval::Interval* intervals, uint8_t intervals_size, CPString::string &name) : _Data(0)
         {
             _Notes.resize(intervals_size + 1);
             
@@ -144,7 +144,7 @@ CPString::string MusicCompositionCore::Core::MusicalCore::MusicalScale::DefaultN
 
                 for(uint8_t i = 0; i < _Notes.size(); i++)
                 {
-                    MCC_MusicalNote::Pitch::PitchClass PitchClass = MCC_MusicalNote::Pitch::PitchClass(Flash::GetScaleNoteToken(source,i));
+                    MCC_MusicalNote::Pitch PitchClass = MCC_MusicalNote::Pitch(Flash::GetScaleNoteToken(source,i));
                     _Notes[i] = PitchClass;
                 }
 
@@ -174,7 +174,7 @@ CPString::string MusicCompositionCore::Core::MusicalCore::MusicalScale::DefaultN
 
                 for(uint8_t i = 0; i < _Notes.size(); i++)
                 {
-                    MCC_MusicalNote::Pitch::PitchClass PitchClass = MCC_MusicalNote::Pitch::PitchClass(Flash::GetScaleNoteToken(source,i));
+                    MCC_MusicalNote::Pitch PitchClass = MCC_MusicalNote::Pitch(Flash::GetScaleNoteToken(source,i));
                     _Notes[i] = PitchClass;
                 }
 
@@ -185,7 +185,7 @@ CPString::string MusicCompositionCore::Core::MusicalCore::MusicalScale::DefaultN
                 _Data.SetMappingMode(ScaleProperties::MappingMode::Dynamic);
             }
 
-            MCC_MusicalScale::Scale::Scale(const MCC_MusicalNote::Pitch::PitchClass& root, const Flash::Container_Notes& source): _Data(0)
+            MCC_MusicalScale::Scale::Scale(const MCC_MusicalNote::Pitch& root, const Flash::Container_Notes& source): _Data(0)
             {
                 *this = Scale(source);
 
@@ -208,7 +208,7 @@ CPString::string MusicCompositionCore::Core::MusicalCore::MusicalScale::DefaultN
         //////////////////////////////////////////////////////////////////////////////////////////////
         // FlashContainer Mapping
         
-            MCC_MusicalScale::Scale::Scale(const MCC_MusicalNote::Pitch::PitchClass& root, const Flash::Container_Mapping& source): _Data(0)
+            MCC_MusicalScale::Scale::Scale(const MCC_MusicalNote::Pitch& root, const Flash::Container_Mapping& source): _Data(0)
             {
                 uint16_t mapping = Flash::GetScaleMapping(source);
                 
@@ -256,7 +256,7 @@ CPString::string MusicCompositionCore::Core::MusicalCore::MusicalScale::DefaultN
         //////////////////////////////////////////////////////////////////////////////////////////////
         // FlashContainer*
 
-             MCC_MusicalScale::Scale::Scale(const MCC_MusicalNote::Pitch::PitchClass& root, const Flash::Container* source, uint8_t ID): _Data(0)
+             MCC_MusicalScale::Scale::Scale(const MCC_MusicalNote::Pitch& root, const Flash::Container* source, uint8_t ID): _Data(0)
             {
                 if(ID >= MCC_MusicalScale::Flash::ScaleArrays::Flash_Size)
                 {
@@ -290,7 +290,7 @@ CPString::string MusicCompositionCore::Core::MusicalCore::MusicalScale::DefaultN
                 (*this) = Scale(root.Pitch(),source,ID);
             }
 
-            MCC_MusicalScale::Scale::Scale(const MCC_MusicalNote::Pitch::PitchClass &root, uint8_t ID): _Data(0)
+            MCC_MusicalScale::Scale::Scale(const MCC_MusicalNote::Pitch &root, uint8_t ID): _Data(0)
             {
 
                 if(ID < MCC_MusicalScale::Flash::ScaleArrays::Flash_Size)
@@ -396,7 +396,7 @@ CPString::string MusicCompositionCore::Core::MusicalCore::MusicalScale::DefaultN
     //////////////////////////////////////////////////////////////////////////////////////////////////
     // Note PitchClass() Vector
 
-        const CPVector::vector<MCC_MusicalNote::Pitch::PitchClass>& MCC_MusicalScale::Scale::NoteTokenVector() const
+        const CPVector::vector<MCC_MusicalNote::Pitch>& MCC_MusicalScale::Scale::NoteTokenVector() const
         {
             return _Notes;
         }
@@ -409,7 +409,7 @@ CPString::string MusicCompositionCore::Core::MusicalCore::MusicalScale::DefaultN
     //////////////////////////////////////////////////////////////////////////////////////////////////
     // Root Note 
         
-        void MCC_MusicalScale::Scale::SetRootNote(const MCC_MusicalNote::Pitch::PitchClass& root)
+        void MCC_MusicalScale::Scale::SetRootNote(const MCC_MusicalNote::Pitch& root)
         {
             if(_Notes[_RootOffset] == root){return;}
 
@@ -505,7 +505,7 @@ CPString::string MusicCompositionCore::Core::MusicalCore::MusicalScale::DefaultN
             }
         }
 
-        void MCC_MusicalScale::Scale::SetRootOffset(const MCC_MusicalNote::Pitch::PitchClass& newRoot)
+        void MCC_MusicalScale::Scale::SetRootOffset(const MCC_MusicalNote::Pitch& newRoot)
         {
             for(uint8_t i = 0; i < size(); i++)
             {
@@ -625,9 +625,9 @@ CPString::string MusicCompositionCore::Core::MusicalCore::MusicalScale::DefaultN
     void MCC_MusicalScale::Scale::_SortNotes()
     {
         if(_Notes.size() == 0){return;}
-        MCC_MusicalNote::Pitch::PitchClass tmp = _Notes[_RootOffset];
+        MCC_MusicalNote::Pitch tmp = _Notes[_RootOffset];
         
-        CPVector::Sorting::SortingArray<MCC_MusicalNote::Pitch::PitchClass> sortSettings;
+        CPVector::Sorting::SortingArray<MCC_MusicalNote::Pitch> sortSettings;
         sortSettings.Append(MCC_MusicalNote::Sorting::PitchClass::NotePitch_Ascending);
         _Notes.Sort(sortSettings);
         

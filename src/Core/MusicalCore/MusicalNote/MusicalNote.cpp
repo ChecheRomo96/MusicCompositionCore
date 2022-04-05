@@ -86,7 +86,7 @@
 			    SetOctave(Octave);
 			}
 
-			Note::Note(const Pitch::PitchClass& Source, int8_t Octave)
+			Note::Note(const MusicalNote::Pitch& Source, int8_t Octave)
 			{
 			    noteData = Source;
 			    SetOctave(Octave);
@@ -516,8 +516,8 @@
 
 			const int16_t Note::NotePitch() const
 			{
-			    Pitch::Letter note = noteData.Letter();
-			    Pitch::Accidental accidental = noteData.Accidental();
+			    Pitch::Letter note = noteData.GetLetter();
+			    Pitch::Accidental accidental = noteData.GetAccidental();
 			    
 			    if((note.ID() != Pitch::Letter::InvalidID)||(accidental < Pitch::Accidental::MinIterator)||(accidental > Pitch::Accidental::MaxIterator))
 			    {
@@ -525,7 +525,7 @@
 			    }
 			    else
 			    {
-		            int16_t note_pitch = MusicalNote::Pitch::NotesArray[note.ID()] + accidental.ID() + (octave * 12);
+		            int16_t note_pitch = MusicalNote::NotesArray[note.ID()] + accidental.ID() + (octave * 12);
 			        
 			        if((note == MusicalNote::Pitch::Letter::B) && (accidental >= MusicalNote::Pitch::Accidental::Sharp)){return note_pitch-12;}
 			        if((note == MusicalNote::Pitch::Letter::A) && (accidental >= MusicalNote::Pitch::Accidental::TripleSharp)){return note_pitch-12;}
@@ -578,12 +578,12 @@
 			///////////////////////////////////////////////////////////////////
 			// Pitch
 
-				void Note::SetPitch(const Pitch::PitchClass& src)
+				void Note::SetPitch(const MusicalNote::Pitch& src)
 				{
 					noteData = src;
 				}
 
-				const Pitch::PitchClass& Note::Pitch() const
+				const Pitch& Note::Pitch() const
 				{
 					return noteData;
 				}
@@ -598,7 +598,7 @@
 
 					const Pitch::Accidental& Note::Accidental() const
 					{
-						return noteData.Accidental();
+						return noteData.GetAccidental();
 					}
 
 					bool Note::Flat()
@@ -622,13 +622,13 @@
 
 					const Pitch::Letter& Note::Letter() const
 					{
-						return noteData.Letter();
+						return noteData.GetLetter();
 					}
 
 					void Note::Next()
 					{
 					    noteData.Next();
-					    if(noteData.Letter() == Pitch::Letter::C)
+					    if(noteData.GetLetter() == Pitch::Letter::C)
 					    {
 					        octave++;
 					    }
@@ -637,7 +637,7 @@
 					void Note::Previous()
 					{
 					    noteData.Previous();
-					    if(noteData.Letter() == Pitch::Letter::B)
+					    if(noteData.GetLetter() == Pitch::Letter::B)
 					    {
 					        octave--;
 					    }

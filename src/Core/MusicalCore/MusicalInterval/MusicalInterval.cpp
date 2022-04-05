@@ -53,20 +53,20 @@
         {
             // Pitch(A) == Pitch(B)
             
-            if(source_a.Pitch().Letter().ID() == source_b.Pitch().Letter().ID())
+            if(source_a.Pitch().GetLetter().ID() == source_b.Pitch().GetLetter().ID())
             {
                 // Note(A) == Note(B)
                 _Number = 0;
             }
-            else if(source_a.Pitch().Letter().ID() < source_b.Pitch().Letter().ID())
+            else if(source_a.Pitch().GetLetter().ID() < source_b.Pitch().GetLetter().ID())
             {
                 // Note(A) < Note(B)
-                _Number = source_b.Pitch().Letter().ID() - source_a.Pitch().Letter().ID();
+                _Number = source_b.Pitch().GetLetter().ID() - source_a.Pitch().GetLetter().ID();
             }
             else
             {
                 // Note(A) > Note(B)
-                _Number = 7 + source_b.Pitch().Letter().ID() - source_a.Pitch().Letter().ID();
+                _Number = 7 + source_b.Pitch().GetLetter().ID() - source_a.Pitch().GetLetter().ID();
             }
         }
         else if(source_a.NotePitch() < source_b.NotePitch())
@@ -74,20 +74,20 @@
             // Pitch(A) < Pitch(B)
             int OctaveOffsetting = 7 * ((source_b.NotePitch() - source_a.NotePitch())/12);
             
-            if(source_a.Pitch().Letter().ID() == source_b.Pitch().Letter().ID())
+            if(source_a.Pitch().GetLetter().ID() == source_b.Pitch().GetLetter().ID())
             {
                 // Note(A) == Note(B)
                 _Number = OctaveOffsetting;
             }
-            else if(source_a.Pitch().Letter().ID() < source_b.Pitch().Letter().ID())
+            else if(source_a.Pitch().GetLetter().ID() < source_b.Pitch().GetLetter().ID())
             {
                 // Note(A) < Note(B)
-                _Number = OctaveOffsetting + source_b.Pitch().Letter().ID() - source_a.Pitch().Letter().ID();
+                _Number = OctaveOffsetting + source_b.Pitch().GetLetter().ID() - source_a.Pitch().GetLetter().ID();
             }
             else
             {
                 // Note(A) > Note(B)
-                _Number = 7 + OctaveOffsetting + source_b.Pitch().Letter().ID() - source_a.Pitch().Letter().ID();
+                _Number = 7 + OctaveOffsetting + source_b.Pitch().GetLetter().ID() - source_a.Pitch().GetLetter().ID();
             }
             
         }
@@ -95,20 +95,20 @@
         {
             // Pitch(A) > Pitch(B)
             
-            if(source_a.Pitch().Letter().ID() == source_b.Pitch().Letter().ID())
+            if(source_a.Pitch().GetLetter().ID() == source_b.Pitch().GetLetter().ID())
             {
                 // Note(A) == Note(B)
                 _Number = 7;
             }
-            else if(source_a.Pitch().Letter().ID() < source_b.Pitch().Letter().ID())
+            else if(source_a.Pitch().GetLetter().ID() < source_b.Pitch().GetLetter().ID())
             {
                 // Note(A) < Note(B)
-                _Number = source_b.Pitch().Letter().ID() - source_a.Pitch().Letter().ID();
+                _Number = source_b.Pitch().GetLetter().ID() - source_a.Pitch().GetLetter().ID();
             }
             else
             {
                 // Note(A) > Note(B)
-                _Number = 7 - (source_a.Pitch().Letter().ID() - source_b.Pitch().Letter().ID());
+                _Number = 7 - (source_a.Pitch().GetLetter().ID() - source_b.Pitch().GetLetter().ID());
             }
         }
 
@@ -139,16 +139,16 @@
         }
     }
 
-    Interval::Interval(const MCC_MusicalNote::Pitch::PitchClass &source_a, const MCC_MusicalNote::Pitch::PitchClass& source_b)
+    Interval::Interval(const MCC_MusicalNote::Pitch &source_a, const MCC_MusicalNote::Pitch& source_b)
     {
-        if(source_a.Letter().ID() == source_b.Letter().ID())
+        if(source_a.GetLetter().ID() == source_b.GetLetter().ID())
         {
-            if(source_a.Accidental().ID() > source_b.Accidental().ID())
+            if(source_a.GetAccidental().ID() > source_b.GetAccidental().ID())
             {
                 // A > B
-                _Number = source_b.Letter().ID() - source_a.Letter().ID()+7;
+                _Number = source_b.GetLetter().ID() - source_a.GetLetter().ID()+7;
             }
-            else if(source_a.Accidental().ID() == source_b.Accidental().ID())
+            else if(source_a.GetAccidental().ID() == source_b.GetAccidental().ID())
             {
                 // A = B
                 _Number = 0;
@@ -156,26 +156,26 @@
             else
             {
                 // A < B
-                _Number = source_b.Letter().ID() - source_a.Letter().ID();
+                _Number = source_b.GetLetter().ID() - source_a.GetLetter().ID();
             }
         }
-        else if(source_a.Letter().ID() > source_b.Letter().ID())
+        else if(source_a.GetLetter().ID() > source_b.GetLetter().ID())
         {
             // A > B
-            _Number = source_b.Letter().ID() - source_a.Letter().ID()+7;
+            _Number = source_b.GetLetter().ID() - source_a.GetLetter().ID()+7;
         }
-        else if(source_a.Letter().ID() < source_b.Letter().ID())
+        else if(source_a.GetLetter().ID() < source_b.GetLetter().ID())
         {
             // A < B
-            _Number = source_b.Letter().ID() - source_a.Letter().ID();
+            _Number = source_b.GetLetter().ID() - source_a.GetLetter().ID();
         }
         
         _Quality = Qualities::InvalidQuality;
         
         uint8_t sem;
-        if(source_a.Letter().ID() == source_b.Letter().ID())
+        if(source_a.GetLetter().ID() == source_b.GetLetter().ID())
         {
-            if(source_a.Accidental().ID() > source_b.Accidental().ID())
+            if(source_a.GetAccidental().ID() > source_b.GetAccidental().ID())
             {
                 // A > B
                 sem = abs(source_b.NotePitch()-source_a.NotePitch()+12);
@@ -186,7 +186,7 @@
                 sem = abs(source_b.NotePitch()-source_a.NotePitch());
             }
         }
-        else if(source_a.Letter().ID() > source_b.Letter().ID())
+        else if(source_a.GetLetter().ID() > source_b.GetLetter().ID())
         {
             // A > B
             sem = abs(source_b.NotePitch()-source_a.NotePitch()+12);
