@@ -9,22 +9,22 @@ int main(int argc, const char * argv[])
     // Printing all the notes recognized by the system
     {
         CPString::string str;
-        Pitch::Letter::LetterClass Letter;
-        Pitch::Accidental::AccidentalClass Accidental;
+        Pitch::Letter Letter;
+        Pitch::Accidental Accidental;
     
-        for(uint8_t i = 0; i < Pitch::Letter::Count; i++)
+        for(uint8_t i = 0; i < Pitch::Letter::MaxIterator+1; i++)
         {
-            Letter = Pitch::Letter::LetterClass(i);
+            Letter = Pitch::Letter(i);
             
-            for(int8_t j = Pitch::Accidental::Min; j <= Pitch::Accidental::Max; j++)
+            for(int8_t j = Pitch::Accidental::MinIterator; j <= Pitch::Accidental::MaxIterator; j++)
             {
-                Accidental = Pitch::Accidental::AccidentalClass(j);
+                Accidental = Pitch::Accidental(j);
                 
                 Note myNote(i,j,3);
                 str = myNote.Name();
                 std::cout<<str;
                 
-                if(j < Pitch::Accidental::Max){ std::cout<<", "; }
+                if(j < Pitch::Accidental::MaxIterator){ std::cout<<", "; }
                 else{ std::cout<<std::endl; }
             }
         }

@@ -1,7 +1,7 @@
 #include <iostream>
 #include <MCC.h>
 
-using namespace MCC_MusicalNote::Pitch;
+using namespace MCC_MusicalNote;
 
 int main()
 {
@@ -10,21 +10,21 @@ int main()
     ///////////////////////////////////////////////////////////////////////////////////////////
     // MusicalNote::Pitch::PitchClass( Letter::LetterClass, Accidental::AccidentalClass )
 
-        PitchClass Pitch( Letter::C, Accidental::Natural);
-        std::cout<< Pitch.Name()<<std::endl;
+        Pitch myPitch(Pitch::Letter::C, Pitch::Accidental::Natural);
+        std::cout<< myPitch.Name()<<std::endl;
     //
     ///////////////////////////////////////////////////////////////////////////////////////////
     // Pitch::PitchClass( Pitch::Letter::LetterClass, Pitch::Accidental::AccidentalClass )
 
-        Pitch = PitchClass( Letter::C, Accidental::Sharp );
-        std::cout<< Pitch.Name()<<std::endl;
+        myPitch = Pitch(Pitch::Letter::C, Pitch::Accidental::Sharp );
+        std::cout<< myPitch.Name()<<std::endl;
     //
     ///////////////////////////////////////////////////////////////////////////////////////////
     // Class Modifiers
 
-        Pitch.SetLetter(Letter::B);
-        Pitch.SetAccidental(Accidental::Flat);
-        std::cout<< Pitch.Name()<<std::endl;
+        myPitch.SetLetter(Pitch::Letter::B);
+        myPitch.SetAccidental(Pitch::Accidental::Flat);
+        std::cout<< myPitch.Name()<<std::endl;
     //
     ///////////////////////////////////////////////////////////////////////////////////////////
     

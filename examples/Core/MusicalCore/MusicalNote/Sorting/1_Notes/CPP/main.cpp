@@ -2,7 +2,6 @@
 #include <MCC.h>
 
 using namespace MCC_MusicalNote;
-using namespace MCC_MusicalNote::Pitch;
 
 int main()
 {
@@ -13,7 +12,7 @@ int main()
 
     for(uint8_t i = 0; i < 100; i++)
     {
-        NoteVector.push_back( MCC_MusicalNote::Note(PitchClass(rand()%(MCC_MusicalNote::Pitch::MaxIterator+1), rand() % 4 ) );
+        NoteVector.push_back( MCC_MusicalNote::Note(Pitch(rand()%(MCC_MusicalNote::Pitch::MaxIterator+1), rand() % 4 ) ));
         
         std::cout<<NoteVector[i].Name();
         if((i+1)%5 == 0){std::cout<<std::endl;}
