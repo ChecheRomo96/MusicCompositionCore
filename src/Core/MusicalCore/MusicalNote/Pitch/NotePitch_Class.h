@@ -25,7 +25,7 @@
                         class PitchClass
                         {
                             Letter _Letter;
-                            Accidental::AccidentalClass _Accidental;
+                            Accidental _Accidental;
                             
                             public:
                                 
@@ -33,7 +33,7 @@
                                 PitchClass(PitchType token);
                                 PitchClass& operator=(PitchType token);
                                 
-                                PitchClass(const Letter& note, const Accidental::AccidentalClass& accidental);
+                                PitchClass(const Letter& note, const Accidental& accidental);
                                 
                                 PitchClass(const PitchClass& source);
                                 PitchClass& operator=(const PitchClass& source);
@@ -41,8 +41,8 @@
                                 PitchClass(const Letter& source);
                                 PitchClass& operator=(const Letter& source);
                                 
-                                PitchClass(const Accidental::AccidentalClass& source);
-                                PitchClass& operator=(const Accidental::AccidentalClass& source);
+                                PitchClass(const Accidental& source);
+                                PitchClass& operator=(const Accidental& source);
                                 
                                 
                                 PitchClass& operator+=(const MusicalInterval::Interval &rhs);
@@ -56,8 +56,8 @@
                                 void SetLetter(const Letter& source);
                                 const Letter& Letter() const;
                                 
-                                void SetAccidental(const Accidental::AccidentalClass& source);
-                                const Accidental::AccidentalClass& Accidental() const;
+                                void SetAccidental(const Accidental& source);
+                                const Accidental& Accidental() const;
                                 
                                 const char* Name(MusicalNote::TextFormat::FormatClass& Format = MusicalNote::TextFormat::DefaultFormat)const;
                                 char* Name(char* buff, MusicalNote::TextFormat::FormatClass& Format = MusicalNote::TextFormat::DefaultFormat) const;

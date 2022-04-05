@@ -13,7 +13,7 @@ void setup()
 
     for(uint8_t i = 0; i < 100; i++)
     {
-        NoteVector.push_back(MCC_MusicalNote::Note(PitchClass(rand()%MCC_MusicalNote::Pitch::Count), (rand()%3)+3 ));
+        NoteVector.push_back(MCC_MusicalNote::Note(PitchClass(rand()%(MCC_MusicalNote::Pitch::MaxIterator+1)), (rand()%3) ));
     
         Serial.print(NoteVector[i].Name());
         if((i+1)%5 == 0){Serial.println();}
@@ -27,7 +27,7 @@ void setup()
     NoteVector.Sort(SortConfiguration);
     
     
-    for(uint8_t i = 0; i < 100; i++)
+    for(uint8_t i = 0; i < NoteVector.size(); i++)
     {
         Serial.print(NoteVector[i].Name());
         if((i+1)%5 == 0){Serial.println();}

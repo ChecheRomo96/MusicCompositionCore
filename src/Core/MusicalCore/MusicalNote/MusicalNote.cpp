@@ -60,7 +60,7 @@
         	Reference::Frequency = Frequency;
         }
 
-        void MCC_MusicalNote::SetReferenceNote(const Pitch::Letter::LetterType& Letter, const Pitch::AccidentalType& Accidental, const float& Frequency)
+        void MCC_MusicalNote::SetReferenceNote(const Pitch::Letter::LetterType& Letter, const Pitch::Accidental::AccidentalType& Accidental, const float& Frequency)
         {
 
         }
@@ -79,7 +79,7 @@
 			    octave = 0;
 			}
 
-			Note::Note(const Pitch::Letter& Letter, const Pitch::Accidental::AccidentalClass& Accidental, int8_t Octave)
+			Note::Note(const Pitch::Letter& Letter, const Pitch::Accidental& Accidental, int8_t Octave)
 			{
 			    noteData.SetLetter(Letter);
 			    noteData.SetAccidental(Accidental);
@@ -517,15 +517,15 @@
 			const int16_t Note::NotePitch() const
 			{
 			    Pitch::Letter note = noteData.Letter();
-			    Pitch::Accidental::AccidentalClass accidental = noteData.Accidental();
+			    Pitch::Accidental accidental = noteData.Accidental();
 			    
-			    if((note.ID() != Pitch::Letter::InvalidID)||(accidental < Pitch::Accidental::Min)||(accidental > Pitch::Accidental::Max))
+			    if((note.ID() != Pitch::Letter::InvalidID)||(accidental < Pitch::Accidental::MinIterator)||(accidental > Pitch::Accidental::MaxIterator))
 			    {
-			        return MusicalNote::InvalidNotePitch;
+			        return MusicalNote::InvalidPitch;
 			    }
 			    else
 			    {
-		            int16_t note_pitch = MusicalNote::Pitch::NotesArray[note.ID()] + accidental + (octave*12);
+		            int16_t note_pitch = MusicalNote::Pitch::NotesArray[note.ID()] + accidental.ID() + (octave * 12);
 			        
 			        if((note == MusicalNote::Pitch::Letter::B) && (accidental >= MusicalNote::Pitch::Accidental::Sharp)){return note_pitch-12;}
 			        if((note == MusicalNote::Pitch::Letter::A) && (accidental >= MusicalNote::Pitch::Accidental::TripleSharp)){return note_pitch-12;}
@@ -591,12 +591,12 @@
 				///////////////////////////////////////////////////////////////
 				// Accidental
 
-                    void Note::SetAccidental(const Pitch::Accidental::AccidentalClass& src)
+                    void Note::SetAccidental(const Pitch::Accidental& src)
 					{
 						noteData.SetAccidental(src);
 					}
 
-					const Pitch::Accidental::AccidentalClass& Note::Accidental() const
+					const Pitch::Accidental& Note::Accidental() const
 					{
 						return noteData.Accidental();
 					}

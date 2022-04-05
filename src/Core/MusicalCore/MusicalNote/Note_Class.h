@@ -42,7 +42,7 @@
 								Note();
 								
 								Note(const Pitch::PitchClass& _pc, int8_t _octave = 3);
-                                Note(const Pitch::Letter& _letter, const Pitch::Accidental::AccidentalClass& _accidental = Pitch::Accidental::Natural, int8_t _octave = 3);
+                                Note(const Pitch::Letter& _letter, const Pitch::Accidental& _accidental = Pitch::Accidental::Natural, int8_t _octave = 3);
 
 								Note(const Note& source);
 								Note& operator=(const Note& source);
@@ -94,8 +94,8 @@
 									///////////////////////////////////////////////////////////////
 									// Accidental
 										
-										void SetAccidental(const Pitch::Accidental::AccidentalClass& src);
-										const Pitch::Accidental::AccidentalClass& Accidental() const;
+										void SetAccidental(const Pitch::Accidental& src);
+										const Pitch::Accidental& Accidental() const;
 
 										bool Flat();
 										bool Sharp();
@@ -119,7 +119,7 @@
 					extern Note NoteBuffer;
                     extern const Note InvalidNote;
                     
-					static constexpr int16_t InvalidNotePitch = INT16_MAX;
+					static constexpr int16_t InvalidPitch = INT16_MAX;
 					
 					bool operator < (const Note& lhs, const Note& rhs);
 					bool operator <= (const Note& lhs, const Note& rhs);
@@ -144,7 +144,7 @@
        				// Reference Note for computing Frequency
 
                     void SetReferenceNote(const Note& Note, const float& Frequency);
-                    void SetReferenceNote(const Pitch::Letter::LetterType& Letter, const Pitch::AccidentalType& Accidental, const float& Frequency);
+                    void SetReferenceNote(const Pitch::Letter::LetterType& Letter, const Pitch::Accidental::AccidentalType& Accidental, const float& Frequency);
 				}
 			}
 		}

@@ -30,7 +30,7 @@ PitchClass::PitchClass(PitchType token)
     if(token < Pitch::MaxIterator)
     {
         _Letter = Pitch::Letter(token/9);
-        _Accidental = Accidental::AccidentalClass((token%9) - 4);
+        _Accidental = Pitch::Accidental((token%9) - 4);
     }
     else
     {
@@ -44,7 +44,7 @@ PitchClass& PitchClass::operator=(PitchType token)
     if(token < Pitch::MaxIterator)
     {
         _Letter = Pitch::Letter(token/9);
-        _Accidental = Accidental::AccidentalClass((token%9) - 4);
+        _Accidental = Pitch::Accidental((token%9) - 4);
     }
     else
     {
@@ -54,7 +54,7 @@ PitchClass& PitchClass::operator=(PitchType token)
     return (*this);
 }
 
-PitchClass::PitchClass(const Pitch::Letter& note, const Accidental::AccidentalClass& accidental)
+PitchClass::PitchClass(const Pitch::Letter& note, const Pitch::Accidental& accidental)
 {
     _Letter = note;
     _Accidental = accidental;
@@ -308,13 +308,13 @@ PitchClass& PitchClass::operator=(const Pitch::Letter& source)
     return (*this);
 }
 
-PitchClass::PitchClass(const Accidental::AccidentalClass& source)
+PitchClass::PitchClass(const Pitch::Accidental& source)
 {
     _Accidental = source;
     _Letter = Letter::InvalidID;
 }
 
-PitchClass& PitchClass::operator=(const Accidental::AccidentalClass& source)
+PitchClass& PitchClass::operator=(const Pitch::Accidental& source)
 {
     _Accidental = source;
     return(*this);
@@ -339,24 +339,24 @@ const Letter& PitchClass::Letter() const
     return _Letter;
 }
 
-void PitchClass::SetAccidental(const Accidental::AccidentalClass& source)
+void PitchClass::SetAccidental(const Pitch::Accidental& source)
 {
     _Accidental = source;
 }
 
-const Accidental::AccidentalClass& PitchClass::Accidental() const
+const Accidental& PitchClass::Accidental() const
 {
     return _Accidental;
 }
 
 bool PitchClass::Sharp()
 {
-    return _Accidental.Sharp();
+    return _Accidental.AddSharp();
 }
 
 bool PitchClass::Flat()
 {
-    return _Accidental.Flat();
+    return _Accidental.AddFlat();
 }
 
 void PitchClass::Next()

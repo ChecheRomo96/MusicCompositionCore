@@ -18,8 +18,8 @@
 					{
 						namespace AccidentalClass
 						{
-                        int8_t Ascending(const Pitch::Accidental::AccidentalClass& Element, const Pitch::Accidental::AccidentalClass& Pivot);
-                        int8_t Descending(const Pitch::Accidental::AccidentalClass& Element, const Pitch::Accidental::AccidentalClass& Pivot);
+                        int8_t Ascending(const Pitch::Accidental& Element, const Pitch::Accidental& Pivot);
+                        int8_t Descending(const Pitch::Accidental& Element, const Pitch::Accidental& Pivot);
 						}
 					}
 				}

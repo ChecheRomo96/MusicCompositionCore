@@ -131,7 +131,7 @@ const Letter:: LetterType& Letter::ID() const
     return _ID;
 }
 
-MusicCompositionCore::Core::MusicalCore::MusicalNote::Pitch::PitchClass& Letter::GenerateToken(const Accidental::AccidentalClass& source)
+MusicCompositionCore::Core::MusicalCore::MusicalNote::Pitch::PitchClass& Letter::GenerateToken(const Accidental& source)
 {
     PitchClass_Buffer = (*this);
     PitchClass_Buffer = source;

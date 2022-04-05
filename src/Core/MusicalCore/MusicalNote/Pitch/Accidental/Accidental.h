@@ -4,7 +4,6 @@
 	#include <MCC_BuildSettings.h>
 
 	#include "Accidental_Class.h"
-	#include "Accidental_Definitions.h"
 
 
 
