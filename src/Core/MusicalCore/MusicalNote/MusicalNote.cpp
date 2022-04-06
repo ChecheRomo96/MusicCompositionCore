@@ -583,7 +583,7 @@
 					noteData = src;
 				}
 
-				const Pitch& Note::Pitch() const
+				const Pitch& Note::GetPitch() const
 				{
 					return noteData;
 				}

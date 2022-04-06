@@ -89,7 +89,7 @@
 	                            // Pitch
 									
 									void SetPitch(const Pitch& src);
-									const Pitch& Pitch() const;
+									const Pitch& GetPitch() const;
 									
 									///////////////////////////////////////////////////////////////
 									// Accidental
