@@ -94,20 +94,20 @@
 
 			Note::Note(const Note& Source)
 			{
-			    noteData = Source.Pitch();
+			    noteData = Source.GetPitch();
 			    SetOctave(Source.Octave());
 			}
 
 			Note& Note::operator=(const Note& Source)
 			{
-			    noteData = Source.Pitch();
+			    noteData = Source.GetPitch();
 			    SetOctave(Source.Octave());
 			    return (*this);
 			}
 
 			Note::Note(const Note& Source, const MCC_MusicalInterval::Interval& interval)
 			{
-			    noteData = Source.Pitch();
+			    noteData = Source.GetPitch();
 			    SetOctave(Source.Octave());
 			    (*this)+=interval;
 			}
