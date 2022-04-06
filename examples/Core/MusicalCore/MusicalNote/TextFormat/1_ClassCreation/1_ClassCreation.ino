@@ -5,7 +5,7 @@ using namespace MCC_MusicalNote;
 void setup()
 {
     Serial.begin(115200);
-	MCC::Start();
+    MCC::Start();
     
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Create Note Objects
@@ -24,9 +24,9 @@ void setup()
 
         TextFormat::FormatClass myFormat(AccidentalMode, OctaveMode, SpacingMode, NaturalMode);
 
-        Serial.print("Note A: "); Serial.print(Flash::GetName(NoteA, myFormat)); << std::endl;
-        Serial.print("Note B: "); Serial.print(Flash::GetName(NoteB, myFormat)); << std::endl;
-        Serial.print("Note C: "); Serial.print(Flash::GetName(NoteC, myFormat)); << std::endl;
+        Serial.print("Note A: "); Serial.print(Flash::GetName(NoteA, myFormat)); Serial.println();
+        Serial.print("Note B: "); Serial.print(Flash::GetName(NoteB, myFormat)); Serial.println();
+        Serial.print("Note C: "); Serial.print(Flash::GetName(NoteC, myFormat)); Serial.println();
         Serial.println();
     //
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -39,14 +39,14 @@ void setup()
 
         myFormat = TextFormat::FormatClass(AccidentalMode, OctaveMode, SpacingMode, NaturalMode);
 
-        Serial.print("Note A: "); Serial.print(Flash::GetName(NoteA, myFormat)); << std::endl;
-        Serial.print("Note B: "); Serial.print(Flash::GetName(NoteB, myFormat)); << std::endl;
-        Serial.print("Note C: "); Serial.print(Flash::GetName(NoteC, myFormat)); << std::endl;
+        Serial.print("Note A: "); Serial.print(Flash::GetName(NoteA, myFormat)); Serial.println();
+        Serial.print("Note B: "); Serial.print(Flash::GetName(NoteB, myFormat)); Serial.println();
+        Serial.print("Note C: "); Serial.print(Flash::GetName(NoteC, myFormat)); Serial.println();
         Serial.println();
     //
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
-	return 0;
+    return 0;
 }
 
 void loop()
