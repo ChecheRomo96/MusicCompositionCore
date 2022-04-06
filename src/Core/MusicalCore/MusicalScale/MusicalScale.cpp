@@ -66,12 +66,12 @@ CPString::string MusicCompositionCore::Core::MusicalCore::MusicalScale::DefaultN
         {
             _Notes.resize(intervals.size() + 1);
             
-            _Notes[0] = root.Pitch();
+            _Notes[0] = root.GetPitch();
             _RootOffset = 0;
             
             for(uint8_t i = 0; i < intervals.size(); i++)
             {
-                _Notes[1 + i] = (MCC_MusicalNote::Note(_Notes[0],intervals[i]).Pitch());
+                _Notes[1 + i] = (MCC_MusicalNote::Note(_Notes[0],intervals[i]).GetPitch());
             }
             
             _SortNotes();
@@ -90,7 +90,7 @@ CPString::string MusicCompositionCore::Core::MusicalCore::MusicalScale::DefaultN
             
             for(uint8_t i = 0; i < intervals.size(); i++)
             {
-                _Notes[1 + i] = (MCC_MusicalNote::Note(_Notes[0],intervals[i]).Pitch());
+                _Notes[1 + i] = (MCC_MusicalNote::Note(_Notes[0],intervals[i]).GetPitch());
             }
             
             _SortNotes();
@@ -109,7 +109,7 @@ CPString::string MusicCompositionCore::Core::MusicalCore::MusicalScale::DefaultN
             
             for(uint8_t i = 0; i < intervals_size; i++)
             {
-                _Notes[1 + i] = (MCC_MusicalNote::Note(_Notes[0],intervals[i]).Pitch());
+                _Notes[1 + i] = (MCC_MusicalNote::Note(_Notes[0],intervals[i]).GetPitch());
             }
             
             _SortNotes();
@@ -201,7 +201,7 @@ CPString::string MusicCompositionCore::Core::MusicalCore::MusicalScale::DefaultN
 
                 for(uint8_t i = 0; i < _Notes.size(); i++)
                 {
-                    if(_Notes[i] == root.Pitch()){_RootOffset = i;}
+                    if(_Notes[i] == root.GetPitch()){_RootOffset = i;}
                 }
             }
         //
@@ -250,7 +250,7 @@ CPString::string MusicCompositionCore::Core::MusicalCore::MusicalScale::DefaultN
             
             MCC_MusicalScale::Scale::Scale(const MCC_MusicalNote::Note &root, const Flash::Container_Mapping& source): _Data(0)
             {
-                (*this) = Scale(root.Pitch(),source);
+                (*this) = Scale(root.GetPitch(),source);
             }
         //
         //////////////////////////////////////////////////////////////////////////////////////////////
@@ -287,7 +287,7 @@ CPString::string MusicCompositionCore::Core::MusicalCore::MusicalScale::DefaultN
 
             MCC_MusicalScale::Scale::Scale(const MCC_MusicalNote::Note &root, const Flash::Container* source, uint8_t ID): _Data(0)
             {
-                (*this) = Scale(root.Pitch(),source,ID);
+                (*this) = Scale(root.GetPitch(),source,ID);
             }
 
             MCC_MusicalScale::Scale::Scale(const MCC_MusicalNote::Pitch &root, uint8_t ID): _Data(0)
@@ -305,7 +305,7 @@ CPString::string MusicCompositionCore::Core::MusicalCore::MusicalScale::DefaultN
 
             MCC_MusicalScale::Scale::Scale(const MCC_MusicalNote::Note &root, uint8_t ID): _Data(0)
             {
-                (*this) = Scale(ID,root.Pitch());
+                (*this) = Scale(ID,root.GetPitch());
             }
         //
         //////////////////////////////////////////////////////////////////////////////////////////////
@@ -462,7 +462,7 @@ CPString::string MusicCompositionCore::Core::MusicalCore::MusicalScale::DefaultN
             {
                 for(uint8_t i = 0; i < size(); i++)
                 {
-                    if(Note(i).Pitch() == root)
+                    if(Note(i).GetPitch() == root)
                     {
                         SetRootOffset(i);
                     }
@@ -472,7 +472,7 @@ CPString::string MusicCompositionCore::Core::MusicalCore::MusicalScale::DefaultN
 
         void MCC_MusicalScale::Scale::SetRootNote(const MCC_MusicalNote::Note& root)
         {
-            SetRootNote(root.Pitch());
+            SetRootNote(root.GetPitch());
         }
         
         const MCC_MusicalNote::Note MCC_MusicalScale::Scale::RootNote() const
@@ -498,7 +498,7 @@ CPString::string MusicCompositionCore::Core::MusicalCore::MusicalScale::DefaultN
         {
             for(uint8_t i = 0; i < size(); i++)
             {
-                if(_Notes[i] == newRoot.Pitch())
+                if(_Notes[i] == newRoot.GetPitch())
                 {
                     SetRootOffset(i);
                 }
