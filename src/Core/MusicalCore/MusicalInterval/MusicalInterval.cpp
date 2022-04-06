@@ -51,64 +51,64 @@
         _Number = 0;
         if(source_a.NotePitch() == source_b.NotePitch())
         {
-            // Pitch(A) == Pitch(B)
+            // GetPitch(A) == GetPitch(B)
             
-            if(source_a.Pitch().GetLetter().ID() == source_b.Pitch().GetLetter().ID())
+            if(source_a.GetPitch().GetLetter().ID() == source_b.GetPitch().GetLetter().ID())
             {
                 // Note(A) == Note(B)
                 _Number = 0;
             }
-            else if(source_a.Pitch().GetLetter().ID() < source_b.Pitch().GetLetter().ID())
+            else if(source_a.GetPitch().GetLetter().ID() < source_b.GetPitch().GetLetter().ID())
             {
                 // Note(A) < Note(B)
-                _Number = source_b.Pitch().GetLetter().ID() - source_a.Pitch().GetLetter().ID();
+                _Number = source_b.GetPitch().GetLetter().ID() - source_a.GetPitch().GetLetter().ID();
             }
             else
             {
                 // Note(A) > Note(B)
-                _Number = 7 + source_b.Pitch().GetLetter().ID() - source_a.Pitch().GetLetter().ID();
+                _Number = 7 + source_b.GetPitch().GetLetter().ID() - source_a.GetPitch().GetLetter().ID();
             }
         }
         else if(source_a.NotePitch() < source_b.NotePitch())
         {
-            // Pitch(A) < Pitch(B)
+            // GetPitch(A) < GetPitch(B)
             int OctaveOffsetting = 7 * ((source_b.NotePitch() - source_a.NotePitch())/12);
             
-            if(source_a.Pitch().GetLetter().ID() == source_b.Pitch().GetLetter().ID())
+            if(source_a.GetPitch().GetLetter().ID() == source_b.GetPitch().GetLetter().ID())
             {
                 // Note(A) == Note(B)
                 _Number = OctaveOffsetting;
             }
-            else if(source_a.Pitch().GetLetter().ID() < source_b.Pitch().GetLetter().ID())
+            else if(source_a.GetPitch().GetLetter().ID() < source_b.GetPitch().GetLetter().ID())
             {
                 // Note(A) < Note(B)
-                _Number = OctaveOffsetting + source_b.Pitch().GetLetter().ID() - source_a.Pitch().GetLetter().ID();
+                _Number = OctaveOffsetting + source_b.GetPitch().GetLetter().ID() - source_a.GetPitch().GetLetter().ID();
             }
             else
             {
                 // Note(A) > Note(B)
-                _Number = 7 + OctaveOffsetting + source_b.Pitch().GetLetter().ID() - source_a.Pitch().GetLetter().ID();
+                _Number = 7 + OctaveOffsetting + source_b.GetPitch().GetLetter().ID() - source_a.GetPitch().GetLetter().ID();
             }
             
         }
         else
         {
-            // Pitch(A) > Pitch(B)
+            // GetPitch(A) > GetPitch(B)
             
-            if(source_a.Pitch().GetLetter().ID() == source_b.Pitch().GetLetter().ID())
+            if(source_a.GetPitch().GetLetter().ID() == source_b.GetPitch().GetLetter().ID())
             {
                 // Note(A) == Note(B)
                 _Number = 7;
             }
-            else if(source_a.Pitch().GetLetter().ID() < source_b.Pitch().GetLetter().ID())
+            else if(source_a.GetPitch().GetLetter().ID() < source_b.GetPitch().GetLetter().ID())
             {
                 // Note(A) < Note(B)
-                _Number = source_b.Pitch().GetLetter().ID() - source_a.Pitch().GetLetter().ID();
+                _Number = source_b.GetPitch().GetLetter().ID() - source_a.GetPitch().GetLetter().ID();
             }
             else
             {
                 // Note(A) > Note(B)
-                _Number = 7 - (source_a.Pitch().GetLetter().ID() - source_b.Pitch().GetLetter().ID());
+                _Number = 7 - (source_a.GetPitch().GetLetter().ID() - source_b.GetPitch().GetLetter().ID());
             }
         }
 
