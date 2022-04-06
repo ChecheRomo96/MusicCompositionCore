@@ -13,17 +13,20 @@ int main()
     const char* Text = GetName( MCC_MusicalNote::Pitch::Letter::C, MCC_MusicalNote::Pitch::Accidental::Sharp, 3, myFormat );
     std::cout<<Text<<std::endl;
 
+    myFormat.Octave_Disabled();
+
+    Text = GetName( MCC_MusicalNote::Pitch::Letter::C, MCC_MusicalNote::Pitch::Accidental::Sharp, 3, myFormat );
+    std::cout<<Text<<std::endl;
+
+    myFormat.Octave_Enabled();
+    myFormat.Accidental_Symbol();
     myFormat.Spacing_Enabled();
 
     Text = GetName( MCC_MusicalNote::Pitch::Letter::C, MCC_MusicalNote::Pitch::Accidental::Sharp, 3, myFormat );
     std::cout<<Text<<std::endl;
 
     myFormat.Accidental_Text();
-
-    Text = GetName( MCC_MusicalNote::Pitch::Letter::C, MCC_MusicalNote::Pitch::Accidental::Sharp, 3, myFormat );
-    std::cout<<Text<<std::endl;
-
-    myFormat.Octave_Disabled();
+    myFormat.Octave_Enabled();
     myFormat.Spacing_Enabled();
 
     Text = GetName( MCC_MusicalNote::Pitch::Letter::C, MCC_MusicalNote::Pitch::Accidental::Sharp, 3, myFormat );

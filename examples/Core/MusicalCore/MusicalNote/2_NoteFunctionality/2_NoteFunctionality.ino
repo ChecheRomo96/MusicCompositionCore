@@ -2,8 +2,10 @@
 
 using namespace MCC_MusicalNote;
 
-void setup(int argc, const char * argv[])
+void setup()
 {   
+  MCC::Start();
+  Serial.begin(115200);
     /////////////////////////////////////////////////////////////////////////////////////////////////////////
     //
         Serial.println("- - - - - - - - - - - - - - - - - - - - - - - - - - - - -");
@@ -45,15 +47,15 @@ void setup(int argc, const char * argv[])
             myNote.SetPitch(Pitch::C_Natural);
             myNote.SetOctave(3);
         
-            Serial.print(myNote.Name());
+            Serial.println(myNote.Name());
         
             myNote = Note(Pitch::C_Natural,3);
         
-            Serial.print(myNote.Name());
+            Serial.println(myNote.Name());
         
             myNote = Note(Pitch::Letter::C,Pitch::Accidental::Natural,3);
         
-            Serial.print(myNote.Name());
+            Serial.println(myNote.Name());
         
         }
     //
@@ -86,7 +88,7 @@ void setup(int argc, const char * argv[])
             else if (NoteA == NoteB) { Serial.print(NoteA.Name()); Serial.print(" == "); Serial.print(NoteB.Name()); Serial.println("."); }
         
             //////////////////////////////////////////////////////////////////////////////////////////////
-            std::cout<<std::endl;
+            Serial.println();
             //////////////////////////////////////////////////////////////////////////////////////////////
         
             SetCompareMode(CompareMode::Pitch);

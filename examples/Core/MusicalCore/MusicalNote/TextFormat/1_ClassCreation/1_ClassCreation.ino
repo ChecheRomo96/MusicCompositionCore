@@ -1,10 +1,10 @@
-#include <iostream>
 #include <MCC.h>
 
 using namespace MCC_MusicalNote;
 
-int main()
+void setup()
 {
+    Serial.begin(115200);
 	MCC::Start();
     
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -24,10 +24,10 @@ int main()
 
         TextFormat::FormatClass myFormat(AccidentalMode, OctaveMode, SpacingMode, NaturalMode);
 
-        std::cout << "Note A: " << Flash::GetName(NoteA, myFormat) << std::endl;
-        std::cout << "Note B: " << Flash::GetName(NoteB, myFormat) << std::endl;
-        std::cout << "Note C: " << Flash::GetName(NoteC, myFormat) << std::endl;
-        std::cout << std::endl;
+        Serial.print("Note A: "); Serial.print(Flash::GetName(NoteA, myFormat)); << std::endl;
+        Serial.print("Note B: "); Serial.print(Flash::GetName(NoteB, myFormat)); << std::endl;
+        Serial.print("Note C: "); Serial.print(Flash::GetName(NoteC, myFormat)); << std::endl;
+        Serial.println();
     //
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Create TextFormat::FormatClass Object and set it to print as Note Symbol
@@ -39,12 +39,17 @@ int main()
 
         myFormat = TextFormat::FormatClass(AccidentalMode, OctaveMode, SpacingMode, NaturalMode);
 
-        std::cout << "Note A: " << Flash::GetName(NoteA, myFormat) << std::endl;
-        std::cout << "Note B: " << Flash::GetName(NoteB, myFormat) << std::endl;
-        std::cout << "Note C: " << Flash::GetName(NoteC, myFormat) << std::endl;
-        std::cout << std::endl;
+        Serial.print("Note A: "); Serial.print(Flash::GetName(NoteA, myFormat)); << std::endl;
+        Serial.print("Note B: "); Serial.print(Flash::GetName(NoteB, myFormat)); << std::endl;
+        Serial.print("Note C: "); Serial.print(Flash::GetName(NoteC, myFormat)); << std::endl;
+        Serial.println();
     //
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
 	return 0;
+}
+
+void loop()
+{
+
 }

@@ -11,33 +11,53 @@ int main()
     MCC_MusicalNote::TextFormat::FormatClass myFormat;
     myFormat.Accidental_Symbol();
 
-    const char* Text = GetAccidentalText(MCC_MusicalNote::Pitch::Accidental::Flat, myFormat);
-    std::cout << "Accidental Symbol: " << Text << std::endl;
+    const char* Text = GetAccidentalText(MCC_MusicalNote::Pitch::Accidental::DoubleFlat, myFormat);
+    std::cout << "Accidental Symbol: " << Text;
+
+    myFormat.Accidental_Text();
+
+    Text = GetAccidentalText(MCC_MusicalNote::Pitch::Accidental::DoubleFlat, myFormat);
+    std::cout << ", Accidental Text: " << Text << std::endl;
+
+    myFormat.Accidental_Symbol();
+
+    Text = GetAccidentalText(MCC_MusicalNote::Pitch::Accidental::Flat, myFormat);
+    std::cout << "Accidental Symbol: " << Text;
 
     myFormat.Accidental_Text();
 
     Text = GetAccidentalText(MCC_MusicalNote::Pitch::Accidental::Flat, myFormat);
-    std::cout << "Accidental Text: " << Text << std::endl;
+    std::cout << " , Accidental Text: " << Text << std::endl;
 
     myFormat.Accidental_Symbol();
 
     Text = GetAccidentalText(MCC_MusicalNote::Pitch::Accidental::Natural, myFormat);
-    std::cout << "Accidental Symbol: " << Text << std::endl;
+    std::cout << "Accidental Symbol: " << Text;
 
     myFormat.Accidental_Text();
 
     Text = GetAccidentalText(MCC_MusicalNote::Pitch::Accidental::Natural, myFormat);
-    std::cout << "Accidental Text: " << Text << std::endl;
+    std::cout << "  , Accidental Text: " << Text << std::endl;
 
     myFormat.Accidental_Symbol();
 
     Text = GetAccidentalText(MCC_MusicalNote::Pitch::Accidental::Sharp, myFormat);
-    std::cout << "Accidental Symbol: " << Text << std::endl;
+    std::cout << "Accidental Symbol: " << Text;
 
     myFormat.Accidental_Text();
 
     Text = GetAccidentalText(MCC_MusicalNote::Pitch::Accidental::Sharp, myFormat);
-    std::cout << "Accidental Text: " << Text << std::endl;
+    std::cout << " , Accidental Text: " << Text << std::endl;
+
+    myFormat.Accidental_Symbol();
+
+    Text = GetAccidentalText(MCC_MusicalNote::Pitch::Accidental::DoubleSharp, myFormat);
+    std::cout << "Accidental Symbol: " << Text;
+
+    myFormat.Accidental_Text();
+
+    Text = GetAccidentalText(MCC_MusicalNote::Pitch::Accidental::DoubleSharp, myFormat);
+    std::cout << ", Accidental Text: " << Text << std::endl;
     
     return 0;
 }

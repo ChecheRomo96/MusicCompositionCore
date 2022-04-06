@@ -1,32 +1,32 @@
 #include <MCC.h>
 
-using namespace MCC_MusicalNoteFlash;
+using namespace MCC_MusicalNote;
 
 
 void setup()
 {
-	Serial.begin(115200);
+    Serial.begin(115200);
 
-	MCC::Start();
+    MCC::Start();
     
     ///////////////////////////////////////////////////////////////////////////////////////////
     // MusicalNote::Pitch::PitchClass( Letter::LetterClass, Accidental::AccidentalClass )
 
-        PitchClass Pitch( Letter::C, Accidental::Natural);
-        Serial.println(Pitch.Name());
+        Pitch myPitch( Pitch::Letter::C, Pitch::Accidental::Natural);
+        Serial.println(myPitch.Name());
     //
     ///////////////////////////////////////////////////////////////////////////////////////////
     // Pitch::PitchClass( Pitch::Letter::LetterClass, Pitch::Accidental::AccidentalClass )
 
-        Pitch = PitchClass( Letter::C, Accidental::Sharp );
-        Serial.println(Pitch.Name());
+        myPitch = Pitch( Pitch::Letter::C, Pitch::Accidental::Sharp );
+        Serial.println(myPitch.Name());
     //
     ///////////////////////////////////////////////////////////////////////////////////////////
     // Class Modifiers
 
-        Pitch.SetLetter(Letter::B);
-        Pitch.SetAccidental(Accidental::Flat); 
-        Serial.println(Pitch.Name());
+        myPitch.SetLetter(Pitch::Letter::B);
+        myPitch.SetAccidental(Pitch::Accidental::Flat); 
+        Serial.println(myPitch.Name());
     //
     ///////////////////////////////////////////////////////////////////////////////////////////
 
@@ -34,5 +34,5 @@ void setup()
 
 void loop()
 {
-	
+    
 }
