@@ -214,7 +214,7 @@ void Pitch::Accidental::Set_ID(const AccidentalType& source)
 	}
 	else
 	{
-		_ID = InvalidPitch;
+		_ID = Accidental::InvalidID;
 	}
 }
 

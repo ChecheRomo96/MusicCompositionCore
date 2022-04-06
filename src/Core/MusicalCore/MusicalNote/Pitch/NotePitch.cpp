@@ -449,12 +449,12 @@ char* Pitch::Name(char* buff, MusicalNote::TextFormat::FormatClass& Format)const
         {
             uint8_t space_mode = Format.SpacingMode();
             Format.Spacing_Enabled();
-            Flash::GetName(buff,MusicalNote::Pitch::Pitch(*this),Format);
+            Flash::GetName(buff,MusicalNote::Pitch(*this),Format);
             Format.SetSpacingMode(space_mode);
         }
         else
         {
-            Flash::GetName(buff,MusicalNote::Pitch::Pitch(*this),Format);
+            Flash::GetName(buff,MusicalNote::Pitch(*this),Format);
         }
     }
     

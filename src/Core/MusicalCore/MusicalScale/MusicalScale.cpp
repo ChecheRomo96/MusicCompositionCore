@@ -31,7 +31,7 @@ CPString::string MusicCompositionCore::Core::MusicalCore::MusicalScale::DefaultN
             
             for(uint8_t i = 0; i < Notes.size(); i++)
             {
-                _Notes[i] = Notes[i].Pitch();
+                _Notes[i] = Notes[i].GetPitch();
             }
             
             _SortNotes();
