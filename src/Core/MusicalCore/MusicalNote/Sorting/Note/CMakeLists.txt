@@ -2,10 +2,10 @@
 set( HEADERS_LIST "" )
 
 # Append Sources
-list( APPEND MCC_SOURCES "${CMAKE_CURRENT_LIST_DIR}/AccidentalClass_Sorting.cpp")
+list( APPEND MCC_SOURCES "${CMAKE_CURRENT_LIST_DIR}/NoteSorting.cpp")
 
 # Append Headers
-list( APPEND HEADERS_LIST "${CMAKE_CURRENT_LIST_DIR}/AccidentalClass_Sorting.h")
+list( APPEND HEADERS_LIST "${CMAKE_CURRENT_LIST_DIR}/NoteSorting.h")
 
 # Refresh Sources List at PARENT_SCOPE
 set(MCC_SOURCES "${MCC_SOURCES}" PARENT_SCOPE)
@@ -15,7 +15,7 @@ if(INSTALL STREQUAL "ON")
 
 	install(
 		FILES ${HEADERS_LIST} 
-		DESTINATION ${CMAKE_INSTALL_PREFIX}/include/MCC/Core/MusicalCore/MusicalNote/Sorting/AccidentalClass
+		DESTINATION ${CMAKE_INSTALL_PREFIX}/include/MCC/Core/MusicalCore/MusicalNote/Sorting/Note
 	)
 
 endif()

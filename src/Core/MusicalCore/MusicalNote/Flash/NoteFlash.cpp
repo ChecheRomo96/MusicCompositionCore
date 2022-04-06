@@ -275,7 +275,7 @@ char Flash::Buffer[24];
 				strcpy_P(buff, (PGM_P)pgm_read_word(&(AccidentalNames[Accidental + 4][Format.AccidentalMode()])));
 	        }
 	    #else
-	        if((Accidental == Pitch::Accidental::Natural) && (Format.NaturalMode() == TextFormat::NaturalMode::Enabled) && (Format.AccidentalMode() == TextFormat::AccidentalMode::Symbol))
+	        if(((Accidental == Pitch::Accidental::Natural) && (Format.NaturalMode() == TextFormat::NaturalMode::Enabled) && (Format.AccidentalMode() == TextFormat::AccidentalMode::Symbol)) || (Accidental == Pitch::Accidental::InvalidID) )
 	        {
 	        	buff[0] = '\0';
 	        }

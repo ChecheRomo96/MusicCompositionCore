@@ -1,4 +1,4 @@
-#include "NoteClass_Sorting.h"
+#include "NoteSorting.h"
 
 using namespace MusicCompositionCore::Core::MusicalCore::MusicalNote;
 

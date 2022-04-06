@@ -7,12 +7,12 @@ int main()
 {
     MCC::Start();
         
-    CPVector::vector<MCC_MusicalNote::Note> NoteVector;
-    CPVector::Sorting::SortingArray<MCC_MusicalNote::Note> SortConfiguration;
+    CPVector::vector<MCC_MusicalNote::Pitch::Accidental> NoteVector;
+    CPVector::Sorting::SortingArray<MCC_MusicalNote::Pitch::Accidental> SortConfiguration;
 
     for(uint8_t i = 0; i < 100; i++)
     {
-        NoteVector.push_back( MCC_MusicalNote::Note(Pitch(rand()%(MCC_MusicalNote::Pitch::MaxIterator+1)), rand() % 4));
+        NoteVector.push_back( Pitch::Accidental( Pitch::Accidental::MinIterator + (rand()%(Pitch::Accidental::MaxIterator-Pitch::Accidental::MinIterator+1))  ));
         
         std::cout<<NoteVector[i].Name();
         if((i+1)%5 == 0){std::cout<<std::endl;}
@@ -20,9 +20,7 @@ int main()
         
     } std::cout<<std::endl;
     
-    SortConfiguration.Append(MCC_MusicalNote::Sorting::Note::Letter_Ascending);
-    SortConfiguration.Append(MCC_MusicalNote::Sorting::Note::Accidental_Ascending);
-    SortConfiguration.Append(MCC_MusicalNote::Sorting::Note::Octave_Ascending);
+    SortConfiguration.Append(Sorting::Accidental::Ascending);
     
     NoteVector.Sort(SortConfiguration);
     

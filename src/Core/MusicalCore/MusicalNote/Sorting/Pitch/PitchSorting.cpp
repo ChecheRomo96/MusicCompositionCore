@@ -1,4 +1,4 @@
-#include "PitchClass_Sorting.h"
+#include "PitchSorting.h"
 
 using namespace MusicCompositionCore::Core::MusicalCore::MusicalNote;
 

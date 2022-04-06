@@ -173,6 +173,9 @@
                                                 friend bool operator != (const LetterType& lhs, const Letter& rhs);
                                                 friend bool operator != (const Letter& lhs, const LetterType& rhs);
 
+                                                char* Name(char* buff);
+                                                const char* Name() const;
+                                                
                                                 const LetterType& ID() const;
                                                 operator const LetterType() const;
 
@@ -276,6 +279,9 @@
                                             
                                                 bool AddSharp();
                                                 bool AddFlat();
+
+                                                int8_t Sort_Ascending(const Pitch::Accidental& Element, const Pitch::Accidental& Pivot);
+                                                int8_t Sort_Descending(const Pitch::Accidental& Element, const Pitch::Accidental& Pivot);
                                     };
 
                                 private:

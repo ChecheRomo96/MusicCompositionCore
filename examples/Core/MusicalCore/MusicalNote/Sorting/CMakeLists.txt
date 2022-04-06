@@ -1,1 +1,4 @@
 add_subdirectory(1_Notes)
+add_subdirectory(2_Pitches)
+add_subdirectory(3_Letters)
+add_subdirectory(4_Accidentals)

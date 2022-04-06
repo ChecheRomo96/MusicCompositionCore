@@ -1,4 +1,5 @@
 #include "NotePitch_Class.h"
+#include "../Flash/NoteFlash.h"
 
 using namespace MusicCompositionCore::Core::MusicalCore::MusicalNote;
 
@@ -122,6 +123,17 @@ bool MusicCompositionCore::Core::MusicalCore::MusicalNote::operator != (const Pi
 {
     if(lhs.ID() == Pitch::Letter(rhs).ID()){return 0;}
     return 1;
+}
+
+
+char* Pitch::Letter::Name(char* buff)
+{
+    return MusicalNote::Flash::GetLetterText(buff,*this);
+}
+
+const char* Pitch::Letter::Name() const
+{
+    return MusicalNote::Flash::GetLetterText(*this);
 }
 
 const Pitch::Letter::LetterType& Pitch::Letter::ID() const

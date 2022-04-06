@@ -11,7 +11,7 @@ void setup()
     CPVector::vector<MCC_MusicalNote::Note> NoteVector;
     CPVector::Sorting::SortingArray<MCC_MusicalNote::Note> SortConfiguration;
 
-    for(uint8_t i = 0; i < 100; i++)
+    for(uint8_t i = 0; i < 40; i++)
     {
         NoteVector.push_back(MCC_MusicalNote::Note(PitchClass(rand()%(MCC_MusicalNote::Pitch::MaxIterator+1)), (rand()%3) ));
     
@@ -26,13 +26,14 @@ void setup()
     
     NoteVector.Sort(SortConfiguration);
     
-    
     for(uint8_t i = 0; i < NoteVector.size(); i++)
     {
         Serial.print(NoteVector[i].Name());
         if((i+1)%5 == 0){Serial.println();}
         else if(i<99){Serial.print(", ");}
     } Serial.println();
+
+    MCC_MusicalNote::Sort
 }
 
 void loop()

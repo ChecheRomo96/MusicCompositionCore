@@ -1,0 +1,2 @@
+add_executable( MCC_MusicalNote_Sorting_Letters main.cpp )
+target_link_libraries( MCC_MusicalNote_Sorting_Letters MCC )

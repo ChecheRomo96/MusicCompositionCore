@@ -1,6 +1,7 @@
 
 #include "NotePitch_Class.h"
 #include "../Flash/NoteFlash.h"
+#include <CPVector.h>
 
 using namespace MusicCompositionCore::Core::MusicalCore::MusicalNote;
 

@@ -5,10 +5,10 @@ set( HEADERS_LIST "" )
 list( APPEND HEADERS_LIST "${CMAKE_CURRENT_LIST_DIR}/MusicalNote_Sorting.h")
 
 # Add Subdirectories
-add_subdirectory(AccidentalClass)
-add_subdirectory(LetterClass)
-add_subdirectory(NoteClass)
-add_subdirectory(PitchClass)
+add_subdirectory(Note)
+add_subdirectory(Pitch)
+add_subdirectory(Accidental)
+add_subdirectory(Letter)
 
 # Refresh Sources List at PARENT_SCOPE
 set(MCC_SOURCES "${MCC_SOURCES}" PARENT_SCOPE)

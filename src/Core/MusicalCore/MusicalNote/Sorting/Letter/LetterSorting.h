@@ -4,7 +4,7 @@
 	#include <MCC_BuildSettings.h>
 	#include <CPVector.h>
 	
-	#include "../../Note_Class.h"
+	#include "../../Pitch/NotePitch.h"
 
 	namespace MusicCompositionCore
 	{
@@ -16,7 +16,7 @@
 				{
 					namespace Sorting
 					{
-						namespace LetterClass
+						namespace Letter
 						{
                         int8_t Ascending(const Pitch::Letter& Element, const Pitch::Letter& Pivot);
                         int8_t Descending(const Pitch::Letter& Element, const Pitch::Letter& Pivot);
