@@ -4,7 +4,7 @@ using namespace MCC_MusicalNote;
 
 void setup()
 {
-	MCC::Start();
+    MCC::Start();
     Serial.begin(115200);
 
     ///////////////////////////////////////////////////////////////////////////////////////////
@@ -17,8 +17,8 @@ void setup()
     // Pitch::PitchClass( Pitch::Letter::LetterClass, Pitch::Accidental::AccidentalClass )
     // MusicalNote::Note( PitchClass, Octave )
 
-        auto Pitch = Pitch::PitchClass( Pitch::Letter::C, Pitch::Accidental::Natural );
-        myNote = Note( Pitch ); 
+        auto myPitch = Pitch( Pitch::Letter::C, Pitch::Accidental::Natural );
+        myNote = Note( myPitch ); 
         Serial.println( myNote.Name() );
     //
     ///////////////////////////////////////////////////////////////////////////////////////////
@@ -29,8 +29,8 @@ void setup()
 
         auto accidental = Pitch::Accidental::Flat;
         auto letter = Pitch::Letter::B;
-        Pitch = Pitch::PitchClass( letter, accidental );
-        myNote = Note( Pitch, 1 );
+        myPitch = Pitch( letter, accidental );
+        myNote = Note( myPitch, 1 );
         Serial.println( myNote.Name() );
     //
     ///////////////////////////////////////////////////////////////////////////////////////////

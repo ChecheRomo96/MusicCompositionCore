@@ -27,8 +27,8 @@ int main()
     // Pitch::PitchClass( LetterType, AccidentalType )
     // MusicalNote::Note( PitchClass, Octave )
     
-        Pitch::Letter::LetterType letter = Pitch::Letter::B;
-        Pitch::Accidental::AccidentalType accidental = Pitch::Accidental::Flat;
+        auto letter = Pitch::Letter::B;
+        auto accidental = Pitch::Accidental::Flat;
         myPitch = Pitch( letter, accidental );
         myNote = Note(myPitch, 1 );
         std::cout<<myNote.Name()<<std::endl;
