@@ -6,7 +6,7 @@ using namespace MCC_MusicalNote::TextFormat;
 void setup()
 {
     Serial.begin(115200);
-	MCC::Start();
+    MCC::Start();
     
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Create Note Objects
@@ -20,10 +20,12 @@ void setup()
 
         uint8_t FormatData = 0; 
 
-        FormatData |= AccidentalMode::Symbol_Mask;
+        FormatData |= AccidentalMode::Text_Mask;
         FormatData |= OctaveMode::Disabled_Mask;
         FormatData |= SpacingMode::Disabled_Mask;
         FormatData |= NaturalMode::Enabled_Mask;
+        Serial.print("FormatData: ");
+        Serial.println(FormatData,2);
 
         TextFormat::FormatClass myFormat(FormatData);
 
@@ -41,6 +43,8 @@ void setup()
         FormatData |= OctaveMode::Enabled_Mask;
         FormatData |= SpacingMode::Enabled_Mask;
         FormatData |= NaturalMode::Enabled_Mask;
+        Serial.print("FormatData: ");
+        Serial.println(FormatData,2);
 
         myFormat = TextFormat::FormatClass(FormatData);
 
@@ -58,6 +62,8 @@ void setup()
         FormatData |= OctaveMode::Enabled_Mask;
         FormatData |= SpacingMode::Enabled_Mask;
         FormatData |= NaturalMode::Enabled_Mask;
+        Serial.print("FormatData: ");
+        Serial.println(FormatData,2);
 
         myFormat = TextFormat::FormatClass(FormatData);
 
@@ -76,6 +82,8 @@ void setup()
         FormatData |= OctaveMode::Enabled_Mask;
         FormatData |= SpacingMode::Justified_Mask;
         FormatData |= NaturalMode::Enabled_Mask;
+        Serial.print("FormatData: ");
+        Serial.println(FormatData,2);
 
         myFormat = TextFormat::FormatClass(FormatData);
 
@@ -87,7 +95,7 @@ void setup()
     //
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
-	return 0;
+    return 0;
 }
 
 void loop()
