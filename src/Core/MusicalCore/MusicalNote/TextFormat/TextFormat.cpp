@@ -35,7 +35,7 @@ using namespace MusicCompositionCore::Core::MusicalCore::MusicalNote;
 
 	TextFormat::FormatClass::FormatClass(uint8_t newData)
 	{
-	    data = (newData & 0x0F);
+	    data = newData;
 	}
 
 	TextFormat::FormatClass::FormatClass(bool AccidentalMode, bool OctaveEnabled, uint8_t SpacingMode, bool NaturalMode)
