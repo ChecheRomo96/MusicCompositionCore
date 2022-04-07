@@ -55,7 +55,7 @@
 							static constexpr bool Disabled = 1;
 							static constexpr bool Enabled = 0;
 
-							static constexpr uint8_t Disabled_Mask = 0b000010000;
+							static constexpr uint8_t Disabled_Mask = 0b00010000;
 							static constexpr uint8_t Enabled_Mask = 0;
 						}
 					}
