@@ -1,0 +1,2 @@
+add_executable(MCC_MusicalNote_TextFormat_DefaultFormat main.cpp)
+target_link_libraries(MCC_MusicalNote_TextFormat_DefaultFormat MCC)
