@@ -33,9 +33,9 @@ using namespace MusicCompositionCore::Core::MusicalCore::MusicalNote;
 		data = source.RawData();
 	}
 
-	TextFormat::FormatClass::FormatClass(uint8_t data)
+	TextFormat::FormatClass::FormatClass(uint8_t newData)
 	{
-	    data = (data & 0x0F);
+	    data = (newData & 0x0F);
 	}
 
 	TextFormat::FormatClass::FormatClass(bool AccidentalMode, bool OctaveEnabled, uint8_t SpacingMode, bool NaturalMode)
