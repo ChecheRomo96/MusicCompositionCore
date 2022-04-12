@@ -19,6 +19,7 @@
                 namespace MusicalScale
                 {
                     extern CPString::string DefaultName;
+                    extern CPString::string NameBuffer;
                     
                     namespace Flash
                     {
@@ -57,13 +58,14 @@
                                 Scale(const MCC_MusicalNote::Pitch &root, const CPVector::vector<MCC_MusicalInterval::Interval> &intervals, CPString::string& name = DefaultName);
                                 Scale(const MCC_MusicalNote::Pitch &root, const MCC_MusicalInterval::Interval* intervals, uint8_t size, CPString::string& name = DefaultName);
                                 
-                                Scale(uint8_t root, const Flash::Container_Notes& source);
                                 Scale(const Flash::Container_Notes& source);
                                 Scale(const MCC_MusicalNote::Note& root, const Flash::Container_Notes& source);
                                 Scale(const MCC_MusicalNote::Pitch& root, const Flash::Container_Notes& source);
+                                Scale(const MCC_MusicalNote::Pitch::PitchType& root, const Flash::Container_Notes& source);
 
                                 Scale(const MCC_MusicalNote::Note &root, const Flash::Container_Mapping& source);
                                 Scale(const MCC_MusicalNote::Pitch& root, const Flash::Container_Mapping& source);
+                                Scale(const MCC_MusicalNote::Pitch::PitchType& root, const Flash::Container_Mapping& source);
 
                                 Scale(const MCC_MusicalNote::Note &root, const Flash::Container* source, uint8_t ID);
                                 Scale(const MCC_MusicalNote::Pitch& root, const Flash::Container* source, uint8_t ID);

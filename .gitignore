@@ -4,6 +4,4 @@
 
 # Ignore build folder
 build/
-
-examples/ArduinoIDE
-examples/CPP
+doc/

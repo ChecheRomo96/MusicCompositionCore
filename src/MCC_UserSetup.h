@@ -4,10 +4,10 @@
 	//////////////////////////////////////////////////////////////////
 	// Compilation Setup
 
-                #define MCC_CORE_ENABLED
+                //#define MCC_CORE_ENABLED
                         
-                        #define MCC_UTILITY_CORE_ENABLED
-                        #define MCC_MUSICAL_CORE_ENABLED
+                        //#define MCC_UTILITY_CORE_ENABLED
+                        //#define MCC_MUSICAL_CORE_ENABLED
 	//		
 	//////////////////////////////////////////////////////////////////
 	// Debug 

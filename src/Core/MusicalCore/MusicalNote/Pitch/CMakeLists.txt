@@ -8,6 +8,7 @@ list( APPEND MCC_SOURCES "${CMAKE_CURRENT_LIST_DIR}/Accidental.cpp")
 
 # Append Headers
 list( APPEND HEADERS_LIST "${CMAKE_CURRENT_LIST_DIR}/NotePitch.h")
+list( APPEND HEADERS_LIST "${CMAKE_CURRENT_LIST_DIR}/NotePitch_Class.h")
 list( APPEND HEADERS_LIST "${CMAKE_CURRENT_LIST_DIR}/NotePitch_Definitions.h")
 
 # Refresh Sources List at PARENT_SCOPE

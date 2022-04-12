@@ -15,6 +15,111 @@ using namespace MusicCompositionCore::Core::MusicalCore::MusicalNote;
     const int8_t MusicalNote::NotesArray[7] = {0,2,4,5,7,9,11};
 //
 /////////////////////////////////////////////////////////////////////////
+// Pitch Definitions
+
+    constexpr Pitch::PitchType Pitch::A_QuadrupleFlat;
+    constexpr Pitch::PitchType Pitch::A_TripleFlat;
+    constexpr Pitch::PitchType Pitch::A_DoubleFlat;
+    constexpr Pitch::PitchType Pitch::A_Flat;
+    constexpr Pitch::PitchType Pitch::A_Natural;
+    constexpr Pitch::PitchType Pitch::A_Sharp;
+    constexpr Pitch::PitchType Pitch::A_DoubleSharp;
+    constexpr Pitch::PitchType Pitch::A_TripleSharp;
+    constexpr Pitch::PitchType Pitch::A_QuadrupleSharp;
+
+    constexpr Pitch::PitchType Pitch::B_QuadrupleFlat;
+    constexpr Pitch::PitchType Pitch::B_TripleFlat;
+    constexpr Pitch::PitchType Pitch::B_DoubleFlat;
+    constexpr Pitch::PitchType Pitch::B_Flat;
+    constexpr Pitch::PitchType Pitch::B_Natural;
+    constexpr Pitch::PitchType Pitch::B_Sharp;
+    constexpr Pitch::PitchType Pitch::B_DoubleSharp;
+    constexpr Pitch::PitchType Pitch::B_TripleSharp;
+    constexpr Pitch::PitchType Pitch::B_QuadrupleSharp;
+
+    constexpr Pitch::PitchType Pitch::C_QuadrupleFlat;
+    constexpr Pitch::PitchType Pitch::C_TripleFlat;
+    constexpr Pitch::PitchType Pitch::C_DoubleFlat;
+    constexpr Pitch::PitchType Pitch::C_Flat;
+    constexpr Pitch::PitchType Pitch::C_Natural;
+    constexpr Pitch::PitchType Pitch::C_Sharp;
+    constexpr Pitch::PitchType Pitch::C_DoubleSharp;
+    constexpr Pitch::PitchType Pitch::C_TripleSharp;
+    constexpr Pitch::PitchType Pitch::C_QuadrupleSharp;
+
+    constexpr Pitch::PitchType Pitch::D_QuadrupleFlat;
+    constexpr Pitch::PitchType Pitch::D_TripleFlat;
+    constexpr Pitch::PitchType Pitch::D_DoubleFlat;
+    constexpr Pitch::PitchType Pitch::D_Flat;
+    constexpr Pitch::PitchType Pitch::D_Natural;
+    constexpr Pitch::PitchType Pitch::D_Sharp;
+    constexpr Pitch::PitchType Pitch::D_DoubleSharp;
+    constexpr Pitch::PitchType Pitch::D_TripleSharp;
+    constexpr Pitch::PitchType Pitch::D_QuadrupleSharp;
+
+    constexpr Pitch::PitchType Pitch::E_QuadrupleFlat;
+    constexpr Pitch::PitchType Pitch::E_TripleFlat;
+    constexpr Pitch::PitchType Pitch::E_DoubleFlat;
+    constexpr Pitch::PitchType Pitch::E_Flat;
+    constexpr Pitch::PitchType Pitch::E_Natural;
+    constexpr Pitch::PitchType Pitch::E_Sharp;
+    constexpr Pitch::PitchType Pitch::E_DoubleSharp;
+    constexpr Pitch::PitchType Pitch::E_TripleSharp;
+    constexpr Pitch::PitchType Pitch::E_QuadrupleSharp;
+
+    constexpr Pitch::PitchType Pitch::F_QuadrupleFlat;
+    constexpr Pitch::PitchType Pitch::F_TripleFlat;
+    constexpr Pitch::PitchType Pitch::F_DoubleFlat;
+    constexpr Pitch::PitchType Pitch::F_Flat;
+    constexpr Pitch::PitchType Pitch::F_Natural;
+    constexpr Pitch::PitchType Pitch::F_Sharp;
+    constexpr Pitch::PitchType Pitch::F_DoubleSharp;
+    constexpr Pitch::PitchType Pitch::F_TripleSharp;
+    constexpr Pitch::PitchType Pitch::F_QuadrupleSharp;
+
+    constexpr Pitch::PitchType Pitch::G_QuadrupleFlat;
+    constexpr Pitch::PitchType Pitch::G_TripleFlat;
+    constexpr Pitch::PitchType Pitch::G_DoubleFlat;
+    constexpr Pitch::PitchType Pitch::G_Flat;
+    constexpr Pitch::PitchType Pitch::G_Natural;
+    constexpr Pitch::PitchType Pitch::G_Sharp;
+    constexpr Pitch::PitchType Pitch::G_DoubleSharp;
+    constexpr Pitch::PitchType Pitch::G_TripleSharp;
+    constexpr Pitch::PitchType Pitch::G_QuadrupleSharp;
+//
+/////////////////////////////////////////////////////////////////////////
+// Pitch::Letter Definitions
+
+    constexpr Pitch::Letter::LetterType Pitch::Letter::A;
+    constexpr Pitch::Letter::LetterType Pitch::Letter::B;
+    constexpr Pitch::Letter::LetterType Pitch::Letter::C;
+    constexpr Pitch::Letter::LetterType Pitch::Letter::D;
+    constexpr Pitch::Letter::LetterType Pitch::Letter::E;
+    constexpr Pitch::Letter::LetterType Pitch::Letter::F;
+    constexpr Pitch::Letter::LetterType Pitch::Letter::G;
+    constexpr Pitch::Letter::LetterType Pitch::Letter::InvalidID;
+
+    constexpr uint8_t Pitch::Letter::MaxIterator;
+    constexpr uint8_t Pitch::Letter::MinIterator;
+//
+/////////////////////////////////////////////////////////////////////////
+// Pitch::Accidental Definitions
+
+    constexpr Pitch::Accidental::AccidentalType Pitch::Accidental::QuadrupleFlat;
+    constexpr Pitch::Accidental::AccidentalType Pitch::Accidental::TripleFlat;
+    constexpr Pitch::Accidental::AccidentalType Pitch::Accidental::DoubleFlat;
+    constexpr Pitch::Accidental::AccidentalType Pitch::Accidental::Flat;
+    constexpr Pitch::Accidental::AccidentalType Pitch::Accidental::Natural;
+    constexpr Pitch::Accidental::AccidentalType Pitch::Accidental::Sharp;
+    constexpr Pitch::Accidental::AccidentalType Pitch::Accidental::DoubleSharp;
+    constexpr Pitch::Accidental::AccidentalType Pitch::Accidental::TripleSharp;
+    constexpr Pitch::Accidental::AccidentalType Pitch::Accidental::QuadrupleSharp;
+    constexpr Pitch::Accidental::AccidentalType Pitch::Accidental::InvalidID;
+
+    constexpr int8_t Pitch::Accidental::MaxIterator;
+    constexpr int8_t Pitch::Accidental::MinIterator;
+//
+/////////////////////////////////////////////////////////////////////////
     
 
 

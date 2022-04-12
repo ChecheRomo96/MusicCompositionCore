@@ -11,6 +11,8 @@ int main()
     std::cout << std::endl;
 
     std::cout << "Checking MCC compile congif:" << std::endl;
+    
+    std::cout << std::endl;
 
     #if defined(MCC_CORE_ENABLED)
         
@@ -23,6 +25,17 @@ int main()
                 std::cout << "MCC::Core::UtilityCore::Accumulator Enabled..." << std::endl;
             #endif
 
+        #endif
+    
+        std::cout << std::endl;
+    
+        #if defined(MCC_MUSICAL_CORE_ENABLED)
+            std::cout << "MCC::Core::MusicalCore Enabled..." << std::endl;
+    
+        #if defined(MCC_MUSICAL_NOTE_ENABLED)
+            std::cout << "MCC::Core::MusicalCore::MusicalNote Enabled..." << std::endl;
+        #endif
+    
         #endif
     #endif
 

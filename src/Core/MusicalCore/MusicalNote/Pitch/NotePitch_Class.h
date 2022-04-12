@@ -3,7 +3,6 @@
 
     #include <MCC_BuildSettings.h>
 
-    #include "../Pitch/NotePitch.h"
     #include "../TextFormat/TextFormat.h"
 
     #include "NotePitch_Definitions.h"

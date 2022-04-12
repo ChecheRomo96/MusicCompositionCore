@@ -2,6 +2,7 @@
 #include <MCC.h>
 
 using namespace MCC_MusicalNote;
+using namespace MCC_MusicalNote::TextFormat;
 
 int main()
 {
@@ -23,7 +24,7 @@ int main()
         FormatData |= OctaveMode::Disabled_Mask;
         FormatData |= SpacingMode::Disabled_Mask;
         FormatData |= NaturalMode::Enabled_Mask;
-        std::cout<<"FormatData: "<<FormatData<<std:endl;
+        std::cout << "FormatData: " << CPString::string(FormatData, 2) << std::endl;
         
         TextFormat::FormatClass myFormat(FormatData);
 
@@ -41,7 +42,7 @@ int main()
         FormatData |= OctaveMode::Enabled_Mask;
         FormatData |= SpacingMode::Enabled_Mask;
         FormatData |= NaturalMode::Enabled_Mask;
-        std::cout<<"FormatData: "<<FormatData<<std:endl;
+        std::cout << "FormatData: " << CPString::string(FormatData, 2) << std::endl;
 
         myFormat = TextFormat::FormatClass(FormatData);
 
@@ -59,7 +60,7 @@ int main()
         FormatData |= OctaveMode::Enabled_Mask;
         FormatData |= SpacingMode::Enabled_Mask;
         FormatData |= NaturalMode::Enabled_Mask;
-        std::cout<<"FormatData: "<<FormatData<<std:endl;
+        std::cout << "FormatData: " << CPString::string(FormatData, 2) << std::endl;
 
         myFormat = TextFormat::FormatClass(FormatData);
 
@@ -78,7 +79,7 @@ int main()
         FormatData |= OctaveMode::Enabled_Mask;
         FormatData |= SpacingMode::Justified_Mask;
         FormatData |= NaturalMode::Enabled_Mask;
-        std::cout<<"FormatData: "<<FormatData<<std:endl;
+        std::cout<<"FormatData: "<<CPString::string(FormatData,2)<<std::endl;
 
         myFormat = TextFormat::FormatClass(FormatData);
 

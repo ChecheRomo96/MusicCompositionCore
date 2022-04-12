@@ -1,6 +1,7 @@
 #include "MusicalScale.h"
 
 CPString::string MusicCompositionCore::Core::MusicalCore::MusicalScale::DefaultName("No Name");
+CPString::string MusicCompositionCore::Core::MusicalCore::MusicalScale::NameBuffer("");
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 // Constructor, Destructor
@@ -99,61 +100,12 @@ CPString::string MusicCompositionCore::Core::MusicalCore::MusicalScale::DefaultN
             _Data.SetNameFlag(ScaleProperties::NameFlag::User);
             _Data.SetMappingMode(ScaleProperties::MappingMode::Fixed);
         }
-
-        MCC_MusicalScale::Scale::Scale(const MCC_MusicalNote::Pitch& root, const MCC_MusicalInterval::Interval* intervals, uint8_t intervals_size, CPString::string &name) : _Data(0)
-        {
-            _Notes.resize(intervals_size + 1);
-            
-            _Notes[0] = root;
-            _RootOffset = 0;
-            
-            for(uint8_t i = 0; i < intervals_size; i++)
-            {
-                _Notes[1 + i] = (MCC_MusicalNote::Note(_Notes[0],intervals[i]).GetPitch());
-            }
-            
-            _SortNotes();
-            _UserName = name;
-            _Data.SetLocation(ScaleProperties::Location::None);
-            _Data.SetNameFlag(ScaleProperties::NameFlag::User);
-            _Data.SetMappingMode(ScaleProperties::MappingMode::Fixed);
-        }
     //
     //////////////////////////////////////////////////////////////////////////////////////////////////
     // Flash
 
         //////////////////////////////////////////////////////////////////////////////////////////////
         // FlashContainer Notes
-
-            MCC_MusicalScale::Scale::Scale(uint8_t root, const Flash::Container_Notes& source): _Data(0)
-            {
-                uint8_t count = 0;
-
-                _Data = Flash::GetScaleProperties(source);
-                _NameID = Flash::GetScaleID(source);
-
-                while(Flash::GetScaleNoteToken(source,count) != MCC_MusicalNote::Pitch::InvaildPitch)
-                {
-                    count++;
-                    if(count == 12){break;}
-                }
-
-                _Notes.resize(count);
-
-                _RootOffset = root;
-
-                for(uint8_t i = 0; i < _Notes.size(); i++)
-                {
-                    MCC_MusicalNote::Pitch PitchClass = MCC_MusicalNote::Pitch(Flash::GetScaleNoteToken(source,i));
-                    _Notes[i] = PitchClass;
-                }
-
-                _SortNotes();
-
-                _Data.SetLocation(ScaleProperties::Location::Flash);
-                _Data.SetNameFlag(ScaleProperties::NameFlag::System);
-                _Data.SetMappingMode(ScaleProperties::MappingMode::Dynamic);
-            }
 
             MCC_MusicalScale::Scale::Scale(const Flash::Container_Notes& source): _Data(0)
             {
@@ -195,6 +147,18 @@ CPString::string MusicCompositionCore::Core::MusicalCore::MusicalScale::DefaultN
                 }
             }
 
+            MCC_MusicalScale::Scale::Scale(const MCC_MusicalNote::Pitch::PitchType& root, const Flash::Container_Notes& source): _Data(0)
+            {
+                *this = Scale(source);
+                auto Root = MCC_MusicalNote::Pitch(root);
+
+
+                for(uint8_t i = 0; i < _Notes.size(); i++)
+                {
+                    if(_Notes[i] == Root){_RootOffset = i;}
+                }
+            }
+
             MCC_MusicalScale::Scale::Scale(const MCC_MusicalNote::Note& root, const Flash::Container_Notes& source): _Data(0)
             {
                 *this = Scale(source);
@@ -208,9 +172,10 @@ CPString::string MusicCompositionCore::Core::MusicalCore::MusicalScale::DefaultN
         //////////////////////////////////////////////////////////////////////////////////////////////
         // FlashContainer Mapping
         
-            MCC_MusicalScale::Scale::Scale(const MCC_MusicalNote::Pitch& root, const Flash::Container_Mapping& source): _Data(0)
+            MCC_MusicalScale::Scale::Scale(const MCC_MusicalNote::Pitch::PitchType& root, const Flash::Container_Mapping& source): _Data(0)
             {
                 uint16_t mapping = Flash::GetScaleMapping(source);
+                auto Root = MCC_MusicalNote::Pitch(root);
                 
                 _Notes.resize(mapping>>12);
                 
@@ -219,7 +184,7 @@ CPString::string MusicCompositionCore::Core::MusicalCore::MusicalScale::DefaultN
                 
                 _RootOffset = 0;
                 
-                _Notes[0] = root;
+                _Notes[0] = Root;
                 
                 uint8_t count = 1;
                 MCC_MusicalInterval::Interval interval;
@@ -228,7 +193,7 @@ CPString::string MusicCompositionCore::Core::MusicalCore::MusicalScale::DefaultN
                 {
                     while(((mapping>>(11-count)) & 1u) != 1){count++;}
 
-                    interval = MCC_MusicalInterval::Interval(root.NotePitch(),root.NotePitch()+count,Flash::GetScaleGenericInterval(source,i-1));
+                    interval = MCC_MusicalInterval::Interval(Root.NotePitch(),Root.NotePitch()+count,Flash::GetScaleGenericInterval(source,i-1));
                     
                     _Notes[i] = _Notes[0] + interval;
 
@@ -248,6 +213,11 @@ CPString::string MusicCompositionCore::Core::MusicalCore::MusicalScale::DefaultN
                 _Data.SetMappingMode(ScaleProperties::MappingMode::Fixed);
             }
             
+            MCC_MusicalScale::Scale::Scale(const MCC_MusicalNote::Pitch &root, const Flash::Container_Mapping& source): _Data(0)
+            {
+                (*this) = Scale(root,source);
+            }
+
             MCC_MusicalScale::Scale::Scale(const MCC_MusicalNote::Note &root, const Flash::Container_Mapping& source): _Data(0)
             {
                 (*this) = Scale(root.GetPitch(),source);
@@ -377,8 +347,13 @@ CPString::string MusicCompositionCore::Core::MusicalCore::MusicalScale::DefaultN
 
         const char* MCC_MusicalScale::Scale::Name() const
         {
-            
-            if(_Data.NameFlag() == ScaleProperties::NameFlag::User){ return _UserName.c_str(); }
+            if(_Data.NameFlag() == ScaleProperties::NameFlag::User)
+            { 
+                NameBuffer = RootNote().GetPitch().Name();
+                NameBuffer += " ";
+                NameBuffer += _UserName;
+                return NameBuffer.c_str();
+            }
                 
             switch(_Data.Location())
             {
@@ -456,7 +431,6 @@ CPString::string MusicCompositionCore::Core::MusicalCore::MusicalScale::DefaultN
                         SetName(name);
                     }
                 }
-
             }
             else
             {
