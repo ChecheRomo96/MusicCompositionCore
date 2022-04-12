@@ -34,7 +34,7 @@ void setup()
 
             for (uint8_t i = 0; i < myScale.size(); i++)
             {
-                std::cout << myScale.Note(myScale.RootOffset() + i).Name();
+                Serial.print(myScale.Note(myScale.RootOffset() + i).Name());
 
                 if (i < myScale.size() - 1)
                 {
@@ -76,7 +76,7 @@ void setup()
 
             for (uint8_t i = 0; i < myScale.size(); i++)
             {
-                std::cout << myScale.Note(myScale.RootOffset() + i).Name();
+                Serial.print(myScale.Note(myScale.RootOffset() + i).Name());
 
                 if (i < myScale.size() - 1)
                 {
@@ -104,7 +104,7 @@ void setup()
 
             for (uint8_t i = 0; i < myScale.size(); i++)
             {
-                std::cout << myScale.Note(myScale.RootOffset() + i).Name();
+                Serial.print(myScale.Note(myScale.RootOffset() + i).Name());
 
                 if (i < myScale.size() - 1)
                 {
@@ -132,7 +132,7 @@ void setup()
 
             for (uint8_t i = 0; i < myScale.size(); i++)
             {
-                std::cout << myScale.Note(myScale.RootOffset() + i).Name();
+                Serial.print(myScale.Note(myScale.RootOffset() + i).Name());
 
                 if (i < myScale.size() - 1)
                 {
