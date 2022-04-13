@@ -591,8 +591,7 @@ const uint8_t Pitch::MidiPitch() const
 
 const Pitch::PitchType& Pitch::ID() const
 {
-    PitchBuffer = Pitch((PitchType)4 + (9*_Letter.ID()) + _Accidental.ID());
-    return PitchBuffer;
+    return (PitchType)4 + (9 * _Letter.ID()) + _Accidental.ID();
 }
 
 bool MusicCompositionCore::Core::MusicalCore::MusicalNote::operator < (const Pitch &lhs, const Pitch &rhs)

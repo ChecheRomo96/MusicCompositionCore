@@ -215,12 +215,12 @@ CPString::string MusicCompositionCore::Core::MusicalCore::MusicalScale::NameBuff
             
             MCC_MusicalScale::Scale::Scale(const MCC_MusicalNote::Pitch &root, const Flash::Container_Mapping& source): _Data(0)
             {
-                (*this) = Scale(root,source);
+                (*this) = Scale(root.ID(), source);
             }
 
             MCC_MusicalScale::Scale::Scale(const MCC_MusicalNote::Note &root, const Flash::Container_Mapping& source): _Data(0)
             {
-                (*this) = Scale(root.GetPitch(),source);
+                (*this) = Scale(root.GetPitch().ID(), source);
             }
         //
         //////////////////////////////////////////////////////////////////////////////////////////////
@@ -275,7 +275,7 @@ CPString::string MusicCompositionCore::Core::MusicalCore::MusicalScale::NameBuff
 
             MCC_MusicalScale::Scale::Scale(const MCC_MusicalNote::Note &root, uint8_t ID): _Data(0)
             {
-                (*this) = Scale(ID,root.GetPitch());
+                (*this) = Scale(root.GetPitch(), ID);
             }
         //
         //////////////////////////////////////////////////////////////////////////////////////////////
@@ -424,7 +424,7 @@ CPString::string MusicCompositionCore::Core::MusicalCore::MusicalScale::NameBuff
                         name = _UserName;
                     }
 
-                    (*this) = Scale(_NameID,root);
+                    (*this) = Scale(root,_NameID);
 
                     if(name != DefaultName)
                     {
@@ -576,7 +576,7 @@ CPString::string MusicCompositionCore::Core::MusicalCore::MusicalScale::NameBuff
                 }
 
 
-                (*this) = Scale(ID,_Notes[_RootOffset]);
+                (*this) = Scale(_Notes[_RootOffset], ID);
 
 
                 if(name != DefaultName)
