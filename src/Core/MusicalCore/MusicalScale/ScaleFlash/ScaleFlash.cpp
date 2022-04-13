@@ -452,7 +452,8 @@
         uint8_t MCC_MusicalScaleFlash::GetScaleGenericInterval(const Container_Mapping& source, uint8_t x)
         {
             #if defined(ARDUINO)
-                return pgm_read_byte(&(source.GenericInterval[x]));
+                uint8_t* array = pgm_read_word(&source.GenericInterval);
+                return pgm_read_byte(&array[x]);  
             #else
                 return source.GenericInterval[x];
             #endif

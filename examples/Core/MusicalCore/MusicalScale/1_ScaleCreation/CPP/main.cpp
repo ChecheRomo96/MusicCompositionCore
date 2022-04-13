@@ -116,6 +116,33 @@ int main()
         }
     //
     ///////////////////////////////////////////////////////////////////////////////////////////
+    // MusicalScale:: Scale(const MCC_MusicalNote::Note& root, const Flash::Container_Notes& source)
+
+        {
+            Scale myScale(MCC_MusicalNote::Pitch(MCC_MusicalNote::Pitch::C_Natural), MCC_MusicalScale::Flash::Scales::Chromatic);
+            std::cout << myScale.Name() << ": ";
+
+
+            MCC_MusicalNote::TextFormat::DefaultFormat.Octave_Disabled();
+            MCC_MusicalNote::TextFormat::DefaultFormat.Accidental_Symbol();
+
+
+            for (uint8_t i = 0; i < myScale.size(); i++)
+            {
+                std::cout << myScale.Note(myScale.RootOffset() + i).Name();
+
+                if (i < myScale.size() - 1)
+                {
+                    std::cout << ", ";
+                }
+                else
+                {
+                    std::cout << "." << std::endl;
+                }
+            }
+        }
+        //
+        ///////////////////////////////////////////////////////////////////////////////////////////
     // MusicalScale::Scale(const MCC_MusicalNote::Pitch& root, const Flash::Container* source, uint8_t ID);
 
         {
