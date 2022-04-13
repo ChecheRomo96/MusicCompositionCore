@@ -2,8 +2,8 @@
 # CPString 
 
 	if(EXISTS ${CMAKE_CURRENT_LIST_DIR}/CPString)
-		set( BUILD_EXAMPLES "OFF" )
-		set( INSTALL "OFF" )
+		set( CPSTRING_BUILD_EXAMPLES "OFF" )
+		set( CPSTRING_INSTALL "OFF" )
 
 		message("Using the CPStirng Source on: MusicCompositonCore/libs/CPString")
 		add_subdirectory(CPString)
@@ -24,8 +24,8 @@
 # CPVector
 
 	if(EXISTS ${CMAKE_CURRENT_LIST_DIR}/CPVector)
-		set( BUILD_EXAMPLES "OFF" )
-		set( INSTALL "OFF" )
+		set( CPVECTOR_BUILD_EXAMPLES "OFF" )
+		set( CPVECTOR_INSTALL "OFF" )
 
 		message("Using the CPVector Source on: MusicCompositonCore/libs/CPVector")
 		add_subdirectory(CPVector)

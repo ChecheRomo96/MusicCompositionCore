@@ -5,8 +5,8 @@ using namespace MCC_MusicalInterval;
 
 void setup()
 {
-    Serial.begin(115200);
-	MCC::Start();
+  Serial.begin(115200);
+    MCC::Start();
     
     ///////////////////////////////////////////////////////////////////////////////////////////
     // MusicalScale::Scale(const CPVector::vector<MCC_MusicalNote::Pitch> &noteTokens, CPString::string& name)
@@ -147,8 +147,62 @@ void setup()
         }
     //
     ///////////////////////////////////////////////////////////////////////////////////////////
-    
-	return 0;
+    // MusicalScale:: Scale(const MCC_MusicalNote::Note& root, const Flash::Container_Notes& source)
+
+        {
+            Scale myScale(MCC_MusicalNote::Pitch(MCC_MusicalNote::Pitch::C_Natural), MCC_MusicalScale::Flash::ScaleArrays::Exotic, 9);
+            Serial.print(myScale.Name());
+            Serial.print(": ");
+
+
+            MCC_MusicalNote::TextFormat::DefaultFormat.Octave_Disabled();
+            MCC_MusicalNote::TextFormat::DefaultFormat.Accidental_Symbol();
+
+
+            for (uint8_t i = 0; i < myScale.size(); i++)
+            {
+                Serial.print(myScale.Note(myScale.RootOffset() + i).Name());
+
+                if (i < myScale.size() - 1)
+                {
+                    Serial.print(", ");
+                }
+                else
+                {
+                    Serial.println(".");
+                }
+            }
+        }
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////////
+    // MusicalScale:: Scale(const MCC_MusicalNote::Note& root, uint8_t ID)
+
+        {
+            Scale myScale(MCC_MusicalNote::Pitch(MCC_MusicalNote::Pitch::C_Natural), 15);
+            Serial.print(myScale.Name());
+            Serial.print(": ");
+
+
+            MCC_MusicalNote::TextFormat::DefaultFormat.Octave_Disabled();
+            MCC_MusicalNote::TextFormat::DefaultFormat.Accidental_Symbol();
+
+
+            for (uint8_t i = 0; i < myScale.size(); i++)
+            {
+                Serial.print(myScale.Note(myScale.RootOffset() + i).Name());
+
+                if (i < myScale.size() - 1)
+                {
+                    Serial.print(", ");
+                }
+                else
+                {
+                    Serial.println(".");
+                }
+            }
+        }
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////////
 }
 
 void loop()
