@@ -26,6 +26,7 @@
                             public:
 
                                 static Pitch PitchBuffer;
+                                static PitchType PitchTypeBuffer;
 
                                 typedef uint8_t PitchType;
                           
