@@ -10,6 +10,11 @@ using namespace MusicCompositionCore::Core::MusicalCore;
 using namespace MusicCompositionCore::Core::MusicalCore::MusicalNote;
 
 /////////////////////////////////////////////////////////////////////////
+//  Pitch Type Buffer
+    
+    Pitch::PitchType Pitch::PitchTypeBuffer;
+//
+/////////////////////////////////////////////////////////////////////////
 //  Notes Array
 
     const int8_t MusicalNote::NotesArray[7] = {0,2,4,5,7,9,11};
