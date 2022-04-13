@@ -167,7 +167,7 @@ CPString::string MusicCompositionCore::Core::MusicalCore::MusicalScale::NameBuff
 
                 for(uint8_t i = 0; i < _Notes.size(); i++)
                 {
-                    Serial.println(_Notes[i].Name())
+                    Serial.println(_Notes[i].Name());
                     if(_Notes[i] == root.GetPitch()){_RootOffset = i;}
                 }
             }
