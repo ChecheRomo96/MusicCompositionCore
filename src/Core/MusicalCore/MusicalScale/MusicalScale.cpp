@@ -114,6 +114,8 @@ CPString::string MusicCompositionCore::Core::MusicalCore::MusicalScale::NameBuff
                 _Data = Flash::GetScaleProperties(source);
                 _NameID = Flash::GetScaleID(source);
 
+                    Serial.println(_NameID);
+
                 while(Flash::GetScaleNoteToken(source,count) != MCC_MusicalNote::Pitch::InvaildPitch)
                 {
                     count++;
@@ -126,8 +128,8 @@ CPString::string MusicCompositionCore::Core::MusicalCore::MusicalScale::NameBuff
 
                 for(uint8_t i = 0; i < _Notes.size(); i++)
                 {
-                    MCC_MusicalNote::Pitch PitchClass = MCC_MusicalNote::Pitch(Flash::GetScaleNoteToken(source,i));
-                    _Notes[i] = PitchClass;
+                    MCC_MusicalNote::Pitch Pitch = MCC_MusicalNote::Pitch(Flash::GetScaleNoteToken(source,i));
+                    _Notes[i] = Pitch;
                 }
 
                 _SortNotes();
@@ -143,7 +145,6 @@ CPString::string MusicCompositionCore::Core::MusicalCore::MusicalScale::NameBuff
 
                 for(uint8_t i = 0; i < _Notes.size(); i++)
                 {
-                    Serial.println(_Notes[i].Name());
                     if(_Notes[i] == root){_RootOffset = i;}
                 }
             }
