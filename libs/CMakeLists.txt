@@ -2,7 +2,7 @@
 # CPString 
 
 	if(EXISTS ${CMAKE_CURRENT_LIST_DIR}/CPString)
-		set( CPSTRING_BUILD_EXAMPLES "OFF" )
+		set( CPSTRING_BUILD_EXAMPLES "ON" )
 		set( CPSTRING_INSTALL "OFF" )
 
 		message("Using the CPStirng Source on: MusicCompositonCore/libs/CPString")
