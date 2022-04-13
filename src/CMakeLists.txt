@@ -79,7 +79,7 @@
 ######################################################################################################
 # Add libs Subdirectory
 
-	add_subdirectory(${CMAKE_HOME_DIRECTORY}/libs ${CMAKE_CURRENT_BINARY_DIR}/libs)
+	add_subdirectory(${MCC_ROOT_DIRECTORY}/libs ${CMAKE_CURRENT_BINARY_DIR}/libs)
 #
 ######################################################################################################
 # Music Composition Core install process

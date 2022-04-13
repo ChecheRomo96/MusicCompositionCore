@@ -10,10 +10,10 @@
 	# Project Name Version and Languaje, print and add preprocessor flag
 		
 		project(MCC VERSION 0.0.1 LANGUAGES CXX)
-		message("Building ${CMAKE_PROJECT_NAME} Version = ${CMAKE_PROJECT_VERSION}...")
+		message(STATUS "Building ${PROJECT_NAME} Version = ${PROJECT_VERSION}...")
 
-		string(TOUPPER ${CMAKE_PROJECT_NAME} PROJECT_NAME_UPPER)
-		add_definitions( -D${PROJECT_NAME_UPPER}_VERSION="${CMAKE_PROJECT_VERSION}" )
+		string(TOUPPER ${PROJECT_NAME} PROJECT_NAME_UPPER)
+		add_definitions( -D${PROJECT_NAME_UPPER}_VERSION="${PROJECT_VERSION}" )
 	#
 	##################################################################################################
 	# Set up C++ Version
@@ -22,6 +22,11 @@
 		set(CMAKE_CXX_STANDARD_REQUIRED ON)
 	#
 	##################################################################################################
+#
+######################################################################################################
+# Store this directory as a variable called MCC_SRC_DIRECTORY to reference in deeper directories
+
+	set( MCC_ROOT_DIRECTORY ${CMAKE_CURRENT_LIST_DIR})
 #
 ######################################################################################################
 # Compile Configuration
@@ -53,7 +58,7 @@
 # Append Examples
 
 	if( ${MCC_BUILD_EXAMPLES} )
-		message("Building ${CMAKE_PROJECT_NAME} Examples...")
+		message("Building ${PROJECT_NAME} Examples...")
 		add_subdirectory(examples)
 	endif()
 #
