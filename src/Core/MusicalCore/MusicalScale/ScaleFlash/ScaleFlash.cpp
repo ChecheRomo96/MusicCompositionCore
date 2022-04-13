@@ -530,7 +530,8 @@
         uint8_t MCC_MusicalScaleFlash::GetScaleNoteToken(const Container_Notes& source, uint8_t x)
         {
             #if defined(ARDUINO)
-                return pgm_read_byte(&(source.NoteTokens[x]));
+                uint8_t* array = pgm_read_word(&source.NoteTokens);
+                return pgm_read_byte(&array[x]);  
             #else
                 return source.NoteTokens[x];
             #endif
