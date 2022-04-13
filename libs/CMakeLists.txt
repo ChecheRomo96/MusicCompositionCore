@@ -1,20 +1,22 @@
 ######################################################################################################
 # CPString 
+	
+	if(NOT TARGET CPString)
+		if(EXISTS ${CMAKE_CURRENT_LIST_DIR}/CPString)
+			set( CPSTRING_BUILD_EXAMPLES "OFF" )
+			set( CPSTRING_INSTALL "OFF" )
 
-	if(EXISTS ${CMAKE_CURRENT_LIST_DIR}/CPString)
-		set( CPSTRING_BUILD_EXAMPLES "OFF" )
-		set( CPSTRING_INSTALL "OFF" )
-
-		message("Using the CPStirng Source on: MusicCompositonCore/libs/CPString")
-		add_subdirectory(CPString)
-	else()
-
-		find_package(CPString)
-
-		if(CPString_FOUND)
-			message("Using the CPStirng Package installed on: ${CMAKE_INSTALL_PREFIX}")
+			message("Using the CPStirng Source on: MusicCompositonCore/libs/CPString")
+			add_subdirectory(CPString)
 		else()
-			message(FATAL_ERROR "CPString not found.")
+
+			find_package(CPString)
+
+			if(CPString_FOUND)
+				message("Using the CPStirng Package installed on: ${CMAKE_INSTALL_PREFIX}")
+			else()
+				message(FATAL_ERROR "CPString not found.")
+			endif()
 		endif()
 	endif()
 
@@ -22,21 +24,23 @@
 #
 ######################################################################################################
 # CPVector
+	
+	if(NOT TARGET CPVector)
+		if(EXISTS ${CMAKE_CURRENT_LIST_DIR}/CPVector)
+			set( CPVECTOR_BUILD_EXAMPLES "OFF" )
+			set( CPVECTOR_INSTALL "OFF" )
 
-	if(EXISTS ${CMAKE_CURRENT_LIST_DIR}/CPVector)
-		set( CPVECTOR_BUILD_EXAMPLES "OFF" )
-		set( CPVECTOR_INSTALL "OFF" )
-
-		message("Using the CPVector Source on: MusicCompositonCore/libs/CPVector")
-		add_subdirectory(CPVector)
-	else()
-
-		find_package(CPVector)
-
-		if(CPVector_FOUND)
-			message("Using the CPVector Package installed on: ${CMAKE_INSTALL_PREFIX}")
+			message("Using the CPVector Source on: MusicCompositonCore/libs/CPVector")
+			add_subdirectory(CPVector)
 		else()
-			message(FATAL_ERROR "CPVector not found.")
+
+			find_package(CPVector)
+
+			if(CPVector_FOUND)
+				message("Using the CPVector Package installed on: ${CMAKE_INSTALL_PREFIX}")
+			else()
+				message(FATAL_ERROR "CPVector not found.")
+			endif()
 		endif()
 	endif()
 
