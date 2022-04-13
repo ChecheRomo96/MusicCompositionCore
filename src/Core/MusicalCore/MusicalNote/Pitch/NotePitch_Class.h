@@ -24,11 +24,11 @@
                         /////////////////////////////////////////////////////////////////////////////////
                         // typrdef and constants declaration
                             public:
+                                
+                                typedef uint8_t PitchType;
 
                                 static Pitch PitchBuffer;
                                 static PitchType PitchTypeBuffer;
-
-                                typedef uint8_t PitchType;
                           
                                 static constexpr PitchType C_QuadrupleFlat = 0u;
                                 static constexpr PitchType C_TripleFlat = 1u;
