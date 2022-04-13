@@ -329,6 +329,9 @@
                             
                                 const uint8_t NotePitch() const;
                                 const uint8_t MidiPitch() const;
+
+                                const PitchType& ID() const;
+                                operator const PitchType() const;
                                 
                                 bool Sharp();
                                 bool Flat();

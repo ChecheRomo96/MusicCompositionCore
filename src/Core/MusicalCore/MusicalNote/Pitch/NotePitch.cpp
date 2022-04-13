@@ -589,6 +589,11 @@ const uint8_t Pitch::MidiPitch() const
     return NotePitch();
 }
 
+const Pitch::PitchType& Pitch::ID() const
+{
+    return _ID;
+}
+
 bool MusicCompositionCore::Core::MusicalCore::MusicalNote::operator < (const Pitch &lhs, const Pitch &rhs)
 {
     if(lhs.NotePitch() < rhs.NotePitch()){return 1;}
@@ -636,6 +641,7 @@ bool MusicCompositionCore::Core::MusicalCore::MusicalNote::operator != (const Pi
     if(lhs.NotePitch() == rhs.NotePitch()){return 0;}
     return 1;
 }
+
 /*
 Pitch& Pitch::operator+=(const MCC_MusicalInterval::Interval &rhs)
 {

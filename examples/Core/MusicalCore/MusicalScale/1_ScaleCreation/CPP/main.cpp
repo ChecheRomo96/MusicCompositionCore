@@ -116,10 +116,10 @@ int main()
         }
     //
     ///////////////////////////////////////////////////////////////////////////////////////////
-    // MusicalScale:: Scale(const MCC_MusicalNote::Note& root, const Flash::Container_Notes& source)
+    // MusicalScale::Scale(const MCC_MusicalNote::Pitch& root, const Flash::Container* source, uint8_t ID);
 
         {
-            Scale myScale(MCC_MusicalNote::Pitch(MCC_MusicalNote::Pitch::C_Natural), MCC_MusicalScale::Flash::Scales::Chromatic);
+            Scale myScale(MCC_MusicalNote::Pitch(MCC_MusicalNote::Pitch::C_Natural), MCC_MusicalScale::Flash::ScaleArrays::Exotic, 0);
             std::cout << myScale.Name() << ": ";
 
 
