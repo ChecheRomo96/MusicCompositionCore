@@ -114,8 +114,6 @@ CPString::string MusicCompositionCore::Core::MusicalCore::MusicalScale::NameBuff
                 _Data = Flash::GetScaleProperties(source);
                 _NameID = Flash::GetScaleID(source);
 
-                    Serial.println(_NameID);
-
                 while(Flash::GetScaleNoteToken(source,count) != MCC_MusicalNote::Pitch::InvaildPitch)
                 {
                     count++;
