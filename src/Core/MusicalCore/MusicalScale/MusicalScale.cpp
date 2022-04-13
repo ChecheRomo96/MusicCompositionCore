@@ -153,6 +153,8 @@ CPString::string MusicCompositionCore::Core::MusicalCore::MusicalScale::NameBuff
                 auto Root = MCC_MusicalNote::Pitch(root);
 
 
+
+
                 for(uint8_t i = 0; i < _Notes.size(); i++)
                 {
                     if(_Notes[i] == Root){_RootOffset = i;}
@@ -165,6 +167,7 @@ CPString::string MusicCompositionCore::Core::MusicalCore::MusicalScale::NameBuff
 
                 for(uint8_t i = 0; i < _Notes.size(); i++)
                 {
+                    Serial.println(_Notes[i].Name())
                     if(_Notes[i] == root.GetPitch()){_RootOffset = i;}
                 }
             }
