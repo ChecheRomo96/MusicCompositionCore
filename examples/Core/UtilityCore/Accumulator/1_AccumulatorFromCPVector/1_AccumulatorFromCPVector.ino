@@ -36,8 +36,6 @@ void setup()
 		Serial.print( (unsigned int)Acc[i].Counter() );
 		Serial.print( F(".\n") );
 	}
-
-	return 0;
 }
 
 void loop()
