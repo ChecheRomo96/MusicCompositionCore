@@ -15,7 +15,7 @@
 
             char* MCC_MusicalScaleFlash::GetScaleName(char* buff, const Container_Notes& source)
             {
-                #if defined(ARDUINO)
+                #if defined(__AVR__)
                     strcpy_P(buff, (PGM_P)pgm_read_word(&(source.Name)));
                 #else
                     strcpy(buff,source.Name);
@@ -35,7 +35,7 @@
             char* MCC_MusicalScaleFlash::GetScaleName(char* buff, const Container_Mapping& source)
             {
 
-                #if defined(ARDUINO)
+                #if defined(__AVR__)
                     strcpy_P(buff, (PGM_P)pgm_read_word(&(source.Name)));
                 #else
                     strcpy(buff,source.Name);
@@ -59,7 +59,7 @@
 
                 if(ptr1 != NULL)
                 {
-                    #if defined(ARDUINO)
+                    #if defined(__AVR__)
                         strcpy_P(buff, (PGM_P)pgm_read_word(&(ptr1->Name)));
                     #else
                         strcpy(buff,ptr1->Name);
@@ -67,7 +67,7 @@
                 }
                 else if(ptr2 != NULL)
                 {
-                    #if defined(ARDUINO)
+                    #if defined(__AVR__)
                         strcpy_P(buff, (PGM_P)pgm_read_word(&(ptr2->Name)));
                     #else
                         strcpy(buff,ptr2->Name);
@@ -90,7 +90,7 @@
 
                 if(ptr1 != NULL)
                 {
-                    #if defined(ARDUINO)
+                    #if defined(__AVR__)
                         strcpy_P(buff, (PGM_P)pgm_read_word(&(ptr1->Name)));
                     #else
                         strcpy(buff,ptr1->Name);
@@ -98,7 +98,7 @@
                 }
                 else if(ptr2 != NULL)
                 {
-                    #if defined(ARDUINO)
+                    #if defined(__AVR__)
                         strcpy_P(buff, (PGM_P)pgm_read_word(&(ptr2->Name)));
                     #else
                         strcpy(buff,ptr2->Name);
@@ -123,7 +123,7 @@
 
                 if(ptr1 != NULL)
                 {
-                    #if defined(ARDUINO)
+                    #if defined(__AVR__)
                         strcpy_P(buff, (PGM_P)pgm_read_word(&(ptr1->Name)));
                     #else
                         strcpy(buff,ptr1->Name);
@@ -131,7 +131,7 @@
                 }
                 else if(ptr2 != NULL)
                 {
-                    #if defined(ARDUINO)
+                    #if defined(__AVR__)
                         strcpy_P(buff, (PGM_P)pgm_read_word(&(ptr2->Name)));
                     #else
                         strcpy(buff,ptr2->Name);
@@ -156,7 +156,7 @@
                 uint8_t offset = strlen(root.Name(format)); 
                 buff[offset] = ' ';
 
-                #if defined(ARDUINO)
+                #if defined(__AVR__)
 
                     if(MCC_MusicalScaleFlash::ScaleArrays::Flash[ScaleID].NotesPointer!=NULL)
                     {
@@ -193,7 +193,7 @@
 
         uint8_t MCC_MusicalScaleFlash::GetScaleID(const Container_Notes& source)
         {
-            #if defined(ARDUINO)
+            #if defined(__AVR__)
                 return pgm_read_byte(&(source.ID));
             #else
                 return source.ID;
@@ -202,7 +202,7 @@
 
         uint8_t MCC_MusicalScaleFlash::GetScaleID(const Container_Mapping& source)
         {
-            #if defined(ARDUINO)
+            #if defined(__AVR__)
                 return pgm_read_byte(&(source.ID));
             #else
                 return source.ID;
@@ -216,7 +216,7 @@
 
             if(ptr1 != NULL)
             {
-                #if defined(ARDUINO)
+                #if defined(__AVR__)
                     return pgm_read_byte(&(ptr1->ID));
                 #else
                     return ptr1->ID;
@@ -224,7 +224,7 @@
             }
             else if(ptr2 != NULL)
             {
-                #if defined(ARDUINO)
+                #if defined(__AVR__)
                     return pgm_read_byte(&(ptr2->ID));
                 #else
                     return ptr2->ID;
@@ -240,7 +240,7 @@
 
             if(ptr1 != NULL)
             {
-                #if defined(ARDUINO)
+                #if defined(__AVR__)
                     return pgm_read_byte(&(ptr1->ID));
                 #else
                     return ptr1->ID;
@@ -248,7 +248,7 @@
             }
             else if(ptr2 != NULL)
             {
-                #if defined(ARDUINO)
+                #if defined(__AVR__)
                     return pgm_read_byte(&(ptr2->ID));
                 #else
                     return ptr2->ID;
@@ -262,7 +262,7 @@
 
         uint8_t MCC_MusicalScaleFlash::GetScaleProperties(const Container_Notes& source)
         {
-            #if defined(ARDUINO)
+            #if defined(__AVR__)
                 return pgm_read_byte(&(source.Properties));
             #else
                 return source.Properties;
@@ -271,7 +271,7 @@
 
         uint8_t MCC_MusicalScaleFlash::GetScaleProperties(const Container_Mapping& source)
         {
-            #if defined(ARDUINO)
+            #if defined(__AVR__)
                 return pgm_read_byte(&(source.Properties));
             #else
                 return source.Properties;
@@ -285,7 +285,7 @@
 
             if(ptr1 != NULL)
             {
-                #if defined(ARDUINO)
+                #if defined(__AVR__)
                     return pgm_read_byte(&(ptr1->Properties));
                 #else
                     return ptr1->Properties;
@@ -293,7 +293,7 @@
             }
             else if(ptr2 != NULL)
             {
-                #if defined(ARDUINO)
+                #if defined(__AVR__)
                     return pgm_read_byte(&(ptr2->Properties));
                 #else
                     return ptr2->Properties;
@@ -308,7 +308,7 @@
             const MCC_MusicalScaleFlash::Container_Notes* ptr1 = container[ID].NotesPointer;
             const MCC_MusicalScaleFlash::Container_Mapping* ptr2 = container[ID].MappingPointer;
 
-            #if defined(ARDUINO)
+            #if defined(__AVR__)
             
                 if(ptr1 != NULL)
                 {
@@ -343,7 +343,7 @@
             const MCC_MusicalScaleFlash::Container_Notes* ptr1 = ScaleArrays::Flash[ID].NotesPointer;
             const MCC_MusicalScaleFlash::Container_Mapping* ptr2 = ScaleArrays::Flash[ID].MappingPointer;
 
-            #if defined(ARDUINO)
+            #if defined(__AVR__)
             
                 if(ptr1 != NULL)
                 {
@@ -377,7 +377,7 @@
 
         uint16_t MCC_MusicalScaleFlash::GetScaleMapping(const Container_Mapping& source)
         {
-            #if defined(ARDUINO)
+            #if defined(__AVR__)
                 return pgm_read_word(&(source.Mapping));
             #else
                 return source.Mapping;
@@ -388,7 +388,7 @@
         {
             const MCC_MusicalScaleFlash::Container_Mapping* ptr = source.MappingPointer;
 
-            #if defined(ARDUINO)
+            #if defined(__AVR__)
             
                 if(ptr != NULL)
                 {
@@ -411,7 +411,7 @@
         {
             const MCC_MusicalScaleFlash::Container_Mapping* ptr = container[ID].MappingPointer;
 
-            #if defined(ARDUINO)
+            #if defined(__AVR__)
             
                 if(ptr != NULL)
                 {
@@ -436,7 +436,7 @@
 
             if(ptr != NULL)
             {
-                #if defined(ARDUINO)
+                #if defined(__AVR__)
                     return pgm_read_word(&ptr->Mapping);
                 #else
                     return ptr->Mapping;
@@ -451,7 +451,7 @@
 
         uint8_t MCC_MusicalScaleFlash::GetScaleGenericInterval(const Container_Mapping& source, uint8_t x)
         {
-            #if defined(ARDUINO)
+            #if defined(__AVR__)
                 uint8_t* array = pgm_read_word(&source.GenericInterval);
                 return pgm_read_byte(&array[x]);  
             #else
@@ -463,7 +463,7 @@
         {
             const MCC_MusicalScaleFlash::Container_Mapping* ptr = source.MappingPointer;
 
-            #if defined(ARDUINO)
+            #if defined(__AVR__)
             
                 if(ptr != NULL)
                 {
@@ -487,7 +487,7 @@
         {
             const MCC_MusicalScaleFlash::Container_Mapping* ptr = source[ID].MappingPointer;
 
-            #if defined(ARDUINO)
+            #if defined(__AVR__)
             
                 if(ptr != NULL)
                 {
@@ -514,7 +514,7 @@
             if(ptr != NULL)
             {
 
-                #if defined(ARDUINO)
+                #if defined(__AVR__)
                     uint8_t* array = pgm_read_word(&ptr->GenericInterval);
                     return pgm_read_byte(&array[x]);                
                 #else
@@ -530,7 +530,7 @@
 
         uint8_t MCC_MusicalScaleFlash::GetScaleNoteToken(const Container_Notes& source, uint8_t x)
         {
-            #if defined(ARDUINO)
+            #if defined(__AVR__)
                 uint8_t* array = pgm_read_word(&source.NoteTokens);
                 return pgm_read_byte(&array[x]);  
             #else
@@ -542,7 +542,7 @@
         {
             const MCC_MusicalScaleFlash::Container_Notes* ptr = source.NotesPointer;
 
-            #if defined(ARDUINO)
+            #if defined(__AVR__)
             
                 if(ptr != NULL)
                 {
@@ -566,7 +566,7 @@
         {
             const MCC_MusicalScaleFlash::Container_Notes* ptr = source[ID].NotesPointer;
 
-            #if defined(ARDUINO)
+            #if defined(__AVR__)
             
                 if(ptr != NULL)
                 {
@@ -593,7 +593,7 @@
 
             if(ptr1 != NULL)
             {
-                #if defined(ARDUINO)
+                #if defined(__AVR__)
                     uint8_t* array = pgm_read_word(&ptr1->NoteTokens);
                     return pgm_read_byte(&array[x]);      
                 #else

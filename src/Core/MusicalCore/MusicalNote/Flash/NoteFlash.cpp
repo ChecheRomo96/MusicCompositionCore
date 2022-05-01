@@ -265,7 +265,7 @@ char Flash::Buffer[24];
     
 	char* Flash::GetAccidentalText(char* buff, const Pitch::Accidental& Accidental, const TextFormat::FormatClass& Format)
 	{
-	    #if defined(ARDUINO)
+	    #if defined(__AVR__)
 	        if((Accidental == Pitch::Accidental::Natural) && (Format.NaturalMode() == TextFormat::NaturalMode::Enabled) && (Format.AccidentalMode() == TextFormat::AccidentalMode::Symbol))
 	        {
 	        	buff[0] = '\0';
@@ -298,7 +298,7 @@ char Flash::Buffer[24];
 
 	char* Flash::GetLetterText(char* buff, const Pitch::Letter& letter)
 	{
-	    #if defined(ARDUINO)
+	    #if defined(__AVR__)
 	        memcpy_P(buff,  (PGM_P)pgm_read_word(&(NoteNames[letter.ID()])), 1 );
 	    #else
 	        memcpy(buff, NoteNames[letter.ID()], 1);

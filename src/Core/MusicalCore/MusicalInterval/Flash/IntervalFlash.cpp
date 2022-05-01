@@ -19,7 +19,7 @@ uint8_t Flash::GetIntervalSemitones(uint8_t IntervalType, uint8_t IntervalQualit
 
 	if(IntervalQuality < 4)
 	{
-		#if defined(ARDUINO)
+		#if defined(__AVR__)
 			semitones = pgm_read_byte(&(IntervalMap[intervalType][0]));
 		#else
 			semitones = IntervalMap[intervalType][0];
@@ -27,7 +27,7 @@ uint8_t Flash::GetIntervalSemitones(uint8_t IntervalType, uint8_t IntervalQualit
 
 		if((uint8_t)semitones == InvalidInterval)
 		{
-			#if defined(ARDUINO)
+			#if defined(__AVR__)
 				semitones = pgm_read_byte(&(IntervalMap[intervalType][1]));
 			#else
 				semitones = IntervalMap[intervalType][1];
@@ -39,7 +39,7 @@ uint8_t Flash::GetIntervalSemitones(uint8_t IntervalType, uint8_t IntervalQualit
 	}
 	else if(IntervalQuality > 6)
 	{
-		#if defined(ARDUINO)
+		#if defined(__AVR__)
 			semitones = pgm_read_byte(&(IntervalMap[intervalType][2]));
 		#else
 			semitones = IntervalMap[intervalType][2];
@@ -47,7 +47,7 @@ uint8_t Flash::GetIntervalSemitones(uint8_t IntervalType, uint8_t IntervalQualit
 
 		if((uint8_t)semitones == InvalidInterval)
 		{
-			#if defined(ARDUINO)
+			#if defined(__AVR__)
 				semitones = pgm_read_byte(&(IntervalMap[intervalType][1]));
 			#else
 				semitones = IntervalMap[intervalType][1];
@@ -58,7 +58,7 @@ uint8_t Flash::GetIntervalSemitones(uint8_t IntervalType, uint8_t IntervalQualit
 	}
 	else
 	{
-		#if defined(ARDUINO)
+		#if defined(__AVR__)
 			semitones = pgm_read_byte(&(IntervalMap[intervalType][IntervalQuality-4]));
 		#else
 			semitones = IntervalMap[intervalType][IntervalQuality-4];
@@ -83,7 +83,7 @@ char* Flash::GetGenericIntervalStr(char* buff, uint8_t IntervalType)
 {
 	if(IntervalType < Numbers::Count)
 	{
-		#if defined(ARDUINO)
+		#if defined(__AVR__)
 			strcpy_P(buff,pgm_read_word(&(GenericIntervalNames[IntervalType])));
 		#else
 			strcpy(buff,GenericIntervalNames[IntervalType]);
@@ -91,7 +91,7 @@ char* Flash::GetGenericIntervalStr(char* buff, uint8_t IntervalType)
 	}
 	else
 	{	
-		#if defined(ARDUINO)
+		#if defined(__AVR__)
             strcpy_P(buff,pgm_read_word(GenericIntervalNames[Numbers::Count]));
             uint8_t offset = strlen(buff);
             buff[offset] = ' ';
@@ -131,7 +131,7 @@ char* Flash::GetIntervalQualityStr(char* buff, uint8_t IntervalQuality)
 {
 	if(IntervalQuality < Qualities::Count)
 	{
-	    #if defined(ARDUINO)
+	    #if defined(__AVR__)
 	        strcpy_P(buff, (PGM_P)pgm_read_word(&(IntervalQualitiesNames[IntervalQuality])));
 	    #else
 	        strcpy(buff,IntervalQualitiesNames[IntervalQuality]);
