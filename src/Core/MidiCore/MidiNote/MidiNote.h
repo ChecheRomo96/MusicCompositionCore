@@ -28,10 +28,10 @@ namespace MusicCompositionCore
                     void SetPitch(uint8_t NewPitch);
                     const uint8_t Pitch() const;
 
-                    SetChannel(uint8_t NewChannel);
+                    void SetChannel(uint8_t NewChannel);
                     const uint8_t Channel() const;
                     
-                    SetVelocity(uint8_t NewVelocity);
+                    void SetVelocity(uint8_t NewVelocity);
                     const uint8_t Velocity() const;
             };
         }
