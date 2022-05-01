@@ -25,8 +25,13 @@ namespace MusicCompositionCore
                     MidiNote(const MusicalCore::MusicalNote::Note& source, uint8_t vel, uint8_t channel = 0);
                     MidiNote(const MusicalCore::MusicalNote::Pitch& source, uint8_t vel, uint8_t channel = 0);
                     
+                    void SetPitch(uint8_t NewPitch);
                     const uint8_t Pitch() const;
+
+                    SetChannel(uint8_t NewChannel);
                     const uint8_t Channel() const;
+                    
+                    SetVelocity(uint8_t NewVelocity);
                     const uint8_t Velocity() const;
             };
         }
