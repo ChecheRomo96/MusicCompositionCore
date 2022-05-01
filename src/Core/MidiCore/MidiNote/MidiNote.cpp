@@ -24,7 +24,7 @@ MusicCompositionCore::Core::MidiCore::MidiNote::MidiNote(const MusicalCore::Musi
 	else{_channel = channel;}
 }
 
-MusicCompositionCore::Core::MidiCore::MidiNote::MidiNote(const MCC_MusicalNote::Pitch::PitchClass& source, uint8_t vel, uint8_t channel)
+MusicCompositionCore::Core::MidiCore::MidiNote::MidiNote(const MCC_MusicalNote::Pitch& source, uint8_t vel, uint8_t channel)
 {
 	if(MCC_MusicalNote::Note(source,3).MidiPitch() >= MidiNoteRange){_pitch = InvalidMidiNote;}
 	else{_pitch = MCC_MusicalNote::Note(source,3).MidiPitch();}
