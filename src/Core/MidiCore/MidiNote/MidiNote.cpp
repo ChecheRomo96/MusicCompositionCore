@@ -41,7 +41,7 @@ const uint8_t MusicCompositionCore::Core::MidiCore::MidiNote::Pitch() const
 	return _pitch;
 }
 
-void SetPitch(uint8_t NewPitch)
+void MusicCompositionCore::Core::MidiCore::MidiNote::SetPitch(uint8_t NewPitch)
 {
 	_pitch = NewPitch&0x7F;
 }
@@ -51,7 +51,7 @@ const uint8_t MusicCompositionCore::Core::MidiCore::MidiNote::Velocity() const
 	return _velocity;
 }
 
-void SetChannel(uint8_t NewChannel)
+void MusicCompositionCore::Core::MidiCore::MidiNote::SetChannel(uint8_t NewChannel)
 {
 	_channel = NewChannel&0xF;
 }
@@ -61,7 +61,7 @@ const uint8_t MusicCompositionCore::Core::MidiCore::MidiNote::Channel() const
 	return _channel;
 }
 
-void SetVelocity(uint8_t NewVelocity)
+void MusicCompositionCore::Core::MidiCore::MidiNote::SetVelocity(uint8_t NewVelocity)
 {
 	_velocity = NewVelocity&0x7F;
 }
