@@ -10,14 +10,14 @@
 
         #if defined(ARDUINO)
 
-        #if defined(__avr__)
-            #include <avr/pgmspace.h>
-            #define PROGMEM_MACRO PROGMEM
-        #elif defined(ESP32)
-            #define PROGMEM_MACRO 
-        #endif
+            #if defined(__avr__)
+                #include <avr/pgmspace.h>
+                #define PROGMEM_MACRO PROGMEM
+            #elif defined(ESP32)
+                #define PROGMEM_MACRO 
+            #endif
 
-        #define MCC_VERSION "0.0.1"
+            #define MCC_VERSION "0.0.1"
     //
     ///////////////////////////////////////////////////////////////////////////////////
     // PSOC Creator
