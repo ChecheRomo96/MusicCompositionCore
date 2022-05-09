@@ -5,40 +5,42 @@
     #include "MCC_GlobalDefinitions.h"
     #include <stdint.h>
 
-    ///////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // MCC Version
+
+        #ifndef MCC_VERSION
+            #define MCC_VERSION "0.0.1"
+        #endif
+
+    //
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Arduino IDE
 
         #if defined(ARDUINO)
-
-            #if defined(__avr__)
-                #include <avr/pgmspace.h>
-                #define PROGMEM_MACRO PROGMEM
-            #elif defined(ESP32)
-                #define PROGMEM_MACRO 
-            #endif
-
-            #define MCC_VERSION "0.0.1"
+            #include <Arduino.h>
+        #endif
     //
-    ///////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
     // PSOC Creator
 
-        #elif defined(PSOC_CREATOR)
+        #if defined(PSOC_CREATOR)
 
-            #ifdef __cplusplus
+            /*#ifdef __cplusplus
                 extern "C" {
                     #include "project.h"   
                 }
             #else
                 #include "project.h"
-            #endif
+            #endif*/
             
             #define PROGMEM_MACRO
             #define constexpr const
+        #endif
     //
     ///////////////////////////////////////////////////////////////////////////////////
     // Building as a target for a desktop system
 
-        #elif defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__NT__) || defined(__APPLE__) || defined(linux)
+        #if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__NT__) || defined(__APPLE__) || defined(linux)
 
             #include <iostream>
             #include <chrono>
@@ -46,13 +48,10 @@
             #define PROGMEM_MACRO
                 
             //#include <RtMidi.h>
+        #endif
 
 
     //
     ///////////////////////////////////////////////////////////////////////////////////
-
-    #else
-    #   error "Unknown compiler"
-    #endif
 
 #endif//MCC_BUILD_SETTINGS_H
