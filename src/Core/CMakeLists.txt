@@ -7,7 +7,6 @@
 # Append Sources and Headers
 
 	list( APPEND MCC_SOURCES "${CMAKE_CURRENT_LIST_DIR}/MCC_Core.cpp")
-
 	list( APPEND HEADERS_LIST "${CMAKE_CURRENT_LIST_DIR}/MCC_Core.h")
 #
 ######################################################################################################

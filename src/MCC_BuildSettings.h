@@ -23,10 +23,10 @@
     ////////////////////////////////////////////////////////////////////////////////////////////////////////
     // AVR 
 
-        #if defined(__avr__)
-            
+        #if defined(__AVR__)
+
             #include <avr/pgmspace.h>
-            
+
             #ifndef PROGMEM_MACRO
                 #define PROGMEM_MACRO PROGMEM
             #endif
