@@ -234,10 +234,6 @@ char Flash::Buffer[24];
 					OutputStr += " ";
 				}
 
-				Serial.println(Flash::GetAccidentalText(Accidental, Format));
-
-				Serial.println(CPString::string(Flash::GetAccidentalText(Accidental, Format)));
-
 				OutputStr += Flash::GetAccidentalText(Accidental, Format);
 				Serial.println(OutputStr);
 
@@ -245,6 +241,8 @@ char Flash::Buffer[24];
 				{
 					OutputStr += CPString::string(Octave,10);
 				}
+				Serial.println(CPString::string(Octave,10));
+				Serial.println(OutputStr);
 			}
 			break;
 		}
