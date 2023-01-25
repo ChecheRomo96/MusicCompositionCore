@@ -235,14 +235,12 @@ char Flash::Buffer[24];
 				}
 
 				OutputStr += Flash::GetAccidentalText(Accidental, Format);
-				Serial.println(OutputStr);
 
 				if(Format.OctaveMode() == TextFormat::OctaveMode::Enabled)
 				{
 					OutputStr += CPString::string(Octave,10);
 				}
 				Serial.println(CPString::string(Octave,10));
-				Serial.println(OutputStr);
 			}
 			break;
 		}
