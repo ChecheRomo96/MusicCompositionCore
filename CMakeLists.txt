@@ -39,7 +39,11 @@
 		set(MCC_COMPILE_MUSICAL_CORE TRUE CACHE BOOL "Compile MCC::Core::MusicalCore")
 			set(MCC_COMPILE_MUSICAL_NOTE TRUE CACHE BOOL "Compile MCC::Core::MusicalCore::Note")
 			set(MCC_COMPILE_MUSICAL_INTERVAL TRUE CACHE BOOL "Compile MCC::Core::MusicalCore::Interval")	
-			set(MCC_COMPILE_MUSICAL_SCALE TRUE CACHE BOOL "Compile MCC::Core::MusicalCore::Scale")	
+			set(MCC_COMPILE_MUSICAL_SCALE TRUE CACHE BOOL "Compile MCC::Core::MusicalCore::Scale")
+
+		set(MCC_COMPILE_MIDI_CORE TRUE CACHE BOOL "Compile MCC::Core::MidiCore")
+			set(MCC_COMPILE_MIDI_NOTE TRUE CACHE BOOL "Compile MCC::Core::MidiCore::MidiNote")
+
 	
 
 	set(MCC_BUILD_EXAMPLES TRUE CACHE BOOL "Build MCC Examples")

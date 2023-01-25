@@ -23,7 +23,11 @@
         #include "MusicalCore/MusicalCore.h"
     #endif
 
-    //#include "MidiCore/MidiCore.h"
+    #if defined(MCC_MIDI_CORE_ENABLED)
+        #include "MidiCore/MidiCore.h"
+    #endif
+
+    
     //#include "MusicalUtilityCore/MusicalUtilityCore.h"
 
 #endif//MCC_CORE_H

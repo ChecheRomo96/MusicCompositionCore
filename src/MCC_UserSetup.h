@@ -15,6 +15,10 @@
                 #ifndef MCC_MUSICAL_CORE_ENABLED
                     #define MCC_MUSICAL_CORE_ENABLED
                 #endif
+
+                #ifndef MCC_MUSICAL_CORE_ENABLED
+                    #define MCC_MIDI_CORE_ENABLED
+                #endif
         //              
         //////////////////////////////////////////////////////////////////
         // Debug 

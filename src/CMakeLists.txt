@@ -64,6 +64,15 @@
 			endif()
 		endif()
 
+		if(${MCC_COMPILE_MIDI_CORE})
+			target_compile_definitions(MCC PUBLIC MCC_MIDI_CORE_ENABLED)
+
+			if(${MCC_COMPILE_MIDI_NOTE})
+				target_compile_definitions(MCC PUBLIC MCC_MIDI_NOTE_ENABLED)
+			endif()
+
+		endif()
+
 	endif()
 #
 ######################################################################################################
