@@ -21,6 +21,22 @@
         #endif
     //
     ////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // AVR 
+
+        #if defined(__avr__)
+            
+            #include <avr/pgmspace.h>
+            
+            #ifndef PROGMEM_MACRO
+                #define PROGMEM_MACRO PROGMEM
+            #endif
+        #else
+            #ifndef PROGMEM_MACRO
+                #define PROGMEM_MACRO
+            #endif
+        #endif
+    //
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
     // PSOC Creator
 
         #if defined(PSOC_CREATOR)
@@ -33,7 +49,6 @@
                 #include "project.h"
             #endif*/
             
-            #define PROGMEM_MACRO
             #define constexpr const
         #endif
     //
@@ -44,8 +59,6 @@
 
             #include <iostream>
             #include <chrono>
-
-            #define PROGMEM_MACRO
                 
             //#include <RtMidi.h>
         #endif
