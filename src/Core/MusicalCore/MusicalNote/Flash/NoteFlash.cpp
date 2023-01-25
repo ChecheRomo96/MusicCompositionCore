@@ -243,7 +243,7 @@ char Flash::Buffer[24];
 
 				if(Format.OctaveMode() == TextFormat::OctaveMode::Enabled)
 				{
-					OutputStr += string(Octave,10);
+					OutputStr += CPString::string(Octave,10);
 				}
 			}
 			break;
