@@ -235,7 +235,9 @@ char Flash::Buffer[24];
 				}
 
 				Serial.println(Flash::GetAccidentalText(Accidental, Format));
-				
+
+				Serial.println(CPString::string(Flash::GetAccidentalText(Accidental, Format)));
+
 				OutputStr += Flash::GetAccidentalText(Accidental, Format);
 				Serial.println(OutputStr);
 
