@@ -234,6 +234,8 @@ char Flash::Buffer[24];
 					OutputStr += " ";
 				}
 
+				Serial.println(Flash::GetAccidentalText(Accidental, Format));
+				
 				OutputStr += Flash::GetAccidentalText(Accidental, Format);
 
 				if(Format.OctaveMode() == TextFormat::OctaveMode::Enabled)
