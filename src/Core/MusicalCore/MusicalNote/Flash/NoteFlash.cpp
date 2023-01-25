@@ -240,7 +240,6 @@ char Flash::Buffer[24];
 				{
 					OutputStr += CPString::string(Octave,10);
 				}
-				Serial.println(CPString::string(Octave,10));
 			}
 			break;
 		}
