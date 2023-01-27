@@ -23,6 +23,12 @@
 		add_definitions( -DMCC_COMPILE_MUSICAL_CORE)
 		add_subdirectory(MusicalCore)
 	endif()
+
+	if(${MCC_COMPILE_MIDI_CORE})
+		message(STATUS "Compiling MCC::Core::MidiCore...")
+		add_definitions( -DMCC_COMPILE_MIDI_CORE)
+		add_subdirectory(MidiCore)
+	endif()
 #
 ######################################################################################################
 # Refresh Sources List at PARENT_SCOPE
