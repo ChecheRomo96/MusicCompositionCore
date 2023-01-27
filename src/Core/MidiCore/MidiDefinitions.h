@@ -50,6 +50,6 @@
 	}
     
     namespace MCC_MidiCore = MusicCompositionCore::Core::MidiCore;
-    namespace MCC_MidiProtocolConstants = MusicCompositionCore::Core::MidiCore::Protocol;
+    namespace MCC_MidiProtocol = MusicCompositionCore::Core::MidiCore::Protocol;
 
 #endif//MCC_MIDI_DEFINITIONS_H
