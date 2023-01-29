@@ -24,6 +24,9 @@ namespace MusicCompositionCore
                     MidiNote(uint8_t pitch, uint8_t vel , uint8_t channel = 0);
                     MidiNote(const MusicalCore::MusicalNote::Note& source, uint8_t vel, uint8_t channel = 0);
                     MidiNote(const MusicalCore::MusicalNote::Pitch& source, uint8_t vel, uint8_t channel = 0);
+
+                    CPString::string& CPString::string::operator=(const string& Source)
+
                     
                     void SetPitch(uint8_t NewPitch);
                     const uint8_t Pitch() const;
