@@ -2,6 +2,7 @@
 #include "../MidiDefinitions.h"
 #include "../../MusicalCore/MusicalCore.h"
 
+using namespace MusicompositionCore::Core::MidiCore;
 
 MidiMessage::MidiMessage()
 {
@@ -180,6 +181,6 @@ MidiMessage& MidiMessage::SystemExclusive(const CPVector::vector& Data)
 }
 MidiMessage& MidiMessage::SystemExclusive(uint8_t* Data, uint8_t Length)
 {
-	
+
 	return *this;
 }
