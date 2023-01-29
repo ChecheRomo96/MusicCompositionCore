@@ -2,7 +2,7 @@
 #include "../MidiDefinitions.h"
 #include "../../MusicalCore/MusicalCore.h"
 
-using namespace MusiCompositionCore::Core::MidiCore;
+using namespace MCC_Core::MidiCore;
 
 MidiMessage::MidiMessage()
 {
