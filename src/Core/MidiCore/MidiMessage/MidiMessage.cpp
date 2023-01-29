@@ -26,7 +26,7 @@ MidiMessage& MidiMessage::operator=(const MidiMessage& Source)
 	return *this;
 }
 
-MidiMessage& MidiMessage::NoteOn(uint8_t Pitch, uint8_t Vel , uint8_t Channel = 0)
+MidiMessage& MidiMessage::NoteOn(uint8_t Pitch, uint8_t Vel , uint8_t Channel)
 {
 	_Buffer.resize(3);
 
@@ -48,7 +48,7 @@ MidiMessage& MidiMessage::NoteOn(const MidiCore::MidiNote& Source)
 	return *this;
 }
 
-MidiMessage& MidiMessage::NoteOn(const MusicalCore::MusicalNote::Note& Source, uint8_t Vel, uint8_t Channel = 0)
+MidiMessage& MidiMessage::NoteOn(const MusicalCore::MusicalNote::Note& Source, uint8_t Vel, uint8_t Channel)
 {
 	_Buffer.resize(3);
 
@@ -59,7 +59,7 @@ MidiMessage& MidiMessage::NoteOn(const MusicalCore::MusicalNote::Note& Source, u
 	return *this;
 }
 
-MidiMessage& MidiMessage::NoteOn(const MusicalCore::MusicalNote::Pitch& Source, uint8_t Octave, uint8_t Vel, uint8_t Channel = 0)
+MidiMessage& MidiMessage::NoteOn(const MusicalCore::MusicalNote::Pitch& Source, uint8_t Octave, uint8_t Vel, uint8_t Channel)
 {
 	_Buffer.resize(3);
 	MCC_MusicalNote::Note tmpNote(Source,Octave);
@@ -71,7 +71,7 @@ MidiMessage& MidiMessage::NoteOn(const MusicalCore::MusicalNote::Pitch& Source, 
 	return *this;
 }
 
-MidiMessage& MidiMessage::NoteOff(uint8_t Pitch, uint8_t Channel = 0)
+MidiMessage& MidiMessage::NoteOff(uint8_t Pitch, uint8_t Channel)
 {
 	_Buffer.resize(3);
 
@@ -93,7 +93,7 @@ MidiMessage& MidiMessage::NoteOff(const MidiCore::MidiNote& Source)
 	return *this;
 }
 
-MidiMessage& MidiMessage::NoteOff(const MusicalCore::MusicalNote::Note& Source, uint8_t Channel = 0)
+MidiMessage& MidiMessage::NoteOff(const MusicalCore::MusicalNote::Note& Source, uint8_t Channel)
 {
 	_Buffer.resize(3);
 
@@ -104,7 +104,7 @@ MidiMessage& MidiMessage::NoteOff(const MusicalCore::MusicalNote::Note& Source, 
 	return *this;
 }
 
-MidiMessage& MidiMessage::NoteOff(const MusicalCore::MusicalNote::Pitch& Source, uint8_t Octave, uint8_t Channel = 0)
+MidiMessage& MidiMessage::NoteOff(const MusicalCore::MusicalNote::Pitch& Source, uint8_t Octave, uint8_t Channel)
 {
 	_Buffer.resize(3);
 	MCC_MusicalNote::Note tmpNote(Source,Octave);
@@ -116,7 +116,7 @@ MidiMessage& MidiMessage::NoteOff(const MusicalCore::MusicalNote::Pitch& Source,
 	return *this;
 }
 
-MidiMessage& MidiMessage::ProgramChange(uint8_t Program, uint8_t Channel = 0)
+MidiMessage& MidiMessage::ProgramChange(uint8_t Program, uint8_t Channel)
 {
 	_Buffer.resize(2);
 
@@ -126,19 +126,19 @@ MidiMessage& MidiMessage::ProgramChange(uint8_t Program, uint8_t Channel = 0)
 	return *this;
 }
 
-MidiMessage& MidiMessage::ContinuousController(uint8_t ControllerNumber, uint8_t Value, uint8_t Channel = 0)
+MidiMessage& MidiMessage::ContinuousController(uint8_t ControllerNumber, uint8_t Value, uint8_t Channel)
 {
 
 	
 	return *this;
 }
-MidiMessage& MidiMessage::PitchBend(int16_t Value, uint8_t Channel = 0)
+MidiMessage& MidiMessage::PitchBend(int16_t Value, uint8_t Channel)
 {
 
 	
 	return *this;
 }
-MidiMessage& MidiMessage::PolyphonicAfetrtouch(uint8_t Note, uint8_t Pressure, uint8_t Channel = 0)
+MidiMessage& MidiMessage::PolyphonicAfetrtouch(uint8_t Note, uint8_t Pressure, uint8_t Channel)
 {
 
 	
