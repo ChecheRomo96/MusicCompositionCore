@@ -26,7 +26,7 @@ MidiMessage& MidiMessage::operator=(const MidiMessage& Source)
 	return *this;
 }
 
-MidiMessage& MidiMessage::NoteOn(uint8_t Pitch, uint8_t Vel , uint8_t Channel)
+MidiMessage& MidiMessage::NoteOn(uint8_t Pitch, uint8_t Vel, uint8_t Channel)
 {
 	_Buffer.resize(3);
 
@@ -41,7 +41,7 @@ MidiMessage& MidiMessage::NoteOn(const MidiCore::MidiNote& Source)
 {
 	_Buffer.resize(3);
 
-	_Buffer[0] = MCC_MidiProtocol::NoteOn & (Channel&=0x0F);
+	_Buffer[0] = MCC_MidiProtocol::NoteOn & (Source.Channel()&=0x0F);
 	_Buffer[1] = Source.Pitch();
 	_Buffer[2] = Source.Velocity();
 	
@@ -86,7 +86,7 @@ MidiMessage& MidiMessage::NoteOff(const MidiCore::MidiNote& Source)
 {
 	_Buffer.resize(3);
 
-	_Buffer[0] = MCC_MidiProtocol::NoteOff & (Channel&=0x0F);
+	_Buffer[0] = MCC_MidiProtocol::NoteOff & (Source.Channel()&=0x0F);
 	_Buffer[1] = Source.Pitch();
 	_Buffer[2] = 0;
 	
