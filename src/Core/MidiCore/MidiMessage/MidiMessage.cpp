@@ -14,7 +14,7 @@ const CPVector::vector<uint8_t>& MidiMessage::Buffer()
 	return _Buffer;
 }
 
-MidiMessage& MidiMessage::operator=(const MidiNote& Source)
+MidiMessage& MidiMessage::operator=(const MidiMessage& Source)
 {
 	_Buffer.resize(Source.Buffer.size());
 
