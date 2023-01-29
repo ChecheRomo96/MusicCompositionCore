@@ -18,7 +18,7 @@ MidiMessage& MidiMessage::operator=(const MidiMessage& Source)
 {
 	_Buffer.resize(Source.Buffer().size());
 
-	for(uint8_t i = 0; i < _Buffer.size())
+	for(uint8_t i = 0; i < _Buffer.size(; i++)
 	{
 		_Buffer[i] = Source.Buffer()[i];
 	}
