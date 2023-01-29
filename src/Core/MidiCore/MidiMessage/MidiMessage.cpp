@@ -179,7 +179,7 @@ MidiMessage& MidiMessage::SongSelect(uint8_t Song)
 	return *this;
 }
 
-MidiMessage& MidiMessage::SystemExclusive(const CPVector::vector& Data)
+MidiMessage& MidiMessage::SystemExclusive(const CPVector::vector<uint8_t>& Data)
 {
 
 	return *this;
