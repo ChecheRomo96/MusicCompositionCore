@@ -17,13 +17,10 @@ namespace MusicCompositionCore
 
                 public:
 
-                    MidiNote();
+                    MidiMessage();
 
-                    MidiNote(uint8_t Pitch, uint8_t Vel , uint8_t Channel = 0);
-                    MidiNote(const MusicalCore::MusicalNote::Note& Source, uint8_t Vel, uint8_t Channel = 0);
-                    MidiNote(const MusicalCore::MusicalNote::Pitch& Source, uint8_t Vel, uint8_t Channel = 0);
-
-                    MidiNote& MidiNote::operator=(const MidiNote& Source);
+                    MidiMessage& MidiMessage::operator=(const MidiMessage& Source);
+                    const CPVector::vector& Buffer
 
                     void NoteOn(uint8_t Pitch, uint8_t Vel , uint8_t Channel = 0);
                     void NoteOn(const MidiCore::MidiNote& Source);
