@@ -13,14 +13,14 @@ namespace MusicCompositionCore
         {
             class MidiMessage
             {
-                CPVector::vector<uint8_t> Buffer;
+                CPVector::vector<uint8_t> _Buffer;
 
                 public:
 
                     MidiMessage();
 
                     MidiMessage& MidiMessage::operator=(const MidiMessage& Source);
-                    const CPVector::vector& Buffer
+                    const CPVector::vector<uint8_t>& Buffer();
 
                     MidiMessage& NoteOn(uint8_t Pitch, uint8_t Vel , uint8_t Channel = 0);
                     MidiMessage& NoteOn(const MidiCore::MidiNote& Source);
