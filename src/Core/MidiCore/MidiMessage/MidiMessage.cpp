@@ -16,11 +16,11 @@ const CPVector::vector<uint8_t>& MidiMessage::Buffer()
 
 MidiMessage& MidiMessage::operator=(const MidiMessage& Source)
 {
-	_Buffer.resize(Source.Buffer.size());
+	_Buffer.resize(Source.Buffer().size());
 
 	for(uint8_t i = 0; i < _Buffer.size())
 	{
-		_Buffer[i] = Source.Buffer[i];
+		_Buffer[i] = Source.Buffer()[i];
 	}
 
 	return *this;
