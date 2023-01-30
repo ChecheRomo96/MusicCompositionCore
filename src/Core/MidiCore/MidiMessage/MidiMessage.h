@@ -4,6 +4,7 @@
 #include <MCC_BuildSettings.h>
 #include <CPVector.h>
 #include "../MidiCore.h"
+#include "../../MusicalCore/MusicalCore.h"
 
 namespace MusicCompositionCore
 {
@@ -12,7 +13,7 @@ namespace MusicCompositionCore
         namespace MidiCore
         {
             class MidiNote;
-            
+
             class MidiMessage
             {
                 CPVector::vector<uint8_t> _Buffer;
