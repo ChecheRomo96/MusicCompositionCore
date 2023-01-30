@@ -31,8 +31,8 @@ MidiMessage& MidiMessage::NoteOn(uint8_t Pitch, uint8_t Vel, uint8_t Channel)
 	_Buffer.resize(3);
 
 	_Buffer[0] = MCC_MidiProtocol::NoteOn | (Channel&0x0F);
-	_Buffer[1] = Pitch;
-	_Buffer[2] = Vel;
+	_Buffer[1] = Pitch & 0x7F;
+	_Buffer[2] = Vel & 0x7F;
 
 	return *this;
 }
@@ -54,7 +54,7 @@ MidiMessage& MidiMessage::NoteOn(const MusicalCore::MusicalNote::Note& Source, u
 
 	_Buffer[0] = MCC_MidiProtocol::NoteOn | (Channel&0x0F);
 	_Buffer[1] = Source.MidiPitch();
-	_Buffer[2] = Vel;
+	_Buffer[2] = Vel & 0x7F;
 	
 	return *this;
 }
@@ -66,7 +66,7 @@ MidiMessage& MidiMessage::NoteOn(const MusicalCore::MusicalNote::Pitch& Source, 
 
 	_Buffer[0] = MCC_MidiProtocol::NoteOn | (Channel&0x0F);
 	_Buffer[1] = tmpNote.MidiPitch();
-	_Buffer[2] = Vel;
+	_Buffer[2] = Vel & 0x7F;
 	
 	return *this;
 }
@@ -76,7 +76,7 @@ MidiMessage& MidiMessage::NoteOff(uint8_t Pitch, uint8_t Channel)
 	_Buffer.resize(3);
 
 	_Buffer[0] = MCC_MidiProtocol::NoteOff | (Channel&0x0F);
-	_Buffer[1] = Pitch;
+	_Buffer[1] = Pitch & 0x7F;
 	_Buffer[2] = 0;
 	
 	return *this;
@@ -121,7 +121,7 @@ MidiMessage& MidiMessage::ProgramChange(uint8_t Program, uint8_t Channel)
 	_Buffer.resize(2);
 
 	_Buffer[0] = MCC_MidiProtocol::ProgramChange | (Channel&0x0F);
-	_Buffer[1] = Program;
+	_Buffer[1] = Program & 0x7F;
 	
 	return *this;
 }
@@ -131,8 +131,8 @@ MidiMessage& MidiMessage::ControlChange(uint8_t ControllerNumber, uint8_t Value,
 	_Buffer.resize(3);
 
 	_Buffer[0] = MCC_MidiProtocol::ControlChange | (Channel&0x0F);
-	_Buffer[1] = ControllerNumber;
-	_Buffer[2] = Value;
+	_Buffer[1] = ControllerNumber & 0x7F;
+	_Buffer[2] = Value & 0x7F;
 
 	return *this;
 }
@@ -153,8 +153,8 @@ MidiMessage& MidiMessage::AfterTouch(uint8_t Note, uint8_t Pressure, uint8_t Cha
 	_Buffer.resize(3);
 
 	_Buffer[0] = MCC_MidiProtocol::AfterTouch | (Channel&0x0F);
-	_Buffer[1] = Note;
-	_Buffer[2] = Pressure;
+	_Buffer[1] = Note & 0x7F;
+	_Buffer[2] = Pressure & 0x7F;
 
 	return *this;
 }
@@ -164,7 +164,7 @@ MidiMessage& MidiMessage::ChannelPressure(uint8_t Pressure, uint8_t Channel)
 	_Buffer.resize(2);
 
 	_Buffer[0] = MCC_MidiProtocol::ChannelPressure | (Channel&0x0F);
-	_Buffer[1] = Pressure;
+	_Buffer[1] = Pressure & 0x7F;
 
 	return *this;
 }
