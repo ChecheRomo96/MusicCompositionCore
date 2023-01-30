@@ -35,7 +35,7 @@ namespace MusicCompositionCore
                     MidiMessage& NoteOff(const MusicalCore::MusicalNote::Pitch& Source, uint8_t Octave, uint8_t Channel = 0);
 
                     MidiMessage& ProgramChange(uint8_t Program, uint8_t Channel = 0);
-                    MidiMessage& ContinuousController(uint8_t ControllerNumber, uint8_t Value, uint8_t Channel = 0);
+                    MidiMessage& ControlChange(uint8_t ControllerNumber, uint8_t Value, uint8_t Channel = 0);
                     MidiMessage& PitchBend(int16_t Value, uint8_t Channel = 0);
                     MidiMessage& AfterTouch(uint8_t Note, uint8_t Pressure, uint8_t Channel = 0);
                     MidiMessage& ChannelPressure(uint8_t Pressure, uint8_t Channel = 0);

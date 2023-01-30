@@ -126,11 +126,11 @@ MidiMessage& MidiMessage::ProgramChange(uint8_t Program, uint8_t Channel)
 	return *this;
 }
 
-MidiMessage& MidiMessage::ContinuousController(uint8_t ControllerNumber, uint8_t Value, uint8_t Channel)
+MidiMessage& MidiMessage::ControlChange(uint8_t ControllerNumber, uint8_t Value, uint8_t Channel)
 {
 	_Buffer.resize(3);
 
-	_Buffer[0] = MCC_MidiProtocol::ContinuousController | (Channel&0x0F);
+	_Buffer[0] = MCC_MidiProtocol::ControlChange | (Channel&0x0F);
 	_Buffer[1] = ControllerNumber;
 	_Buffer[2] = Value;
 
