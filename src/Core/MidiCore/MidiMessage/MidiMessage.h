@@ -4,7 +4,7 @@
 #include <MCC_BuildSettings.h>
 #include <CPVector.h>
 #include "../MidiDefinitions.h"
-#include "../MidiCore/MidiNote.h"
+#include "../MidiNote/MidiNote.h"
 #include "../../MusicalCore/MusicalCore.h"
 
 namespace MusicCompositionCore
