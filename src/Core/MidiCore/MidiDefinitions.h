@@ -19,9 +19,8 @@
 					static constexpr uint8_t ProgramChange = 0xC0;
 					static constexpr uint8_t ChannelPressure = 0xD0;
 					static constexpr uint8_t PitchBend = 0xE0;
-
-
 					static constexpr uint8_t SystemMessage = 0xF0;
+
 					static constexpr uint8_t SystemExclusive = 0x0;
 					static constexpr uint8_t MTC_QuarterFrame = 0x1;
 					static constexpr uint8_t SongPosition = 0x2;

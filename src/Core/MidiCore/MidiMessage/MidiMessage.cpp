@@ -128,53 +128,100 @@ MidiMessage& MidiMessage::ProgramChange(uint8_t Program, uint8_t Channel)
 
 MidiMessage& MidiMessage::ContinuousController(uint8_t ControllerNumber, uint8_t Value, uint8_t Channel)
 {
+	_Buffer.resize(3);
 
-	
+	_Buffer[0] = MCC_MidiProtocol::ContinuousController | (Channel&0x0F);
+	_Buffer[1] = ControllerNumber;
+	_Buffer[2] = Value;
+
 	return *this;
 }
+
 MidiMessage& MidiMessage::PitchBend(int16_t Value, uint8_t Channel)
 {
+	_Buffer.resize(3);
 
+	_Buffer[0] = MCC_MidiProtocol::PitchBend | (Channel&0x0F);
+	_Buffer[1] = Value & 0xFF;
+	_Buffer[2] = (Value>>8) & 0xFF;
 	
 	return *this;
 }
-MidiMessage& MidiMessage::PolyphonicAfetrtouch(uint8_t Note, uint8_t Pressure, uint8_t Channel)
-{
 
-	
+MidiMessage& MidiMessage::AfterTouch(uint8_t Note, uint8_t Pressure, uint8_t Channel)
+{
+	_Buffer.resize(3);
+
+	_Buffer[0] = MCC_MidiProtocol::AfterTouch | (Channel&0x0F);
+	_Buffer[1] = Note;
+	_Buffer[2] = Pressure;
+
+	return *this;
+}
+
+MidiMessage& MidiMessage::ChannelPressure(uint8_t Pressure, uint8_t Channel)
+{
+	_Buffer.resize(2);
+
+	_Buffer[0] = MCC_MidiProtocol::ChannelPressure | (Channel&0x0F);
+	_Buffer[1] = Pressure;
+
 	return *this;
 }
 
 MidiMessage& MidiMessage::Start()
 {
+	_Buffer.resize(1);
 
-	
+	_Buffer[0] = MCC_MidiProtocol::SystemMessage | MCC_MidiProtocol::StartSong;
+
 	return *this;
 }
+
 MidiMessage& MidiMessage::Continue()
 {
+	_Buffer.resize(1);
 
-	
+	_Buffer[0] = MCC_MidiProtocol::SystemMessage | MCC_MidiProtocol::ContinueSong;
+
 	return *this;
 }
+
 MidiMessage& MidiMessage::Stop()
 {
+	_Buffer.resize(1);
+
+	_Buffer[0] = MCC_MidiProtocol::SystemMessage | MCC_MidiProtocol::StopSong;
 
 	return *this;
 }
 
 MidiMessage& MidiMessage::ClockTick()
 {
+	_Buffer.resize(1);
+
+	_Buffer[0] = MCC_MidiProtocol::SystemMessage | MCC_MidiProtocol::TimingTick;
 
 	return *this;
 }
+
 MidiMessage& MidiMessage::SongPositionCounter(uint16_t Position)
 {
+	_Buffer.resize(3);
+
+	_Buffer[0] = MCC_MidiProtocol::SystemMessage | MCC_MidiProtocol::SongPosition;
+	_Buffer[1] = Position&0xFF;
+	_Buffer[2] = (Position>>8)&0xFF;
 
 	return *this;
 }
+
 MidiMessage& MidiMessage::SongSelect(uint8_t Song)
 {
+	_Buffer.resize(3);
+
+	_Buffer[0] = MCC_MidiProtocol::SystemMessage | MCC_MidiProtocol::SongPosition;
+	_Buffer[1] = Song & 0x7F;
 
 	return *this;
 }
