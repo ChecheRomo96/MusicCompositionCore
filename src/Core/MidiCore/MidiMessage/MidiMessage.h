@@ -12,8 +12,6 @@ namespace MusicCompositionCore
     {
         namespace MidiCore
         {
-            class MidiNote;
-
             class MidiMessage
             {
                 CPVector::vector<uint8_t> _Buffer;
