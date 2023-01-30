@@ -11,6 +11,8 @@ namespace MusicCompositionCore
     {
         namespace MidiCore
         {
+            class MidiNote;
+            
             class MidiMessage
             {
                 CPVector::vector<uint8_t> _Buffer;
@@ -23,12 +25,12 @@ namespace MusicCompositionCore
                     const CPVector::vector<uint8_t>& Buffer();
 
                     MidiMessage& NoteOn(uint8_t Pitch, uint8_t Vel , uint8_t Channel = 0);
-                    MidiMessage& NoteOn(const MidiCore::MidiNote& Source);
+                    MidiMessage& NoteOn(const MidiNote& Source);
                     MidiMessage& NoteOn(const MusicalCore::MusicalNote::Note& Source, uint8_t Vel, uint8_t Channel = 0);
                     MidiMessage& NoteOn(const MusicalCore::MusicalNote::Pitch& Source, uint8_t Octave, uint8_t Vel, uint8_t Channel = 0);
 
                     MidiMessage& NoteOff(uint8_t Pitch, uint8_t Channel = 0);
-                    MidiMessage& NoteOff(const MidiCore::MidiNote& Source);
+                    MidiMessage& NoteOff(const MidiNote& Source);
                     MidiMessage& NoteOff(const MusicalCore::MusicalNote::Note& Source, uint8_t Channel = 0);
                     MidiMessage& NoteOff(const MusicalCore::MusicalNote::Pitch& Source, uint8_t Octave, uint8_t Channel = 0);
 
