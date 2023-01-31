@@ -173,7 +173,7 @@ MidiMessage& MidiMessage::Start()
 {
 	_Buffer.resize(1);
 
-	_Buffer[0] = MCC_MidiProtocol::SystemMessage | MCC_MidiProtocol::StartSong;
+	_Buffer[0] = MCC_MidiProtocol::SystemMessage | MCC_MidiProtocol::Start;
 
 	return *this;
 }
@@ -182,7 +182,7 @@ MidiMessage& MidiMessage::Continue()
 {
 	_Buffer.resize(1);
 
-	_Buffer[0] = MCC_MidiProtocol::SystemMessage | MCC_MidiProtocol::ContinueSong;
+	_Buffer[0] = MCC_MidiProtocol::SystemMessage | MCC_MidiProtocol::Continue;
 
 	return *this;
 }
@@ -191,7 +191,7 @@ MidiMessage& MidiMessage::Stop()
 {
 	_Buffer.resize(1);
 
-	_Buffer[0] = MCC_MidiProtocol::SystemMessage | MCC_MidiProtocol::StopSong;
+	_Buffer[0] = MCC_MidiProtocol::SystemMessage | MCC_MidiProtocol::Stop;
 
 	return *this;
 }
