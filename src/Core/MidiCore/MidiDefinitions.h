@@ -21,8 +21,9 @@
 					static constexpr uint8_t ChannelPressure = 0xD0;
 					static constexpr uint8_t PitchBend = 0xE0;
 
-					//System Messages
 					static constexpr uint8_t SystemMessage = 0xF0;
+
+					// System Common Messages
 					static constexpr uint8_t SystemExclusive = 0x0;
 					static constexpr uint8_t MTC_QuarterFrame = 0x1;
 					static constexpr uint8_t SongPositionPointer = 0x2;
@@ -30,7 +31,7 @@
 					static constexpr uint8_t TuningRequest = 0x6;
 					static constexpr uint8_t SystemExclusiveEnd = 0x7;
 
-					// Real Time Messages
+					// System Real Time Messages
 					static constexpr uint8_t TimingTick = 0x8;
 					static constexpr uint8_t Start = 0xA;
 					static constexpr uint8_t Continue = 0xB;
