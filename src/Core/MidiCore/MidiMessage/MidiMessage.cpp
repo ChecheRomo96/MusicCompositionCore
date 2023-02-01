@@ -258,6 +258,30 @@ MidiMessage& MidiMessage::SystemExclusive(const CPVector::vector<uint8_t>& Data)
 
 MidiMessage& MidiMessage::SystemExclusive(uint8_t* Data, uint8_t Length)
 {
+	uint8_t counter = 0;
+	bool flag1 = 0;
+	bool flag2 = 0;
 
+	if(Data[0] != (MCC_MidiProtocol::System::Exclusive::Start))
+	{
+		counter++;
+		flag1 = 1;
+	}
+	if(Data[Length - 1] != (MCC_MidiProtocol::System::Exclusive::End))
+	{
+		counter++;
+		flag2 = 1;
+	}
+
+	_Buffer.resize(Length + counter);
+
+	if(flag1){ _Buffer[0] = MCC_MidiProtocol::System::Exclusive::Start; }
+	if(flag2){ _Buffer[_Buffer.size() - 1] = MCC_MidiProtocol::System::Exclusive::End; }
+	
+	for(uint8_t i = flag1; i < _Buffer.size() - flag2; i++)
+	{
+		_Buffer[i] = Data[i-flag1];
+	}
+	
 	return *this;
 }
