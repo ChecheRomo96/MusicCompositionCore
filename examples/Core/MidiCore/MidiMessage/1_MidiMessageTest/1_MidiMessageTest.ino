@@ -75,8 +75,8 @@ void setup() {
       Serial.print("  Song Position Pointer Message (Position: 0xFF):   ");
       PrintBuffer();
       
-      myMessage.SongPositionPointer(0xFFAA);
-      Serial.print("  Song Position Pointer Message (Position: 0xFFAA): ");
+      myMessage.SongPositionPointer(0xAAFF);
+      Serial.print("  Song Position Pointer Message (Position: 0xAAFF): ");
       PrintBuffer();
     
     Serial.println();
