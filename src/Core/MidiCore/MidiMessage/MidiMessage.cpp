@@ -255,6 +255,7 @@ MidiMessage& MidiMessage::SystemExclusive(const CPVector::vector<uint8_t>& Data)
 
 	return *this;
 }
+
 MidiMessage& MidiMessage::SystemExclusive(uint8_t* Data, uint8_t Length)
 {
 
