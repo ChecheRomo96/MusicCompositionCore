@@ -209,7 +209,7 @@ MidiMessage& MidiMessage::SongPositionPointer(uint16_t Position)
 {
 	_Buffer.resize(3);
 
-	_Buffer[0] = MCC_MidiProtocol::SystemMessage | MCC_MidiProtocol::SongPosition;
+	_Buffer[0] = MCC_MidiProtocol::SystemMessage | MCC_MidiProtocol::SongPositionPointer;
 	_Buffer[1] = Position&0xFF;
 	_Buffer[2] = (Position>>8)&0xFF;
 
@@ -220,7 +220,7 @@ MidiMessage& MidiMessage::SongSelect(uint8_t Song)
 {
 	_Buffer.resize(3);
 
-	_Buffer[0] = MCC_MidiProtocol::SystemMessage | MCC_MidiProtocol::SongPosition;
+	_Buffer[0] = MCC_MidiProtocol::SystemMessage | MCC_MidiProtocol::SongSelect;
 	_Buffer[1] = Song & 0x7F;
 
 	return *this;
