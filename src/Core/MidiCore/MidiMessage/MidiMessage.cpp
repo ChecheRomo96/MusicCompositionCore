@@ -205,7 +205,7 @@ MidiMessage& MidiMessage::ClockTick()
 	return *this;
 }
 
-MidiMessage& MidiMessage::SongPositionCounter(uint16_t Position)
+MidiMessage& MidiMessage::SongPositionPointer(uint16_t Position)
 {
 	_Buffer.resize(3);
 

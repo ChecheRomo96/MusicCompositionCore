@@ -25,7 +25,7 @@
 					static constexpr uint8_t SystemMessage = 0xF0;
 					static constexpr uint8_t SystemExclusive = 0x0;
 					static constexpr uint8_t MTC_QuarterFrame = 0x1;
-					static constexpr uint8_t SongPosition = 0x2;
+					static constexpr uint8_t SongPositionPointer = 0x2;
 					static constexpr uint8_t SongSelect = 0x3;
 					static constexpr uint8_t TuningRequest = 0x6;
 					static constexpr uint8_t SystemExclusiveEnd = 0x7;

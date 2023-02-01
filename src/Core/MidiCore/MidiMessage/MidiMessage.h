@@ -45,7 +45,7 @@ namespace MusicCompositionCore
                     MidiMessage& Stop();
 
                     MidiMessage& ClockTick();
-                    MidiMessage& SongPositionCounter(uint16_t Position);
+                    MidiMessage& SongPositionPointer(uint16_t Position);
                     MidiMessage& SongSelect(uint8_t Song);
 
                     MidiMessage& SystemExclusive(const CPVector::vector<uint8_t>& Data);
