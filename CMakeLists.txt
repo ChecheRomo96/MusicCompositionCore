@@ -44,7 +44,16 @@
 		set(MCC_COMPILE_MIDI_CORE TRUE CACHE BOOL "Compile MCC::Core::MidiCore")
 			set(MCC_COMPILE_MIDI_NOTE TRUE CACHE BOOL "Compile MCC::Core::MidiCore::MidiNote")
 
+
+
+	set(MCC_COMPILE_COMMUNICATIONS TRUE CACHE BOOL "Compile MCC::Communications")
+
+		set(MCC_COMPILE_MIDI_PORT TRUE CACHE BOOL "Compile MCC::Communications::MidiPort")
 	
+			set(MCC_COMPILE_UART_MIDI CACHE BOOL "Compile MCC::Communications::MidiPort::Uart")
+				set(MCC_COMPILE_UART_MIDI_IN CACHE BOOL "Compile MCC::Communications::MidiPort::Uart")
+
+			set(MCC_COMPILE_RTMIDI CACHE BOOL "Compile MCC::Communications::MidiPort::RtMidi")
 
 	set(MCC_BUILD_EXAMPLES TRUE CACHE BOOL "Build MCC Examples")
 #

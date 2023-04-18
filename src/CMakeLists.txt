@@ -27,6 +27,11 @@
 		message(STATUS "Compiling MCC::Core...")
 		add_subdirectory(Core)
 	endif()
+
+	if(${MCC_COMPILE_COMMUNICATIONS})
+		message(STATUS "Compiling MCC::Communications...")
+		add_subdirectory(Communications)
+	endif()
 #
 ######################################################################################################
 # Create the MCC library (STATIC is not justified tho)
@@ -69,6 +74,25 @@
 
 			if(${MCC_COMPILE_MIDI_NOTE})
 				target_compile_definitions(MCC PUBLIC MCC_MIDI_NOTE_ENABLED)
+			endif()
+
+		endif()
+
+	endif()
+
+
+	if(${MCC_COMPILE_COMMUNICATIONS})
+		target_compile_definitions(MCC PUBLIC MCC_COMMUNICATIONS_ENABLED)
+
+		if(${MCC_COMPILE_MIDI_PORT})
+			target_compile_definitions(MCC PUBLIC MCC_MIDI_PORT_ENABLED)
+
+			if(${MCC_COMPILE_UART_MIDI})
+				target_compile_definitions(MCC PUBLIC MCC_UART_MIDI_ENABLED)
+			endif()
+
+			if(${MCC_COMPILE_RTMIDI})
+				target_compile_definitions(MCC PUBLIC MCC_RTMIDI_ENABLED)
 			endif()
 
 		endif()

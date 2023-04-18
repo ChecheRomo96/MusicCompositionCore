@@ -4,21 +4,21 @@
         //////////////////////////////////////////////////////////////////
         // Compilation Setup
 
-                #ifndef MCC_CORE_ENABLED
-                    #define MCC_CORE_ENABLED
-                #endif
+            //////////////////////////////////////////////////////////////
+            // Core
 
-                #ifndef MCC_UTILITY_CORE_ENABLED
+                #define MCC_CORE_ENABLED
+
                     #define MCC_UTILITY_CORE_ENABLED
-                #endif
-
-                #ifndef MCC_MUSICAL_CORE_ENABLED
                     #define MCC_MUSICAL_CORE_ENABLED
-                #endif
-
-                #ifndef MCC_MIDI_CORE_ENABLED
                     #define MCC_MIDI_CORE_ENABLED
-                #endif
+            //
+            //////////////////////////////////////////////////////////////
+            // Communications
+
+                #define MCC_COMMUNICATIONS_ENABLED
+            //
+            //////////////////////////////////////////////////////////////
         //              
         //////////////////////////////////////////////////////////////////
         // Debug 

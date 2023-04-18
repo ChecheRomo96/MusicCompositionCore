@@ -11,6 +11,13 @@
 	endif()
 #
 ######################################################################################################
+# Append Communications Examples
+
+	if(${MCC_COMPILE_COMMUNICATIONS})
+		add_subdirectory(Communications)
+	endif()
+#
+######################################################################################################
 # Append Code Testing Executable
 
 	add_subdirectory(CodeTesting)

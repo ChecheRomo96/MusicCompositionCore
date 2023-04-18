@@ -37,8 +37,11 @@
 	    #include "Core/MCC_Core.h"
 	#endif
 
+	#ifdef MCC_COMMUNICATIONS_ENABLED
+	    #include "Communications/MCC_Communications.h"
+	#endif
+
 	
-	//#include "Communications/MCC_Communications.h"
 	//#include "MidiDevices/MidiDevices.h"
     //#include "ServiceHandler/ServiceHandler.h"
 

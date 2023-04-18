@@ -6,25 +6,15 @@
 ######################################################################################################
 # Append Sources and Headers
 
-	list( APPEND MCC_SOURCES "${CMAKE_CURRENT_LIST_DIR}/MCC_Core.cpp")
-	list( APPEND HEADERS_LIST "${CMAKE_CURRENT_LIST_DIR}/MCC_Core.h")
+	#list( APPEND MCC_SOURCES "${CMAKE_CURRENT_LIST_DIR}/MCC_Core.cpp")
+	list( APPEND HEADERS_LIST "${CMAKE_CURRENT_LIST_DIR}/UartMidi.h")
 #
 ######################################################################################################
 # Add Subdirectories
 
-	if(${MCC_COMPILE_UTILITY_CORE})
-		message(STATUS "Compiling MCC::Core::UtilityCore...")
-		add_subdirectory(UtilityCore)
-	endif()
-
-	if(${MCC_COMPILE_MUSICAL_CORE})
-		message(STATUS "Compiling MCC::Core::MusicalCore...")
-		add_subdirectory(MusicalCore)
-	endif()
-
-	if(${MCC_COMPILE_MIDI_CORE})
-		message(STATUS "Compiling MCC::Core::MidiCore...")
-		add_subdirectory(MidiCore)
+	if(${MCC_COMPILE_UART_MIDI_IN})
+		message(STATUS "Compiling MCC::Communications::MidiPort::Uart::InputPort...")
+		add_subdirectory(InputPort)
 	endif()
 #
 ######################################################################################################
@@ -33,24 +23,13 @@
 	set(MCC_SOURCES "${MCC_SOURCES}" PARENT_SCOPE)
 #
 ######################################################################################################
-# Add Compliler Definitions
-
-	if(MCC_COMPILE_UTILITY_CORE)
-		#target_compile_definitions(MCC PUBLIC MCC_UTILITY_CORE_ENABLED)
-	endif()
-
-	if(MCC_COMPILE_MUSICAL_CORE)
-		#target_compile_definitions(MCC PUBLIC MCC_MUSICAL_CORE_ENABLED)
-	endif()
-#
-######################################################################################################
 # MCC install process
 
 	if(INSTALL STREQUAL "ON")
 
 		install(
 			FILES ${HEADERS_LIST} 
-			DESTINATION ${CMAKE_INSTALL_PREFIX}/include/MCC/Core
+			DESTINATION ${CMAKE_INSTALL_PREFIX}/include/MCC/Communications/MidiPort/UartMidi
 		)
 
 	endif()

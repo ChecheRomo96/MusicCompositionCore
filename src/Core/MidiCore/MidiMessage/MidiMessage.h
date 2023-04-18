@@ -21,7 +21,7 @@ namespace MusicCompositionCore
 
                     MidiMessage();
 
-                    MidiMessage& MidiMessage::operator=(const MidiMessage& Source);
+                    MidiMessage& operator=(const MidiMessage& Source);
                     const CPVector::vector<uint8_t>& Buffer();
 
                     MidiMessage& NoteOn(uint8_t Pitch, uint8_t Vel , uint8_t Channel = 0);
