@@ -6,7 +6,7 @@
 ######################################################################################################
 # Append Sources and Headers
 
-	#list( APPEND MCC_SOURCES "${CMAKE_CURRENT_LIST_DIR}/MCC_Core.cpp")
+	list( APPEND MCC_SOURCES "${CMAKE_CURRENT_LIST_DIR}/MidiPort.cpp")
 	list( APPEND HEADERS_LIST "${CMAKE_CURRENT_LIST_DIR}/MidiPort.h")
 #
 ######################################################################################################
@@ -29,7 +29,7 @@
 
 		install(
 			FILES ${HEADERS_LIST} 
-			DESTINATION ${CMAKE_INSTALL_PREFIX}/include/MCC/Communications/MidiPort
+			DESTINATION ${CMAKE_INSTALL_PREFIX}/include/MCC/Communications/Midi
 		)
 
 	endif()

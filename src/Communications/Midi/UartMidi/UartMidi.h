@@ -11,12 +11,20 @@
 			{
 				namespace Uart
 				{
-					namespace PortID
+
+                	typedef uint8_t PortID;
+                	typedef uint8_t PortType;
+
+                	static constexpr PortID InvalidPortID = 0xFF;
+
+                	class MidiPort;
+
+					namespace PortTypes
 					{
-						static constexpr uint8_t InvalidMode = 0u;
-						static constexpr uint8_t DuplexPort = 1u;
-						static constexpr uint8_t InputPort = 2u;
-						static constexpr uint8_t OutputPort = 3u;
+						static constexpr PortType InvalidType = 0u;
+						static constexpr PortType DuplexPort = 1u;
+						static constexpr PortType InputPort = 2u;
+						static constexpr PortType OutputPort = 3u;
 					}
 
 					namespace PollingMode
@@ -25,7 +33,7 @@
 						static constexpr bool Manual = 1;
 					}
 
-					static constexpr uint32_t MidiBaudRate = 31250;
+					static constexpr uint32_t SpecBaudRate = 31250;
 				}
 			}
 		}
@@ -43,25 +51,62 @@
 			{
 				namespace Uart
                 {
+                    class InputPort;
                 
-                    /*class UartMidiPort
-                     {
-                     private:
-                     void* _PortPointer;
-                     uint8_t _PortID;
+                    class MidiPort
+                    {
+	                    private:
+							void* _PortPointer;
+							PortType _PortType;
+	                     
+	                    public:
+
+							///////////////////////////////////////////////////////////////////////
+	                    	// Constructors
+
+	                            MidiPort();
+
+
+	                            MidiPort(const InputPort& Parent);
+								//UartMidiPort(const Uart::OutputPort& Parent);
+								//UartMidiPort(const Uart::DuplexPort& Parent);
+							//
+							///////////////////////////////////////////////////////////////////////
+	                        // High Level API
+
+								void LinkToPort(const InputPort& Parent);
+								void UnlinkFromPort();
+
+								const PortType& ParentType() const;
+								const void* ParentPointer() const;
+							//
+							///////////////////////////////////////////////////////////////////////
+							// Midi Port Generic API
+
+								const CPString::string& Name() const;
+								void SetName(const CPString::string& NewName);
+
+							//
+							///////////////////////////////////////////////////////////////////////
+		                    // Midi In API
+
+		                        void AppendCallback(void(*Callback)(CPVector::vector<uint8_t>&));
+		                        void DetachCallback(void(*Callback)(CPVector::vector<uint8_t>&));
+
+		                        void SetBufferSize(uint8_t size);
+
+								void Service();
+							//
+							///////////////////////////////////////////////////////////////////////
+
+
+                    };
                      
-                     public:
-                     UartMidiPort(const Uart::InputPort& Parent);
-                     UartMidiPort(const Uart::OutputPort& Parent);
-                     UartMidiPort(const Uart::DuplexPort& Parent);
+                    extern CPVector::vector<MidiPort> SystemPorts;
                      
-                     
-                     };
-                     
-                     CPVector::vector<UartMidiPort> UartMidiPorts;
-                     
-                     uint8_t GetPortID();
-                     */
+                    bool BindPort(const InputPort& PortPointer); 
+                    void ReleasePort(const InputPort& PortPointer); 
+                    PortID GetSystemPortID(const InputPort& Port);
                 
                 }
 			}

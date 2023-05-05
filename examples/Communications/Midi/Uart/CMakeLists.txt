@@ -1,8 +1,8 @@
 ######################################################################################################
 # Append Midi Port Examples
 
-	if(${MCC_COMPILE_MIDI_PORT})
-		add_subdirectory(Midi)
+	if(${MCC_COMPILE_UART_MIDI_IN})
+		add_subdirectory(InputPort)
 	endif()
 #
 ######################################################################################################
