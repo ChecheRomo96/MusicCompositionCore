@@ -16,6 +16,11 @@
 		message(STATUS "Compiling MCC::Communications::MidiPort::Uart::InputPort...")
 		add_subdirectory(InputPort)
 	endif()
+
+	if(${MCC_COMPILE_UART_MIDI_OUT})
+		message(STATUS "Compiling MCC::Communications::MidiPort::Uart::OutputPort...")
+		add_subdirectory(OutputPort)
+	endif()
 #
 ######################################################################################################
 # Refresh Sources List at PARENT_SCOPE

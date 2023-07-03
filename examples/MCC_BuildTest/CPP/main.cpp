@@ -39,6 +39,39 @@ int main()
         #endif
     #endif
 
+    #if defined(MCC_COMPILE_COMMUNICATIONS)
+        std::cout << "MCC::Communications Enabled..." << std::endl;
+
+        #if defined(MCC_COMPILE_MIDI_PORT)
+            std::cout << "MCC::Communications::Midi Enabled..." << std::endl;
+
+            #if defined(MCC_COMPILE_UART_MIDI)
+                std::cout << "MCC::Communications::Midi::Uart Enabled..." << std::endl;
+
+                #if defined(MCC_COMPILE_UART_MIDI_IN)
+                    std::cout << "MCC::Communications::Midi::Uart::InputPort Enabled..." << std::endl;
+                #endif
+
+                #if defined(MCC_COMPILE_UART_MIDI_OUT)
+                    std::cout << "MCC::Communications::Midi::Uart::OutputPort Enabled..." << std::endl;
+                #endif
+            #endif
+
+            #if defined(MCC_COMPILE_RTMIDI)
+                std::cout << "MCC::Communications::Midi::RtMidi Enabled..." << std::endl;
+                
+            #endif
+
+
+
+        #endif
+
+    #endif
+
+
+    #if defined(MCC_BUILD_EXAMPLES)
+        std::cout << "Examples Built. Find them on the \"BuildDirectory/Examples\" Directory" << std::endl;
+    #endif
 
 
 	return 0;

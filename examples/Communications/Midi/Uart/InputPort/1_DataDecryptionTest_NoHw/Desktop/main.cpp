@@ -51,10 +51,6 @@ void Callback(CPVector::vector<uint8_t>& message)
             std::cout<<"After Touch ";
             break;
 
-        case MCC_MidiCore::Protocol::System::RealTime::ActiveSensing:
-            std::cout<<"Active Sensing ";
-            break;
-
         case 0xF0: // System Messages
             switch(message[0])
             {
@@ -84,6 +80,10 @@ void Callback(CPVector::vector<uint8_t>& message)
 
                 case MCC_MidiCore::Protocol::System::Common::SongSelect:
                     std::cout<<"Song Select ";
+                    break;
+                    
+                case MCC_MidiCore::Protocol::System::RealTime::ActiveSensing:
+                    std::cout<<"Active Sensing ";
                     break;
             }
             break;
