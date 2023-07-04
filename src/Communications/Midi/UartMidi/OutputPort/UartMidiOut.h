@@ -25,7 +25,7 @@
 							//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 							// HW Link Function pointers
 
-								uint8_t (*_Write)(_Write Data);
+								uint8_t (*_Write)(uint8_t Data);
 
 								void (*_SetBaudRate)(uint32_t BaudRate); // Optional
 								void (*_Initialize)(void);				 // Optional
