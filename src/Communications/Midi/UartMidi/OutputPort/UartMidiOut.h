@@ -97,7 +97,7 @@
 		                        // Channel Voice Messages
 		                        void NoteOn(uint8_t Note, uint8_t Velocity, uint8_t Channel);
 		                        void NoteOff(uint8_t Note, uint8_t Velocity, uint8_t Channel);
-		                        void ControlChange(uint8_t ControlNumber, uint8_t NewValue uint8_t Channel);
+		                        void ControlChange(uint8_t ControlNumber, uint8_t NewValue, uint8_t Channel);
 		                        void ChannelPressure(uint8_t Pressure, uint8_t Channel);
 		                        void PitchBend(uint8_t BendValue, uint8_t Channel);
 		                        void PitchBend(uint16_t BendValue, uint8_t Channel);
