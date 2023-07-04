@@ -63,8 +63,7 @@
 								void HLAPI_Dettach();
 								bool HLAPI_Status();
 
-								bool AvailableAPI_Status();
-								bool ReadAPI_Status();
+								bool WriteAPI_Status();
 								bool InitializeAPI_Status();
 								bool SetBaudRateAPI_Status();
 							//
