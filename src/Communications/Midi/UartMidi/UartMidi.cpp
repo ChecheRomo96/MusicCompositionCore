@@ -1,5 +1,5 @@
 #include "UartMidi.h"
-#include "..MidiPort.h"
+#include "../MidiPort.h"
 #include <MCC.h>
 
 
