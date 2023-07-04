@@ -1,6 +1,4 @@
 #include "UartMidiOut.h"
-
-#include "UartMidiIn.h"
 #include "../../MidiPort.h"
 #include "../../../../Core/MidiCore/MidiCore.h"
 
@@ -177,59 +175,101 @@ using namespace MusicCompositionCore::Communications;
 
     void OutputPort::ChannelPressure(uint8_t Pressure, uint8_t Channel)
     {
+		Write(MCC_MidiCore::Protocol::ChannelVoice::ChannelPressure | (Channel & 0x0F) );
+		Write( Pressure );
+    }
 
+    void OutputPort::PitchBend(uint8_t BendValue, uint8_t Channel)
+    {
+		Write(MCC_MidiCore::Protocol::ChannelVoice::PitchBend | (Channel & 0x0F) );
+		Write( 0 );
+		Write( BendValue & 0b01111111 );
+    }
+
+    void OutputPort::PitchBend(int8_t BendValue, uint8_t Channel)
+    {
+    	if(BendValue >= 0x40){BendValue = 0x3F;}
+    	if(BendValue < -0x40){BendValue = 0x40;}
+
+    	BendValue = 0x40 + BendValue;
+
+		Write(MCC_MidiCore::Protocol::ChannelVoice::PitchBend | (Channel & 0x0F) );
+		Write( 0 );
+		Write( BendValue & 0b01111111 );
     }
 
     void OutputPort::PitchBend(uint16_t BendValue, uint8_t Channel)
     {
+		Write(MCC_MidiCore::Protocol::ChannelVoice::PitchBend | (Channel & 0x0F) );
+		Write( BendValue & 0b01111111 );
+		Write( ((BendValue)>>7) & 0b01111111 );
+    }
 
+    void OutputPort::PitchBend(int16_t BendValue, uint8_t Channel)
+    {
+    	if(BendValue >= 0x2000){BendValue = 0x1FFF;}
+    	if(BendValue < -0x2000){BendValue = -0x2000;}
+
+    	BendValue = 0x2000 + BendValue;
+
+		Write(MCC_MidiCore::Protocol::ChannelVoice::PitchBend | (Channel & 0x0F) );
+		Write( BendValue & 0b01111111 );
+		Write( ((BendValue)>>7) & 0b01111111 );
     }
 
     void OutputPort::AfterTouch(uint8_t Note, uint8_t Value, uint8_t Channel)
     {
-
+		Write(MCC_MidiCore::Protocol::ChannelVoice::AfterTouch | (Channel & 0x0F) );
+		Write( Note & 0b01111111 );
+		Write( Value );
     }
 
 
-    // Sysytem Common Messages
+    // Sysytem Real Time Messages
     void OutputPort::TimingTick()
     {
-
+		Write(MCC_MidiCore::Protocol::System::RealTime::TimingTick);
     }
 
     void OutputPort::Start()
     {
-
+		Write(MCC_MidiCore::Protocol::System::RealTime::Start);
     }
 
     void OutputPort::Stop()
     {
-
+		Write(MCC_MidiCore::Protocol::System::RealTime::Stop);
     }
 
     void OutputPort::Continue()
     {
-
+		Write(MCC_MidiCore::Protocol::System::RealTime::Continue);
     }
+
+    // System Common Messages
 
     void OutputPort::SongPositionPointer(uint16_t Position)
     {
-
+		Write(MCC_MidiCore::Protocol::System::Common::SongPositionPointer);
+		Write( Position & 0b01111111 );
+		Write( ((Position)>>7) & 0b01111111 );
     }
 
     void OutputPort::MTC_QuarterFrame(uint8_t MessageType, uint8_t Values)
     {
-
+		Write(MCC_MidiCore::Protocol::System::Common::MTC_QuarterFrame);
+		Write( ((MessageType & 0b111)<<4) | (Values & 0x0F) );
     }
 
     void OutputPort::SongSelect(uint8_t SongID)
     {
-
+		Write(MCC_MidiCore::Protocol::System::Common::SongSelect);
+		Write( SongID & 0b01111111 );
     }
 
     void OutputPort::ActiveSensing()
     {
-
+		Write(MCC_MidiCore::Protocol::System::Common::ActiveSensing);
     }
 
 
@@ -257,26 +297,5 @@ using namespace MusicCompositionCore::Communications;
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Helpers
 
-	void OutputPort::SetSysExFlag(bool State)
-	{
-        _FlagRegister &= 0b11111101;
-        _FlagRegister |= (State<<1u);
-	}
-
-	const bool OutputPort::SysExFlag() const
-	{
-        return (_FlagRegister >> 1u) & 1u;
-	}
-
-	void OutputPort::SetSOMF(bool State)
-	{
-        _FlagRegister &= 0b11111011;
-        _FlagRegister |= (State<<2u);
-	}
-
-	const bool OutputPort::SOMF() const
-	{
-        return (_FlagRegister >> 2u) & 1u;
-	}
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

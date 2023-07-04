@@ -73,6 +73,7 @@
 
 								void Initialize();
 								void SetBaudRate(uint32_t BaudRate);
+								void Write(uint8_t Data);
 							//
 							//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 							// High Level API
@@ -98,6 +99,7 @@
 		                        void NoteOff(uint8_t Note, uint8_t Velocity, uint8_t Channel);
 		                        void ControlChange(uint8_t ControlNumber, uint8_t NewValue uint8_t Channel);
 		                        void ChannelPressure(uint8_t Pressure, uint8_t Channel);
+		                        void PitchBend(uint8_t BendValue, uint8_t Channel);
 		                        void PitchBend(uint16_t BendValue, uint8_t Channel);
 		                        void AfterTouch(uint8_t Note, uint8_t Value, uint8_t Channel);
 
@@ -124,7 +126,7 @@
 							//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 							// Low Level Hardware API
 
-								void Write(uint8_t Data);
+								
 							//
 							//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 							// Helpers

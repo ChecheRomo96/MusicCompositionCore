@@ -16,13 +16,13 @@ int main()
 
     #if defined(MCC_CORE_ENABLED)
         
-        std::cout << "MCC::Core Enabled..."<< std::endl;
+        std::cout << "MCC::Core Enabled..."<< std::endl<< std::endl;
 
         #if defined(MCC_UTILITY_CORE_ENABLED)
-            std::cout << "MCC::Core::UtilityCore Enabled..." << std::endl;
+            std::cout << "  MCC::Core::UtilityCore Enabled..." << std::endl;
 
             #if defined(MCC_ACCUMULATOR_ENABLED)
-                std::cout << "MCC::Core::UtilityCore::Accumulator Enabled..." << std::endl;
+                std::cout << "    MCC::Core::UtilityCore::Accumulator Enabled..." << std::endl;
             #endif
 
         #endif
@@ -30,35 +30,37 @@ int main()
         std::cout << std::endl;
     
         #if defined(MCC_MUSICAL_CORE_ENABLED)
-            std::cout << "MCC::Core::MusicalCore Enabled..." << std::endl;
+            std::cout << "  MCC::Core::MusicalCore Enabled..." << std::endl;
     
-        #if defined(MCC_MUSICAL_NOTE_ENABLED)
-            std::cout << "MCC::Core::MusicalCore::MusicalNote Enabled..." << std::endl;
-        #endif
+            #if defined(MCC_MUSICAL_NOTE_ENABLED)
+                std::cout << "    MCC::Core::MusicalCore::MusicalNote Enabled..." << std::endl;
+            #endif
     
         #endif
     #endif
 
-    #if defined(MCC_COMPILE_COMMUNICATIONS)
-        std::cout << "MCC::Communications Enabled..." << std::endl;
+    std::cout << std::endl;
 
-        #if defined(MCC_COMPILE_MIDI_PORT)
-            std::cout << "MCC::Communications::Midi Enabled..." << std::endl;
+    #if defined(MCC_COMMUNICATIONS_ENABLED)
+        std::cout << "MCC::Communications Enabled..." << std::endl<< std::endl;
 
-            #if defined(MCC_COMPILE_UART_MIDI)
-                std::cout << "MCC::Communications::Midi::Uart Enabled..." << std::endl;
+        #if defined(MCC_MIDI_PORT_ENABLED)
+            std::cout << "  MCC::Communications::Midi Enabled..." << std::endl;
+
+            #if defined(MCC_UART_MIDI_ENABLED)
+                std::cout << "    MCC::Communications::Midi::Uart Enabled..." << std::endl;
 
                 #if defined(MCC_COMPILE_UART_MIDI_IN)
-                    std::cout << "MCC::Communications::Midi::Uart::InputPort Enabled..." << std::endl;
+                    std::cout << "      MCC::Communications::Midi::Uart::InputPort Enabled..." << std::endl;
                 #endif
 
                 #if defined(MCC_COMPILE_UART_MIDI_OUT)
-                    std::cout << "MCC::Communications::Midi::Uart::OutputPort Enabled..." << std::endl;
+                    std::cout << "      MCC::Communications::Midi::Uart::OutputPort Enabled..." << std::endl;
                 #endif
             #endif
 
-            #if defined(MCC_COMPILE_RTMIDI)
-                std::cout << "MCC::Communications::Midi::RtMidi Enabled..." << std::endl;
+            #if defined(MCC_RTMIDI_ENABLED)
+                std::cout << "    MCC::Communications::Midi::RtMidi Enabled..." << std::endl;
                 
             #endif
 

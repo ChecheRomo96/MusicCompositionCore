@@ -1,11 +1,11 @@
 #include "UartMidi.h"
-#include "../MidiPort.h"
+#include "..MidiPort.h"
 #include <MCC.h>
 
 
 using namespace MCC::Communications::Midi;
 
-CPVector::vector<Uart::MidiPort> Uart::SystemPorts;
+CPVector::vector<Uart::Port> Uart::SystemPorts;
 
 bool Uart::BindPort(const InputPort& Port)
 {
@@ -63,45 +63,45 @@ Uart::PortID Uart::GetSystemPortID(const InputPort& Port)
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Constructors
 
-	Uart::MidiPort::MidiPort()
+	Uart::Port::Port()
 	{
 		UnlinkFromPort();
 	}
 
 
 
-	Uart::MidiPort::MidiPort(const InputPort& Parent)
+	Uart::Port::Port(const InputPort& Parent)
 	{
 		UnlinkFromPort();
 		LinkToPort(Parent);
 	}
 
-	//UartMidiPort(const Uart::OutputPort& Parent);
-	//UartMidiPort(const Uart::DuplexPort& Parent);
+	//UartPort(const Uart::OutputPort& Parent);
+	//UartPort(const Uart::DuplexPort& Parent);
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // High Level API
 
-	void Uart::MidiPort::LinkToPort(const InputPort& Parent)
+	void Uart::Port::LinkToPort(const InputPort& Parent)
 	{
 	    _PortPointer = (void*) &Parent;
 	    _PortType = PortTypes::InputPort;
 	    Midi::BindPort(*this);
 	}
 
-	void Uart::MidiPort::UnlinkFromPort()
+	void Uart::Port::UnlinkFromPort()
 	{
 	    _PortPointer = NULL;
 	    _PortType = PortTypes::InvalidType;
 	    Midi::ReleasePort(*this);
 	}
 
-	const Uart::PortType& Uart::MidiPort::ParentType() const
+	const Uart::PortType& Uart::Port::ParentType() const
 	{
 	    return  _PortType;
 	}
 
-	const void* Uart::MidiPort::ParentPointer() const
+	const void* Uart::Port::ParentPointer() const
 	{
 	    return _PortPointer;
 	}
@@ -109,7 +109,7 @@ Uart::PortID Uart::GetSystemPortID(const InputPort& Port)
 ///////////////////////////////////////////////////////////////////////
 // Midi Port Generic API
 
-	const CPString::string& Uart::MidiPort::Name() const
+	const CPString::string& Uart::Port::Name() const
 	{
 		switch(_PortType)
 		{
@@ -120,7 +120,7 @@ Uart::PortID Uart::GetSystemPortID(const InputPort& Port)
 		return CPString::string("");
 	}
 
-	void Uart::MidiPort::SetName(const CPString::string& NewName)
+	void Uart::Port::SetName(const CPString::string& NewName)
 	{
 		switch(_PortType)
 		{
@@ -132,7 +132,7 @@ Uart::PortID Uart::GetSystemPortID(const InputPort& Port)
 ///////////////////////////////////////////////////////////////////////
 // Midi In API
 
-	void Uart::MidiPort::AppendCallback(void(*Callback)(CPVector::vector<uint8_t>&))
+	void Uart::Port::AppendCallback(void(*Callback)(CPVector::vector<uint8_t>&))
 	{
 		switch(_PortType)
 		{
@@ -141,7 +141,7 @@ Uart::PortID Uart::GetSystemPortID(const InputPort& Port)
 		}
 	}
 
-	void Uart::MidiPort::DetachCallback(void(*Callback)(CPVector::vector<uint8_t>&))
+	void Uart::Port::DetachCallback(void(*Callback)(CPVector::vector<uint8_t>&))
 	{
 		switch(_PortType)
 		{
@@ -150,7 +150,7 @@ Uart::PortID Uart::GetSystemPortID(const InputPort& Port)
 		}
 	}
 
-	void Uart::MidiPort::SetBufferSize(uint8_t size)
+	void Uart::Port::SetBufferSize(uint8_t size)
 	{
 		switch(_PortType)
 		{
@@ -159,7 +159,7 @@ Uart::PortID Uart::GetSystemPortID(const InputPort& Port)
 		}
 	}
 
-	void Uart::MidiPort::Service()
+	void Uart::Port::Service()
 	{
 		switch(_PortType)
 		{

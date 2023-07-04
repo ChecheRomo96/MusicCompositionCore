@@ -17,7 +17,7 @@
 
                 	static constexpr PortID InvalidPortID = 0xFF;
 
-                	class MidiPort;
+                	class Port;
 
 					namespace PortTypes
 					{
@@ -40,7 +40,14 @@
 	}
 
 
-	#include "InputPort/UartMidiIn.h"
+	#if defined (MCC_UART_MIDI_IN_ENABLED)
+		#include "InputPort/UartMidiIn.h"
+	#endif
+
+	#if defined (MCC_UART_MIDI_OUT_ENABLED)
+		#include "OutputPort/UartMidiOut.h"
+	#endif
+
 	#include <CPVector.h>
 
 	namespace MusicCompositionCore
@@ -53,7 +60,8 @@
                 {
                     class InputPort;
                 
-                    class MidiPort
+                    class Port
+
                     {
 	                    private:
 							void* _PortPointer;
@@ -64,12 +72,12 @@
 							///////////////////////////////////////////////////////////////////////
 	                    	// Constructors
 
-	                            MidiPort();
+	                            Port();
 
 
-	                            MidiPort(const InputPort& Parent);
-								//UartMidiPort(const Uart::OutputPort& Parent);
-								//UartMidiPort(const Uart::DuplexPort& Parent);
+	                            Port(const InputPort& Parent);
+								//UartPort(const Uart::OutputPort& Parent);
+								//UartPort(const Uart::DuplexPort& Parent);
 							//
 							///////////////////////////////////////////////////////////////////////
 	                        // High Level API
@@ -102,7 +110,7 @@
 
                     };
                      
-                    extern CPVector::vector<MidiPort> SystemPorts;
+                    extern CPVector::vector<Port> SystemPorts;
                      
                     bool BindPort(const InputPort& PortPointer); 
                     void ReleasePort(const InputPort& PortPointer); 

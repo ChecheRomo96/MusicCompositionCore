@@ -108,7 +108,10 @@ Midi::PortID Midi::GetSystemPortID(const Uart::MidiPort& Port)
 	{
 		switch(_PortType)
 		{
-	        case PortTypes::Uart: return ((Uart::MidiPort*) _PortPointer) -> Name();
+			#if defined(MCC_COMPILE_UART_MIDI)
+				case PortTypes::Uart: return ((Uart::MidiPort*) _PortPointer) -> Name();
+			#endif		
+
 			default: break;
 		}
 
@@ -119,7 +122,10 @@ Midi::PortID Midi::GetSystemPortID(const Uart::MidiPort& Port)
 	{
 		switch(_PortType)
 		{
-            case PortTypes::Uart: ((Uart::MidiPort*) _PortPointer) -> SetName(NewName);  break;
+			#if defined(MCC_COMPILE_UART_MIDI)
+				case PortTypes::Uart: ((Uart::MidiPort*) _PortPointer) -> SetName(NewName);  break;
+			#endif
+
 			default: break;
 		} 
 	}
@@ -132,7 +138,10 @@ Midi::PortID Midi::GetSystemPortID(const Uart::MidiPort& Port)
     {
 		switch(_PortType)
 		{
-            case PortTypes::Uart: ((Uart::MidiPort*) _PortPointer) -> AppendCallback(Callback);  break;
+			#if defined(MCC_COMPILE_UART_MIDI)
+				case PortTypes::Uart: ((Uart::MidiPort*) _PortPointer) -> AppendCallback(Callback);  break;
+			#endif	
+
 			default: break;
 		}
     }
@@ -141,7 +150,10 @@ Midi::PortID Midi::GetSystemPortID(const Uart::MidiPort& Port)
     {
 		switch(_PortType)
 		{
-            case PortTypes::Uart: ((Uart::MidiPort*) _PortPointer) -> DetachCallback(Callback);  break;
+			#if defined(MCC_COMPILE_UART_MIDI)
+				case PortTypes::Uart: ((Uart::MidiPort*) _PortPointer) -> DetachCallback(Callback);  break;
+			#endif	
+
 			default: break;
 		}
     }
@@ -151,7 +163,10 @@ Midi::PortID Midi::GetSystemPortID(const Uart::MidiPort& Port)
     {
 		switch(_PortType)
 		{
-            case PortTypes::Uart: ((Uart::MidiPort*) _PortPointer) -> SetBufferSize(size);  break;
+			#if defined(MCC_COMPILE_UART_MIDI)
+				case PortTypes::Uart: ((Uart::MidiPort*) _PortPointer) -> SetBufferSize(size);  break;
+			#endif	
+
 			default: break;
 		}
     }
@@ -161,7 +176,10 @@ Midi::PortID Midi::GetSystemPortID(const Uart::MidiPort& Port)
 	{
 		switch(_PortType)
 		{
-            case PortTypes::Uart: ((Uart::MidiPort*) _PortPointer) -> Service();  break;
+			#if defined(MCC_COMPILE_UART_MIDI)
+				case PortTypes::Uart: ((Uart::MidiPort*) _PortPointer) -> Service();  break;
+			#endif	
+
 			default: break;
 		}
 	}

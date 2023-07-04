@@ -28,6 +28,9 @@
 		#include "UartMidi/UartMidi.h"
 	#endif
 
+	#include<CPString.h>
+	#include<CPVector.h>
+
 	namespace MusicCompositionCore
 	{
 		namespace Communications
@@ -49,7 +52,12 @@
 					public:
 
 						Port();
-						Port(const Uart::MidiPort& Parent);
+
+
+						#if defined (MCC_UART_MIDI_ENABLED)
+							Port(const Uart::MidiPort& Parent);
+						#endif
+						
 
 						///////////////////////////////////////////////////////////////////////
 	                    // High Level API
@@ -70,7 +78,7 @@
 	                    // Midi In API
 
 	                        void AppendCallback(void(*Callback)(CPVector::vector<uint8_t>&));
-	                        void DetachCallback(void(*Callback)(CPVector::vector<uint8_tUa&));
+	                        void DetachCallback(void(*Callback)(CPVector::vector<uint8_t>&));
 
 	                        void SetBufferSize(uint8_t size);
 

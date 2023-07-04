@@ -87,9 +87,21 @@
 		if(${MCC_COMPILE_MIDI_PORT})
 			target_compile_definitions(MCC PUBLIC MCC_MIDI_PORT_ENABLED)
 
+
+
 			if(${MCC_COMPILE_UART_MIDI})
 				target_compile_definitions(MCC PUBLIC MCC_UART_MIDI_ENABLED)
+
+				if(${MCC_COMPILE_UART_MIDI_IN})
+					target_compile_definitions(MCC PUBLIC MCC_UART_MIDI_IN_ENABLED)
+				endif()
+
+				if(${MCC_COMPILE_UART_MIDI_OUT})
+					target_compile_definitions(MCC PUBLIC MCC_UART_MIDI_OUT_ENABLED)
+				endif()
 			endif()
+
+
 
 			if(${MCC_COMPILE_RTMIDI})
 				target_compile_definitions(MCC PUBLIC MCC_RTMIDI_ENABLED)

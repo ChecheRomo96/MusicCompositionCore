@@ -10,13 +10,27 @@
                 #define MCC_CORE_ENABLED
 
                     #define MCC_UTILITY_CORE_ENABLED
+                        #define MCC_ACCUMULATOR_ENABLED
+
                     #define MCC_MUSICAL_CORE_ENABLED
+                        #define MCC_MUSICAL_NOTE_ENABLED
+                        #define MCC_MUSICAL_INTERVAL_ENABLED
+                        #define MCC_MUSICAL_SCALE_ENABLED
+
                     #define MCC_MIDI_CORE_ENABLED
+                        #define MCC_MIDI_NOTE_ENABLED
+        
             //
             //////////////////////////////////////////////////////////////
             // Communications
 
                 #define MCC_COMMUNICATIONS_ENABLED
+
+                    #define MCC_MIDI_PORT_ENABLED
+
+                        #define MCC_UART_MIDI_ENABLED
+                            #define MCC_UART_MIDI_IN_ENABLED
+                            #define MCC_UART_MIDI_OUT_ENABLED
             //
             //////////////////////////////////////////////////////////////
         //              
