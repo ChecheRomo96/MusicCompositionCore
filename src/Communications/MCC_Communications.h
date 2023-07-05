@@ -17,4 +17,8 @@
 		#include "Midi/MidiPort.h"
 	#endif
 
+	#if defined(MCC_UART_PORT_ENABLED)
+		#include "Uart/Uart.h"
+	#endif
+
 #endif//MCC_COMMUNICATIONS_H

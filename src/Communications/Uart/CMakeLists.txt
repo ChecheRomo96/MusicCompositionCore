@@ -6,20 +6,28 @@
 ######################################################################################################
 # Append Sources and Headers
 
-	#list( APPEND MCC_SOURCES "${CMAKE_CURRENT_LIST_DIR}/MCC_Core.cpp")
-	list( APPEND HEADERS_LIST "${CMAKE_CURRENT_LIST_DIR}/MCC_Communications.h")
+	list( APPEND MCC_SOURCES "${CMAKE_CURRENT_LIST_DIR}/Uart.cpp")
+	list( APPEND MCC_SOURCES "${CMAKE_CURRENT_LIST_DIR}/UartPort.cpp")
+
+	list( APPEND HEADERS_LIST "${CMAKE_CURRENT_LIST_DIR}/Uart.h")
+	list( APPEND HEADERS_LIST "${CMAKE_CURRENT_LIST_DIR}/UartPort.h")
 #
 ######################################################################################################
 # Add Subdirectories
 
-	if(${MCC_COMPILE_MIDI_PORT})
-		message(STATUS "Compiling MCC::Communications::Midi...")
-		add_subdirectory(Midi)
+	if(${MCC_COMPILE_UART_IN_PORT})
+		message(STATUS "Compiling MCC::Communications::Uart::InputPort...")
+		add_subdirectory(InputPort)
 	endif()
 
-	if(${MCC_COMPILE_UART_PORT})
-		message(STATUS "Compiling MCC::Communications::Uart...")
-		add_subdirectory(Uart)
+	if(${MCC_COMPILE_UART_OUT_PORT})
+		message(STATUS "Compiling MCC::Communications::Uart::OutputPort...")
+		add_subdirectory(OutputPort)
+	endif()
+
+	if(${MCC_COMPILE_UART_DUPLEX_PORT})
+		message(STATUS "Compiling MCC::Communications::Uart::DuplexPort...")
+		add_subdirectory(DuplexPort)
 	endif()
 #
 ######################################################################################################
@@ -34,7 +42,7 @@
 
 		install(
 			FILES ${HEADERS_LIST} 
-			DESTINATION ${CMAKE_INSTALL_PREFIX}/include/MCC/Communications
+			DESTINATION ${CMAKE_INSTALL_PREFIX}/include/MCC/Communications/Uart
 		)
 
 	endif()

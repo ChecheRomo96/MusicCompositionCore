@@ -246,6 +246,11 @@ using namespace MusicCompositionCore::Communications;
 		Write(MCC_MidiCore::Protocol::System::RealTime::Continue);
     }
 
+	void OutputPort::ActiveSensing()
+	{
+		Write(MCC_MidiCore::Protocol::System::RealTime::ActiveSensing);
+	}
+
     // System Common Messages
 
     void OutputPort::SongPositionPointer(uint16_t Position)
@@ -266,12 +271,6 @@ using namespace MusicCompositionCore::Communications;
 		Write(MCC_MidiCore::Protocol::System::Common::SongSelect);
 		Write( SongID & 0b01111111 );
     }
-
-    void OutputPort::ActiveSensing()
-    {
-		Write(MCC_MidiCore::Protocol::System::Common::ActiveSensing);
-    }
-
 
     void OutputPort::SysteExclusive(uint8_t ManufacturerID , uint8_t* Data, uint8_t size)
     {

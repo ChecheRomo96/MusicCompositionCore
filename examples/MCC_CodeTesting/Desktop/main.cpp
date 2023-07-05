@@ -7,6 +7,7 @@ int main()
 {
 	MCC::Start();
 
+	/*
      MCC_MusicalScale::Scale myScale(MCC_MusicalNote::Note(MCC_MusicalNote::Pitch::G_Natural, 3), MCC_MusicalScaleFlash::Scales::Hirajoshi);
     std::cout << myScale.Name() << std::endl;
 
@@ -18,7 +19,9 @@ int main()
 	{
 		targetNote = myScale.Note(i);
 		std::cout << targetNote.Name() << "   -->   Frequency = " << targetNote.Frequency() << std::endl;
-	}
+	}*/
      
+
+	auto Port = MCC_Communications::Uart::InputPort();
     
 }

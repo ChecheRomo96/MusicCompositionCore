@@ -10,14 +10,6 @@
 	list( APPEND HEADERS_LIST "${CMAKE_CURRENT_LIST_DIR}/MidiPort.h")
 #
 ######################################################################################################
-# Add Subdirectories
-
-	if(${MCC_COMPILE_UART_MIDI})
-		message(STATUS "Compiling MCC::Communications::MidiPort::Uart...")
-		add_subdirectory(UartMidi)
-	endif()
-#
-######################################################################################################
 # Refresh Sources List at PARENT_SCOPE
 	
 	set(MCC_SOURCES "${MCC_SOURCES}" PARENT_SCOPE)

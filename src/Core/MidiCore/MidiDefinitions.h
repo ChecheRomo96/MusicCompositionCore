@@ -84,7 +84,6 @@
 						}
 					}
 				}
-
 				
 				static constexpr uint8_t MidiNoteRange = 128u;
 				static constexpr uint8_t InvalidMidiNote = 128u;
@@ -92,7 +91,8 @@
 				static constexpr uint8_t InvalidMidiVelocity = 128u;
 				static constexpr uint8_t MidiChannelRange = 16u;
 				static constexpr uint8_t InvalidMidiChannel = 16u;
-				
+
+				static constexpr uint32_t BaudRate = 31250;
 			}
 		}
 	}

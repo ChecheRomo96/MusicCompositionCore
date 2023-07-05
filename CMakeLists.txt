@@ -50,10 +50,13 @@
 		set(MCC_COMPILE_MIDI_PORT TRUE CACHE BOOL "Compile MCC::Communications::MidiPort")
 	
 			set(MCC_COMPILE_UART_MIDI CACHE BOOL "Compile MCC::Communications::MidiPort::Uart")
-				set(MCC_COMPILE_UART_MIDI_IN CACHE BOOL "Compile MCC::Communications::MidiPort::Uart::InputPort")
-				set(MCC_COMPILE_UART_MIDI_OUT CACHE BOOL "Compile MCC::Communications::MidiPort::Uart::OutputPort")
 
 			set(MCC_COMPILE_RTMIDI CACHE BOOL "Compile MCC::Communications::MidiPort::RtMidi")
+
+		set(MCC_COMPILE_UART_PORT CACHE BOOL "Compile MCC::Communications::MidiPort::Uart")
+			set(MCC_COMPILE_UART_IN_PORT CACHE BOOL "Compile MCC::Communications::Uart::InputPort")
+			set(MCC_COMPILE_UART_OUT_PORT CACHE BOOL "Compile MCC::Communications::Uart::OutputPort")
+			set(MCC_COMPILE_UART_DUPLEX_PORT CACHE BOOL "Compile MCC::Communications::Uart::DuplexPort")
 
 	set(MCC_BUILD_EXAMPLES TRUE CACHE BOOL "Build MCC Examples")
 #

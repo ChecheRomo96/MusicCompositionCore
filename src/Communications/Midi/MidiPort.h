@@ -39,7 +39,7 @@
 			{
 				namespace Uart
 				{
-					class MidiPort;
+					class Port;
 				}
 				
 				class Port
@@ -55,14 +55,14 @@
 
 
 						#if defined (MCC_UART_MIDI_ENABLED)
-							Port(const Uart::MidiPort& Parent);
+							Port(const Uart::Port& Parent);
 						#endif
 						
 
 						///////////////////////////////////////////////////////////////////////
 	                    // High Level API
 
-							void LinkToPort(const Uart::MidiPort& Parent);
+							void LinkToPort(const Uart::Port& Parent);
 							void UnlinkFromPort();
 
 							const PortType& ParentType() const;
@@ -91,9 +91,9 @@
 
 				extern CPVector::vector<Port> SystemPorts;
 
-                bool BindPort(const Uart::MidiPort& PortPointer); 
-                void ReleasePort(const Uart::MidiPort& PortPointer); 
-                PortID GetSystemPortID(const Uart::MidiPort& Port);
+                bool BindPort(const Uart::Port& PortPointer); 
+                void ReleasePort(const Uart::Port& PortPointer); 
+                PortID GetSystemPortID(const Uart::Port& Port);
 			}
 		}
 	}
