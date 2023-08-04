@@ -7,20 +7,18 @@
 # Append Sources and Headers
 
 	list( APPEND MCC_SOURCES "${CMAKE_CURRENT_LIST_DIR}/UartMidi.cpp")
+
 	list( APPEND HEADERS_LIST "${CMAKE_CURRENT_LIST_DIR}/UartMidi.h")
 #
 ######################################################################################################
 # Add Subdirectories
 
-	if(${MCC_COMPILE_UART_MIDI_IN})
-		message(STATUS "Compiling MCC::Communications::MidiPort::Uart::InputPort...")
-		add_subdirectory(InputPort)
-	endif()
+	message(STATUS "Compiling MCC::Communications::Midi::UartMidi::Port...")
+	add_subdirectory(Port)
 
-	if(${MCC_COMPILE_UART_MIDI_OUT})
-		message(STATUS "Compiling MCC::Communications::MidiPort::Uart::OutputPort...")
-		add_subdirectory(OutputPort)
-	endif()
+	message(STATUS "Compiling MCC::Communications::Midi::UartMidi::SystemPorts...")
+	add_subdirectory(SystemPorts)
+
 #
 ######################################################################################################
 # Refresh Sources List at PARENT_SCOPE

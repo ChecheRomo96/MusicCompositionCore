@@ -12,6 +12,11 @@
 		add_subdirectory(MidiNote)
 	endif()
 
+	if(${MCC_COMPILE_MIDI_MESSAGE})
+		message(STATUS "Compiling MCC::Core::MidiCore::MidiNote...")
+		add_subdirectory(MidiMessage)
+	endif()
+
 # Refresh Sources List at PARENT_SCOPE
 	set(MCC_SOURCES "${MCC_SOURCES}" PARENT_SCOPE)
 

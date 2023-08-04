@@ -22,17 +22,26 @@ namespace MusicCompositionCore
                     MidiMessage();
 
                     MidiMessage& operator=(const MidiMessage& Source);
-                    const CPVector::vector<uint8_t>& Buffer();
+                    const CPVector::vector<uint8_t>& Buffer() const;
 
                     MidiMessage& NoteOn(uint8_t Pitch, uint8_t Vel , uint8_t Channel = 0);
-                    MidiMessage& NoteOn(const MidiCore::MidiNote& Source);
-                    MidiMessage& NoteOn(const MusicalCore::MusicalNote::Note& Source, uint8_t Vel, uint8_t Channel = 0);
-                    MidiMessage& NoteOn(const MusicalCore::MusicalNote::Pitch& Source, uint8_t Octave, uint8_t Vel, uint8_t Channel = 0);
+                    MidiMessage& NoteOff(uint8_t Pitch, uint8_t Vel = 0, uint8_t Channel = 0);
 
-                    MidiMessage& NoteOff(uint8_t Pitch, uint8_t Channel = 0);
-                    MidiMessage& NoteOff(const MidiCore::MidiNote& Source);
-                    MidiMessage& NoteOff(const MusicalCore::MusicalNote::Note& Source, uint8_t Channel = 0);
-                    MidiMessage& NoteOff(const MusicalCore::MusicalNote::Pitch& Source, uint8_t Octave, uint8_t Channel = 0);
+                    #if defined (MCC_MIDI_NOTE_ENABLED)
+                        MidiMessage& NoteOn(const MidiCore::MidiNote& Source);
+                        MidiMessage& NoteOff(const MidiCore::MidiNote& Source);
+                    #endif
+
+                    #if defined (MCC_MUSICAL_NOTE_ENABLED)
+                        MidiMessage& NoteOn(const MusicalCore::MusicalNote::Note& Source, uint8_t Vel, uint8_t Channel = 0);
+                        MidiMessage& NoteOff(const MusicalCore::MusicalNote::Note& Source, uint8_t Vel = 0, uint8_t Channel = 0);
+
+                        MidiMessage& NoteOn(const MusicalCore::MusicalNote::Pitch& Source, uint8_t Octave, uint8_t Vel, uint8_t Channel = 0);
+                        MidiMessage& NoteOff(const MusicalCore::MusicalNote::Pitch& Source, uint8_t Octave, uint8_t Vel = 0, uint8_t Channel = 0);
+                    #endif
+
+
+
 
                     MidiMessage& ProgramChange(uint8_t Program, uint8_t Channel = 0);
                     MidiMessage& ControlChange(uint8_t ControllerNumber, uint8_t Value, uint8_t Channel = 0);
@@ -50,6 +59,7 @@ namespace MusicCompositionCore
 
                     MidiMessage& SystemExclusive(const CPVector::vector<uint8_t>& Data);
                     MidiMessage& SystemExclusive(uint8_t* Data, uint8_t Length);
+
 
             };
         }

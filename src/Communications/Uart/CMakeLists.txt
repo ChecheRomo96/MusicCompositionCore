@@ -7,10 +7,8 @@
 # Append Sources and Headers
 
 	list( APPEND MCC_SOURCES "${CMAKE_CURRENT_LIST_DIR}/Uart.cpp")
-	list( APPEND MCC_SOURCES "${CMAKE_CURRENT_LIST_DIR}/UartPort.cpp")
 
 	list( APPEND HEADERS_LIST "${CMAKE_CURRENT_LIST_DIR}/Uart.h")
-	list( APPEND HEADERS_LIST "${CMAKE_CURRENT_LIST_DIR}/UartPort.h")
 #
 ######################################################################################################
 # Add Subdirectories
@@ -29,6 +27,13 @@
 		message(STATUS "Compiling MCC::Communications::Uart::DuplexPort...")
 		add_subdirectory(DuplexPort)
 	endif()
+
+	message(STATUS "Compiling MCC::Communications::Uart::Port...")
+	add_subdirectory(Port)
+	
+	message(STATUS "Compiling MCC::Communications::Uart::SystemPorts...")
+	add_subdirectory(SystemPorts)
+	
 #
 ######################################################################################################
 # Refresh Sources List at PARENT_SCOPE

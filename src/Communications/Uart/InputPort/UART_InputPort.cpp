@@ -2,112 +2,124 @@
 #include <Core/MidiCore/MidiCore.h>
 
 #if defined(MCC_MIDI_PORT_ENABLED)
-	#include "../../MidiPort.h"
-#endif 
+    #include <Communications/Midi/MCC_Midi.h>
+	using namespace MusicCompositionCore::Communications::Midi;
+#endif
 
-using namespace MusicCompositionCore::Communications::Uart;
-using namespace MusicCompositionCore::Communications::Midi;
-using namespace MusicCompositionCore::Communications;
+
+	using namespace MusicCompositionCore::Communications::Uart;
+	using namespace MusicCompositionCore::Communications;
+
+namespace MusicCompositionCore
+{
+	namespace Communications
+	{
+		namespace Uart
+		{
+			namespace
+			{
+				static const CPString::string InputPortStr("Uart Input Port");
+			}
+		}
+	}
+}
+	
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Constructors
 
-	InputPort::InputPort()
+	Input::Port::Port()
 	{
-		HLAPI_Dettach();
+		HLAPI_Unlink();
 
 		_FlagRegister = 0;
-		_FlagRegister |= PollingMode::Manual;
-		_Name = "Uart MIDI In Port";
-
-		SetBufferSize(3);
+		_Name = InputPortStr;
 	}
 
-	InputPort::InputPort( const CPString::string& PortName )
+	Input::Port::Port( const CPString::string& PortName )
 	{
-		HLAPI_Dettach();
+		HLAPI_Unlink();
 
 		_FlagRegister = 0;
-		_FlagRegister |= PollingMode::Manual;
+		_Name = PortName;
+	}
+
+	Input::Port::Port( uint8_t (&Available)(void), uint8_t (&Read)(void) )
+	{
+        HLAPI_Unlink();
+		HLAPI_Link(Available,Read);
+
+		_FlagRegister = 0;
+		_Name = InputPortStr;
+
+		Uart_BindPort();
+	}
+
+	Input::Port::Port( const CPString::string& PortName, uint8_t (&Available)(void), uint8_t (&Read)(void) )
+	{
+        HLAPI_Unlink();
+		HLAPI_Link(Available,Read);
+
+		_FlagRegister = 0;
 		_Name = PortName;
 
-		SetBufferSize(3);
+		Uart_BindPort();
 	}
 
-	InputPort::InputPort( uint8_t (&Available)(void), uint8_t (&Read)(void) )
+	Input::Port::Port( uint8_t (&Available)(void), uint8_t (&Read)(void), void (&Initialize)(void) , void (&SetBaudRate)(uint32_t) )
 	{
-        HLAPI_Dettach();
-		HLAPI_Attach(Available,Read);
+        HLAPI_Unlink();
+		HLAPI_Link(Available,Read,Initialize,SetBaudRate);
 
 		_FlagRegister = 0;
-		_FlagRegister |= PollingMode::Manual;
-		_Name = "Uart MIDI In Port";
+		_Name = InputPortStr;
 
-		SetBufferSize(3);
+		Uart_BindPort();
 	}
 
-	InputPort::InputPort( const CPString::string& PortName, uint8_t (&Available)(void), uint8_t (&Read)(void) )
+	Input::Port::Port( const CPString::string& PortName, uint8_t (&Available)(void), uint8_t (&Read)(void), void (&Initialize)(void) , void (&SetBaudRate)(uint32_t) )
 	{
-        HLAPI_Dettach();
-		HLAPI_Attach(Available,Read);
+        HLAPI_Unlink();
+		HLAPI_Link(Available,Read,Initialize,SetBaudRate);
 
 		_FlagRegister = 0;
-		_FlagRegister |= PollingMode::Manual;
 		_Name = PortName;
 
-		SetBufferSize(3);
-	}
-
-	InputPort::InputPort( uint8_t (&Available)(void), uint8_t (&Read)(void), void (&Initialize)(void) , void (&SetBaudRate)(uint32_t) )
-	{
-        HLAPI_Dettach();
-		HLAPI_Attach(Available,Read,Initialize,SetBaudRate);
-
-		_FlagRegister = 0;
-		_FlagRegister |= PollingMode::Manual;
-		_Name = "Uart MIDI In Port";
-
-		SetBufferSize(3);
-	}
-
-	InputPort::InputPort( const CPString::string& PortName, uint8_t (&Available)(void), uint8_t (&Read)(void), void (&Initialize)(void) , void (&SetBaudRate)(uint32_t) )
-	{
-        HLAPI_Dettach();
-		HLAPI_Attach(Available,Read,Initialize,SetBaudRate);
-
-		_FlagRegister = 0;
-		_FlagRegister |= PollingMode::Manual;
-		_Name = PortName;
-
-		SetBufferSize(3);
+		Uart_BindPort();
 	}
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Hardware Link API
 	 
-	void InputPort::HLAPI_Attach( uint8_t (&Available)(void), uint8_t (&Read)(void), void (&Initialize)(void) , void (&SetBaudRate)(uint32_t) )
+	void Input::Port::HLAPI_Link( uint8_t (&Available)(void), uint8_t (&Read)(void), void (&Initialize)(void) , void (&SetBaudRate)(uint32_t) )
 	{
 		_Initialize = Initialize;
 		_SetBaudRate = SetBaudRate;
 		_Available = Available;
 		_Read = Read;
+
+		Uart_BindPort();
 	}
 
-    void InputPort::HLAPI_Attach( uint8_t (&Available)(void), uint8_t (&Read)(void) )
+    void Input::Port::HLAPI_Link( uint8_t (&Available)(void), uint8_t (&Read)(void) )
     {
        _Available = Available;
        _Read = Read;
+
+	   Uart_BindPort();
     }
 
-	void InputPort::HLAPI_Dettach()
+	void Input::Port::HLAPI_Unlink()
 	{
 		_Available = NULL;
 		_Read = NULL;
 		_SetBaudRate = NULL;
 		_Initialize = NULL;
+		
+		Uart_UnbindPort();
 	}
 
-	bool InputPort::HLAPI_Status()
+	const bool Input::Port::HLAPI_Status() const
 	{
 		// Only checks id _Available and _Read are binded, because the other functionality is optional
 		if( (_Available != NULL) && (_Read != NULL) )
@@ -117,73 +129,44 @@ using namespace MusicCompositionCore::Communications;
 		return 0;
 	}
 
-	bool InputPort::AvailableAPI_Status()
+	const bool Input::Port::AvailableAPI_Status() const
 	{
 		if( _Available != NULL ){ return 1; }
 		return 0;
 	}
 
-	bool InputPort::ReadAPI_Status()
+	const bool Input::Port::ReadAPI_Status() const
 	{
 		if( _Read != NULL ){ return 1; }
 		return 0;
 	}
 
-	bool InputPort::InitializeAPI_Status()
+	const bool Input::Port::InitializeAPI_Status() const
 	{
 		if( _Initialize != NULL ){ return 1; }
 		return 0;
 	}
 
-	bool InputPort::SetBaudRateAPI_Status()
+	const bool Input::Port::SetBaudRateAPI_Status() const
 	{
 		if( _SetBaudRate != NULL ){ return 1; }
 		return 0;
 	}
-
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// UART::Port API
+// Generic Uart Port API
 
-	bool InputPort::EnablePort()
+	const CPString::string& Input::Port::Name() const
 	{
-		if(HLAPI_Status())
-		{
-			return Uart::BindPort( (*this) );
-		}
-		return 0;
+		return _Name;
 	}
 
-	void InputPort::DisablePort()
+	void Input::Port::SetName(const CPString::string& NewName)
 	{
-		Uart::ReleasePort( (*this) );
+		_Name = NewName;
 	}
-
-	Uart::PortID InputPort::UartPortID()
-	{
-		return Uart::GetSystemPortID(*this);
-	}
-
-	#if defined(MCC_MIDI_PORT_ENABLED)
-
-		Midi::PortID InputPort::MidiPortID()
-		{
-			auto UartSystemPortID = GetSystemPortID(*this);
-        
-			if( UartSystemPortID != Uart::InvalidPortID )
-			{
-				return Midi::GetSystemPortID( Uart::SystemPorts[UartSystemPortID] );
-			}
-        
-			return Midi::InvalidID;
-		}
-
-	#endif
-//
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Low Level Hardware API
-
-	void InputPort::Initialize()
+	
+	void Input::Port::Initialize()
 	{
 		if(_Initialize != NULL)
 		{
@@ -191,24 +174,28 @@ using namespace MusicCompositionCore::Communications;
 		}
 	}
 
-	void InputPort::SetBaudRate(uint32_t BaudRate)
+	void Input::Port::SetBaudRate(uint32_t BaudRate)
 	{
 		if(_SetBaudRate != NULL)
 		{
 			_SetBaudRate(BaudRate);
 		}
 	}
+//
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// UART In API
 
-	uint8_t InputPort::BytesAvailable()
+
+	uint8_t Input::Port::BytesAvailable()
 	{
-		if(_Available != NULL)
+		if(_Available != NULL) 
 		{
 			return _Available();
 		}
 		return 0;
 	}
 
-	uint8_t InputPort::ReadByte()
+	uint8_t Input::Port::ReadByte()
 	{
 		if(_Read != NULL)
 		{
@@ -218,208 +205,134 @@ using namespace MusicCompositionCore::Communications;
 	}
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Generic Port API
+// UART::Port API
 
-	const CPString::string& InputPort::Name() const
+	bool Input::Port::Uart_BindPort() const
 	{
-		return _Name;
+		if(HLAPI_Status())
+		{
+			return Uart::SystemPorts.BindPort( (*this) );
+		}
+		else
+		{
+			Uart_UnbindPort();
+		}
+		return 0;
 	}
 
-	void InputPort::SetName(const CPString::string& NewName)
+	void Input::Port::Uart_UnbindPort() const
 	{
-		_Name = NewName;
+		Uart::SystemPorts.UnbindPort( (*this) );
+	}
+
+	Uart::SystemPortHandler::PortID Input::Port::Uart_PortID() const
+	{
+		return Uart::SystemPorts.GetID(*this);
+	}
+
+	Uart::Port& Input::Port::Uart_Port() const
+	{
+		uint8_t ID = Uart_PortID();
+
+		if(ID != Uart::SystemPortHandler::InvalidPortID)
+		{
+			return Uart::SystemPorts[ID];
+		}
+
+		return Uart::DummyPort;
 	}
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// UART In API
-    
-    void InputPort::AppendCallback(void(*Callback)(CPVector::vector<uint8_t>&))
-	{
-		if(Callback != NULL)
-		{
-			_CallbackVector.push_back(Callback);
-		}
-	}
+// UartMidi::Port API
 
-    void InputPort::DetachCallback(void(*Callback)(CPVector::vector<uint8_t>&))
-	{
-		for(uint8_t i = 0; i < _CallbackVector.size(); i++)
+	#if defined(MCC_MIDI_PORT_ENABLED) & defined(MCC_UART_MIDI_ENABLED)
+
+		bool Input::Port::UartMidi_BindPort() const
 		{
-			if(_CallbackVector[i] == Callback)
+			return Midi::UartMidi::SystemPorts.BindPort(*this);
+		}
+
+		void Input::Port::UartMidi_UnbindPort() const
+		{
+			Midi::UartMidi::SystemPorts.UnbindPort(*this);
+		}
+
+		Midi::UartMidi::SystemPortHandler::PortID Input::Port::UartMidi_PortID() const
+		{
+			return Midi::UartMidi::SystemPorts.GetID(*this);
+		}
+
+		
+		Midi::UartMidi::Port& Input::Port::UartMidi_Port() const
+		{
+			return Midi::UartMidi::SystemPorts.GetPort(*this);
+		}
+
+
+	#endif
+//
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Midi::Port API
+	
+	#if defined(MCC_MIDI_PORT_ENABLED) & defined(MCC_UART_MIDI_ENABLED)
+
+		bool Input::Port::Midi_BindPort() const
+		{
+			return Midi::SystemPorts.BindPort(*this);
+		}
+
+		void Input::Port::Midi_UnbindPort() const
+		{
+			Midi::SystemPorts.UnbindPort( *this );
+		}
+
+		Midi::SystemPortHandler::PortID Input::Port::Midi_PortID() const
+		{
+			auto UartMiditID = UartMidi_PortID();
+        
+			if(UartMiditID != Midi::UartMidi::SystemPortHandler::InvalidPortID )
 			{
-				_CallbackVector.erase(i);
-				return;
+				return Midi::SystemPorts.GetID( *this );
 			}
+        
+			return Midi::SystemPortHandler::InvalidPortID;
 		}
-	}
 
 
-	void InputPort::SetBufferSize(uint8_t size)
-	{
-		if(size > 3){_MessageBuffer.resize(size);}
-		else{_MessageBuffer.resize(3);}
-	}
-
-	void InputPort:: Service()
-	{
-		while(BytesAvailable())
-    	{
-    		uint8_t read = ReadByte();
-
-    		if(SysExFlag())
-    		{
-    			_MessageBuffer[_BufferIndex++] = read;
-
-    			if(read == (MCC_MidiCore::Protocol::System::Exclusive::End))
-    			{
-    				CPVector::vector<uint8_t> MidiMessage = _MessageBuffer;
-    				MidiMessage.resize(_BufferIndex);
-
-    				for(uint8_t i = 0; i < _CallbackVector.size(); i++)
-    				{
-    					(*_CallbackVector[i])(_MessageBuffer);
-    				}
-    			}
-
-    			if(_BufferIndex == _MessageBuffer.size())
-    			{
-    				_BufferIndex = 0;
-	    			SetSysExFlag(0);
-    				
-    			}
-    		}
-
-    		else 
-    		{
-    			if((read >> 7)&0b1) // Start of message
-	    		{
-	    			if(read == (MCC_MidiCore::Protocol::System::Exclusive::Start))
-	    			{
-	    				SetSysExFlag(1);
-	    				SetSOMF(0);
-	    				_BufferIndex = 0;
-	    			}
-	    			else
-	    			{
-	    				SetSysExFlag(0);
-	    				SetSOMF(1);
-	    				_BufferIndex = 0;
-	    			}
-	    		}
-
-	    		if(SOMF())
-	    		{
-
-	    			_MessageBuffer[_BufferIndex++] = read;
-
-	    			switch(_MessageBuffer[0]&0xF0)
-	    			{
-	    				case MCC_MidiCore::Protocol::ChannelVoice::NoteOn:
-	    				case MCC_MidiCore::Protocol::ChannelVoice::AfterTouch:
-	    				case MCC_MidiCore::Protocol::ChannelVoice::ControlChange:
-	    				case MCC_MidiCore::Protocol::ChannelVoice::ProgramChange:
-	    				case MCC_MidiCore::Protocol::ChannelVoice::ChannelPressure:
-	    				case MCC_MidiCore::Protocol::ChannelVoice::PitchBend:
-
-	    					if(_BufferIndex == 3)
-	    					{
-	    						for(uint8_t i = 0; i < _CallbackVector.size(); i++)
-	    						{
-	    							(*_CallbackVector[i])(_MessageBuffer);
-	    						}
-	    					}
-
-	    				break;
-
-	    				case MCC_MidiCore::Protocol::ChannelVoice::NoteOff:
-
-	    					if(_BufferIndex == 2)
-	    					{
-	    						for(uint8_t i = 0; i < _CallbackVector.size(); i++)
-	    						{
-	    							(*_CallbackVector[i])(_MessageBuffer);
-	    						}
-	    					}
-
-	    				break;
-
-	    				case 0xF0: 
-
-	    					switch(_MessageBuffer[0]&0x0F)
-	    					{
-	    						case MCC_MidiCore::Protocol::System::Common::TuningRequest:
-	    						case MCC_MidiCore::Protocol::System::RealTime::TimingTick:
-	    						case MCC_MidiCore::Protocol::System::RealTime::Start:
-	    						case MCC_MidiCore::Protocol::System::RealTime::Continue:
-	    						case MCC_MidiCore::Protocol::System::RealTime::Stop:
-	    						case MCC_MidiCore::Protocol::System::RealTime::ActiveSensing:
-	    						case MCC_MidiCore::Protocol::System::RealTime::SystemReset:
-								
-									if(_BufferIndex == 1)
-			    					{
-			    						for(uint8_t i = 0; i < _CallbackVector.size(); i++)
-			    						{
-			    							(*_CallbackVector[i])(_MessageBuffer);
-			    						}
-			    					}
-
-	    						break;
-
-
-	    						case MCC_MidiCore::Protocol::System::Common::MTC_QuarterFrame:
-	    						case MCC_MidiCore::Protocol::System::Common::SongSelect:
-
-		    						if(_BufferIndex == 2)
-			    					{
-			    						for(uint8_t i = 0; i < _CallbackVector.size(); i++)
-			    						{
-			    							(*_CallbackVector[i])(_MessageBuffer);
-			    						}
-			    					}
-
-	    						break;
-
-	    						case MCC_MidiCore::Protocol::System::Common::SongPositionPointer:
-
-		    						if(_BufferIndex == 3)
-			    					{
-			    						for(uint8_t i = 0; i < _CallbackVector.size(); i++)
-			    						{
-			    							(*_CallbackVector[i])(_MessageBuffer);
-			    						}
-			    					}
-
-	    						break;
-	    					}
-
-	    				break;
-	    			}
-	    		}
-	    	}
-    	}
-	}
+		Midi::Port& Input::Port::Midi_Port() const
+		{
+			auto MiditID = Midi_PortID();
+        
+			if(MiditID != Midi::SystemPortHandler::InvalidPortID )
+			{
+				return Midi::SystemPorts[MiditID];
+			}
+        
+			return Midi::DummyPort;
+		}
+	#endif	
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Helpers
 
-	void InputPort::SetSysExFlag(bool State)
+	void Input::Port::SetSysExFlag(bool State)
 	{
         _FlagRegister &= 0b11111101;
         _FlagRegister |= (State<<1u);
 	}
 
-	const bool InputPort::SysExFlag() const
+	const bool Input::Port::SysExFlag() const
 	{
         return (_FlagRegister >> 1u) & 1u;
 	}
 
-	void InputPort::SetSOMF(bool State)
+	void Input::Port::SetSOMF(bool State)
 	{
         _FlagRegister &= 0b11111011;
         _FlagRegister |= (State<<2u);
 	}
 
-	const bool InputPort::SOMF() const
+	const bool Input::Port::SOMF() const
 	{
         return (_FlagRegister >> 2u) & 1u;
 	}

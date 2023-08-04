@@ -2,10 +2,10 @@
 set( HEADERS_LIST "" )
 
 # Append Sources
-list( APPEND MCC_SOURCES "${CMAKE_CURRENT_LIST_DIR}/UartMidiIn.cpp")
+list( APPEND MCC_SOURCES "${CMAKE_CURRENT_LIST_DIR}/Midi_SystemPorts.cpp")
 
 # Append Headers
-list( APPEND HEADERS_LIST "${CMAKE_CURRENT_LIST_DIR}/UartMidiIn.h")
+list( APPEND HEADERS_LIST "${CMAKE_CURRENT_LIST_DIR}/Midi_SystemPorts.h")
 
 # Refresh Sources List at PARENT_SCOPE
 set(MCC_SOURCES "${MCC_SOURCES}" PARENT_SCOPE)
@@ -15,7 +15,7 @@ if(INSTALL STREQUAL "ON")
 
 	install(
 		FILES ${HEADERS_LIST} 
-		DESTINATION ${CMAKE_INSTALL_PREFIX}/include/MCC/Communications/MidiPort/UartMidi/InputPort
+		DESTINATION ${CMAKE_INSTALL_PREFIX}/include/MCC/Communications/Midi/SystemPorts
 	)
 
 endif()

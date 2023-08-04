@@ -5,142 +5,151 @@
 	#include <CPVector.h>
 	#include <CPString.h>
 
-	#include "../Uart.h"
 
-	namespace MusicCompositionCore
+    namespace MusicCompositionCore::Communications::Uart::Input
 	{
-		namespace Communications
+		class Port;
+	}
+
+
+    #include "../Uart.h"
+    
+	#if defined(MCC_MIDI_PORT_ENABLED)
+		#include <Communications/Midi/MCC_Midi.h>
+	#endif
+	
+	#if defined(MCC_UART_MIDI_ENABLED)
+		#include <Communications/Midi/UartMidi/UartMidi.h>
+	#endif
+    
+
+    namespace MusicCompositionCore::Communications::Uart::Input
+	{
+		class Port
 		{
-			namespace Midi
-			{
-				class Port;
-			}
+			private:
 
-			namespace Uart
-			{
+				//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+				// HW Link Function pointers
 
-				class InputPort
-				{
-					private:
+					uint8_t (*_Available)(void);
+					uint8_t (*_Read)(void);
 
-						//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-						// HW Link Function pointers
+					void (*_SetBaudRate)(uint32_t BaudRate); // Optional
+					void (*_Initialize)(void);				 // Optional
+				//
+				//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+				// Callback vector ans Message Buffer Vector
 
-							uint8_t (*_Available)(void);
-							uint8_t (*_Read)(void);
+					CPVector::vector<void(*)(const CPVector::vector<uint8_t>&)> _CallbackVector;
+					CPVector::vector<uint8_t> _MessageBuffer;
+				//
+				//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+				// Port Name
 
-							void (*_SetBaudRate)(uint32_t BaudRate); // Optional
-							void (*_Initialize)(void);				 // Optional
-						//
-						//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-						// Callback vector ans Message Buffer Vector
+					CPString::string _Name;
+				//
+				//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+				// BaudRate, Polling Mode, and flags
+					
+					uint32_t _BaudRate;
+					uint8_t _FlagRegister;
+					uint8_t _BufferIndex;
 
-							CPVector::vector<void(*)(CPVector::vector<uint8_t>&)> _CallbackVector;
-							CPVector::vector<uint8_t> _MessageBuffer;
-						//
-						//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-						// Port Name
+                    // bool _PollingMode  --> Bit 0
+					// bool _SOMF         --> Bit 1
+					// bool _SysExFlag    --> Bit 2
+				//
+				//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-							CPString::string _Name;
-						//
-						//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-						// BaudRate, Polling Mode, and flags
-							
-							uint32_t _BaudRate;
-							uint8_t _FlagRegister;
-							uint8_t _BufferIndex;
+			public:
 
-		                    // bool _PollingMode  --> Bit 0
-							// bool _SOMF         --> Bit 1
-							// bool _SysExFlag    --> Bit 2
-						//
-						//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+				
+				//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+				// Constructors
 
-					public:
+					Port();
+					Port( const CPString::string& PortName );							
+					Port( uint8_t (&Available)(void), uint8_t (&Read)(void) );
+					Port( const CPString::string& PortName, uint8_t (&Available)(void), uint8_t (&Read)(void) );
+					Port( uint8_t (&Available)(void), uint8_t (&Read)(void), void (&Initialize)(void), void (&SetBaudRate)(uint32_t) );
+					Port( const CPString::string& PortName, uint8_t (&Available)(void), uint8_t (&Read)(void), void (&Initialize)(void), void (&SetBaudRate)(uint32_t) );
+				//
+				//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+				// Hardware Link API
+					
+					void HLAPI_Link( uint8_t (&Available)(void), uint8_t (&Read)(void), void (&Initialize)(void) , void (&SetBaudRate)(uint32_t) );
+					void HLAPI_Link( uint8_t (&Available)(void), uint8_t (&Read)(void));
+					void HLAPI_Unlink();
+					const bool HLAPI_Status() const;
 
-						
-						//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-						// Constructors
+					const bool AvailableAPI_Status() const;
+					const bool ReadAPI_Status() const;
+					const bool InitializeAPI_Status() const;
+					const bool SetBaudRateAPI_Status() const;
+				//
+				//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+				// Generic Uart Port API
 
-							InputPort();
-							InputPort( const CPString::string& PortName );							
-							InputPort( uint8_t (&Available)(void), uint8_t (&Read)(void) );
-							InputPort( const CPString::string& PortName, uint8_t (&Available)(void), uint8_t (&Read)(void) );
-							InputPort( uint8_t (&Available)(void), uint8_t (&Read)(void), void (&Initialize)(void), void (&SetBaudRate)(uint32_t) );
-							InputPort( const CPString::string& PortName, uint8_t (&Available)(void), uint8_t (&Read)(void), void (&Initialize)(void), void (&SetBaudRate)(uint32_t) );
-						//
-						//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-						// Hardware Link API
-							
-							void HLAPI_Attach( uint8_t (&Available)(void), uint8_t (&Read)(void), void (&Initialize)(void) , void (&SetBaudRate)(uint32_t) );
-							void HLAPI_Attach( uint8_t (&Available)(void), uint8_t (&Read)(void));
-							void HLAPI_Dettach();
-							bool HLAPI_Status();
+					const CPString::string& Name() const;
+					void SetName(const CPString::string& NewName);
 
-							bool AvailableAPI_Status();
-							bool ReadAPI_Status();
-							bool InitializeAPI_Status();
-							bool SetBaudRateAPI_Status();
-						//
-						//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-						// UART::Port API
+					void Initialize();
+					void SetBaudRate(uint32_t BaudRate);
+				//
+				//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                // UART In API
+                    
+					uint8_t BytesAvailable();
+					uint8_t ReadByte();
+				//
+				//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+				// UART::Port API
 
-							bool EnablePort();
-							void DisablePort();
+					bool Uart_BindPort() const;
+					void Uart_UnbindPort() const;
+					Uart::SystemPortHandler::PortID Uart_PortID() const;
+					Uart::Port& Uart_Port() const;
+				//
+				//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+				// UartMidi::Port API
+					
+					#if defined(MCC_MIDI_PORT_ENABLED) & defined(MCC_UART_MIDI_ENABLED)
 
-							Uart::PortID UartPortID();
-							
-							#if defined(MCC_MIDI_PORT_ENABLED)
-								Midi::PortID MidiPortID();
-							#endif	
-						//
-						////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-						// Low Level Hardware API
+						bool UartMidi_BindPort() const;
+						void UartMidi_UnbindPort() const;
+						Midi::UartMidi::SystemPortHandler::PortID UartMidi_PortID() const;
+						Midi::UartMidi::Port& UartMidi_Port() const;
+					#endif	
+				//
+				//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+				// Midi::Port API
+					
+					#if defined(MCC_MIDI_PORT_ENABLED) & defined(MCC_UART_MIDI_ENABLED)
 
-							void Initialize();
-							void SetBaudRate(uint32_t BaudRate);
-						//
-						//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-						// Generic Port API
+						bool Midi_BindPort() const;
+						void Midi_UnbindPort() const;
+						Midi::SystemPortHandler::PortID Midi_PortID() const;
+						Midi::Port& Midi_Port() const;
+					#endif	
+				//
+				//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-							const CPString::string& Name() const;
-							void SetName(const CPString::string& NewName);
-						//
-						//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	                    // UART In API
-	                        
-	                        void AppendCallback(void(*Callback)(CPVector::vector<uint8_t>&));
-	                        void DetachCallback(void(*Callback)(CPVector::vector<uint8_t>&));
+			private:
 
-	                        void SetBufferSize(uint8_t size);
+				//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+				// Helpers
 
-							void Service();
-						//
-						//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+					void SetSysExFlag(bool State);
+					const bool SysExFlag() const;
 
-					private:
+					void SetSOMF(bool State);
+					const bool SOMF() const;
+				//
+				//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-						//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-						// Low Level Hardware API
+		};
 
-							uint8_t BytesAvailable();
-							uint8_t ReadByte();
-						//
-						//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-						// Helpers
-
-							void SetSysExFlag(bool State);
-							const bool SysExFlag() const;
-
-							void SetSOMF(bool State);
-							const bool SOMF() const;
-						//
-						//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-				};
-
-			}
-		}
 	}
 
 #endif//MCC_UART_IN_H

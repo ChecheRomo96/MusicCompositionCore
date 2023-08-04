@@ -14,16 +14,17 @@ namespace MusicCompositionCore
             class MidiNote
             {
                 uint8_t _pitch;
-                uint8_t _velocity;
+                uint8_t _onVelocity;
+                uint8_t _offVelocity;
                 uint8_t _channel;
 
                 public:
 
                     MidiNote();
 
-                    MidiNote(uint8_t pitch, uint8_t vel , uint8_t channel = 0);
-                    MidiNote(const MusicalCore::MusicalNote::Note& source, uint8_t vel, uint8_t channel = 0);
-                    MidiNote(const MusicalCore::MusicalNote::Pitch& source, uint8_t vel, uint8_t channel = 0);
+                    MidiNote(uint8_t Pitch, uint8_t OnVel , uint8_t Channel = 0);
+                    MidiNote(const MusicalCore::MusicalNote::Note& Source, uint8_t OnVel, uint8_t Channel = 0, uint8_t OffVel = 0);
+                    MidiNote(const MusicalCore::MusicalNote::Pitch& Source, uint8_t OnVel, uint8_t Channel = 0, uint8_t OffVel = 0);
 
                     MidiNote& operator=(const MidiNote& Source);
 
@@ -34,8 +35,11 @@ namespace MusicCompositionCore
                     void SetChannel(uint8_t NewChannel);
                     const uint8_t Channel() const;
                     
-                    void SetVelocity(uint8_t NewVelocity);
-                    const uint8_t Velocity() const;
+                    void SetOnVelocity(uint8_t NewVelocity);
+                    const uint8_t OnVelocity() const;
+
+                    void SetOffVelocity(uint8_t NewVelocity);
+                    const uint8_t OffVelocity() const;
             };
         }
     }

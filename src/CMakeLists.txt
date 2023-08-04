@@ -76,6 +76,10 @@
 				target_compile_definitions(MCC PUBLIC MCC_MIDI_NOTE_ENABLED)
 			endif()
 
+			if(${MCC_COMPILE_MIDI_MESSAGE})
+				target_compile_definitions(MCC PUBLIC MCC_MIDI_MESSAGE_ENABLED)
+			endif()
+
 		endif()
 
 	endif()
@@ -101,7 +105,12 @@
 		endif()
 		
 		if(${MCC_COMPILE_MIDI_PORT})
+			target_compile_definitions(MCC PUBLIC MCC_CORE_ENABLED)
 			target_compile_definitions(MCC PUBLIC MCC_MIDI_PORT_ENABLED)
+			target_compile_definitions(MCC PUBLIC MCC_MIDI_CORE_ENABLED)
+			target_compile_definitions(MCC PUBLIC MCC_MIDI_MESSAGE_ENABLED)
+			set(MCC_COMPILE_CORE TRUE CACHE BOOL "Compile MCC::Core" FORCE)
+			set(MCC_COMPILE_MIDI_CORE TRUE CACHE BOOL "Compile MCC::Core::MidiCore" FORCE)
 
 			if(${MCC_COMPILE_UART_MIDI})
 				target_compile_definitions(MCC PUBLIC MCC_UART_MIDI_ENABLED)
@@ -112,8 +121,6 @@
 			endif()
 
 		endif()
-
-
 	endif()
 #
 ######################################################################################################
