@@ -5,7 +5,6 @@ using namespace MusicCompositionCore::Communications;
 Midi::Port Midi::DummyPort;
 Midi::SystemPortHandler Midi::SystemPorts;
 
-
 Midi::SystemPortHandler::SystemPortHandler()
 {
 
@@ -107,6 +106,7 @@ const Midi::Port& Midi::SystemPortHandler::operator[](unsigned int Index) const
 
 
 	#if defined(MCC_UART_PORT_ENABLED)
+
 		bool Midi::SystemPortHandler::BindPort(const Uart::Port& Port)
 		{
 			if(&Port.UartMidi_Port() == &UartMidi::DummyPort)
@@ -222,9 +222,7 @@ const Midi::Port& Midi::SystemPortHandler::operator[](unsigned int Index) const
 
 				return Midi::DummyPort;
             }
-
         #endif
-
 
         #if defined(MCC_UART_OUT_ENABLED)
             bool Midi::SystemPortHandler::BindPort(const Uart::Output::Port& Port)
@@ -282,8 +280,67 @@ const Midi::Port& Midi::SystemPortHandler::operator[](unsigned int Index) const
 
 				return Midi::DummyPort;
             }
-
         #endif
+
+
+        #if defined(MCC_UART_DUPLEX_ENABLED)
+            bool Midi::SystemPortHandler::BindPort(const Uart::Duplex::Port& Port)
+            {
+				if(&Port.UartMidi_Port() == &UartMidi::DummyPort)
+				{
+					if(!Midi::UartMidi::SystemPorts.BindPort(Port)){return 0;}
+				}
+
+				if(GetID(Port) == Midi::SystemPortHandler::InvalidPortID)
+				{
+					return BindPort(Port.UartMidi_Port());
+				}
+				return 1;
+            }
+
+            void Midi::SystemPortHandler::UnbindPort(const Uart::Duplex::Port& Port)
+            {
+            	if(&Port.Midi_Port() != &Midi::DummyPort)
+            	{
+            		auto ID = GetID(Port);
+
+            		if( ID != SystemPortHandler::InvalidPortID )
+            		{
+            			_PortVector.erase(ID);
+            		}            		
+            	}
+            }
+
+			Midi::SystemPortHandler::PortID Midi::SystemPortHandler::GetID(const Uart::Duplex::Port& Port)
+			{
+				for(uint8_t i = 0; i < _PortVector.size(); i++)
+				{
+					if(_PortVector[i].ParentType() == Midi::PortTypes::UartMidi)
+					{
+						auto UartMidiPortPtr = (Midi::UartMidi::Port*) _PortVector[i].ParentPointer();
+						if( UartMidiPortPtr -> Uart_PortPointer() == &Port.Uart_Port() )
+						{
+							return (Midi::SystemPortHandler::PortID) i;
+						}
+					} 
+				}
+
+				return Midi::SystemPortHandler::InvalidPortID;
+			}
+
+            Midi::Port& Midi::SystemPortHandler::GetPort(const Uart::Duplex::Port& Port)
+            {
+				auto ID = GetID(Port);
+
+				if(ID != Midi::SystemPortHandler::InvalidPortID)
+				{
+					return _PortVector[ID];
+				}
+
+				return Midi::DummyPort;
+            }
+        #endif
+
 
 	#endif
 #endif

@@ -236,6 +236,71 @@ const UartMidi::Port& UartMidi::SystemPortHandler::operator[](unsigned int Index
 
 			return UartMidi::SystemPortHandler::InvalidPortID;
 		}
+    #endif
 
+    #if defined(MCC_UART_DUPLEX_ENABLED)
+
+        bool UartMidi::SystemPortHandler::BindPort(const Uart::Duplex::Port& Port)
+        {
+			if(GetID(Port) == UartMidi::SystemPortHandler::InvalidPortID)
+			{
+
+				if (Uart::SystemPorts.GetID(Port) == Uart::SystemPortHandler::InvalidPortID)
+				{
+					if (!Uart::SystemPorts.BindPort(Port)) { return 0; }
+				}
+
+				if(_PortVector.resize(_PortVector.size()+1))
+				{
+					_PortVector[_PortVector.size() - 1] = UartMidi::Port(Uart::SystemPorts.GetPort(Port));
+					return 1;
+				}
+				return 0;
+			}
+			return 1;
+        }
+
+        void UartMidi::SystemPortHandler::UnbindPort(const Uart::Duplex::Port& Port)
+        {
+			for(uint8_t i = 0; i < _PortVector.size(); i++)
+			{
+				if(_PortVector[i].ParentType() == Uart::PortTypes::DuplexPort)
+				{
+					if (_PortVector[i].Uart_PortPointer()->ParentPointer() == &Port)
+					{
+						_PortVector.erase(i);
+					}
+					return;
+				} 
+			}
+        }
+
+        UartMidi::Port& UartMidi::SystemPortHandler::GetPort(const Uart::Duplex::Port& Port)
+        {
+			auto ID = GetID(Port);
+
+			if (ID != UartMidi::SystemPortHandler::InvalidPortID)
+			{
+				return _PortVector[ID];
+			}
+
+			return UartMidi::DummyPort;
+        }
+
+		const UartMidi::SystemPortHandler::PortID UartMidi::SystemPortHandler::GetID(const Uart::Duplex::Port& Port) const
+		{
+			for (uint8_t i = 0; i < _PortVector.size(); i++)
+			{
+				if (_PortVector[i].ParentType() == Uart::PortTypes::DuplexPort)
+				{
+					if (_PortVector[i].Uart_PortPointer()->ParentPointer() == &Port)
+					{
+						return (UartMidi::SystemPortHandler::PortID)i;
+					}
+				}
+			}
+
+			return UartMidi::SystemPortHandler::InvalidPortID;
+		}
     #endif
 #endif

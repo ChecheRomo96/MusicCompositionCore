@@ -43,7 +43,14 @@ using namespace MCC::Communications;
 		}
 	#endif
 
-	//UartPort(const Uart::DuplexPort& Parent);
+	#if defined (MCC_UART_DUPLEX_ENABLED)
+		
+		Uart::Port::Port(const Uart::Duplex::Port& Parent)
+		{
+			UnlinkFromPort();
+			LinkToPort(Parent);
+		}
+	#endif
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // High Level API
@@ -73,6 +80,10 @@ using namespace MCC::Communications;
             	case PortTypes::OutputPort: return ((Uart::Output::Port*) _PortPointer) -> Name();
             #endif
 
+			#if defined (MCC_UART_DUPLEX_ENABLED)
+            	case PortTypes::DuplexPort: return ((Uart::Duplex::Port*) _PortPointer) -> Name();
+            #endif
+
 			default: break;
 		} 
 
@@ -91,6 +102,10 @@ using namespace MCC::Communications;
             	case PortTypes::OutputPort: ((Uart::Output::Port*) _PortPointer) -> SetName(NewName);  break;
             #endif
 
+			#if defined (MCC_UART_DUPLEX_ENABLED)
+            	case PortTypes::DuplexPort: return ((Uart::Duplex::Port*) _PortPointer) -> SetName(NewName);  break;
+            #endif
+
 			default: break;
 		} 
 	}
@@ -106,8 +121,8 @@ using namespace MCC::Communications;
             	case PortTypes::InputPort: return ((Uart::Input::Port*) _PortPointer) -> BytesAvailable();
             #endif
 
-			#if defined (MCC_UART_DUPLEX_PORT_ENABLED)
-            	case PortTypes::DuplexPort: return ((DuplexPort*) _PortPointer) -> BytesAvailable();
+			#if defined (MCC_UART_DUPLEX_ENABLED)
+            	case PortTypes::DuplexPort: return ((Uart::Duplex::Port*) _PortPointer) -> BytesAvailable();
             #endif
 
 			default: return 0;
@@ -122,8 +137,8 @@ using namespace MCC::Communications;
             	case PortTypes::InputPort: return ((Uart::Input::Port*) _PortPointer) -> ReadByte();
             #endif
 
-			#if defined (MCC_UART_DUPLEX_PORT_ENABLED)
-            	case PortTypes::DuplexPort: return ((DuplexPort*) _PortPointer) -> ReadByte();
+			#if defined (MCC_UART_DUPLEX_ENABLED)
+            	case PortTypes::DuplexPort: return ((Uart::Duplex::Port*) _PortPointer) -> ReadByte();
             #endif
 
 			default: return 0;
@@ -141,8 +156,8 @@ using namespace MCC::Communications;
             	case PortTypes::OutputPort: ((Uart::Output::Port*) _PortPointer) -> WriteByte(Data);  break;
             #endif
 
-			#if defined (MCC_UART_DUPLEX_PORT_ENABLED)
-            	case PortTypes::DuplexPort: ((DuplexPort*) _PortPointer) -> Write(Data);  break;
+			#if defined (MCC_UART_DUPLEX_ENABLED)
+            	case PortTypes::DuplexPort: ((Uart::Duplex::Port*) _PortPointer) -> WriteByte(Data);  break;
             #endif
 
 			default: break;
@@ -157,8 +172,8 @@ using namespace MCC::Communications;
 	        	case PortTypes::OutputPort: ((Uart::Output::Port*) _PortPointer) -> WriteBuffer(Data,Len);  break;
 	        #endif
 
-			#if defined (MCC_UART_DUPLEX_PORT_ENABLED)
-	        	case PortTypes::DuplexPort: ((DuplexPort*) _PortPointer) -> WriteBuffer(Data,Len);  break;
+			#if defined (MCC_UART_DUPLEX_ENABLED)
+	        	case PortTypes::DuplexPort: ((Uart::Duplex::Port*) _PortPointer) -> WriteBuffer(Data,Len);  break;
 	        #endif
     	}
     }
@@ -171,8 +186,8 @@ using namespace MCC::Communications;
 	        	case PortTypes::OutputPort: ((Uart::Output::Port*) _PortPointer) -> WriteBuffer(Data);  break;
 	        #endif
 
-			#if defined (MCC_UART_DUPLEX_PORT_ENABLED)
-	        	case PortTypes::DuplexPort: ((DuplexPort*) _PortPointer) -> WriteBuffer(Data);  break;
+			#if defined (MCC_UART_DUPLEX_ENABLED)
+	        	case PortTypes::DuplexPort: ((Uart::Duplex::Port*) _PortPointer) -> WriteBuffer(Data);  break;
 	        #endif
     	}
     }
@@ -261,6 +276,14 @@ using namespace MCC::Communications;
             {
             	_PortPointer = (void*) &Parent;
             	_PortType = Uart::PortTypes::OutputPort;
+            }
+		#endif
+
+		#if defined (MCC_UART_DUPLEX_ENABLED)
+            void Uart::Port::LinkToPort(const Uart::Duplex::Port& Parent)
+            {
+            	_PortPointer = (void*) &Parent;
+            	_PortType = Uart::PortTypes::DuplexPort;
             }
 		#endif
 	//

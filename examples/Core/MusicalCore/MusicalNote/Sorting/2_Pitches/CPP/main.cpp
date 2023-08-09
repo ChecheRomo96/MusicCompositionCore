@@ -15,13 +15,15 @@ int main()
         PitchVector.push_back( Pitch(rand()%(MCC_MusicalNote::Pitch::MaxIterator+1)) );
         
         std::cout<< PitchVector[i].Name();
-        if((i+1)%5 == 0){std::cout<<std::endl;}
-        else if(i<99){std::cout<<", ";}
+
+        if (i < 99){ std::cout << ", "; }
+        if((i+1)%10 == 0){ std::cout <<std::endl; }
+ 
         
     } std::cout<<std::endl;
     
-    SortConfiguration.Append(MCC_MusicalNote::Sorting::PitchClass::Letter_Ascending);
-    SortConfiguration.Append(MCC_MusicalNote::Sorting::PitchClass::Accidental_Ascending);
+    SortConfiguration.Append(MCC_MusicalNote::Sorting::Pitch::Letter_Ascending);
+    SortConfiguration.Append(MCC_MusicalNote::Sorting::Pitch::Accidental_Ascending);
     
     PitchVector.Sort(SortConfiguration);
     
@@ -29,8 +31,15 @@ int main()
     for(uint8_t i = 0; i < 100; i++)
     {
         std::cout<< PitchVector[i].Name();
-        if((i+1)%5 == 0){std::cout<<std::endl;}
-        else if(i<99){std::cout<<", ";}
+
+        if (i < 99)
+        {
+            if (PitchVector[i].GetLetter() != PitchVector[i + 1].GetLetter())
+            {
+                std::cout << std::endl;
+            }
+            else { std::cout << ", "; }
+        }
         
     } std::cout<<std::endl;
     

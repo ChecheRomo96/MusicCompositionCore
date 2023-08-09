@@ -23,6 +23,10 @@
 			#if defined(MCC_UART_OUT_ENABLED)
 				namespace Output { class Port; }
 			#endif
+
+			#if defined(MCC_UART_DUPLEX_ENABLED)
+				namespace Duplex { class Port; }
+			#endif
 		}
 	#endif
 
@@ -77,6 +81,13 @@
 		                    void UnbindPort(const Uart::Output::Port& Port);
 							Midi::SystemPortHandler::PortID GetID(const Uart::Output::Port& Port);
 		                    Midi::Port& GetPort(const Uart::Output::Port& Port);
+			            #endif
+
+			            #if defined(MCC_UART_DUPLEX_ENABLED)
+		                    bool BindPort(const Uart::Duplex::Port& Port);
+		                    void UnbindPort(const Uart::Duplex::Port& Port);
+							Midi::SystemPortHandler::PortID GetID(const Uart::Duplex::Port& Port);
+		                    Midi::Port& GetPort(const Uart::Duplex::Port& Port);
 			            #endif
 		        	#endif
 	            #endif

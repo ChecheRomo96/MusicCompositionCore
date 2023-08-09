@@ -188,7 +188,7 @@ namespace MusicCompositionCore
 
 	uint8_t Input::Port::BytesAvailable()
 	{
-		if(_Available != NULL) 
+		if(AvailableAPI_Status()) 
 		{
 			return _Available();
 		}
@@ -197,7 +197,7 @@ namespace MusicCompositionCore
 
 	uint8_t Input::Port::ReadByte()
 	{
-		if(_Read != NULL)
+		if(ReadAPI_Status())
 		{
 			return _Read();
 		}

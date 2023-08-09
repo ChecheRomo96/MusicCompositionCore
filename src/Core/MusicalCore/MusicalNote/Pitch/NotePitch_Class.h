@@ -13,10 +13,13 @@
         {
             namespace MusicalCore
             {
-                namespace MusicalInterval
-                {
-                    class Interval;
-                }
+                #if defined(MCC_MUSICAL_INTERVAL_ENABLED)
+                    namespace MusicalInterval
+                    {
+                        class Interval;
+                    }
+                #endif
+
                 namespace MusicalNote
                 {
                     class Pitch
@@ -157,8 +160,6 @@
 
                                                 Letter(const Pitch& token);
                                                 Letter& operator=(const Pitch& token);
-
-                                                bool operator!=(const Letter& rhs) const;
 
                                                 friend bool operator < (const Letter& lhs, const Letter& rhs);
                                                 friend bool operator <= (const Letter& lhs, const Letter& rhs);
@@ -309,14 +310,15 @@
                                 
                                 Pitch(const Accidental& source);
                                 Pitch& operator=(const Accidental& source);
-                                
-                                
-                                Pitch& operator+=(const MusicalInterval::Interval &rhs);
-                                Pitch operator+(const MusicalInterval::Interval &rhs) const;
-                                
-                                Pitch& operator-=(const MusicalInterval::Interval &rhs);
-                                Pitch operator-(const MusicalInterval::Interval &rhs) const;
-                                
+                              
+                                #if defined (MCC_MUSICAL_INTERVAL_ENABLED)  
+                                    Pitch& operator+=(const MusicalInterval::Interval &rhs);
+                                    Pitch operator+(const MusicalInterval::Interval &rhs) const;
+                                    
+                                    Pitch& operator-=(const MusicalInterval::Interval &rhs);
+                                    Pitch operator-(const MusicalInterval::Interval &rhs) const;
+                                #endif
+
                                 operator uint8_t() const;
                                 
                                 void SetLetter(const Letter& source);

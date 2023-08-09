@@ -2,38 +2,24 @@
 #define MCC_PITCH_CLASS_SORTING_H
 
 	#include <MCC_BuildSettings.h>
-	#include <CPVector.h>
-	
+#include <CPVector.h>
+
+	#include "../../MusicalNote.h"
 	#include "../../Pitch/NotePitch.h"
 
-	namespace MusicCompositionCore
+	namespace MusicCompositionCore::Core::MusicalCore::MusicalNote::Sorting::Pitch
 	{
-		namespace Core
-		{
-			namespace MusicalCore
-			{
-				namespace MusicalNote
-				{
-					namespace Sorting
-					{
-						namespace PitchClass
-						{
-							int8_t Letter_Ascending(const Pitch& Element, const Pitch& Pivot);
-							int8_t Letter_Descending(const Pitch& Element, const Pitch& Pivot);
+		int8_t Letter_Ascending(const MCC_MusicalNote::Pitch& Element, const MCC_MusicalNote::Pitch& Pivot);
+		int8_t Letter_Descending(const MCC_MusicalNote::Pitch& Element, const MCC_MusicalNote::Pitch& Pivot);
 
-							int8_t Accidental_Ascending(const Pitch& Element, const Pitch& Pivot);
-							int8_t Accidental_Descending(const Pitch& Element, const Pitch& Pivot);
+		int8_t Accidental_Ascending(const MCC_MusicalNote::Pitch& Element, const MCC_MusicalNote::Pitch& Pivot);
+		int8_t Accidental_Descending(const MCC_MusicalNote::Pitch& Element, const MCC_MusicalNote::Pitch& Pivot);
 
-							int8_t NotePitch_Ascending(const Pitch& Element, const Pitch& Pivot);
-							int8_t NotePitch_Descending(const Pitch& Element, const Pitch& Pivot);
+		int8_t NotePitch_Ascending(const MCC_MusicalNote::Pitch& Element, const MCC_MusicalNote::Pitch& Pivot);
+		int8_t NotePitch_Descending(const MCC_MusicalNote::Pitch& Element, const MCC_MusicalNote::Pitch& Pivot);
 
-							int8_t MidiPitch_Ascending(const Pitch& Element, const Pitch& Pivot);
-							int8_t MidiPitch_Descending(const Pitch& Element, const Pitch& Pivot);
-						}
-					}
-				}
-			}
-		}
+		int8_t MidiPitch_Ascending(const MCC_MusicalNote::Pitch& Element, const MCC_MusicalNote::Pitch& Pivot);
+		int8_t MidiPitch_Descending(const MCC_MusicalNote::Pitch& Element, const MCC_MusicalNote::Pitch& Pivot);
 	}
 
 #endif//MCC_PITCH_CLASS_SORTING_H

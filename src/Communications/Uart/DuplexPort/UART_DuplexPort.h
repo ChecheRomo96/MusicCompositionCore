@@ -1,12 +1,12 @@
-#ifndef MCC_UART_OUT_H
-#define MCC_UART_OUT_H
+#ifndef MCC_UART_DUPLEX_H
+#define MCC_UART_DUPLEX_H
 
 	#include <MCC_BuildSettings.h>
 	#include <CPVector.h>
 	#include <CPString.h>
 
 
-    namespace MusicCompositionCore::Communications::Uart::Input
+    namespace MusicCompositionCore::Communications::Uart::Duplex
 	{
 		class Port;
 	}
@@ -23,7 +23,7 @@
 	#endif
     
 
-    namespace MusicCompositionCore::Communications::Uart::Output
+    namespace MusicCompositionCore::Communications::Uart::Duplex
 	{
 		class Port
 		{
@@ -32,10 +32,19 @@
 				//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 				// HW Link Function pointers
 
+					uint8_t (*_Available)(void);
+					uint8_t (*_Read)(void);
+
 					void (*_Write)(uint8_t);
 
 					void (*_SetBaudRate)(uint32_t BaudRate); // Optional
 					void (*_Initialize)(void);				 // Optional
+				//
+				//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+				// Callback vector ans Message Buffer Vector
+
+					CPVector::vector<void(*)(const CPVector::vector<uint8_t>&)> _CallbackVector;
+					CPVector::vector<uint8_t> _MessageBuffer;
 				//
 				//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 				// Port Name
@@ -46,6 +55,12 @@
 				// BaudRate, Polling Mode, and flags
 					
 					uint32_t _BaudRate;
+					uint8_t _FlagRegister;
+					uint8_t _BufferIndex;
+
+                    // bool _PollingMode  --> Bit 0
+					// bool _SOMF         --> Bit 1
+					// bool _SysExFlag    --> Bit 2
 				//
 				//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -57,23 +72,31 @@
 
 					Port();
 					Port( const CPString::string& PortName );							
-					Port( void (&Write)(uint8_t) );
-					Port( const CPString::string& PortName, void (&Write)(uint8_t) );
-					Port( void (&Write)(uint8_t), void (&Initialize)(void), void (&SetBaudRate)(uint32_t) );
-					Port( const CPString::string& PortName, void (&Write)(uint8_t), void (&Initialize)(void), void (&SetBaudRate)(uint32_t) );
+					Port( uint8_t (&Available)(void), uint8_t (&Read)(void), void (&Write)(uint8_t));
+					Port( const CPString::string& PortName, uint8_t (&Available)(void), uint8_t (&Read)(void), void (&Write)(uint8_t) );
+					Port( uint8_t (&Available)(void), uint8_t (&Read)(void), void (&Write)(uint8_t), void (&Initialize)(void), void (&SetBaudRate)(uint32_t) );
+					Port( const CPString::string& PortName, uint8_t (&Available)(void), uint8_t (&Read)(void), void (&Write)(uint8_t), void (&Initialize)(void), void (&SetBaudRate)(uint32_t) );
 				//
 				//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 				// Hardware Link API
 					
 					const bool HLAPI_Status() const;
-					void HLAPI_Link( void (&Write)(uint8_t), void (&Initialize)(void) , void (&SetBaudRate)(uint32_t) );
-					void HLAPI_Link( void (&Write)(uint8_t));
+					void HLAPI_Link( uint8_t (&Available)(void), uint8_t (&Read)(void), void (&Write)(uint8_t), void (&Initialize)(void) , void (&SetBaudRate)(uint32_t) );
+					void HLAPI_Link( uint8_t (&Available)(void), uint8_t (&Read)(void), void (&Write)(uint8_t));
 					void HLAPI_Unlink();
+
+					const bool AvailableAPI_Status() const;
+					void AvailableAPI_Link(uint8_t (&Available)(void));
+					void AvailableAPI_Unlink();
+
+					const bool ReadAPI_Status() const;
+					void ReadAPI_Link(uint8_t (&Read)(void));
+					void ReadAPI_Unlink();
 
 					const bool WriteAPI_Status() const;
 					void WriteAPI_Link(void (&Write)(uint8_t));
 					void WriteAPI_Unlink();
-					
+
 					const bool InitializeAPI_Status() const;
 					void InitializeAPI_Link(void (&Initialize)(void));
 					void InitializeAPI_Unlink();
@@ -90,6 +113,12 @@
 
 					void Initialize();
 					void SetBaudRate(uint32_t BaudRate);
+				//
+				//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                // UART In API
+                    
+					uint8_t BytesAvailable();
+					uint8_t ReadByte();
 				//
 				//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                 // UART Out API
@@ -129,8 +158,22 @@
 					#endif	
 				//
 				//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+			private:
+
+				//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+				// Helpers
+
+					void SetSysExFlag(bool State);
+					const bool SysExFlag() const;
+
+					void SetSOMF(bool State);
+					const bool SOMF() const;
+				//
+				//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 		};
 
 	}
 
-#endif//MCC_UART_OUT_H
+#endif//MCC_UART_DUPLEX_H

@@ -57,12 +57,6 @@ Pitch::Letter& Pitch::Letter::operator=(const Pitch& token)
     return (*this);
 }
 
-bool Pitch::Letter::operator!=(const Letter& rhs) const
-{
-    if(_ID==rhs.ID()){return 0;}
-    else{return 1;}
-}
-
 MusicCompositionCore::Core::MusicalCore::MusicalNote::Pitch::Letter::operator const LetterType() const{return _ID;}
 
 bool MusicCompositionCore::Core::MusicalCore::MusicalNote::operator < (const Pitch::Letter &lhs, const Pitch::Letter &rhs)

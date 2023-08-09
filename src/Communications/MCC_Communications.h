@@ -3,14 +3,7 @@
 
 	#include <MCC_BuildSettings.h>
 
-	namespace MusicCompositionCore
-	{
-		namespace Communications
-		{
-
-		}
-	}
-
+	namespace MusicCompositionCore::Communications{}
 	namespace MCC_Communications = MusicCompositionCore::Communications;
 
 	#if defined(MCC_UART_PORT_ENABLED)

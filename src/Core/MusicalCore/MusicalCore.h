@@ -15,9 +15,18 @@
 
 	namespace MCC_MusicalCore = MusicCompositionCore::Core::MusicalCore;
 
-	#include "MusicalNote/MusicalNote.h"
-	#include "MusicalInterval/MusicalInterval.h"
-    #include "MusicalScale/MusicalScale.h"
+	#if defined (MCC_MUSICAL_NOTE_ENABLED)
+		#include "MusicalNote/MusicalNote.h"
+	#endif
+
+	#if defined (MCC_MUSICAL_INTERVAL_ENABLED)
+		#include "MusicalInterval/MusicalInterval.h"
+	#endif
+
+	#if defined (MCC_MUSICAL_SCALE_ENABLED)
+	    #include "MusicalScale/MusicalScale.h"
+	#endif
+
 	//#include "MusicalChord/MusicalChord.h"
 
 

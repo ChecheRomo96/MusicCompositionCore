@@ -201,7 +201,7 @@ using namespace MCC::Communications::Midi;
 		    						break;
 
 
-		    						case MCC_MidiCore::Protocol::System::Common::MTC_QuarterFrame:
+									case MCC_MidiCore::Protocol::System::Common::MTC::QuarterFrame:
 		    						case MCC_MidiCore::Protocol::System::Common::SongSelect:
 
 			    						if(_BufferIndex == 2){ InvokeCallbacks(); }
@@ -272,7 +272,7 @@ using namespace MCC::Communications::Midi;
     //////////////////////////////////////////////////////////////////
     // Channel Voice Messages
 
-		void Midi::Port::NoteOn(uint8_t Note, uint8_t Velocity, uint8_t Channel)
+		void UartMidi::Port::NoteOn(uint8_t Note, uint8_t Velocity, uint8_t Channel)
 		{
 			MCC_MidiCore::MidiMessage MidiMessage;
 			MidiMessage.NoteOn(Note, Velocity, Channel);
@@ -280,7 +280,7 @@ using namespace MCC::Communications::Midi;
 			WriteMessage(MidiMessage);
 		}
 	
-	    void Midi::Port::NoteOff(uint8_t Note, uint8_t Velocity, uint8_t Channel)
+	    void UartMidi::Port::NoteOff(uint8_t Note, uint8_t Velocity, uint8_t Channel)
 	    {
 			MCC_MidiCore::MidiMessage MidiMessage;
 			MidiMessage.NoteOff(Note, Velocity, Channel);
@@ -288,133 +288,265 @@ using namespace MCC::Communications::Midi;
 			WriteMessage(MidiMessage);
 	    }
 
-	    void Midi::Port::ControlChange(uint8_t ControlNumber, uint8_t NewValue, uint8_t Channel)
+	    void UartMidi::Port::AfterTouch(uint8_t Note, uint8_t Value, uint8_t Channel)
 	    {
-			Write( MCC_MidiCore::Protocol::ChannelVoice::ControlChange | (Channel & 0x0F) );
-			Write( ControlNumber & 0b01111111 );
-			Write(NewValue);
+			MCC_MidiCore::MidiMessage MidiMessage;
+			MidiMessage.AfterTouch(Note, Value, Channel);
+
+			WriteMessage(MidiMessage);
 	    }
 
-	    void Midi::Port::ChannelPressure(uint8_t Pressure, uint8_t Channel)
+	    void UartMidi::Port::ControlChange(uint8_t ControlNumber, uint8_t Value, uint8_t Channel)
 	    {
-			Write(MCC_MidiCore::Protocol::ChannelVoice::ChannelPressure | (Channel & 0x0F) );
-			Write( Pressure );
+			MCC_MidiCore::MidiMessage MidiMessage;
+			MidiMessage.ControlChange(ControlNumber, Value, Channel);
+
+			WriteMessage(MidiMessage);
 	    }
 
-	    void Midi::Port::PitchBend(uint8_t BendValue, uint8_t Channel)
+		void UartMidi::Port::ProgramChange(uint8_t Program, uint8_t Channel)
+		{
+			MCC_MidiCore::MidiMessage MidiMessage;
+			MidiMessage.ProgramChange(Program, Channel);
+
+			WriteMessage(MidiMessage);
+		}
+
+	    void UartMidi::Port::ChannelPressure(uint8_t Pressure, uint8_t Channel)
 	    {
-			Write(MCC_MidiCore::Protocol::ChannelVoice::PitchBend | (Channel & 0x0F) );
-			Write( 0 );
-			Write( BendValue & 0b01111111 );
+			MCC_MidiCore::MidiMessage MidiMessage;
+			MidiMessage.ChannelPressure(Pressure, Channel);
+
+			WriteMessage(MidiMessage);
 	    }
 
-	    void Midi::Port::PitchBend(int8_t BendValue, uint8_t Channel)
+	    void UartMidi::Port::PitchBend(int8_t BendValue, uint8_t Channel)
 	    {
-	    	if(BendValue >= 0x40){BendValue = 0x3F;}
-	    	if(BendValue < -0x40){BendValue = 0x40;}
+			MCC_MidiCore::MidiMessage MidiMessage;
+			MidiMessage.PitchBend(BendValue, Channel);
 
-	    	BendValue = 0x40 + BendValue;
-
-			Write(MCC_MidiCore::Protocol::ChannelVoice::PitchBend | (Channel & 0x0F) );
-			Write( 0 );
-			Write( BendValue & 0b01111111 );
+			WriteMessage(MidiMessage);
 	    }
 
-	    void Midi::Port::PitchBend(uint16_t BendValue, uint8_t Channel)
+	    void UartMidi::Port::PitchBend(int16_t BendValue, uint8_t Channel)
 	    {
-			Write(MCC_MidiCore::Protocol::ChannelVoice::PitchBend | (Channel & 0x0F) );
-			Write( BendValue & 0b01111111 );
-			Write( ((BendValue)>>7) & 0b01111111 );
+			MCC_MidiCore::MidiMessage MidiMessage;
+			MidiMessage.PitchBend(BendValue, Channel);
+
+			WriteMessage(MidiMessage);
 	    }
 
-	    void Midi::Port::PitchBend(int16_t BendValue, uint8_t Channel)
+	    void UartMidi::Port::PitchBend(uint8_t BendValue, uint8_t Channel)
 	    {
-	    	if(BendValue >= 0x2000){BendValue = 0x1FFF;}
-	    	if(BendValue < -0x2000){BendValue = -0x2000;}
+			MCC_MidiCore::MidiMessage MidiMessage;
+			MidiMessage.PitchBend(BendValue, Channel);
 
-	    	BendValue = 0x2000 + BendValue;
-
-			Write(MCC_MidiCore::Protocol::ChannelVoice::PitchBend | (Channel & 0x0F) );
-			Write( BendValue & 0b01111111 );
-			Write( ((BendValue)>>7) & 0b01111111 );
+			WriteMessage(MidiMessage);
 	    }
 
-	    void Midi::Port::AfterTouch(uint8_t Note, uint8_t Value, uint8_t Channel)
+	    void UartMidi::Port::PitchBend(uint16_t BendValue, uint8_t Channel)
 	    {
-			Write(MCC_MidiCore::Protocol::ChannelVoice::AfterTouch | (Channel & 0x0F) );
-			Write( Note & 0b01111111 );
-			Write( Value );
+			MCC_MidiCore::MidiMessage MidiMessage;
+			MidiMessage.PitchBend(BendValue, Channel);
+
+			WriteMessage(MidiMessage);
 	    }
+
+	    //////////////////////////////////////////////////////////////
+	    // MCC_MidiCore::MidiNote
+
+	        #if defined (MCC_MIDI_NOTE_ENABLED)
+
+	            void UartMidi::Port::NoteOn(const MidiCore::MidiNote& Source)
+	            {
+					MCC_MidiCore::MidiMessage MidiMessage;
+					MidiMessage.NoteOn(Source);
+
+					WriteMessage(MidiMessage);
+	            }
+
+	            void UartMidi::Port::NoteOff(const MidiCore::MidiNote& Source)
+	            {
+					MCC_MidiCore::MidiMessage MidiMessage;
+					MidiMessage.NoteOff(Source);
+
+					WriteMessage(MidiMessage);
+	            }
+	        #endif
+	    //
+	    //////////////////////////////////////////////////////////////
+	    // Mcc_MusicalNote::Note
+
+	        #if defined (MCC_MUSICAL_NOTE_ENABLED)
+
+	            void UartMidi::Port::NoteOn(const MCC_MusicalCore::MusicalNote::Note& Source, uint8_t Vel, uint8_t Channel)
+	            {
+					MCC_MidiCore::MidiMessage MidiMessage;
+					MidiMessage.NoteOff(Source, Vel, Channel);
+
+					WriteMessage(MidiMessage);
+	            }
+
+	            void UartMidi::Port::NoteOff(const MCC_MusicalCore::MusicalNote::Note& Source, uint8_t Vel, uint8_t Channel)
+	            {
+					MCC_MidiCore::MidiMessage MidiMessage;
+					MidiMessage.NoteOff(Source, Vel, Channel);
+
+					WriteMessage(MidiMessage);
+	            }
+	        #endif
+	    //
+	    //////////////////////////////////////////////////////////////
+	    // Mcc_MusicalNote::Pitch
+
+	        #if defined (MCC_MUSICAL_NOTE_ENABLED)
+
+	            void UartMidi::Port::NoteOn(const MCC_MusicalCore::MusicalNote::Pitch& Source, uint8_t Octave, uint8_t Vel, uint8_t Channel)
+	            {
+					MCC_MidiCore::MidiMessage MidiMessage;
+					MidiMessage.NoteOn(Source, Octave, Vel, Channel);
+
+					WriteMessage(MidiMessage);
+	            }
+
+	            void UartMidi::Port::NoteOff(const MCC_MusicalCore::MusicalNote::Pitch& Source, uint8_t Octave, uint8_t Vel, uint8_t Channel)
+	            {
+					MCC_MidiCore::MidiMessage MidiMessage;
+					MidiMessage.NoteOff(Source, Octave, Vel, Channel);
+
+					WriteMessage(MidiMessage);
+	            }
+	        #endif
+	    //
+	    //////////////////////////////////////////////////////////////
     //
     //////////////////////////////////////////////////////////////////
-    // Sysytem Common Messages
-    
-	    void Midi::Port::TimingTick()
-	    {
-			Write(MCC_MidiCore::Protocol::System::RealTime::TimingTick);
-	    }
-
-	    void Midi::Port::Start()
-	    {
-			Write(MCC_MidiCore::Protocol::System::RealTime::Start);
-	    }
-
-	    void Midi::Port::Stop()
-	    {
-			Write(MCC_MidiCore::Protocol::System::RealTime::Stop);
-	    }
-
-	    void Midi::Port::Continue()
-	    {
-			Write(MCC_MidiCore::Protocol::System::RealTime::Continue);
-	    }
-
-		void Midi::Port::ActiveSensing()
-		{
-			Write(MCC_MidiCore::Protocol::System::RealTime::ActiveSensing);
-		}
-	//
-	//////////////////////////////////////////////////////////////////
 	// Sysytem Common Messages
 
-	    void Midi::Port::SongPositionPointer(uint16_t Position)
+	    void UartMidi::Port::MTC_QuarterFrame(uint8_t MTC_ID, uint8_t Data)
 	    {
-			Write(MCC_MidiCore::Protocol::System::Common::SongPositionPointer);
-			Write( Position & 0b01111111 );
-			Write( ((Position)>>7) & 0b01111111 );
+			MCC_MidiCore::MidiMessage MidiMessage;
+			MidiMessage.MTC_QuarterFrame(MTC_ID, Data);
+
+			WriteMessage(MidiMessage);
 	    }
 
-	    void Midi::Port::MTC_QuarterFrame(uint8_t MessageType, uint8_t Values)
+	    void UartMidi::Port::SongPositionPointer(uint16_t Position)
 	    {
-			Write(MCC_MidiCore::Protocol::System::Common::MTC_QuarterFrame);
-			Write( ((MessageType & 0b111)<<4) | (Values & 0x0F) );
+			MCC_MidiCore::MidiMessage MidiMessage;
+			MidiMessage.SongPositionPointer(Position);
+
+			WriteMessage(MidiMessage);
 	    }
 
-	    void Midi::Port::SongSelect(uint8_t SongID)
+	    void UartMidi::Port::SongSelect(uint8_t SongID)
 	    {
-			Write(MCC_MidiCore::Protocol::System::Common::SongSelect);
-			Write( SongID & 0b01111111 );
+			MCC_MidiCore::MidiMessage MidiMessage;
+			MidiMessage.SongSelect(SongID);
+
+			WriteMessage(MidiMessage);
 	    }
 
-	    void Midi::Port::SysteExclusive(uint8_t ManufacturerID , uint8_t* Data, uint8_t size)
+        void UartMidi::Port::TuningRequest()
+        {
+			MCC_MidiCore::MidiMessage MidiMessage;
+			MidiMessage.TuningRequest();
+
+			WriteMessage(MidiMessage);
+        }
+	//
+	//////////////////////////////////////////////////////////////////
+    // System Real Time Messages
+    
+	    void UartMidi::Port::TimingTick()
+	    {
+			MCC_MidiCore::MidiMessage MidiMessage;
+			MidiMessage.TimingTick();
+
+			WriteMessage(MidiMessage);
+	    }
+
+	    void UartMidi::Port::Start()
+	    {
+			MCC_MidiCore::MidiMessage MidiMessage;
+			MidiMessage.Start();
+
+			WriteMessage(MidiMessage);
+	    }
+
+	    void UartMidi::Port::Continue()
+	    {
+			MCC_MidiCore::MidiMessage MidiMessage;
+			MidiMessage.Continue();
+
+			WriteMessage(MidiMessage);
+	    }
+
+	    void UartMidi::Port::Stop()
+	    {
+			MCC_MidiCore::MidiMessage MidiMessage;
+			MidiMessage.Stop();
+
+			WriteMessage(MidiMessage);
+	    }
+
+		void UartMidi::Port::ActiveSensing()
+		{
+			MCC_MidiCore::MidiMessage MidiMessage;
+			MidiMessage.ActiveSensing();
+
+			WriteMessage(MidiMessage);
+		}
+
+	    void UartMidi::Port::SystemReset()
+	    {
+			MCC_MidiCore::MidiMessage MidiMessage;
+			MidiMessage.SystemReset();
+
+			WriteMessage(MidiMessage);
+	    }
+	//
+	//////////////////////////////////////////////////////////////////
+    // System Exclusive Messages
+
+        void UartMidi::Port::SystemExclusive(const CPVector::vector<uint8_t>& Data)
+        {
+			MCC_MidiCore::MidiMessage MidiMessage;
+			MidiMessage.SystemExclusive(Data);
+
+			WriteMessage(MidiMessage);
+        }
+
+        void UartMidi::Port::SystemExclusive(uint8_t* Data, uint8_t Length)
+        {
+			MCC_MidiCore::MidiMessage MidiMessage;
+			MidiMessage.SystemExclusive(Data, Length);
+
+			WriteMessage(MidiMessage);
+        }
+
+	    /*
+
+	    void UartMidi::Port::SysteExclusive(uint8_t ManufacturerID , uint8_t* Data, uint8_t size)
 	    {
 
 	    }
 
-	    void Midi::Port::SysteExclusive(uint8_t ManufacturerID , const CPVector::vector<uint8_t>& Data)
+	    void UartMidi::Port::SysteExclusive(uint8_t ManufacturerID , const CPVector::vector<uint8_t>& Data)
 	    {
 
 	    }
 
-	    void Midi::Port::SysteExclusive(uint32_t ManufacturerID , uint8_t* Data, uint8_t size)
+	    void UartMidi::Port::SysteExclusive(uint32_t ManufacturerID , uint8_t* Data, uint8_t size)
 	    {
 
 	    }
 
-	    void Midi::Port::SysteExclusive(uint32_t ManufacturerID , const CPVector::vector<uint8_t>& Data)
+	    void UartMidi::Port::SysteExclusive(uint32_t ManufacturerID , const CPVector::vector<uint8_t>& Data)
 	    {
 
 	    }
+	    */
 	//
     //////////////////////////////////////////////////////////////////
 //

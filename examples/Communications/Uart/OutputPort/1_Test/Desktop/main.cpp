@@ -49,7 +49,7 @@ int main()
 			Port3.UartMidi_Port().WriteMessage(Buffer);
 			std::cout << std::endl;
 
-			//Port3.UartMidi_Port().NoteOn(60, 100);
+			Port3.UartMidi_Port().NoteOn(60, 100);
 
 			MCC_MidiCore::MidiMessage myMessage;
 			myMessage.NoteOff(60);

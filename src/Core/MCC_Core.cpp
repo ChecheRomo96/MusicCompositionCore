@@ -2,7 +2,9 @@
 
 void MusicCompositionCore::Core::Start()
 {
-    MCC_MusicalNote::Start();
+    #if defined(MCC_MUSICAL_NOTE_ENABLED)
+        MCC_MusicalNote::Start();
+    #endif
     //MCC_MidiStart();
 }
 

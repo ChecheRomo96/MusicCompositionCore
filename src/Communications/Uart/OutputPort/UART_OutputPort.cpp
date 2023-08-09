@@ -10,17 +10,11 @@
 	using namespace MusicCompositionCore::Communications::Uart;
 	using namespace MusicCompositionCore::Communications;
 
-namespace MusicCompositionCore
+namespace MusicCompositionCore::Communications::Uart
 {
-	namespace Communications
+	namespace
 	{
-		namespace Uart
-		{
-			namespace
-			{
-				static const CPString::string OutputPortStr("Uart Output Port");
-			}
-		}
+		static const CPString::string OutputPortStr("Uart Output Port");
 	}
 }
 	
@@ -84,40 +78,34 @@ namespace MusicCompositionCore
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Hardware Link API
+
+	const bool Output::Port::HLAPI_Status() const
+	{
+		// Only checks if _Write() is binded, because the other functionality is optional
+		if( WriteAPI_Status() ){ return 1; }
+		return 0;
+	}
 	 
 	void Output::Port::HLAPI_Link(void(&Write)(uint8_t), void (&Initialize)(void) , void (&SetBaudRate)(uint32_t) )
 	{
-		_Initialize = Initialize;
-		_SetBaudRate = SetBaudRate;
-		_Write = Write;
-
+		InitializeAPI_Link(Initialize);
+		SetBaudRateAPI_Link(SetBaudRate);
+		WriteAPI_Link(Write);
 		Uart_BindPort();
 	}
 
     void Output::Port::HLAPI_Link(void(&Write)(uint8_t) )
     {
-		_Write = Write;
-
-	   Uart_BindPort();
+		WriteAPI_Link(Write);
+		Uart_BindPort();
     }
 
 	void Output::Port::HLAPI_Unlink()
 	{
-		_Write = NULL;
-		_SetBaudRate = NULL;
-		_Initialize = NULL;
-		
+		WriteAPI_Unlink();
+		SetBaudRateAPI_Unlink();
+		InitializeAPI_Unlink();
 		Uart_UnbindPort();
-	}
-
-	const bool Output::Port::HLAPI_Status() const
-	{
-		// Only checks id _Available and _Read are binded, because the other functionality is optional
-		if( (_Write != NULL)  )
-		{
-			return 1;
-		}
-		return 0;
 	}
 
 	const bool Output::Port::WriteAPI_Status() const
@@ -125,18 +113,47 @@ namespace MusicCompositionCore
 		if( _Write != NULL ){ return 1; }
 		return 0;
 	}
-
+	
+	void Output::Port::WriteAPI_Link(void (&Write)(uint8_t))
+	{
+		_Write = Write;
+	}
+	
+	void Output::Port::WriteAPI_Unlink()
+	{
+		_Write = NULL;
+	}
 
 	const bool Output::Port::InitializeAPI_Status() const
 	{
 		if( _Initialize != NULL ){ return 1; }
 		return 0;
 	}
+	
+	void Output::Port::InitializeAPI_Link(void (&Initialize)(void))
+	{
+		_Initialize = Initialize;
+	}
+	
+	void Output::Port::InitializeAPI_Unlink()
+	{
+		_Initialize = NULL;
+	}
 
 	const bool Output::Port::SetBaudRateAPI_Status() const
 	{
 		if( _SetBaudRate != NULL ){ return 1; }
 		return 0;
+	}
+	
+	void Output::Port::SetBaudRateAPI_Link(void (&SetBaudRate)(uint32_t))
+	{
+		_SetBaudRate = SetBaudRate;
+	}
+	
+	void Output::Port::SetBaudRateAPI_Unlink()
+	{
+		_SetBaudRate = NULL;
 	}
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -183,7 +200,7 @@ namespace MusicCompositionCore
 	{
 		if (WriteAPI_Status())
 		{
-			if( (sizeof(Data)/sizeof(uint8_t)) >= size )
+			if( (sizeof(*Data)/sizeof(uint8_t)) >= size )
 			{
 				for( uint8_t i = 0; i < size; i++ )
 				{

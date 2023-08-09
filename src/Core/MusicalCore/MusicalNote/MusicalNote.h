@@ -3,18 +3,9 @@
 
 	#include <MCC_BuildSettings.h>
 
-	namespace MusicCompositionCore
+	namespace MusicCompositionCore::Core::MusicalCore::MusicalNote
 	{
-        namespace Core
-        {
-        	namespace MusicalCore
-       		{
-       			namespace MusicalNote
-       			{
-       				void Start();
-				}
-			}
-		}
+		void Start();
 	}
 
 	namespace MCC_MusicalNote = MusicCompositionCore::Core::MusicalCore::MusicalNote;

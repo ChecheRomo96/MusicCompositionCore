@@ -15,7 +15,7 @@ const uint8_t Uart::SystemPortHandler::PortCount() const
 	return _PortVector.size();
 }
 
-const Uart::SystemPortHandler::PortID& Uart::SystemPortHandler::GetID(const Uart::Port& Port) const
+Uart::SystemPortHandler::PortID Uart::SystemPortHandler::GetID(const Uart::Port& Port) const
 {
 	return Uart::SystemPortHandler::InvalidPortID;
 }
@@ -91,7 +91,7 @@ const Uart::Port& Uart::SystemPortHandler::operator[](unsigned int Index) const
 		return Uart::DummyPort;
 	}
 
-	const Uart::SystemPortHandler::PortID& Uart::SystemPortHandler::GetID(const Uart::Input::Port& Port) const
+	Uart::SystemPortHandler::PortID Uart::SystemPortHandler::GetID(const Uart::Input::Port& Port) const
 	{
 		for(uint8_t i = 0; i < _PortVector.size(); i++)
 		{
@@ -147,7 +147,62 @@ const Uart::Port& Uart::SystemPortHandler::operator[](unsigned int Index) const
 		return Uart::DummyPort;
 	}
 
-	const Uart::SystemPortHandler::PortID& Uart::SystemPortHandler::GetID(const Uart::Output::Port& Port) const
+	Uart::SystemPortHandler::PortID Uart::SystemPortHandler::GetID(const Uart::Output::Port& Port) const
+	{
+		for(uint8_t i = 0; i < _PortVector.size(); i++)
+		{
+			if(_PortVector[i].ParentPointer() == &Port)
+			{
+				return (Uart::SystemPortHandler::PortID) i;
+			} 
+		}
+
+		return Uart::SystemPortHandler::InvalidPortID;
+	}
+#endif
+
+#if defined(MCC_UART_DUPLEX_ENABLED)
+
+	bool Uart::SystemPortHandler::BindPort(const Uart::Duplex::Port& Port)
+	{
+		if(GetID(Port) == Uart::SystemPortHandler::InvalidPortID)
+		{
+			if(_PortVector.resize(_PortVector.size()+1))
+			{
+				_PortVector[_PortVector.size() - 1] = Uart::Port(Port);
+				return 1;
+			}
+			return 0;
+		}
+		return 1;
+	}
+	
+
+	void Uart::SystemPortHandler::UnbindPort(const Uart::Duplex::Port& Port)
+	{
+		for(uint8_t i = 0; i < _PortVector.size(); i++)
+		{
+			if(_PortVector[i].ParentPointer() == &Port)
+			{
+				_PortVector.erase(i);
+				return;
+			} 
+		}
+	}
+
+	Uart::Port& Uart::SystemPortHandler::GetPort(const Uart::Duplex::Port& Port)
+	{
+		uint8_t ID = GetID(Port);
+
+		if(ID != Uart::SystemPortHandler::InvalidPortID)
+		{
+			return _PortVector[ID];
+		}
+
+		return Uart::DummyPort;
+	}
+
+	Uart::SystemPortHandler::PortID Uart::SystemPortHandler::GetID(const Uart::Duplex::Port& Port) const
 	{
 		for(uint8_t i = 0; i < _PortVector.size(); i++)
 		{

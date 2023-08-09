@@ -2,6 +2,11 @@
 
 using namespace MCC::Communications;
 
+namespace
+{
+    CPString::string emptyStr;
+};
+
 ///////////////////////////////////////////////////////////////////////
 // Constructors
 
@@ -59,8 +64,9 @@ using namespace MCC::Communications;
 
 			default: break;
 		}
-
-		return CPString::string("");
+        
+        emptyStr = "";
+		return emptyStr;
 	}
 
 	void Midi::Port::SetName(const CPString::string& NewName)
@@ -136,7 +142,7 @@ using namespace MCC::Communications;
 		switch (ParentType())
 		{
 			#if defined(MCC_UART_MIDI_ENABLED)
-				case PortTypes::UartMidi: ((UartMidi::Port*)_PortPointer) -> Write(Data);
+				case PortTypes::UartMidi: ((UartMidi::Port*)_PortPointer) -> Write(Data); break;
 			#endif
 
 			default:break;
@@ -148,7 +154,7 @@ using namespace MCC::Communications;
 		switch (ParentType())
 		{
 			#if defined(MCC_UART_MIDI_ENABLED)
-				case PortTypes::UartMidi: ((UartMidi::Port*)_PortPointer) -> WriteMessage(Data, Size);
+				case PortTypes::UartMidi: ((UartMidi::Port*)_PortPointer) -> WriteMessage(Data, Size); break;
 			#endif
 
 			default:break;
@@ -160,7 +166,7 @@ using namespace MCC::Communications;
 		switch (ParentType())
 		{
 			#if defined(MCC_UART_MIDI_ENABLED)
-				case PortTypes::UartMidi: ((UartMidi::Port*)_PortPointer) -> WriteMessage(Data);
+				case PortTypes::UartMidi: ((UartMidi::Port*)_PortPointer) -> WriteMessage(Data); break;
 			#endif
 
 			default:break;
@@ -173,7 +179,7 @@ using namespace MCC::Communications;
 			switch (ParentType())
 			{
 				#if defined(MCC_UART_MIDI_ENABLED)
-					case PortTypes::UartMidi: ((UartMidi::Port*)_PortPointer) -> WriteMessage(Data);
+					case PortTypes::UartMidi: ((UartMidi::Port*)_PortPointer) -> WriteMessage(Data); break;
 				#endif
 
 				default:break;
@@ -181,149 +187,366 @@ using namespace MCC::Communications;
 		}
 	#endif
 
-/*
+
     //////////////////////////////////////////////////////////////////
     // Channel Voice Messages
 
 		void Midi::Port::NoteOn(uint8_t Note, uint8_t Velocity, uint8_t Channel)
 		{
-
-			CPVector::vector<uint8_t> Message;
-
-			if(Message.resize(3))
-			{
-				Message[0] = (MCC_MidiCore::Protocol::ChannelVoice::NoteOn | (Channel & 0x0F));
-				Message[1] = (Note & 0b01111111);
-				Message[2] = (Velocity & 0b01111111);
-			} else{ return; }
-
 			switch (ParentType())
 			{
 				#if defined(MCC_UART_MIDI_ENABLED)
-					case PortTypes::UartMidi: ((UartMidi::Port*)_PortPointer) -> WriteMessage(Message);
+					case PortTypes::UartMidi: ((UartMidi::Port*)_PortPointer) -> NoteOn( Note,  Velocity,  Channel); break;
 				#endif
 
 				default:break;
 			}
 			
 		}
-	
+		
 	    void Midi::Port::NoteOff(uint8_t Note, uint8_t Velocity, uint8_t Channel)
 	    {
-			Write(MCC_MidiCore::Protocol::ChannelVoice::NoteOff | (Channel & 0x0F) );
-			Write( Note & 0b01111111 );
-			Write( Velocity );
-	    }
+			switch (ParentType())
+			{
+				#if defined(MCC_UART_MIDI_ENABLED)
+					case PortTypes::UartMidi: ((UartMidi::Port*)_PortPointer) -> NoteOff( Note,  Velocity,  Channel); break;
+				#endif
 
-	    void Midi::Port::ControlChange(uint8_t ControlNumber, uint8_t NewValue, uint8_t Channel)
-	    {
-			Write( MCC_MidiCore::Protocol::ChannelVoice::ControlChange | (Channel & 0x0F) );
-			Write( ControlNumber & 0b01111111 );
-			Write(NewValue);
-	    }
-
-	    void Midi::Port::ChannelPressure(uint8_t Pressure, uint8_t Channel)
-	    {
-			Write(MCC_MidiCore::Protocol::ChannelVoice::ChannelPressure | (Channel & 0x0F) );
-			Write( Pressure );
-	    }
-
-	    void Midi::Port::PitchBend(uint8_t BendValue, uint8_t Channel)
-	    {
-			Write(MCC_MidiCore::Protocol::ChannelVoice::PitchBend | (Channel & 0x0F) );
-			Write( 0 );
-			Write( BendValue & 0b01111111 );
-	    }
-
-	    void Midi::Port::PitchBend(int8_t BendValue, uint8_t Channel)
-	    {
-	    	if(BendValue >= 0x40){BendValue = 0x3F;}
-	    	if(BendValue < -0x40){BendValue = 0x40;}
-
-	    	BendValue = 0x40 + BendValue;
-
-			Write(MCC_MidiCore::Protocol::ChannelVoice::PitchBend | (Channel & 0x0F) );
-			Write( 0 );
-			Write( BendValue & 0b01111111 );
-	    }
-
-	    void Midi::Port::PitchBend(uint16_t BendValue, uint8_t Channel)
-	    {
-			Write(MCC_MidiCore::Protocol::ChannelVoice::PitchBend | (Channel & 0x0F) );
-			Write( BendValue & 0b01111111 );
-			Write( ((BendValue)>>7) & 0b01111111 );
-	    }
-
-	    void Midi::Port::PitchBend(int16_t BendValue, uint8_t Channel)
-	    {
-	    	if(BendValue >= 0x2000){BendValue = 0x1FFF;}
-	    	if(BendValue < -0x2000){BendValue = -0x2000;}
-
-	    	BendValue = 0x2000 + BendValue;
-
-			Write(MCC_MidiCore::Protocol::ChannelVoice::PitchBend | (Channel & 0x0F) );
-			Write( BendValue & 0b01111111 );
-			Write( ((BendValue)>>7) & 0b01111111 );
+				default:break;
+			}
 	    }
 
 	    void Midi::Port::AfterTouch(uint8_t Note, uint8_t Value, uint8_t Channel)
 	    {
-			Write(MCC_MidiCore::Protocol::ChannelVoice::AfterTouch | (Channel & 0x0F) );
-			Write( Note & 0b01111111 );
-			Write( Value );
+			switch (ParentType())
+			{
+				#if defined(MCC_UART_MIDI_ENABLED)
+					case PortTypes::UartMidi: ((UartMidi::Port*)_PortPointer) -> AfterTouch( Note,  Value,  Channel); break;
+				#endif
+
+				default:break;
+			}
 	    }
+
+	    void Midi::Port::ControlChange(uint8_t ControlNumber, uint8_t Value, uint8_t Channel)
+	    {
+			switch (ParentType())
+			{
+				#if defined(MCC_UART_MIDI_ENABLED)
+					case PortTypes::UartMidi: ((UartMidi::Port*)_PortPointer) -> ControlChange( ControlNumber,  Value,  Channel); break;
+				#endif
+
+				default:break;
+			}
+	    }
+
+	    void Midi::Port::ChannelPressure(uint8_t Pressure, uint8_t Channel)
+	    {
+			switch (ParentType())
+			{
+				#if defined(MCC_UART_MIDI_ENABLED)
+					case PortTypes::UartMidi: ((UartMidi::Port*)_PortPointer) -> ChannelPressure( Pressure,  Channel); break;
+				#endif
+
+				default:break;
+			}
+	    }
+
+	    void Midi::Port::PitchBend(uint8_t BendValue, uint8_t Channel)
+	    {
+			switch (ParentType())
+			{
+				#if defined(MCC_UART_MIDI_ENABLED)
+					case PortTypes::UartMidi: ((UartMidi::Port*)_PortPointer) -> PitchBend( BendValue,  Channel); break;
+				#endif
+
+				default:break;
+			}
+	    }
+
+	    void Midi::Port::PitchBend(int8_t BendValue, uint8_t Channel)
+	    {
+			switch (ParentType())
+			{
+				#if defined(MCC_UART_MIDI_ENABLED)
+					case PortTypes::UartMidi: ((UartMidi::Port*)_PortPointer) -> PitchBend( BendValue,  Channel); break;
+				#endif
+
+				default:break;
+			}
+	    }
+
+	    void Midi::Port::PitchBend(uint16_t BendValue, uint8_t Channel)
+	    {
+			switch (ParentType())
+			{
+				#if defined(MCC_UART_MIDI_ENABLED)
+					case PortTypes::UartMidi: ((UartMidi::Port*)_PortPointer) -> PitchBend( BendValue,  Channel); break;
+				#endif
+
+				default:break;
+			}
+	    }
+
+	    void Midi::Port::PitchBend(int16_t BendValue, uint8_t Channel)
+	    {
+			switch (ParentType())
+			{
+				#if defined(MCC_UART_MIDI_ENABLED)
+					case PortTypes::UartMidi: ((UartMidi::Port*)_PortPointer) -> PitchBend( BendValue,  Channel); break;
+				#endif
+
+				default:break;
+			}
+	    }
+
+	    //////////////////////////////////////////////////////////////
+	    // MCC_MidiCore::MidiNote
+
+	        #if defined (MCC_MIDI_NOTE_ENABLED)
+
+	            void Midi::Port::NoteOn(const MidiCore::MidiNote& Source)
+	            {
+					switch (ParentType())
+					{
+						#if defined(MCC_UART_MIDI_ENABLED)
+							case PortTypes::UartMidi: ((UartMidi::Port*)_PortPointer) -> NoteOn( Source); break;
+						#endif
+
+						default:break;
+					}
+	            }
+
+	            void Midi::Port::NoteOff(const MidiCore::MidiNote& Source)
+	            {
+					switch (ParentType())
+					{
+						#if defined(MCC_UART_MIDI_ENABLED)
+							case PortTypes::UartMidi: ((UartMidi::Port*)_PortPointer) -> NoteOff( Source); break;
+						#endif
+
+						default:break;
+					}
+	            }
+	        #endif
+	    //
+	    //////////////////////////////////////////////////////////////
+	    // Mcc_MusicalNote::Note
+
+	        #if defined (MCC_MUSICAL_NOTE_ENABLED)
+
+	            void Midi::Port::NoteOn(const MCC_MusicalCore::MusicalNote::Note& Source, uint8_t Vel, uint8_t Channel)
+	            {
+					switch (ParentType())
+					{
+						#if defined(MCC_UART_MIDI_ENABLED)
+							case PortTypes::UartMidi: ((UartMidi::Port*)_PortPointer) -> NoteOn( Source, Vel, Channel); break;
+						#endif
+
+						default:break;
+					}
+	            }
+
+	            void Midi::Port::NoteOff(const MCC_MusicalCore::MusicalNote::Note& Source, uint8_t Vel, uint8_t Channel)
+	            {
+					switch (ParentType())
+					{
+						#if defined(MCC_UART_MIDI_ENABLED)
+							case PortTypes::UartMidi: ((UartMidi::Port*)_PortPointer) -> NoteOff( Source, Vel, Channel); break;
+						#endif
+
+						default:break;
+					}
+	            }
+	        #endif
+	    //
+	    //////////////////////////////////////////////////////////////
+	    // Mcc_MusicalNote::Pitch
+
+	        #if defined (MCC_MUSICAL_NOTE_ENABLED)
+
+	            void Midi::Port::NoteOn(const MCC_MusicalCore::MusicalNote::Pitch& Source, uint8_t Octave, uint8_t Vel, uint8_t Channel)
+	            {
+					switch (ParentType())
+					{
+						#if defined(MCC_UART_MIDI_ENABLED)
+							case PortTypes::UartMidi: ((UartMidi::Port*)_PortPointer) -> NoteOn( Source, Octave, Vel, Channel); break;
+						#endif
+
+						default:break;
+					}
+	            }
+
+	            void Midi::Port::NoteOff(const MCC_MusicalCore::MusicalNote::Pitch& Source, uint8_t Octave, uint8_t Vel, uint8_t Channel)
+	            {
+					switch (ParentType())
+					{
+						#if defined(MCC_UART_MIDI_ENABLED)
+							case PortTypes::UartMidi: ((UartMidi::Port*)_PortPointer) -> NoteOff( Source, Octave, Vel, Channel); break;
+						#endif
+
+						default:break;
+					}
+	            }
+	        #endif
+	    //
+	    //////////////////////////////////////////////////////////////
     //
     //////////////////////////////////////////////////////////////////
-    // Sysytem Common Messages
-    
-	    void Midi::Port::TimingTick()
-	    {
-			Write(MCC_MidiCore::Protocol::System::RealTime::TimingTick);
-	    }
-
-	    void Midi::Port::Start()
-	    {
-			Write(MCC_MidiCore::Protocol::System::RealTime::Start);
-	    }
-
-	    void Midi::Port::Stop()
-	    {
-			Write(MCC_MidiCore::Protocol::System::RealTime::Stop);
-	    }
-
-	    void Midi::Port::Continue()
-	    {
-			Write(MCC_MidiCore::Protocol::System::RealTime::Continue);
-	    }
-
-		void Midi::Port::ActiveSensing()
-		{
-			Write(MCC_MidiCore::Protocol::System::RealTime::ActiveSensing);
-		}
-	//
-	//////////////////////////////////////////////////////////////////
 	// Sysytem Common Messages
+
+	    void Midi::Port::MTC_QuarterFrame(uint8_t MTC_ID, uint8_t Data)
+	    {
+			switch (ParentType())
+			{
+				#if defined(MCC_UART_MIDI_ENABLED)
+					case PortTypes::UartMidi: ((UartMidi::Port*)_PortPointer) -> MTC_QuarterFrame( MTC_ID, Data); break;
+				#endif
+
+				default:break;
+			}
+	    }
 
 	    void Midi::Port::SongPositionPointer(uint16_t Position)
 	    {
-			Write(MCC_MidiCore::Protocol::System::Common::SongPositionPointer);
-			Write( Position & 0b01111111 );
-			Write( ((Position)>>7) & 0b01111111 );
-	    }
+			switch (ParentType())
+			{
+				#if defined(MCC_UART_MIDI_ENABLED)
+					case PortTypes::UartMidi: ((UartMidi::Port*)_PortPointer) -> SongPositionPointer( Position); break;
+				#endif
 
-	    void Midi::Port::MTC_QuarterFrame(uint8_t MessageType, uint8_t Values)
-	    {
-			Write(MCC_MidiCore::Protocol::System::Common::MTC_QuarterFrame);
-			Write( ((MessageType & 0b111)<<4) | (Values & 0x0F) );
+				default:break;
+			}
 	    }
 
 	    void Midi::Port::SongSelect(uint8_t SongID)
 	    {
-			Write(MCC_MidiCore::Protocol::System::Common::SongSelect);
-			Write( SongID & 0b01111111 );
+			switch (ParentType())
+			{
+				#if defined(MCC_UART_MIDI_ENABLED)
+					case PortTypes::UartMidi: ((UartMidi::Port*)_PortPointer) -> SongSelect( SongID); break;
+				#endif
+
+				default:break;
+			}
 	    }
 
-	    void Midi::Port::SysteExclusive(uint8_t ManufacturerID , uint8_t* Data, uint8_t size)
+        void Midi::Port::TuningRequest()
+        {
+			switch (ParentType())
+			{
+				#if defined(MCC_UART_MIDI_ENABLED)
+					case PortTypes::UartMidi: ((UartMidi::Port*)_PortPointer) -> TuningRequest(); break;
+				#endif
+
+				default:break;
+			}
+        }
+    //
+    //////////////////////////////////////////////////////////////////
+    // System Real Time Messages
+    
+	    void Midi::Port::TimingTick()
+	    {
+			switch (ParentType())
+			{
+				#if defined(MCC_UART_MIDI_ENABLED)
+					case PortTypes::UartMidi: ((UartMidi::Port*)_PortPointer) -> TimingTick(); break;
+				#endif
+
+				default:break;
+			}
+	    }
+
+	    void Midi::Port::Start()
+	    {
+			switch (ParentType())
+			{
+				#if defined(MCC_UART_MIDI_ENABLED)
+					case PortTypes::UartMidi: ((UartMidi::Port*)_PortPointer) -> Start(); break;
+				#endif
+
+				default:break;
+			}
+	    }
+
+	    void Midi::Port::Continue()
+	    {
+			switch (ParentType())
+			{
+				#if defined(MCC_UART_MIDI_ENABLED)
+					case PortTypes::UartMidi: ((UartMidi::Port*)_PortPointer) -> Continue(); break;
+				#endif
+
+				default:break;
+			}
+	    }
+
+	    void Midi::Port::Stop()
+	    {
+			switch (ParentType())
+			{
+				#if defined(MCC_UART_MIDI_ENABLED)
+					case PortTypes::UartMidi: ((UartMidi::Port*)_PortPointer) -> Stop(); break;
+				#endif
+
+				default:break;
+			}
+	    }
+
+		void Midi::Port::ActiveSensing()
+		{
+			switch (ParentType())
+			{
+				#if defined(MCC_UART_MIDI_ENABLED)
+					case PortTypes::UartMidi: ((UartMidi::Port*)_PortPointer) -> ActiveSensing(); break;
+				#endif
+
+				default:break;
+			}
+		}
+
+	    void Midi::Port::SystemReset()
+	    {
+			switch (ParentType())
+			{
+				#if defined(MCC_UART_MIDI_ENABLED)
+					case PortTypes::UartMidi: ((UartMidi::Port*)_PortPointer) -> SystemReset(); break;
+				#endif
+
+				default:break;
+			}
+	    }
+	//
+	//////////////////////////////////////////////////////////////////
+	// Sysytem Exclusive Messages
+
+        void Midi::Port::SystemExclusive(const CPVector::vector<uint8_t>& Data)
+        {
+			switch (ParentType())
+			{
+				#if defined(MCC_UART_MIDI_ENABLED)
+					case PortTypes::UartMidi: ((UartMidi::Port*)_PortPointer) -> SystemExclusive(Data); break;
+				#endif
+
+				default:break;
+			}
+        }
+
+        void Midi::Port::SystemExclusive(uint8_t* Data, uint8_t Length)
+        {
+			switch (ParentType())
+			{
+				#if defined(MCC_UART_MIDI_ENABLED)
+					case PortTypes::UartMidi: ((UartMidi::Port*)_PortPointer) -> SystemExclusive(Data, Length); break;
+				#endif
+
+				default:break;
+			}
+        }
+
+	    /*
+	    void Midi::Port::SystemExclusive(uint8_t ManufacturerID , uint8_t* Data, uint8_t size)
 	    {
 
 	    }
@@ -341,16 +564,8 @@ using namespace MCC::Communications;
 	    void Midi::Port::SysteExclusive(uint32_t ManufacturerID , const CPVector::vector<uint8_t>& Data)
 	    {
 
-	    }
+	    }*/
 	//
     //////////////////////////////////////////////////////////////////
-
-*/
-
-//						
-///////////////////////////////////////////////////////////////////////
-// Helpers
-
-
 //						
 ///////////////////////////////////////////////////////////////////////

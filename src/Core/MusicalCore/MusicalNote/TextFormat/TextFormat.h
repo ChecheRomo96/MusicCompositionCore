@@ -3,23 +3,7 @@
 
 	#include <MCC_BuildSettings.h>
 
-	namespace MusicCompositionCore
-	{
-        namespace Core
-        {
-        	namespace MusicalCore
-       		{
-       			namespace MusicalNote
-       			{
-       				namespace TextFormat
-       				{
-
-					}
-				}
-			}
-		}
-	}
-
+	namespace MusicCompositionCore::Core::MusicalCore::MusicalNote::TextFormat{}
 	namespace MCC_MusicalNoteFormat = MusicCompositionCore::Core::MusicalCore::MusicalNote::TextFormat;
 
 	#include "TextFormat_Definitions.h"

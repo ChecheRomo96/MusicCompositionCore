@@ -3,6 +3,9 @@
 
 	#include <MCC_BuildSettings.h>
 	
+	namespace MusicCompositionCore::Core::MusicalCore::MusicalNote::Sorting {}
+	namespace MCC_MusicalNote_Sorting = MusicCompositionCore::Core::MusicalCore::MusicalNote::Sorting;
+
 	#include "Accidental/AccidentalSorting.h"
 	#include "Letter/LetterSorting.h"
 	#include "Note/NoteSorting.h"

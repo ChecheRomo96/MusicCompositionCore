@@ -59,7 +59,7 @@ char Flash::Buffer[24];
         TextFormat::FormatClass tmp = Format;
         tmp.Octave_Disabled();
 
-		return GetName(buff, Letter, Accidental, tmp);
+		return GetName(buff, Letter.ID(), Accidental.ID(), tmp);
 	}
 
 	const char* Flash::GetName(const Pitch::Letter& Letter, const Pitch::Accidental& Accidental, const TextFormat::FormatClass& Format)
@@ -67,7 +67,7 @@ char Flash::Buffer[24];
         TextFormat::FormatClass tmp = Format;
         tmp.Octave_Disabled();
         
-		return GetName(Flash::Buffer, Letter, Accidental, tmp);
+		return GetName(Flash::Buffer, Letter.ID(), Accidental.ID(), tmp);
 	}
 //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -133,9 +133,11 @@ char Flash::Buffer[24];
 					{
 						case Pitch::Accidental::Natural:
 							OutputStr += " ";
+							[[fallthrough]];
 						case Pitch::Accidental::Flat:
 						case Pitch::Accidental::Sharp:
 							OutputStr += " ";
+							[[fallthrough]];
 	                    case Pitch::Accidental::DoubleFlat:
 	                    case Pitch::Accidental::DoubleSharp:
 							OutputStr += " ";
@@ -147,40 +149,31 @@ char Flash::Buffer[24];
 					switch(Accidental)
 					{
 						case Pitch::Accidental::Flat:
-
 							OutputStr += " ";
-
+							[[fallthrough]];
 						case Pitch::Accidental::Sharp:
-
 							OutputStr += "  ";
-
+							[[fallthrough]];
 						case Pitch::Accidental::Natural:
-
 							if(Format.NaturalMode() == MusicCompositionCore::Disabled)
 							{
 								OutputStr += "       ";
 							}
-
 							OutputStr += "    ";
-
+							[[fallthrough]];
 	                    case Pitch::Accidental::DoubleFlat:
 	                    case Pitch::Accidental::TripleFlat:
-
 							OutputStr += " ";
-
+							[[fallthrough]];
 	                    case Pitch::Accidental::DoubleSharp:
 	                    case Pitch::Accidental::TripleSharp:
-
 							OutputStr += " ";
-							
+							[[fallthrough]];
 	                    case Pitch::Accidental::QuadrupleFlat:
-
 							OutputStr += "   ";
-							
+							[[fallthrough]];
 	                    case Pitch::Accidental::QuadrupleSharp:
-
 							OutputStr += " ";
-							
 						break;
 					}
 				}
@@ -251,6 +244,8 @@ char Flash::Buffer[24];
 		{
 			buff[i] = OutputStr.at(i);
 		}
+
+		buff[OutputStr.size()] = '\0';
 
 		return buff;
 	}

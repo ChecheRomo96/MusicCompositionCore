@@ -4,7 +4,10 @@
 
 #include "../Note_Class.h"
 #include "../TextFormat/TextFormat.h"
-#include "../../MusicalInterval/MusicalInterval.h"
+
+#if defined(MCC_MUSICAL_INTERVAL_ENABLED)
+    #include "../../MusicalInterval/MusicalInterval.h"
+#endif
 
 using namespace MusicCompositionCore::Core::MusicalCore;
 using namespace MusicCompositionCore::Core::MusicalCore::MusicalNote;
@@ -125,8 +128,6 @@ using namespace MusicCompositionCore::Core::MusicalCore::MusicalNote;
     constexpr int8_t Pitch::Accidental::MinIterator;
 //
 /////////////////////////////////////////////////////////////////////////
-    
-
 
 Pitch Pitch::PitchBuffer;
 Pitch::PitchType Pitch::Buffer;
@@ -185,228 +186,233 @@ Pitch& Pitch::operator=(const Pitch& source)
     return (*this);
 }
 
-Pitch& Pitch::operator+=(const MusicalInterval::Interval &rhs)
-{
-    PitchBuffer = (*this)+rhs;
-    (*this) = PitchBuffer;
-    return (*this);
-}
 
-Pitch Pitch::operator+(const MusicalInterval::Interval &rhs) const
-{
-    Pitch tmp = (*this);
-    
-    int16_t base = NotePitch();
-    
-    if(rhs.Semitones() == MCC_MusicalInterval::InvalidInterval){return tmp;}
+#if defined(MCC_MUSICAL_INTERVAL_ENABLED)
 
-    for(uint8_t i = 0; i < rhs.Number()%7; i++)
+    Pitch& Pitch::operator+=(const MusicalInterval::Interval &rhs)
     {
-        tmp.Next();
+        PitchBuffer = (*this)+rhs;
+        (*this) = PitchBuffer;
+        return (*this);
     }
-    
-    int16_t destination_pitch = (base + rhs.Semitones())%12;
-    int16_t current_pitch = tmp.NotePitch()%12;
-    
-    int8_t distance = current_pitch-destination_pitch;
-    bool flag = 0;
-    
-    if(distance < 0){distance+=12;}
-    if(distance>=6)
+
+    Pitch Pitch::operator+(const MusicalInterval::Interval &rhs) const
     {
-        flag = 1;
-        distance = destination_pitch-current_pitch;
+        Pitch tmp = (*this);
+        
+        int16_t base = NotePitch();
+        
+        if(rhs.Semitones() == MCC_MusicalInterval::InvalidInterval){return tmp;}
+
+        for(uint8_t i = 0; i < rhs.Number()%7; i++)
+        {
+            tmp.Next();
+        }
+        
+        int16_t destination_pitch = (base + rhs.Semitones())%12;
+        int16_t current_pitch = tmp.NotePitch()%12;
+        
+        int8_t distance = current_pitch-destination_pitch;
+        bool flag = 0;
+        
         if(distance < 0){distance+=12;}
+        if(distance>=6)
+        {
+            flag = 1;
+            distance = destination_pitch-current_pitch;
+            if(distance < 0){distance+=12;}
+        }
+        
+        if(distance == 0){return tmp;}
+        
+        else if(destination_pitch<current_pitch)
+        {
+            if((destination_pitch+distance)%12 == current_pitch)
+            {
+                while( distance != 0 )
+                {
+                    if(tmp.Flat() == 0)
+                    {
+                        tmp = (*this);
+                        return tmp;
+                    }
+                    current_pitch = tmp.NotePitch()%12;
+                    
+                    distance = current_pitch-destination_pitch;
+                    if(distance < 0){distance+=12;}
+                }
+                return tmp;
+            }
+            else if((current_pitch+distance)%12 == destination_pitch)
+            {
+                while( distance != 0 )
+                {
+                    if(tmp.Sharp() == 0)
+                    {
+                        tmp = (*this);
+                        return tmp;
+                    }
+                    current_pitch = tmp.NotePitch()%12;
+                    
+                    distance = current_pitch-destination_pitch;
+                    if(distance < 0){distance+=12;}
+                }
+                return tmp;
+            }
+        }
+        
+        else if(destination_pitch>current_pitch)
+        {
+            if((destination_pitch+distance)%12 == current_pitch)
+            {
+                while( distance != 0 )
+                {
+                    if(tmp.Flat() == 0)
+                    {
+                        tmp = (*this);
+                        return tmp;
+                    }
+                    current_pitch = tmp.NotePitch()%12;
+                    
+                    distance = current_pitch-destination_pitch;
+                    if(distance < 0){distance+=12;}
+                }
+                return tmp;
+            }
+            else if((current_pitch+distance)%12 == destination_pitch)
+            {
+                while( distance != 0 )
+                {
+                    if(tmp.Sharp() == 0)
+                    {
+                        tmp = (*this);
+                        return tmp;
+                    }
+                    current_pitch = tmp.NotePitch()%12;
+                    
+                    distance = current_pitch-destination_pitch;
+                    if(distance < 0){distance+=12;}
+                }
+                return tmp;
+            }
+        }
+
+        return tmp;
     }
-    
-    if(distance == 0){return tmp;}
-    
-    else if(destination_pitch<current_pitch)
+
+
+    Pitch& Pitch::operator-=(const MusicalInterval::Interval &rhs)
     {
-        if((destination_pitch+distance)%12 == current_pitch)
-        {
-            while( distance != 0 )
-            {
-                if(tmp.Flat() == 0)
-                {
-                    tmp = (*this);
-                    return tmp;
-                }
-                current_pitch = tmp.NotePitch()%12;
-                
-                distance = current_pitch-destination_pitch;
-                if(distance < 0){distance+=12;}
-            }
-            return tmp;
-        }
-        else if((current_pitch+distance)%12 == destination_pitch)
-        {
-            while( distance != 0 )
-            {
-                if(tmp.Sharp() == 0)
-                {
-                    tmp = (*this);
-                    return tmp;
-                }
-                current_pitch = tmp.NotePitch()%12;
-                
-                distance = current_pitch-destination_pitch;
-                if(distance < 0){distance+=12;}
-            }
-            return tmp;
-        }
+        PitchBuffer = (*this)-rhs;
+        (*this) = PitchBuffer;
+        return (*this);
     }
-    
-    else if(destination_pitch>current_pitch)
+
+    Pitch Pitch::operator-(const MusicalInterval::Interval &rhs) const
     {
-        if((destination_pitch+distance)%12 == current_pitch)
+        // Checking if the provided interval is valid, else return the note as is
+        if(rhs.Semitones() == MCC_MusicalInterval::InvalidInterval){return (*this);}
+
+        // Make a copy of this instance into an object called tmp
+        Pitch tmp = (*this);
+        
+        // Storing the base Pitch
+        int16_t base = NotePitch();
+
+        // Changing Note Letter to finish the Generic Interval Conversion
+        for(uint8_t i = 0; i < rhs.Number()%7; i++)
         {
-            while( distance != 0 )
-            {
-                if(tmp.Flat() == 0)
-                {
-                    tmp = (*this);
-                    return tmp;
-                }
-                current_pitch = tmp.NotePitch()%12;
-                
-                distance = current_pitch-destination_pitch;
-                if(distance < 0){distance+=12;}
-            }
-            return tmp;
+            tmp.Previous();
         }
-        else if((current_pitch+distance)%12 == destination_pitch)
+        
+        int16_t destination_pitch = base - rhs.Semitones();
+        int16_t current_pitch = tmp.NotePitch();
+        
+        int8_t distance = destination_pitch - current_pitch;
+
+        if(distance == 0){return tmp;}
+
+        else if(destination_pitch<current_pitch)
         {
-            while( distance != 0 )
+            if((destination_pitch-distance) == current_pitch)
             {
-                if(tmp.Sharp() == 0)
+                while( distance != 0 )
                 {
-                    tmp = (*this);
-                    return tmp;
+                    if(tmp.Flat() == 0)
+                    {
+                        tmp = (*this);
+                        return tmp;
+                    }
+                    current_pitch = tmp.NotePitch();
+                    
+                    distance = destination_pitch-current_pitch;
+                    
+                    if(distance > 0){distance-=12;}
                 }
-                current_pitch = tmp.NotePitch()%12;
-                
-                distance = current_pitch-destination_pitch;
-                if(distance < 0){distance+=12;}
+                return tmp;
             }
-            return tmp;
+            else if((current_pitch-distance)%12 == destination_pitch)
+            {
+                while( distance != 0 )
+                {
+                    if(tmp.Sharp() == 0)
+                    {
+                        tmp = (*this);
+                        return tmp;
+                    }
+                    current_pitch = tmp.NotePitch()%12;
+                    
+                    distance = current_pitch-destination_pitch;
+                    if(distance < 0){distance+=12;}
+                }
+                return tmp;
+            }
         }
+        
+
+
+
+        
+        else if(destination_pitch>current_pitch)
+        {
+            if((destination_pitch-distance) == current_pitch)
+            {
+                while( distance != 0 )
+                {
+                    if(tmp.Sharp() == 0)
+                    {
+                        tmp = (*this);
+                        return tmp;
+                    }
+                    current_pitch = tmp.NotePitch();
+                    
+                    distance = current_pitch-destination_pitch;
+                    if(distance < 0){distance+=12;}
+                }
+                return tmp;
+            }
+            else if((current_pitch-distance) == destination_pitch)
+            {
+                while( distance != 0 )
+                {
+                    if(tmp.Flat() == 0)
+                    {
+                        tmp = (*this);
+                        return tmp;
+                    }
+                    current_pitch = tmp.NotePitch();
+                    
+                    distance = current_pitch-destination_pitch;
+                    if(distance < 0){distance+=12;}
+                }
+                return tmp;
+            }
+        }
+
+        return tmp;
     }
+#endif
 
-    return tmp;
-}
-
-
-Pitch& Pitch::operator-=(const MusicalInterval::Interval &rhs)
-{
-    PitchBuffer = (*this)-rhs;
-    (*this) = PitchBuffer;
-    return (*this);
-}
-
-Pitch Pitch::operator-(const MusicalInterval::Interval &rhs) const
-{
-    // Checking if the provided interval is valid, else return the note as is
-    if(rhs.Semitones() == MCC_MusicalInterval::InvalidInterval){return (*this);}
-
-    // Make a copy of this instance into an object called tmp
-    Pitch tmp = (*this);
-    
-    // Storing the base Pitch
-    int16_t base = NotePitch();
-
-    // Changing Note Letter to finish the Generic Interval Conversion
-    for(uint8_t i = 0; i < rhs.Number()%7; i++)
-    {
-        tmp.Previous();
-    }
-    
-    int16_t destination_pitch = base - rhs.Semitones();
-    int16_t current_pitch = tmp.NotePitch();
-    
-    int8_t distance = destination_pitch - current_pitch;
-
-    if(distance == 0){return tmp;}
-
-    else if(destination_pitch<current_pitch)
-    {
-        if((destination_pitch-distance) == current_pitch)
-        {
-            while( distance != 0 )
-            {
-                if(tmp.Flat() == 0)
-                {
-                    tmp = (*this);
-                    return tmp;
-                }
-                current_pitch = tmp.NotePitch();
-                
-                distance = destination_pitch-current_pitch;
-                
-                if(distance > 0){distance-=12;}
-            }
-            return tmp;
-        }
-        else if((current_pitch-distance)%12 == destination_pitch)
-        {
-            while( distance != 0 )
-            {
-                if(tmp.Sharp() == 0)
-                {
-                    tmp = (*this);
-                    return tmp;
-                }
-                current_pitch = tmp.NotePitch()%12;
-                
-                distance = current_pitch-destination_pitch;
-                if(distance < 0){distance+=12;}
-            }
-            return tmp;
-        }
-    }
-    
-
-
-
-    
-    else if(destination_pitch>current_pitch)
-    {
-        if((destination_pitch-distance) == current_pitch)
-        {
-            while( distance != 0 )
-            {
-                if(tmp.Sharp() == 0)
-                {
-                    tmp = (*this);
-                    return tmp;
-                }
-                current_pitch = tmp.NotePitch();
-                
-                distance = current_pitch-destination_pitch;
-                if(distance < 0){distance+=12;}
-            }
-            return tmp;
-        }
-        else if((current_pitch-distance) == destination_pitch)
-        {
-            while( distance != 0 )
-            {
-                if(tmp.Flat() == 0)
-                {
-                    tmp = (*this);
-                    return tmp;
-                }
-                current_pitch = tmp.NotePitch();
-                
-                distance = current_pitch-destination_pitch;
-                if(distance < 0){distance+=12;}
-            }
-            return tmp;
-        }
-    }
-
-    return tmp;
-}
 
 Pitch::Pitch(const Pitch::Letter& source)
 {

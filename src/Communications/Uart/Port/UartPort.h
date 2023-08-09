@@ -12,6 +12,10 @@
 		#include "../OutputPort/UART_OutputPort.h"
 	#endif
 
+	#if defined (MCC_UART_DUPLEX_ENABLED)
+		#include "../DuplexPort/UART_DuplexPort.h"
+	#endif
+
 	#if defined (MCC_MIDI_PORT_ENABLED)
 		#if defined (MCC_UART_MIDI_ENABLED)
 			#include <Communications/Midi/UartMidi/UartMidi.h>
@@ -63,6 +67,10 @@
                     	
 					#if defined (MCC_UART_OUT_ENABLED)
 	                    Port(const Uart::Output::Port& Parent);
+					#endif
+
+					#if defined (MCC_UART_DUPLEX_ENABLED)
+	                    Port(const Uart::Duplex::Port& Parent);
 					#endif
 
 					//UartPort(const Uart::OutputPort& Parent);
@@ -132,6 +140,10 @@
 
 					#if defined (MCC_UART_OUT_ENABLED)
 	                    void LinkToPort(const Uart::Output::Port& Parent);
+					#endif
+
+					#if defined (MCC_UART_DUPLEX_ENABLED)
+	                    void LinkToPort(const Uart::Duplex::Port& Parent);
 					#endif
 				//
 				///////////////////////////////////////////////////////////////////////

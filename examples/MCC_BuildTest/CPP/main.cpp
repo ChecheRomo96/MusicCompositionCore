@@ -34,10 +34,19 @@ int main()
                 std::cout << "    MCC::Core::MusicalCore::MusicalNote Enabled..." << std::endl;
             #endif
 
+            std::cout << std::endl;
         #endif
 
         #if defined(MCC_MIDI_CORE_ENABLED)
                 std::cout << "  MCC::Core::MidiCore Enabled..." << std::endl;
+    
+            #if defined(MCC_MIDI_NOTE_ENABLED)
+                std::cout << "    MCC::Core::MidiCore::MidiNote Enabled..." << std::endl;
+            #endif
+    
+            #if defined(MCC_MIDI_MESSAGE_ENABLED)
+                std::cout << "    MCC::Core::MidiCore::MidiMessage Enabled..." << std::endl;
+            #endif
         #endif
 
                 std::cout << std::endl;
@@ -74,7 +83,7 @@ int main()
             #endif
 
             #if defined(MCC_UART_DUPLEX_ENABLED)
-                std::cout << "    MCC::Communications::Uart::OutputPort Enabled..." << std::endl;
+                std::cout << "    MCC::Communications::Uart::DuplexPort Enabled..." << std::endl;
             #endif
 
         #endif

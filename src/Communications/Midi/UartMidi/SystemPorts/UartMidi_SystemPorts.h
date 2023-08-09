@@ -15,9 +15,17 @@
 		namespace MusicCompositionCore::Communications::Uart
 		{
 			class Port;
-
+			
 		    #if defined(MCC_UART_IN_ENABLED)
 				namespace Input{ class Port; }
+		    #endif
+			
+		    #if defined(MCC_UART_OUT_ENABLED)
+				namespace Output{ class Port; }
+		    #endif
+			
+		    #if defined(MCC_UART_DUPLEX_ENABLED)
+				namespace Duplex{ class Port; }
 		    #endif
 		}
 	#endif
@@ -66,6 +74,13 @@
 	                    void UnbindPort(const Uart::Output::Port& Port);
 	                    UartMidi::Port& GetPort(const Uart::Output::Port& Port);
 						const UartMidi::SystemPortHandler::PortID GetID(const Uart::Output::Port& Port) const;
+		            #endif
+
+		            #if defined(MCC_UART_DUPLEX_ENABLED)
+	                    bool BindPort(const Uart::Duplex::Port& Port);
+	                    void UnbindPort(const Uart::Duplex::Port& Port);
+	                    UartMidi::Port& GetPort(const Uart::Duplex::Port& Port);
+						const UartMidi::SystemPortHandler::PortID GetID(const Uart::Duplex::Port& Port) const;
 		            #endif
 	        	#endif
 

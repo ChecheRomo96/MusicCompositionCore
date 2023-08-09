@@ -1,0 +1,2 @@
+add_subdirectory(1_Test)
+add_subdirectory(2_MinimalPort)

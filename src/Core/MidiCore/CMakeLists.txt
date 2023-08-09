@@ -13,7 +13,7 @@
 	endif()
 
 	if(${MCC_COMPILE_MIDI_MESSAGE})
-		message(STATUS "Compiling MCC::Core::MidiCore::MidiNote...")
+		message(STATUS "Compiling MCC::Core::MidiCore::MidiMessage...")
 		add_subdirectory(MidiMessage)
 	endif()
 

@@ -67,6 +67,10 @@
 			if(${MCC_COMPILE_MUSICAL_SCALE})
 				target_compile_definitions(MCC PUBLIC MCC_MUSICAL_SCALE_ENABLED)
 			endif()
+
+			if(${MCC_COMPILE_MUSICAL_CHORD})
+				target_compile_definitions(MCC PUBLIC MCC_MUSICAL_CHORD_ENABLED)
+			endif()
 		endif()
 
 		if(${MCC_COMPILE_MIDI_CORE})
@@ -111,6 +115,7 @@
 			target_compile_definitions(MCC PUBLIC MCC_MIDI_MESSAGE_ENABLED)
 			set(MCC_COMPILE_CORE TRUE CACHE BOOL "Compile MCC::Core" FORCE)
 			set(MCC_COMPILE_MIDI_CORE TRUE CACHE BOOL "Compile MCC::Core::MidiCore" FORCE)
+			set(MCC_COMPILE_MIDI_MESSAGE TRUE CACHE BOOL "Compile MCC::Core::MidiCore::MidiMessage" FORCE)
 
 			if(${MCC_COMPILE_UART_MIDI})
 				target_compile_definitions(MCC PUBLIC MCC_UART_MIDI_ENABLED)
