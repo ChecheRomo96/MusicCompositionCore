@@ -26,21 +26,22 @@
 # CPVector
 	
 	if(NOT TARGET CPVector)
-		if(EXISTS ${CMAKE_CURRENT_LIST_DIR}/CPVector)
-			set( CPVECTOR_BUILD_EXAMPLES FALSE CACHE BOOL "")
-			set( CPVECTOR_INSTALL FALSE CACHE BOOL "")
-
-			message("Using the CPVector Source on: MusicCompositonCore/libs/CPVector")
-			add_subdirectory(CPVector)
-		else()
-
-			find_package(CPVector)
-
+		if(find_package(CPVector))
+		
 			if(CPVector_FOUND)
 				message("Using the CPVector Package installed on: ${CMAKE_INSTALL_PREFIX}")
 			else()
 				message(FATAL_ERROR "CPVector not found.")
 			endif()
+			
+		elseif(EXISTS ${CMAKE_CURRENT_LIST_DIR}/CPVector)
+
+			set( CPVECTOR_BUILD_EXAMPLES FALSE CACHE BOOL "")
+			set( CPVECTOR_INSTALL FALSE CACHE BOOL "")
+
+			message("Using the CPVector Source on: MusicCompositonCore/libs/CPVector")
+			add_subdirectory(CPVector)
+
 		endif()
 	endif()
 
