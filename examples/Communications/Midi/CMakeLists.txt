@@ -2,7 +2,7 @@
 # Append Uart Midi Port Examples
 
 	if(${MCC_COMPILE_UART_MIDI})
-		add_subdirectory(Uart)
+		add_subdirectory(UartMidi)
 	endif()
 #
 ######################################################################################################

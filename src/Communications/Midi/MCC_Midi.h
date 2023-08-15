@@ -31,6 +31,10 @@
 	#if defined(MCC_UART_MIDI_ENABLED)
 		#include "UartMidi/UartMidi.h"
 	#endif
+
+	#if defined(MCC_RTMIDI_ENABLED)
+		#include "RtMidi/MCC_RtMidi.h"
+	#endif
 	
 
 	#include "Port/MidiPort.h"

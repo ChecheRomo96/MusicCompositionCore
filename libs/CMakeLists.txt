@@ -49,7 +49,7 @@
 ######################################################################################################
 # RtMidi
 	
-	if(MCC_RTMIDI_STATUS)
+	if(MCC_COMPILE_RTMIDI)
 
 		option(RTMIDI_BUILD_TESTING "Build test programs" OFF)
 

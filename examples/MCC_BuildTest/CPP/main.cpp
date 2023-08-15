@@ -41,7 +41,7 @@ int main()
                 std::cout << "  MCC::Core::MidiCore Enabled..." << std::endl;
     
             #if defined(MCC_MIDI_NOTE_ENABLED)
-                std::cout << "    MCC::Core::MidiCore::MidiNote Enabled..." << std::endl;
+                std::cout << "    MCC::Core::MidiCore::MidiNote  Enabled..." << std::endl;
             #endif
     
             #if defined(MCC_MIDI_MESSAGE_ENABLED)
@@ -57,14 +57,22 @@ int main()
             std::cout << "MCC::Communications Enabled..." << std::endl << std::endl;
 
         #if defined(MCC_MIDI_PORT_ENABLED)
-            std::cout << "  MCC::Communications::Midi Enabled..." << std::endl;
+            std::cout << "  MCC::Communications::Midi Enabled..." << std::endl<< std::endl;
 
             #if defined(MCC_UART_MIDI_ENABLED)
-                std::cout << "    MCC::Communications::Midi::UartMidi Enabled..." << std::endl;
+                std::cout << "    MCC::Communications::Midi::UartMidi Enabled..." << std::endl<< std::endl;
             #endif
 
             #if defined(MCC_RTMIDI_ENABLED)
                 std::cout << "    MCC::Communications::Midi::RtMidi Enabled..." << std::endl;
+    
+                #if defined(MCC_RTMIDI_VIRTUAL_PORT_ENABLED)
+                    std::cout << "      MCC::Communications::Midi::RtMidi::Virtual::Port Enabled..." << std::endl;
+    
+                    #if defined(MCC_RTMIDI_VIRTUAL_OUT_ENABLED)
+                        std::cout << "        MCC::Communications::Midi::RtMidi::Virtual::OutputPort Enabled..." << std::endl;
+                    #endif
+                #endif
             #endif
 
                 std::cout << std::endl;
@@ -90,12 +98,11 @@ int main()
 
     #endif
 
-
-    #if defined(MCC_BUILD_EXAMPLES)
-        std::cout << "Examples Built. Find them on the \"BuildDirectory/Examples\" Directory" << std::endl;
-    #endif
-
+    MCC_Communications::Midi::RtMidi::Virtual::OutputPort myVirtualPort(CPString::string("RtMidi"));
     
+    myVirtualPort.OpenPort();
+    
+    while(1){}
 
 	return 0;
 }

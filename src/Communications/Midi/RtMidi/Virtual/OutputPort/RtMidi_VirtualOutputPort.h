@@ -1,98 +1,71 @@
-#ifndef MCC_UART_MIDI_PORT_H
-#define MCC_UART_MIDI_PORT_H
+#ifndef MCC_RT_MIDI_VIRTUAL_OUT_PORT_H
+#define MCC_RT_MIDI_VIRTUAL_OUT_PORT_H
+	
+    #include <MCC_BuildSettings.h>
+    #include <RtMidi.h>
+    #include <CPString.h>
+    #include <Core/MidiCore/MidiCore.h>
 
-	#include <MCC_BuildSettings.h>
-	#include <Core/MidiCore/MidiCore.h>
+    namespace MusicCompositionCore::Communications::Midi::RtMidi::Virtual
+    {
+        class OutputPort;
+    }
 
-	#include <CPVector.h>
 
-	#if defined (MCC_UART_PORT_ENABLED)
-		#include <Communications/Uart/Uart.h>
-	#endif
+    #include "../RtMidi_Virtual.h"
 
-	#include "../../MCC_Midi.h"
-
-	namespace MusicCompositionCore::Communications::Uart
-	{
-		class Port;
-	}
-
-	namespace MusicCompositionCore::Communications::Midi::UartMidi
-    { 	
-        class Port
+	namespace MusicCompositionCore::Communications::Midi::RtMidi::Virtual
+    {
+        class OutputPort
         {
-            private:
+            private:        
+                //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                // RtMidi API
 
-				
-				///////////////////////////////////////////////////////////////////////
-				// Uart Port Pointer
+                    RtMidiOut* _OutPort;
+                    bool _PortStatus;
+                //
+                //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                // Port Name
 
-					Uart::Port* _PortPointer;
-				//
-				///////////////////////////////////////////////////////////////////////
-				// Callback vector ( Called when a midi messqge has been recieved )
+                    CPString::string _PortName;
+                //
+                //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                
 
-					CPVector::vector<void(*)(const CPVector::vector<uint8_t>&)> _CallbackVector;
-
-				//
-				///////////////////////////////////////////////////////////////////////
-				// Midi Input Decoding buffer (Initializes to 3 bytes)
-
-					CPVector::vector<uint8_t> _MessageBuffer;
-					uint8_t _BufferIndex;
-				//
-				///////////////////////////////////////////////////////////////////////
-				// BaudRate, Polling Mode, and flags
-					
-					uint8_t _FlagRegister;
-
-					// bool _PollingMode  --> Bit 0
-					// bool _SOMF         --> Bit 1
-					// bool _SysExFlag    --> Bit 2
-				//
-				///////////////////////////////////////////////////////////////////////
-             
             public:
 
-				///////////////////////////////////////////////////////////////////////
-            	// Constructors
+                ///////////////////////////////////////////////////////////////////////
+                // Constructors and Destructor
 
-                    Port();
-                    Port(const Uart::Port& Parent);
-				//
-				///////////////////////////////////////////////////////////////////////
-                // Parent API
+                    OutputPort();
+                    ~OutputPort();
+                    OutputPort(const CPString::string& PortName);
+                    OutputPort(const CPString::string& PortName, CPString::string& ClientName);
+                //
+                ///////////////////////////////////////////////////////////////////////
+                // Midi Port Generic API
 
-					const Uart::PortType& ParentType() const;
-					const Uart::Port* Uart_PortPointer() const;
-				//
-				///////////////////////////////////////////////////////////////////////
-				// Midi Port Generic API
+                    const CPString::string& Name() const;
+                    void SetName(const CPString::string& NewName);
+                //
+                ///////////////////////////////////////////////////////////////////////
+                // RtMidi API
 
-					const CPString::string& Name() const;
-					void SetName(const CPString::string& NewName);
+                    const bool PortStatus() const;
+                    void OpenPort();
+                    void ClosePort();
+                //
+                ///////////////////////////////////////////////////////////////////////
+                // Midi Out API
 
-				//
-				///////////////////////////////////////////////////////////////////////
-                // Midi In API
+                    void Write(uint8_t Data);
+                    void WriteMessage(uint8_t* Data, uint8_t Len);
+                    void WriteMessage(const CPVector::vector<uint8_t>& Message);
 
-                    void AppendCallback(void(*Callback)(const CPVector::vector<uint8_t>&));
-                    void DetachCallback(void(*Callback)(const CPVector::vector<uint8_t>&));
-
-                    void SetBufferSize(uint8_t size);
-
-					void Service();
-				//
-				///////////////////////////////////////////////////////////////////////
-				// Midi Out API
-
-					void Write(uint8_t Data);
-					void WriteMessage(uint8_t* Data, uint8_t Len);
-					void WriteMessage(const CPVector::vector<uint8_t>& Message);
-
-					#if defined (MCC_MIDI_MESSAGE_ENABLED)
-						void WriteMessage(const MCC_MidiCore::MidiMessage& Data);
-					#endif
+                    #if defined (MCC_MIDI_MESSAGE_ENABLED)
+                        void WriteMessage(const MCC_MidiCore::MidiMessage& Data);
+                    #endif
 
                     //////////////////////////////////////////////////////////////////
                     // Channel Voice Messages
@@ -165,40 +138,25 @@
                     //
                     //////////////////////////////////////////////////////////////////
 
-				//
-				///////////////////////////////////////////////////////////////////////
+                //
+                ///////////////////////////////////////////////////////////////////////
+                // RtMidi Port API
+
+                    //bool RtMidi_BindPort() const;
+                    //void RtMidi_UnbindPort() const;
+                    //RtMidi::SystemPortHandler::PortID RtMidi_PortID() const;
+                    //RtMidi::Port& RtMidi_Port() const;
+                //
+                ///////////////////////////////////////////////////////////////////////
                 // Midi Port API
 
-                	bool Midi_BindPort() const;
-                	void Midi_UnbindPort() const;
-					Midi::SystemPortHandler::PortID Midi_PortID() const;
-					Midi::Port& Midi_Port() const;
-	            //
-				///////////////////////////////////////////////////////////////////////
-			
-			private:
-
-				//////////////////////////////////////////////////////////////////////
-                // Uart Port Link Helpers
-					#if defined(MCC_UART_PORT_ENABLED)
-						void LinkToPort(const Uart::Port& Parent);
-					#endif
-
-					void UnlinkFromPort();
-				//
-				///////////////////////////////////////////////////////////////////////
-				// Midi In Helpers
-
-					void InvokeCallbacks();
-
-					void SetSysExFlag(bool State);
-					const bool SysExFlag() const;
-
-					void SetSOMF(bool State);
-					const bool SOMF() const;
-				//
-				///////////////////////////////////////////////////////////////////////
-		};
+                    //bool Midi_BindPort() const;
+                    //void Midi_UnbindPort() const;
+                    //Midi::SystemPortHandler::PortID Midi_PortID() const;
+                    //Midi::Port& Midi_Port() const;
+                //
+                ///////////////////////////////////////////////////////////////////////
+        };
     }
 
-#endif//MCC_UART_MIDI_PORT_H
+#endif//MCC_RT_MIDI_VIRTUAL_OUT_PORT_H

@@ -6,28 +6,22 @@
 ######################################################################################################
 # Append Sources and Headers
 
-	list( APPEND MCC_SOURCES "${CMAKE_CURRENT_LIST_DIR}/MCC_Midi.cpp")
-
-	list( APPEND HEADERS_LIST "${CMAKE_CURRENT_LIST_DIR}/MCC_Midi.h")
+	list( APPEND MCC_SOURCES "${CMAKE_CURRENT_LIST_DIR}/MCC_RtMidi.cpp")
+	list( APPEND HEADERS_LIST "${CMAKE_CURRENT_LIST_DIR}/MCC_RtMidi.h")
 #
 ######################################################################################################
 # Add Subdirectories
 
-	if(${MCC_COMPILE_UART_MIDI})
-		message(STATUS "Compiling MCC::Communications::Midi::UartMidi...")
-		add_subdirectory(UartMidi)
-	endif()
+	#if(${MCC_COMPILE_UART_MIDI})
+	#	message(STATUS "Compiling MCC::Communications::Midi::UartMidi...")
+	#	add_subdirectory(UartMidi)
+	#endif()
 
-	if(${MCC_COMPILE_RTMIDI})
-		message(STATUS "Compiling MCC::Communications::Midi::RtMidi...")
-		add_subdirectory(RtMidi)
-	endif()
-
-	message(STATUS "Compiling MCC::Communications::Midi::Port...")
-	add_subdirectory(Port)
+	message(STATUS "Compiling MCC::Communications::Midi::RtMidi::Virtual...")
+	add_subdirectory(Virtual)
 	
-	message(STATUS "Compiling MCC::Communications::Midi::SystemPorts...")
-	add_subdirectory(SystemPorts)
+	#message(STATUS "Compiling MCC::Communications::Midi::SystemPorts...")
+	#add_subdirectory(SystemPorts)
 #
 ######################################################################################################
 # Refresh Sources List at PARENT_SCOPE
@@ -41,9 +35,10 @@
 
 		install(
 			FILES ${HEADERS_LIST} 
-			DESTINATION ${CMAKE_INSTALL_PREFIX}/include/MCC/Communications/Midi
+			DESTINATION ${CMAKE_INSTALL_PREFIX}/include/MCC/Communications/Midi/RtMidi
 		)
 
 	endif()
 #
 ######################################################################################################
+

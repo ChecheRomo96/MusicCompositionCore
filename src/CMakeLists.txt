@@ -123,6 +123,17 @@
 
 			if(${MCC_COMPILE_RTMIDI})
 				target_compile_definitions(MCC PUBLIC MCC_RTMIDI_ENABLED)
+
+				if(${MCC_COMPILE_RTMIDI_VIRTUAL})
+					target_compile_definitions(MCC PUBLIC MCC_RTMIDI_VIRTUAL_PORT_ENABLED)
+
+					if(${MCC_COMPILE_RTMIDI_VIRTUAL_OUT})
+						target_compile_definitions(MCC PUBLIC MCC_RTMIDI_VIRTUAL_OUT_ENABLED)
+					endif()
+
+				endif()
+
+
 			endif()
 
 		endif()
