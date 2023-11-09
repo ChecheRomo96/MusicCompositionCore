@@ -1,9 +1,3 @@
-[submodule "libs/CPString"]
-	path = libs/CPString
-	url = https://github.com/ChecheRomo96/CPString.git
-[submodule "libs/CPVector"]
-	path = libs/CPVector
-	url = https://github.com/ChecheRomo96/CPVector
 [submodule "libs/rtmidi"]
 	path = libs/rtmidi
 	url = https://github.com/thestk/rtmidi.git
