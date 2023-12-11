@@ -34,7 +34,7 @@
 	endif()
 #
 ######################################################################################################
-# Create the MCC library (STATIC is not justified tho)
+# Create the MCC library
 
 	add_library(MCC STATIC ${MCC_SOURCES})
 #

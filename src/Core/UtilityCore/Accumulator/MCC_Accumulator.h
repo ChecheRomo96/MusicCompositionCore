@@ -2,7 +2,7 @@
 #define Accumulator_H
 
 	#include <MCC_BuildSettings.h>
-	#include <CPVector.h>
+	#include <CPvector.h>
 
 	namespace MusicCompositionCore
     {
@@ -63,7 +63,7 @@
                 template <typename DataType, typename Range = int8_t>
                 class Accumulator
                 {
-                	CPVector::vector<Element<DataType,Range>> _Elements;
+                	costd::vector<Element<DataType,Range>> _Elements;
                 	Element<DataType,Range> _ElementBuffer;
 
 	                public:

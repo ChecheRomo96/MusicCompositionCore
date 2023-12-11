@@ -24,13 +24,13 @@
             //////////////////////////////////////////////////////////////
             // Communications
 
-                #define MCC_COMMUNICATIONS_ENABLED
+                //#define MCC_COMMUNICATIONS_ENABLED
 
-                    #define MCC_MIDI_PORT_ENABLED
+                    //#define MCC_MIDI_PORT_ENABLED
 
-                        #define MCC_UART_MIDI_ENABLED
-                            #define MCC_UART_MIDI_IN_ENABLED
-                            #define MCC_UART_MIDI_OUT_ENABLED
+                        //#define MCC_UART_MIDI_ENABLED
+                            //#define MCC_UART_MIDI_IN_ENABLED
+                            //#define MCC_UART_MIDI_OUT_ENABLED
             //
             //////////////////////////////////////////////////////////////
         //              

@@ -26,7 +26,7 @@
 ######################################################################################################
 # Store this directory as a variable called MCC_SRC_DIRECTORY to reference in deeper directories
 
-	set( MCC_ROOT_DIRECTORY ${CMAKE_CURRENT_LIST_DIR})
+	set( ${PROJECT_NAME_UPPER}_ROOT_DIRECTORY ${CMAKE_CURRENT_LIST_DIR})
 #
 ######################################################################################################
 # Compile Configuration

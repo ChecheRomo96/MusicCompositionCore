@@ -1,51 +1,28 @@
 ######################################################################################################
-# CPString 
-	
-	if(NOT TARGET CPString)
-		if(EXISTS ${CMAKE_CURRENT_LIST_DIR}/CPString)
-			set( CPSTRING_BUILD_EXAMPLES FALSE CACHE BOOL "")
-			set( CPSTRING_INSTALL FALSE CACHE BOOL "")
+# CPSTL 
+    
+    if(NOT TARGET CPSTL)
+        if(EXISTS ${CMAKE_CURRENT_LIST_DIR}/CPSTL)
+            set( CPSTL_EXAMPLES FALSE CACHE BOOL "")
+            set( CPSTL_TESTING FALSE CACHE BOOL "")
+            set( CPSTL_INSTALL FALSE CACHE BOOL "")
 
-			message("Using the CPStirng Source on: MusicCompositonCore/libs/CPString")
-			add_subdirectory(CPString)
-		else()
+            message("Using the CPSTL Source on: MusicCompositonCore/libs/CPSTL")
+            add_subdirectory(CPSTL)
+        else()
 
-			find_package(CPString)
+            find_package(CPSTL)
 
-			if(CPString_FOUND)
-				message("Using the CPStirng Package installed on: ${CMAKE_INSTALL_PREFIX}")
-			else()
-				message(FATAL_ERROR "CPString not found.")
-			endif()
-		endif()
-	endif()
+            if(CPSTL_FOUND)
+                message("Using the CPSTL Package installed on: ${CMAKE_INSTALL_PREFIX}")
+            else()
+                message(FATAL_ERROR "CPSTL not found.")
+            endif()
+        endif()
+    endif()
 
-	target_link_libraries( MCC PUBLIC CPString )
+    target_link_libraries( MCC INTERFACE CPSTL )
 #
-######################################################################################################
-# CPVector
-	
-	if(NOT TARGET CPVector)
-
-		find_package(CPVector)
-
-		if(CPVector_FOUND)
-			message("Using the CPVector Package installed on: ${CMAKE_INSTALL_PREFIX}")
-		elseif(EXISTS ${CMAKE_CURRENT_LIST_DIR}/CPVector)
-
-			set( CPVECTOR_BUILD_EXAMPLES FALSE CACHE BOOL "")
-			set( CPVECTOR_INSTALL FALSE CACHE BOOL "")
-
-			message("Using the CPVector Source on: MusicCompositonCore/libs/CPVector")
-			add_subdirectory(CPVector)
-		else()
-			message(FATAL_ERROR "CPVector not found.")
-		endif()
-
-	endif()
-
-	target_link_libraries(MCC PUBLIC CPVector)
-#		
 ######################################################################################################
 # RtMidi
 	
