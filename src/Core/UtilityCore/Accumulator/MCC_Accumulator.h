@@ -57,7 +57,7 @@
                 {
 	                if(Compare.Data()<Pivot.Data()){return false;}
 	                else{return true;}
-                }
+                };
 
                 template <typename DataType, typename Range = int8_t>
                 class Accumulator
