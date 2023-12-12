@@ -72,7 +72,7 @@
 	                		_Elements.resize(0);
 	                	}
 
-	                	Accumulator(const CPVector::vector<Element<DataType,Range>>& Source)
+	                	Accumulator(const cpstd::vector<Element<DataType,Range>>& Source)
 	                	{
 	                		for(unsigned int i = 0; i < Source.size() ; i++)
 	                		{
@@ -80,7 +80,7 @@
 	                		}
 	                	}
 
-	                	Accumulator(const CPVector::vector<DataType>& Source)
+	                	Accumulator(const cpstd::vector<DataType>& Source)
 	                	{
 	                		for(unsigned int i = 0; i < Source.size(); i++)
 	                		{
