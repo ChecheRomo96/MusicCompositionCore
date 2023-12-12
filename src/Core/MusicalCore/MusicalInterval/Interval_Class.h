@@ -2,7 +2,7 @@
 #define MCC_MUSIC_INTERVAL_CLASS_H
 
     #include <MCC_BuildSettings.h>
-    #include <CPVector.h>    
+    #include <CPvector.h>    
 
     #include "MusicalInterval_Definitions.h"
 
