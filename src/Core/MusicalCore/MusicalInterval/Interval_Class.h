@@ -69,7 +69,7 @@
                         
                         private:
 
-                            CPVector::vector<Interval> PossibleIntervals(int16_t _NotePitch_A, int16_t _NotePitch_B);
+                            cpstd::vector<Interval> PossibleIntervals(int16_t _NotePitch_A, int16_t _NotePitch_B);
                     };
 
                     extern Interval IntervalBuffer;
