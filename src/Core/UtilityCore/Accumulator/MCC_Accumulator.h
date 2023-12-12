@@ -55,8 +55,7 @@
                 template <typename DataType, typename Range = int8_t>
                 auto ElementSorting = [](const Element<DataType,Range>& Compare, const Element<DataType,Range>& Pivot)
                 {
-	                if(Compare.Data()<Pivot.Data()){return false;}
-	                else{return true;}
+	                return Compare.Data()>=Pivot.Data();
                 };
 
                 template <typename DataType, typename Range = int8_t>
