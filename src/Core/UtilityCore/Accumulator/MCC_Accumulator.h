@@ -53,17 +53,16 @@
                 };
 
                 template <typename DataType, typename Range = int8_t>
-                int8_t ElementSorting(const Element<DataType,Range>& Compare, const Element<DataType,Range>& Pivot)
+                auto ElementSorting = [](const Element<DataType,Range>& Compare, const Element<DataType,Range>& Pivot)
                 {
-	                if(Compare.Data()==Pivot.Data()){return CPVector::Sorting::Equal;}
-	                else if(Compare.Data()<Pivot.Data()){return CPVector::Sorting::Swap;}
-	                else{return CPVector::Sorting::Ignore;}
+	                else if(Compare.Data()<Pivot.Data()){return false;}
+	                else{return true;}
                 }
 
                 template <typename DataType, typename Range = int8_t>
                 class Accumulator
                 {
-                	costd::vector<Element<DataType,Range>> _Elements;
+                	cpstd::vector<Element<DataType,Range>> _Elements;
                 	Element<DataType,Range> _ElementBuffer;
 
 	                public:
