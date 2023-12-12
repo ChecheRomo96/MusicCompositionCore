@@ -2,8 +2,8 @@
 #define MCC_SCALE_CLASS_H
 
     #include <MCC_BuildSettings.h>
-    #include <CPVector.h>
-    #include <CPString.h>
+    #include <CPvector.h>
+    #include <CPstring.h>
 
     #include "../MusicalNote/MusicalNote.h"
     #include "../MusicalInterval/MusicalInterval.h"
@@ -18,8 +18,8 @@
             {
                 namespace MusicalScale
                 {
-                    extern CPString::string DefaultName;
-                    extern CPString::string NameBuffer;
+                    extern cpstd::string DefaultName;
+                    extern cpstd::string NameBuffer;
                     
                     namespace Flash
                     {
@@ -33,14 +33,14 @@
                         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                         // Variable Declaration
 
-                            CPString::string _UserName;
+                            cpstd::string _UserName;
 
                             PropertiesContainer _Data;
 
                             uint8_t _NameID;
                             uint8_t _RootOffset;
                             
-                            CPVector::vector<MCC_MusicalNote::Pitch> _Notes;
+                            cpstd::vector<MCC_MusicalNote::Pitch> _Notes;
                         //
                         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -51,12 +51,12 @@
                             
                                 Scale(bool sharps_flats = 0);
 
-                                Scale(const CPVector::vector<MCC_MusicalNote::Note> &notes, CPString::string& name = DefaultName);
-                                Scale(const CPVector::vector<MCC_MusicalNote::Pitch> &noteTokens, CPString::string& name = DefaultName);
+                                Scale(const cpstd::vector<MCC_MusicalNote::Note> &notes, cpstd::string& name = DefaultName);
+                                Scale(const cpstd::vector<MCC_MusicalNote::Pitch> &noteTokens, cpstd::string& name = DefaultName);
 
-                                Scale(const MCC_MusicalNote::Note &root, const CPVector::vector<MCC_MusicalInterval::Interval> &intervals, CPString::string& name = DefaultName);
-                                Scale(const MCC_MusicalNote::Pitch &root, const CPVector::vector<MCC_MusicalInterval::Interval> &intervals, CPString::string& name = DefaultName);
-                                Scale(const MCC_MusicalNote::Pitch &root, const MCC_MusicalInterval::Interval* intervals, uint8_t size, CPString::string& name = DefaultName);
+                                Scale(const MCC_MusicalNote::Note &root, const cpstd::vector<MCC_MusicalInterval::Interval> &intervals, cpstd::string& name = DefaultName);
+                                Scale(const MCC_MusicalNote::Pitch &root, const cpstd::vector<MCC_MusicalInterval::Interval> &intervals, cpstd::string& name = DefaultName);
+                                Scale(const MCC_MusicalNote::Pitch &root, const MCC_MusicalInterval::Interval* intervals, uint8_t size, cpstd::string& name = DefaultName);
                                 
                                 Scale(const Flash::Container_Notes& source);
                                 Scale(const MCC_MusicalNote::Note& root, const Flash::Container_Notes& source);
@@ -90,12 +90,12 @@
 
                                     const char* Name() const;
                                     char* Name(char* buff) const;
-                                    void SetName(CPString::string& new_name);
+                                    void SetName(cpstd::string& new_name);
                                 //
                                 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                 // Note Token Vector
 
-                                    const CPVector::vector<MCC_MusicalNote::Pitch>& NoteTokenVector() const;
+                                    const cpstd::vector<MCC_MusicalNote::Pitch>& NoteTokenVector() const;
                                     const uint8_t size() const;
                                 //
                                 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
