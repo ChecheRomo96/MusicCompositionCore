@@ -8,8 +8,15 @@
 
 	namespace MusicCompositionCore::Core::MusicalCore::MusicalNote::Sorting::Letter
 	{
-        int8_t Ascending(const Pitch::Letter& Element, const Pitch::Letter& Pivot);
-        int8_t Descending(const Pitch::Letter& Element, const Pitch::Letter& Pivot);
+		const auto Ascending = [](const Pitch::Letter& Element, const Pitch::Letter& Pivot){
+			return Element < Pivot;
+		}
+
+		const auto Descending = [](const Pitch::Letter& Element, const Pitch::Letter& Pivot){
+			return Element > Pivot;
+		}
 	}
 						
 #endif//MCC_LETTER_CLASS_SORTING_H
+ 
+  

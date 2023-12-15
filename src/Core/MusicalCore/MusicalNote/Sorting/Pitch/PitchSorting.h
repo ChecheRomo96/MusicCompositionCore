@@ -9,17 +9,38 @@
 
 	namespace MusicCompositionCore::Core::MusicalCore::MusicalNote::Sorting::Pitch
 	{
-		int8_t Letter_Ascending(const MCC_MusicalNote::Pitch& Element, const MCC_MusicalNote::Pitch& Pivot);
-		int8_t Letter_Descending(const MCC_MusicalNote::Pitch& Element, const MCC_MusicalNote::Pitch& Pivot);
+		
+		const auto Letter_Ascending = [](const MCC_MusicalNote::Pitch& Element, const MCC_MusicalNote::Pitch& Pivot){
+			return Element.Letter() < Pivot.Letter();
+		}
 
-		int8_t Accidental_Ascending(const MCC_MusicalNote::Pitch& Element, const MCC_MusicalNote::Pitch& Pivot);
-		int8_t Accidental_Descending(const MCC_MusicalNote::Pitch& Element, const MCC_MusicalNote::Pitch& Pivot);
+		const auto Letter_Ascending = [](const MCC_MusicalNote::Pitch& Element, const MCC_MusicalNote::Pitch& Pivot){
+			return Element.Letter() > Pivot.Letter();
+		}
 
-		int8_t NotePitch_Ascending(const MCC_MusicalNote::Pitch& Element, const MCC_MusicalNote::Pitch& Pivot);
-		int8_t NotePitch_Descending(const MCC_MusicalNote::Pitch& Element, const MCC_MusicalNote::Pitch& Pivot);
+		const auto Accidental_Ascending = [](const MCC_MusicalNote::Pitch& Element, const MCC_MusicalNote::Pitch& Pivot){
+			return Element.Accidental() < Pivot.Accidental();
+		}
 
-		int8_t MidiPitch_Ascending(const MCC_MusicalNote::Pitch& Element, const MCC_MusicalNote::Pitch& Pivot);
-		int8_t MidiPitch_Descending(const MCC_MusicalNote::Pitch& Element, const MCC_MusicalNote::Pitch& Pivot);
+		const auto Accidental_Ascending = [](const MCC_MusicalNote::Pitch& Element, const MCC_MusicalNote::Pitch& Pivot){
+			return Element.Accidental() > Pivot.Accidental();
+		}
+		
+		const auto NotePitch_Ascending = [](const MCC_MusicalNote::Pitch& Element, const MCC_MusicalNote::Pitch& Pivot){
+			return Element.NotePitch() < Pivot.NotePitch();
+		}
+
+		const auto NotePitch_Ascending = [](const MCC_MusicalNote::Pitch& Element, const MCC_MusicalNote::Pitch& Pivot){
+			return Element.NotePitch() > Pivot.NotePitch();
+		}
+		
+		const auto MidiPitch_Ascending = [](const MCC_MusicalNote::Pitch& Element, const MCC_MusicalNote::Pitch& Pivot){
+			return Element.MidiPitch() < Pivot.MidiPitch();
+		}
+
+		const auto MidiPitch_Ascending = [](const MCC_MusicalNote::Pitch& Element, const MCC_MusicalNote::Pitch& Pivot){
+			return Element.MidiPitch() > Pivot.MidiPitch();
+		}
 	}
 
 #endif//MCC_PITCH_CLASS_SORTING_H

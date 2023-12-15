@@ -8,8 +8,13 @@
 
 	namespace MusicCompositionCore::Core::MusicalCore::MusicalNote::Sorting::Accidental
 	{
-        int8_t Ascending(const Pitch::Accidental& Element, const Pitch::Accidental& Pivot);
-        int8_t Descending(const Pitch::Accidental& Element, const Pitch::Accidental& Pivot);
+		const auto Ascending = [](const Pitch::Accidental& Element, const Pitch::Accidental& Pivot){
+			return Element < Pivot;
+		}
+
+		const auto Descending = [](const Pitch::Accidental& Element, const Pitch::Accidental& Pivot){
+			return Element > Pivot;
+		}
 	}
 
 #endif//MCC_ACCIDENTAL_SORTING_H

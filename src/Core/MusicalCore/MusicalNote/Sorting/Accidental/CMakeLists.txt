@@ -1,9 +1,6 @@
 # Initialize HEADER_LIST as an empty string list
 set( HEADERS_LIST "" )
 
-# Append Sources
-list( APPEND MCC_SOURCES "${CMAKE_CURRENT_LIST_DIR}/AccidentalSorting.cpp")
-
 # Append Headers
 list( APPEND HEADERS_LIST "${CMAKE_CURRENT_LIST_DIR}/AccidentalSorting.h")
 
