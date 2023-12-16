@@ -22,7 +22,7 @@
 			return Element.Accidental() < Pivot.Accidental();
 		};
 
-		const auto Accidental_Ascending = [](const MusicalNote::Note& Element, const MusicalNote::Note& Pivot){
+		const auto Accidental_Descending = [](const MusicalNote::Note& Element, const MusicalNote::Note& Pivot){
 			return Element.Accidental() > Pivot.Accidental();
 		};
 		
@@ -30,7 +30,7 @@
 			return Element.NotePitch() < Pivot.NotePitch();
 		};
 
-		const auto NotePitch_Ascending = [](const MusicalNote::Note& Element, const MusicalNote::Note& Pivot){
+		const auto NotePitch_Descending = [](const MusicalNote::Note& Element, const MusicalNote::Note& Pivot){
 			return Element.NotePitch() > Pivot.NotePitch();
 		};
 		
@@ -38,7 +38,7 @@
 			return Element.MidiPitch() < Pivot.MidiPitch();
 		};
 
-		const auto MidiPitch_Ascending = [](const MusicalNote::Note& Element, const MusicalNote::Note& Pivot){
+		const auto MidiPitch_Descending = [](const MusicalNote::Note& Element, const MusicalNote::Note& Pivot){
 			return Element.MidiPitch() > Pivot.MidiPitch();
 		};
 		
@@ -46,7 +46,7 @@
 			return Element.Octave() < Pivot.Octave();
 		};
 
-		const auto Octave_Ascending = [](const MusicalNote::Note& Element, const MusicalNote::Note& Pivot){
+		const auto Octave_Descending = [](const MusicalNote::Note& Element, const MusicalNote::Note& Pivot){
 			return Element.Octave() > Pivot.Octave();
 		};
 	}
