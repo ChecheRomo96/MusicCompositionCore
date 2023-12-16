@@ -9,7 +9,6 @@
 
 	namespace MusicCompositionCore::Core::MusicalCore::MusicalNote::Sorting::Pitch
 	{
-		
 		const auto Letter_Ascending = [](const MCC_MusicalNote::Pitch& Element, const MCC_MusicalNote::Pitch& Pivot){
 			return Element.Letter() < Pivot.Letter();
 		}
