@@ -2,6 +2,7 @@
 
 using namespace MCC_MidiCore;
 
+
 MCC_MidiCore::MidiMessage myMessage;
 void PrintBuffer()
 {
@@ -75,8 +76,8 @@ void setup() {
       Serial.print("  Song Position Pointer Message (Position: 0xFF):   ");
       PrintBuffer();
       
-      myMessage.SongPositionPointer(0xAAFF);
-      Serial.print("  Song Position Pointer Message (Position: 0xAAFF): ");
+      myMessage.SongPositionPointer(0xFFAA);
+      Serial.print("  Song Position Pointer Message (Position: 0xFFAA): ");
       PrintBuffer();
     
     Serial.println();
@@ -84,8 +85,8 @@ void setup() {
     
     Serial.println("System Real Time Messages: ");
     
-      myMessage.ClockTick();
-      Serial.print("  ClockTick Message: ");
+      myMessage.TimingTick();
+      Serial.print("  TimingTick Message: ");
       PrintBuffer();
       
       myMessage.Start();
