@@ -215,7 +215,7 @@ char Flash::Buffer[24];
 				if (Format.OctaveMode() == TextFormat::OctaveMode::Enabled)
 				{
 					OutputStr += " ";
-					OutputStr += Octave;
+					OutputStr += cpstd::to_string(Octave);
 				}
 			}
 			break;
@@ -233,7 +233,7 @@ char Flash::Buffer[24];
 
 				if(Format.OctaveMode() == TextFormat::OctaveMode::Enabled)
 				{
-					OutputStr += cpstd::string(Octave,10);
+					OutputStr += cpstd::to_string(Octave);
 				}
 			}
 			break;
