@@ -162,7 +162,7 @@ using namespace MusicCompositionCore::Core::MidiCore;
 
 				_Buffer[0] = MCC_MidiProtocol::ChannelVoice::NoteOn | (Source.Channel()&0x0F);
 				_Buffer[1] = Source.Pitch();
-				_Buffer[2] = Source.Velocity();
+				_Buffer[2] = Source.OnVelocity();
 				
 				return *this;
 			}
@@ -173,7 +173,7 @@ using namespace MusicCompositionCore::Core::MidiCore;
 
 				_Buffer[0] = MCC_MidiProtocol::ChannelVoice::NoteOff | (Source.Channel()&0x0F);
 				_Buffer[1] = Source.Pitch();
-				_Buffer[2] = Source.Velocity();
+				_Buffer[2] = Source.OffVelocity();
 				
 				return *this;
 			}
