@@ -33,7 +33,7 @@
         _Number = Numbers::InvalidNumber;
         _Quality = Qualities::InvalidQuality;
         
-        CPVector::vector<MCC_MusicalInterval::Interval> possibleIntervals = PossibleIntervals(_NotePitch_A, _NotePitch_B);
+        cpstd::vector<MCC_MusicalInterval::Interval> possibleIntervals = PossibleIntervals(_NotePitch_A, _NotePitch_B);
         
         while(i < possibleIntervals.size())
         {
@@ -285,9 +285,9 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Private Methods
 
-    CPVector::vector<MCC_MusicalInterval::Interval> Interval::PossibleIntervals(int16_t _NotePitch_A, int16_t _NotePitch_B)
+    cpstd::vector<MCC_MusicalInterval::Interval> Interval::PossibleIntervals(int16_t _NotePitch_A, int16_t _NotePitch_B)
     {
-        CPVector::vector<MCC_MusicalInterval::Interval> vect;
+        cpstd::vector<MCC_MusicalInterval::Interval> vect;
         
         uint16_t semitones = abs(_NotePitch_A-_NotePitch_B);
         
