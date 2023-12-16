@@ -1,5 +1,7 @@
 #include "MidiNote.h"
 
+using namespace MCC_MidiCore::Protocol;
+
 MusicCompositionCore::Core::MidiCore::MidiNote::MidiNote(uint8_t Pitch, uint8_t OnVel , uint8_t Channel, uint8_t OffVel)
 {
     if(Pitch >= MidiNoteRange){_pitch = InvalidMidiNote;}
