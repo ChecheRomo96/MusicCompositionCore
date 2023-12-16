@@ -600,9 +600,9 @@ cpstd::string MusicCompositionCore::Core::MusicalCore::MusicalScale::NameBuffer(
     {
         if(_Notes.size() == 0){return;}
         MCC_MusicalNote::Pitch tmp = _Notes[_RootOffset];
-        cpstd::sort(_Notes.begin(), _Notes.end(), MCC_MusicalNote::Sorting::Pitch::NotePitch_Ascending)
+        cpstd::sort(_Notes.begin(), _Notes.end(), MCC_MusicalNote::Sorting::Pitch::NotePitch_Ascending);
         
-        for(uint8_t i = 0; i < _Notes.size(); i++)
+        for(size_t i = 0; i < _Notes.size(); i++)
         {
             if(_Notes[i] == tmp)
             {
