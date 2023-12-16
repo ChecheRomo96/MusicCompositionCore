@@ -19,6 +19,7 @@
 
                     #define MCC_MIDI_CORE_ENABLED
                         #define MCC_MIDI_NOTE_ENABLED
+                        #define MCC_MIDI_MESSAGE_ENABLED
         
             //
             //////////////////////////////////////////////////////////////
