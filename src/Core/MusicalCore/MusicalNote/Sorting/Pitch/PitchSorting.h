@@ -13,7 +13,7 @@
 			return Element.GetLetter() < Pivot.GetLetter();
 		};
 
-		const auto Letter_Ascending = [](const MCC_MusicalNote::Pitch& Element, const MCC_MusicalNote::Pitch& Pivot){
+		const auto Letter_Descending = [](const MCC_MusicalNote::Pitch& Element, const MCC_MusicalNote::Pitch& Pivot){
 			return Element.GetLetter() > Pivot.GetLetter();
 		};
 
@@ -21,7 +21,7 @@
 			return Element.GetAccidental() < Pivot.GetAccidental();
 		};
 
-		const auto Accidental_Ascending = [](const MCC_MusicalNote::Pitch& Element, const MCC_MusicalNote::Pitch& Pivot){
+		const auto Accidental_Descending = [](const MCC_MusicalNote::Pitch& Element, const MCC_MusicalNote::Pitch& Pivot){
 			return Element.GetAccidental() > Pivot.GetAccidental();
 		};
 		
@@ -29,7 +29,7 @@
 			return Element.NotePitch() < Pivot.NotePitch();
 		};
 
-		const auto NotePitch_Ascending = [](const MCC_MusicalNote::Pitch& Element, const MCC_MusicalNote::Pitch& Pivot){
+		const auto NotePitch_Descending = [](const MCC_MusicalNote::Pitch& Element, const MCC_MusicalNote::Pitch& Pivot){
 			return Element.NotePitch() > Pivot.NotePitch();
 		};
 		
@@ -37,7 +37,7 @@
 			return Element.MidiPitch() < Pivot.MidiPitch();
 		};
 
-		const auto MidiPitch_Ascending = [](const MCC_MusicalNote::Pitch& Element, const MCC_MusicalNote::Pitch& Pivot){
+		const auto MidiPitch_Descending = [](const MCC_MusicalNote::Pitch& Element, const MCC_MusicalNote::Pitch& Pivot){
 			return Element.MidiPitch() > Pivot.MidiPitch();
 		};
 	}
