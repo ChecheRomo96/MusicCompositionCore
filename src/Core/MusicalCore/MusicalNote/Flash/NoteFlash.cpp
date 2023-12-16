@@ -1,5 +1,6 @@
 #include "NoteFlash.h"
 #include <MCC_BuildSettings.h>
+#include <CPstring.h>
 
 using namespace MusicCompositionCore::Core::MusicalCore::MusicalNote;
 //using namespace MusicCompositionCore::Core::UtilityCore;
@@ -110,7 +111,7 @@ char Flash::Buffer[24];
 	{
 		if((Letter == Pitch::Letter::InvalidID)||(Accidental < Pitch::Accidental::MinIterator)||(Accidental > Pitch::Accidental::MaxIterator)){buff[0] = '\0'; return buff;}
 
-		CPString::string OutputStr;
+		cpstd::string OutputStr;
 
 		switch(Format.SpacingMode())
 		{
@@ -190,7 +191,7 @@ char Flash::Buffer[24];
 
 					OutputStr += Octave;
 
-					for(uint8_t i = CPString::string(Octave).length(); i<max_chars; i++)
+					for(uint8_t i = cpstd::string(Octave).length(); i<max_chars; i++)
 					{
 						OutputStr += " ";
 					}
@@ -231,7 +232,7 @@ char Flash::Buffer[24];
 
 				if(Format.OctaveMode() == TextFormat::OctaveMode::Enabled)
 				{
-					OutputStr += CPString::string(Octave,10);
+					OutputStr += cpstd::string(Octave,10);
 				}
 			}
 			break;
