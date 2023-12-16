@@ -2,6 +2,7 @@
 #include "../MidiDefinitions.h"
 #include "../../MusicalCore/MusicalCore.h"
 
+#include <CPvector.h>
 using namespace MusicCompositionCore::Core::MidiCore;
 
 //////////////////////////////////////////////////////////////////
@@ -27,7 +28,7 @@ using namespace MusicCompositionCore::Core::MidiCore;
 //////////////////////////////////////////////////////////////////
 // Buffer API
 
-	const CPVector::vector<uint8_t>& MidiMessage::Buffer() const
+	const cpstd::vector<uint8_t>& MidiMessage::Buffer() const
 	{
 		return _Buffer;
 	}
@@ -340,7 +341,7 @@ using namespace MusicCompositionCore::Core::MidiCore;
 //////////////////////////////////////////////////////////////////
 // System Exclusive Messages
 
-	MidiMessage& MidiMessage::SystemExclusive(const CPVector::vector<uint8_t>& Data)
+	MidiMessage& MidiMessage::SystemExclusive(const cpstd::vector<uint8_t>& Data)
 	{
 		uint8_t counter = 0;
 		bool flag1 = 0;
