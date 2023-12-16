@@ -11,19 +11,19 @@
 	{
 
 		const auto Letter_Ascending = [](const MusicalNote::Note& Element, const MusicalNote::Note& Pivot){
-			return Element.Letter() < Pivot.Letter();
+			return Element.GetLetter() < Pivot.GetLetter();
 		};
 
 		const auto Letter_Descending = [](const MusicalNote::Note& Element, const MusicalNote::Note& Pivot){
-			return Element.Letter() > Pivot.Letter();
+			return Element.GetLetter() > Pivot.GetLetter();
 		};
 		
 		const auto Accidental_Ascending = [](const MusicalNote::Note& Element, const MusicalNote::Note& Pivot){
-			return Element.Accidental() < Pivot.Accidental();
+			return Element.GetAccidental() < Pivot.GetAccidental();
 		};
 
 		const auto Accidental_Descending = [](const MusicalNote::Note& Element, const MusicalNote::Note& Pivot){
-			return Element.Accidental() > Pivot.Accidental();
+			return Element.GetAccidental() > Pivot.GetAccidental();
 		};
 		
 		const auto NotePitch_Ascending = [](const MusicalNote::Note& Element, const MusicalNote::Note& Pivot){
