@@ -13,8 +13,8 @@ MusicCompositionCore::Core::MidiCore::MidiNote::MidiNote(uint8_t Pitch, uint8_t 
 	if(OffVel >= MidiVelocityRange){ _offVelocity = InvalidMidiVelocity;}
 	else{_offVelocity = OffVel;}
 
-	if(channel >= MidiChannelRange){ _channel = InvalidMidiChannel;}
-	else{_channel = channel;}
+	if(Channel >= MidiChannelRange){ _channel = InvalidMidiChannel;}
+	else{_channel = Channel;}
 }
 
 MusicCompositionCore::Core::MidiCore::MidiNote::MidiNote(const MusicalCore::MusicalNote::Note& source, uint8_t OnVel , uint8_t Channel, uint8_t OffVel)
@@ -28,8 +28,8 @@ MusicCompositionCore::Core::MidiCore::MidiNote::MidiNote(const MusicalCore::Musi
 	if(OffVel >= MidiVelocityRange){ _offVelocity = InvalidMidiVelocity;}
 	else{_offVelocity = OffVel;}
 
-	if(channel >= MidiChannelRange){_channel = InvalidMidiChannel;}
-	else{_channel = channel;}
+	if(Channel >= MidiChannelRange){_channel = InvalidMidiChannel;}
+	else{_channel = Channel;}
 }
 
 MusicCompositionCore::Core::MidiCore::MidiNote::MidiNote(const MCC_MusicalNote::Pitch& source, uint8_t OnVel , uint8_t Channel, uint8_t OffVel)
@@ -43,8 +43,8 @@ MusicCompositionCore::Core::MidiCore::MidiNote::MidiNote(const MCC_MusicalNote::
 	if(OffVel >= MidiVelocityRange){ _offVelocity = InvalidMidiVelocity;}
 	else{_offVelocity = OffVel;}
 
-	if(channel >= MidiChannelRange){_channel = InvalidMidiChannel;}
-	else{_channel = channel;}
+	if(Channel >= MidiChannelRange){_channel = InvalidMidiChannel;}
+	else{_channel = Channel;}
 }
 
 const uint8_t MusicCompositionCore::Core::MidiCore::MidiNote::Pitch() const
