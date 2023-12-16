@@ -10,19 +10,19 @@
 	namespace MusicCompositionCore::Core::MusicalCore::MusicalNote::Sorting::Pitch
 	{
 		const auto Letter_Ascending = [](const MCC_MusicalNote::Pitch& Element, const MCC_MusicalNote::Pitch& Pivot){
-			return Element.Letter() < Pivot.Letter();
+			return Element.GetLetter() < Pivot.GetLetter();
 		};
 
 		const auto Letter_Ascending = [](const MCC_MusicalNote::Pitch& Element, const MCC_MusicalNote::Pitch& Pivot){
-			return Element.Letter() > Pivot.Letter();
+			return Element.GetLetter() > Pivot.GetLetter();
 		};
 
 		const auto Accidental_Ascending = [](const MCC_MusicalNote::Pitch& Element, const MCC_MusicalNote::Pitch& Pivot){
-			return Element.Accidental() < Pivot.Accidental();
+			return Element.GetAccidental() < Pivot.GetAccidental();
 		};
 
 		const auto Accidental_Ascending = [](const MCC_MusicalNote::Pitch& Element, const MCC_MusicalNote::Pitch& Pivot){
-			return Element.Accidental() > Pivot.Accidental();
+			return Element.GetAccidental() > Pivot.GetAccidental();
 		};
 		
 		const auto NotePitch_Ascending = [](const MCC_MusicalNote::Pitch& Element, const MCC_MusicalNote::Pitch& Pivot){
