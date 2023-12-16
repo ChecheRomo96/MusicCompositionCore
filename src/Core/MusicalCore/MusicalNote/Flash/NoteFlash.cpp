@@ -188,8 +188,8 @@ char Flash::Buffer[24];
 						OutputStr += " ";
 						max_chars = 2;
 					}
-					
-					auto octv_str = cpsstd::to_string(Octave);
+
+					auto octv_str = cpstd::to_string(Octave);
 					OutputStr += octv_str;
 
 					for(uint8_t i = octv_str.length(); i<max_chars; i++)
