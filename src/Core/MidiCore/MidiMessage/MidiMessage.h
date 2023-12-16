@@ -2,7 +2,7 @@
 #define MCC_MIDI_MESSAGE_H
 
 #include <MCC_BuildSettings.h>
-#include <CPVector.h>
+#include <CPvector.h>
 
 #include "../MidiDefinitions.h"
 
