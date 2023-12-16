@@ -1,7 +1,7 @@
 #include "MusicalScale.h"
 
-CPString::string MusicCompositionCore::Core::MusicalCore::MusicalScale::DefaultName("No Name");
-CPString::string MusicCompositionCore::Core::MusicalCore::MusicalScale::NameBuffer("");
+cpstd::string MusicCompositionCore::Core::MusicalCore::MusicalScale::DefaultName("No Name");
+cpstd::string MusicCompositionCore::Core::MusicalCore::MusicalScale::NameBuffer("");
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 // Constructor, Destructor
@@ -25,7 +25,7 @@ CPString::string MusicCompositionCore::Core::MusicalCore::MusicalScale::NameBuff
     //////////////////////////////////////////////////////////////////////////////////////////////////
     // Note Vector, Note PitchClass() Vector
 
-        MCC_MusicalScale::Scale::Scale(const CPVector::vector<MCC_MusicalNote::Note> &Notes, CPString::string& name): _Data(0)
+        MCC_MusicalScale::Scale::Scale(const cpstd::vector<MCC_MusicalNote::Note> &Notes, cpstd::string& name): _Data(0)
         {
             _Notes.resize(Notes.size());
             _RootOffset = 0;
@@ -43,7 +43,7 @@ CPString::string MusicCompositionCore::Core::MusicalCore::MusicalScale::NameBuff
             _Data.SetMappingMode(ScaleProperties::MappingMode::Dynamic);
         }
 
-        MCC_MusicalScale::Scale::Scale(const CPVector::vector<MCC_MusicalNote::Pitch> &Tokens, CPString::string& name): _Data(0)
+        MCC_MusicalScale::Scale::Scale(const cpstd::vector<MCC_MusicalNote::Pitch> &Tokens, cpstd::string& name): _Data(0)
         {
             _Notes.resize(Tokens.size());
             _RootOffset = 0;
@@ -63,7 +63,7 @@ CPString::string MusicCompositionCore::Core::MusicalCore::MusicalScale::NameBuff
     //////////////////////////////////////////////////////////////////////////////////////////////////
     // Note + Interval Vector
 
-        MCC_MusicalScale::Scale::Scale(const MCC_MusicalNote::Note& root, const CPVector::vector<MCC_MusicalInterval::Interval>& intervals, CPString::string &name) : _Data(0)
+        MCC_MusicalScale::Scale::Scale(const MCC_MusicalNote::Note& root, const cpstd::vector<MCC_MusicalInterval::Interval>& intervals, cpstd::string &name) : _Data(0)
         {
             _Notes.resize(intervals.size() + 1);
             
@@ -82,7 +82,7 @@ CPString::string MusicCompositionCore::Core::MusicalCore::MusicalScale::NameBuff
             _Data.SetMappingMode(ScaleProperties::MappingMode::Fixed);
         }
 
-        MCC_MusicalScale::Scale::Scale(const MCC_MusicalNote::Pitch& root, const CPVector::vector <MCC_MusicalInterval::Interval>& intervals, CPString::string & name) : _Data(0)
+        MCC_MusicalScale::Scale::Scale(const MCC_MusicalNote::Pitch& root, const cpstd::vector <MCC_MusicalInterval::Interval>& intervals, cpstd::string & name) : _Data(0)
         {
             _Notes.resize(intervals.size() + 1);
             
@@ -339,7 +339,7 @@ CPString::string MusicCompositionCore::Core::MusicalCore::MusicalScale::NameBuff
     //////////////////////////////////////////////////////////////////////////////////////////////////
     // Name 
 
-        void MCC_MusicalScale::Scale::SetName(CPString::string& new_name)
+        void MCC_MusicalScale::Scale::SetName(cpstd::string& new_name)
         {
             _UserName = new_name;
             _Data.SetNameFlag(ScaleProperties::NameFlag::User);
@@ -371,7 +371,7 @@ CPString::string MusicCompositionCore::Core::MusicalCore::MusicalScale::NameBuff
     //////////////////////////////////////////////////////////////////////////////////////////////////
     // Note PitchClass() Vector
 
-        const CPVector::vector<MCC_MusicalNote::Pitch>& MCC_MusicalScale::Scale::NoteTokenVector() const
+        const cpstd::vector<MCC_MusicalNote::Pitch>& MCC_MusicalScale::Scale::NoteTokenVector() const
         {
             return _Notes;
         }
@@ -393,7 +393,7 @@ CPString::string MusicCompositionCore::Core::MusicalCore::MusicalScale::NameBuff
 
                 if(_Data.Location() == ScaleProperties::Location::None)
                 {
-                    CPVector::vector<MCC_MusicalInterval::Interval> Intervals;
+                    cpstd::vector<MCC_MusicalInterval::Interval> Intervals;
                     Intervals.resize(size() - 1);
 
                     for(uint8_t i = 1; i < size(); i++)
@@ -401,7 +401,7 @@ CPString::string MusicCompositionCore::Core::MusicalCore::MusicalScale::NameBuff
                         Intervals[i-1] = Interval(_RootOffset+i);
                     }
 
-                    CPString::string name = DefaultName;
+                    cpstd::string name = DefaultName;
 
                     if(_Data.NameFlag() == ScaleProperties::NameFlag::User)
                     {
@@ -417,7 +417,7 @@ CPString::string MusicCompositionCore::Core::MusicalCore::MusicalScale::NameBuff
                 }
                 else if(_Data.Location() == ScaleProperties::Location::Flash)
                 {
-                    CPString::string name = DefaultName;
+                    cpstd::string name = DefaultName;
 
                     if(_Data.NameFlag() == ScaleProperties::NameFlag::User)
                     {
@@ -568,7 +568,7 @@ CPString::string MusicCompositionCore::Core::MusicalCore::MusicalScale::NameBuff
             {
                 if(ID >= MCC_MusicalScale::Flash::ScaleArrays::Flash_Size){return;}
 
-                CPString::string name = DefaultName;
+                cpstd::string name = DefaultName;
 
                 if(_Data.NameFlag() == ScaleProperties::NameFlag::User)
                 {
@@ -601,7 +601,7 @@ CPString::string MusicCompositionCore::Core::MusicalCore::MusicalScale::NameBuff
         if(_Notes.size() == 0){return;}
         MCC_MusicalNote::Pitch tmp = _Notes[_RootOffset];
         
-        CPVector::Sorting::SortingArray<MCC_MusicalNote::Pitch> sortSettings;
+        cpstd::Sorting::SortingArray<MCC_MusicalNote::Pitch> sortSettings;
         sortSettings.Append(MCC_MusicalNote::Sorting::PitchClass::NotePitch_Ascending);
         _Notes.Sort(sortSettings);
         
