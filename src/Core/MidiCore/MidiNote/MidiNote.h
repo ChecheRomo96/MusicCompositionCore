@@ -22,7 +22,7 @@ namespace MusicCompositionCore
 
                     MidiNote();
 
-                    MidiNote(uint8_t Pitch, uint8_t OnVel , uint8_t Channel = 0);
+                    MidiNote(uint8_t Pitch, uint8_t OnVel , uint8_t Channel = 0, uint8_t OffVel = 0);
                     MidiNote(const MusicalCore::MusicalNote::Note& Source, uint8_t OnVel, uint8_t Channel = 0, uint8_t OffVel = 0);
                     MidiNote(const MusicalCore::MusicalNote::Pitch& Source, uint8_t OnVel, uint8_t Channel = 0, uint8_t OffVel = 0);
 
