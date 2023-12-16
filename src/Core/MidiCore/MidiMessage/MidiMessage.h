@@ -23,7 +23,7 @@ namespace MusicCompositionCore
         {
             class MidiMessage
             {
-                CPVector::vector<uint8_t> _Buffer;
+                cpstd::vector<uint8_t> _Buffer;
 
                 public:
 
@@ -37,7 +37,7 @@ namespace MusicCompositionCore
                     //////////////////////////////////////////////////////////////////
                     // Buffer API
 
-                        const CPVector::vector<uint8_t>& Buffer() const;
+                        const cpstd::vector<uint8_t>& Buffer() const;
                     //
                     //////////////////////////////////////////////////////////////////
                     // Channel Voice Messages
@@ -100,7 +100,7 @@ namespace MusicCompositionCore
                     //////////////////////////////////////////////////////////////////
                     // System Exclusive Messages
 
-                        MidiMessage& SystemExclusive(const CPVector::vector<uint8_t>& Data);
+                        MidiMessage& SystemExclusive(const cpstd::vector<uint8_t>& Data);
                         MidiMessage& SystemExclusive(uint8_t* Data, uint8_t Length);
                     //
                     //////////////////////////////////////////////////////////////////
