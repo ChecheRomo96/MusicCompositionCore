@@ -43,6 +43,7 @@
                         Note(const Pitch::Letter& _letter, const Pitch::Accidental& _accidental = Pitch::Accidental::Natural, int8_t _octave = 3);
 
 						Note(const Note& source);
+
 						Note& operator=(const Note& source);
 
 						#if defined (MCC_MUSICAL_INTERVAL_ENABLED)
@@ -148,7 +149,7 @@
 			// Reference Note for computing Frequency
 
             void SetReferenceNote(const Note& Note, const float& Frequency);
-            void SetReferenceNote(const Pitch::Letter::LetterType& Letter, const Pitch::Accidental::AccidentalType& Accidental, const float& Frequency);
+            void SetReferenceNote(const Pitch::Letter::LetterType& Letter, const Pitch::Accidental::AccidentalType& Accidental, int8_t Octave, const float& Frequency);
 		}
 	}
 		
