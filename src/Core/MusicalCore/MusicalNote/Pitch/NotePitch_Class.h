@@ -106,8 +106,6 @@
                                 static constexpr PitchType InvaildPitch = 63u;
                                 static constexpr uint8_t MinIterator = 0u;
                                 static constexpr uint8_t MaxIterator = 63u;
-
-                                static PitchType Buffer;
                         //
                         /////////////////////////////////////////////////////////////////////////////////
                         // Variable Definitions
