@@ -60,9 +60,10 @@
         	Reference::Frequency = Frequency;
         }
 
-        void MCC_MusicalNote::SetReferenceNote(const Pitch::Letter::LetterType& Letter, const Pitch::Accidental::AccidentalType& Accidental, const float& Frequency)
+        void MCC_MusicalNote::SetReferenceNote(const Pitch::Letter::LetterType& Letter, const Pitch::Accidental::AccidentalType& Accidental, int8_t Octave, const float& Frequency)
         {
-
+        	Reference::Note = Note(Letter,Accidental, Octave);
+        	Reference::Frequency = Frequency;
         }
 //
 /////////////////////////////////////////////////////////////////////////
