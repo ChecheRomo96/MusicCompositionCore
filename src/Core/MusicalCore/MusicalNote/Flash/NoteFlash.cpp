@@ -120,7 +120,7 @@ char Flash::Buffer[24];
 			{
 				OutputStr = Flash::GetLetterText(Letter);
 
-				if (Format.AccidentalMode() == TextFormat::AccidentalMode::Text)
+				if (Format.AccidentalMode() == TextFormat::Accidental_Text)
 				{
 					OutputStr += " ";
 				}
@@ -205,7 +205,7 @@ char Flash::Buffer[24];
 
 				OutputStr = Flash::GetLetterText(Letter);
 
-				if (Format.AccidentalMode() == TextFormat::AccidentalMode::Text)
+				if (Format.AccidentalMode() == TextFormat::Accidental_Text)
 				{
 					OutputStr += " ";
 				}
@@ -224,7 +224,7 @@ char Flash::Buffer[24];
 			{
 				OutputStr = Flash::GetLetterText(Letter);
 		
-				if (Format.AccidentalMode() == TextFormat::AccidentalMode::Text)
+				if (Format.AccidentalMode() == TextFormat::Accidental_Text)
 				{
 					OutputStr += " ";
 				}
