@@ -135,17 +135,17 @@ using namespace MusicCompositionCore::Core::MusicalCore::MusicalNote;
 
 		void TextFormat::SetSpacing_Enabled()
 		{
-		    SetSpacingMode(TextFormat::SpacingMode::Enabled);
+		    SetSpacingMode(TextFormat::Spacing_Enabled);
 		}
 
 		void TextFormat::SetSpacing_Disabled()
 		{
-		    SetSpacingMode(TextFormat::SpacingMode::Disabled);
+		    SetSpacingMode(TextFormat::Spacing_Disabled);
 		}
 
 		void TextFormat::SetSpacing_Justified()
 		{
-		    SetSpacingMode(TextFormat::SpacingMode::Justified);
+		    SetSpacingMode(TextFormat::Spacing_Justified);
 		}
 	//
 	/////////////////////////////////////////////////////////////////////////
@@ -164,12 +164,12 @@ using namespace MusicCompositionCore::Core::MusicalCore::MusicalNote;
 
 		void TextFormat::SetNatural_Enabled()
 		{
-		    SetNaturalMode(TextFormat::NaturalMode::Enabled);
+		    SetNaturalMode(TextFormat::Natural_Enabled);
 		}
 
 		void TextFormat::SetNatural_Disabled()
 		{
-		    SetNaturalMode(TextFormat::NaturalMode::Disabled);
+		    SetNaturalMode(TextFormat::Natural_Disabled);
 		}
 
 	//
