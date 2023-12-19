@@ -494,7 +494,7 @@ const char* Pitch::Name(MusicalNote::TextFormat& Format) const
         Format.SetOctave_Disabled();
     }
     
-    if(Format.AccidentalMode() == MusicalNote::TextFormat::AccidentalMode::Symbol)
+    if(Format.AccidentalMode() == MusicalNote::TextFormat::Accidental_Symbol)
     {
         if(Format.SpacingMode() != TextFormat::SpacingMode::Disabled)
         {
@@ -541,7 +541,7 @@ char* Pitch::Name(char* buff, MusicalNote::TextFormat& Format)const
         Format.SetOctave_Disabled();
     }
     
-    if(Format.AccidentalMode() == MusicalNote::TextFormat::AccidentalMode::Symbol)
+    if(Format.AccidentalMode() == MusicalNote::TextFormat::Accidental_Symbol)
     {
         if(Format.SpacingMode() != TextFormat::SpacingMode::Disabled)
         {
