@@ -496,7 +496,7 @@ const char* Pitch::Name(MusicalNote::TextFormat& Format) const
     
     if(Format.AccidentalMode() == MusicalNote::TextFormat::Accidental_Symbol)
     {
-        if(Format.SpacingMode() != TextFormat::SpacingMode::Disabled)
+        if(Format.SpacingMode() != TextFormat::Spacing_Disabled)
         {
             uint8_t space_mode = Format.SpacingMode();
 
@@ -512,7 +512,7 @@ const char* Pitch::Name(MusicalNote::TextFormat& Format) const
     }
     else
     {
-        if(Format.SpacingMode() != TextFormat::SpacingMode::Enabled)
+        if(Format.SpacingMode() != TextFormat::Spacing_Enabled)
         {
             uint8_t space_mode = Format.SpacingMode();
 
@@ -543,7 +543,7 @@ char* Pitch::Name(char* buff, MusicalNote::TextFormat& Format)const
     
     if(Format.AccidentalMode() == MusicalNote::TextFormat::Accidental_Symbol)
     {
-        if(Format.SpacingMode() != TextFormat::SpacingMode::Disabled)
+        if(Format.SpacingMode() != TextFormat::Spacing_Disabled)
         {
             uint8_t space_mode = Format.SpacingMode();
 
@@ -559,7 +559,7 @@ char* Pitch::Name(char* buff, MusicalNote::TextFormat& Format)const
     }
     else
     {
-        if(Format.SpacingMode() != TextFormat::SpacingMode::Enabled)
+        if(Format.SpacingMode() != TextFormat::Spacing_Enabled)
         {
             uint8_t space_mode = Format.SpacingMode();
             Format.Spacing_Enabled();
