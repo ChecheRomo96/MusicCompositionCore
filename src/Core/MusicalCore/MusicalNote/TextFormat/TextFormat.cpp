@@ -19,10 +19,10 @@ using namespace MusicCompositionCore::Core::MusicalCore::MusicalNote;
 	TextFormat::TextFormat()
 	{
 	    data = 
-	    AccidentalMode_SymbolMask |
-	    SpacingMode_DisabledMask |
-	    OctaveMode_EnabledMask | 
-	    NaturalMode_DisabledMask;
+	    Accidental_SymbolMask |
+	    Spacing_DisabledMask |
+	    Octave_EnabledMask | 
+	    Natural_DisabledMask;
 	}
 //
 /////////////////////////////////////////////////////////////////////////
