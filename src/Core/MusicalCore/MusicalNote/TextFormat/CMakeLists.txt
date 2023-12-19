@@ -6,7 +6,6 @@ list( APPEND MCC_SOURCES "${CMAKE_CURRENT_LIST_DIR}/TextFormat.cpp")
 
 # Append Headers
 list( APPEND HEADERS_LIST "${CMAKE_CURRENT_LIST_DIR}/TextFormat.h")
-list( APPEND HEADERS_LIST "${CMAKE_CURRENT_LIST_DIR}/TextFormat_Definitions.h")
 
 # Refresh Sources List at PARENT_SCOPE
 set(MCC_SOURCES "${MCC_SOURCES}" PARENT_SCOPE)
