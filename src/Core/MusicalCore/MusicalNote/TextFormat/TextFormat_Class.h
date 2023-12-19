@@ -60,7 +60,7 @@
 
 					TextFormat(const TextFormat& source);
 					TextFormat(uint8_t data);
-					TextFormat(bool AccidentalMode, bool OctaveEnabled, uint8_t Spacing, bool NaturalMode = TextFormat::NaturalMode::Disabled);
+					TextFormat(bool AccidentalMode, bool OctaveEnabled, uint8_t Spacing, bool NaturalMode = NaturalMode_Disabled);
 					TextFormat& operator=(const TextFormat& src);
 				//
 				/////////////////////////////////////////////////////////////////////////
