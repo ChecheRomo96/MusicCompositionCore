@@ -488,7 +488,7 @@ void Pitch::Previous()
 const char* Pitch::Name(MusicalNote::TextFormat& Format) const
 {
     bool flag = 0;
-    if(Format.OctaveMode() == TextFormat::OctaveMode::Enabled)
+    if(Format.OctaveMode() == TextFormat::Octave_Enabled)
     {
         flag = 1;
         Format.Octave_Disabled();
