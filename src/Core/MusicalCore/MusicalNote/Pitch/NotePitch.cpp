@@ -130,7 +130,7 @@ using namespace MusicCompositionCore::Core::MusicalCore::MusicalNote;
 /////////////////////////////////////////////////////////////////////////
 
 Pitch Pitch::PitchBuffer;
-Pitch::PitchType Pitch::Buffer;
+Pitch::PitchType Pitch::PitchTypeBuffer;
 
 Pitch::Pitch()
 {
