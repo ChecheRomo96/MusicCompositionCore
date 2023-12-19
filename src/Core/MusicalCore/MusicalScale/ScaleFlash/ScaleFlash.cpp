@@ -149,7 +149,7 @@
             {
                 if(ScaleID>=MCC_MusicalScaleFlash::ScaleArrays::Flash_Size){return buff;}
                 
-                MCC_MusicalNote::TextFormat::FormatClass format(MCC_MusicalNote::TextFormat::AccidentalMode::Symbol, MCC_MusicalNote::TextFormat::OctaveMode::Disabled, MCC_MusicalNote::TextFormat::SpacingMode::Disabled);
+                MCC_MusicalNote::TextFormat format(MCC_MusicalNote::TextFormat::Accidental_Symbol, MCC_MusicalNote::TextFormat::Octave_Disabled, MCC_MusicalNote::TextFormat::Spacing_Disabled);
                 
                 strcpy(buff,root.Name(format));
 
