@@ -82,12 +82,12 @@ using namespace MusicCompositionCore::Core::MusicalCore::MusicalNote;
 		    data |= (Mode<<BitNumbering_AccidentalMode);
 		}
 
-		void TextFormat::Accidental_Symbol()
+		void TextFormat::SetAccidental_Symbol()
 		{
 		    SetAccidentalMode(TextFormat::AccidentalMode::Symbol);
 		}
 
-		void TextFormat::Accidental_Text()
+		void TextFormat::SetAccidental_Text()
 		{
 		    SetAccidentalMode(TextFormat::AccidentalMode::Text);
 		}
@@ -133,17 +133,17 @@ using namespace MusicCompositionCore::Core::MusicalCore::MusicalNote;
 		    data |=  (Mode<<BitNumbering_SpacingMode);
 		}
 
-		void TextFormat::Spacing_Enabled()
+		void TextFormat::SetSpacing_Enabled()
 		{
 		    SetSpacingMode(TextFormat::SpacingMode::Enabled);
 		}
 
-		void TextFormat::Spacing_Disabled()
+		void TextFormat::SetSpacing_Disabled()
 		{
 		    SetSpacingMode(TextFormat::SpacingMode::Disabled);
 		}
 
-		void TextFormat::Spacing_Justified()
+		void TextFormat::SetSpacing_Justified()
 		{
 		    SetSpacingMode(TextFormat::SpacingMode::Justified);
 		}
@@ -162,12 +162,12 @@ using namespace MusicCompositionCore::Core::MusicalCore::MusicalNote;
 		    data |= (Mode<<BitNumbering_NaturalMode);
 		}
 
-		void TextFormat::Natural_Enabled()
+		void TextFormat::SetNatural_Enabled()
 		{
 		    SetNaturalMode(TextFormat::NaturalMode::Enabled);
 		}
 
-		void TextFormat::Natural_Disabled()
+		void TextFormat::SetNatural_Disabled()
 		{
 		    SetNaturalMode(TextFormat::NaturalMode::Disabled);
 		}
