@@ -225,7 +225,7 @@ const Pitch::Accidental::AccidentalType& Pitch::Accidental::ID() const
 
 Pitch& Pitch::Accidental::GenerateToken(const Pitch::Letter& source)
 {
-    return Pitch::PitchBuffer = Pitch(source,(*this));
+    return MusicalNote::PitchBuffer = Pitch(source,(*this));
 }
 
 bool Pitch::Accidental::AddSharp()
