@@ -325,8 +325,8 @@
                                 void SetAccidental(const Accidental& source);
                                 const Accidental& GetAccidental() const;
                                 
-                                const char* Name(MusicalNote::TextFormat& Format = MusicalNote::TextFormatat)const;
-                                char* Name(char* buff, MusicalNote::TextFormat& Format = MusicalNote::TextFormatat) const;
+                                const char* Name(MusicalNote::TextFormat& Format = MusicalNote::DefaultFormat)const;
+                                char* Name(char* buff, MusicalNote::TextFormat& Format = MusicalNote::DefaultFormat) const;
                             
                                 const uint8_t NotePitch() const;
                                 const uint8_t MidiPitch() const;
