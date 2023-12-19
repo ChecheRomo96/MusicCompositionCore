@@ -16,7 +16,7 @@ using namespace MusicCompositionCore::Core::MusicalCore::MusicalNote;
 /////////////////////////////////////////////////////////////////////////
 // Constructors, Destructors and Clear Function
 
-	TextFormat::FormatClass()
+	TextFormat::TextFormat()
 	{
 	    data = 
 	    AccidentalMode_SymbolMask |
@@ -28,17 +28,17 @@ using namespace MusicCompositionCore::Core::MusicalCore::MusicalNote;
 /////////////////////////////////////////////////////////////////////////
 // Copy Constructor and assignment operator
 
-	TextFormat::FormatClass(const FormatClass& source)
+	TextFormat::TextFormat(const FormatClass& source)
 	{
 		data = source.RawData();
 	}
 
-	TextFormat::FormatClass(uint8_t newData)
+	TextFormat::TextFormat(uint8_t newData)
 	{
 	    data = newData;
 	}
 
-	TextFormat::FormatClass(bool AccidentalMode, bool OctaveEnabled, uint8_t SpacingMode, bool NaturalMode)
+	TextFormat::TextFormat(bool AccidentalMode, bool OctaveEnabled, uint8_t SpacingMode, bool NaturalMode)
 	{
 	    SetAccidentalMode(AccidentalMode);
 	    SetSpacingMode(SpacingMode);
