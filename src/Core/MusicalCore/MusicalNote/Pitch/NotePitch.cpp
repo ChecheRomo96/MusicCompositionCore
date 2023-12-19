@@ -516,7 +516,7 @@ const char* Pitch::Name(MusicalNote::TextFormat& Format) const
         {
             uint8_t space_mode = Format.SpacingMode();
 
-            Format.Spacing_Enabled();
+            Format.SetSpacing_Enabled();
             Flash::GetName(Flash::Buffer,MusicalNote::Note(*this),Format);
             
             Format.SetSpacingMode(space_mode);
@@ -562,7 +562,7 @@ char* Pitch::Name(char* buff, MusicalNote::TextFormat& Format)const
         if(Format.SpacingMode() != TextFormat::Spacing_Enabled)
         {
             uint8_t space_mode = Format.SpacingMode();
-            Format.Spacing_Enabled();
+            Format.SetSpacing_Enabled();
             Flash::GetName(buff,MusicalNote::Pitch(*this),Format);
             Format.SetSpacingMode(space_mode);
         }
