@@ -109,12 +109,12 @@ using namespace MusicCompositionCore::Core::MusicalCore::MusicalNote;
 
 		void TextFormat::SetOctave_Enabled()
 		{
-		    SetOctaveMode(TextFormat::OctaveMode::Enabled);
+		    SetOctaveMode(TextFormat::Octave_Enabled);
 		}
 
 		void TextFormat::SetOctave_Disabled()
 		{
-		    SetOctaveMode(TextFormat::OctaveMode::Disabled);
+		    SetOctaveMode(TextFormat::Octave_Disabled);
 		}
 	//
 	/////////////////////////////////////////////////////////////////////////
