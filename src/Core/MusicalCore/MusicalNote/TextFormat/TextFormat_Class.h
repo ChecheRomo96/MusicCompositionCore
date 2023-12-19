@@ -5,26 +5,63 @@
 
 	#include "TextFormat.h"
 
-	namespace MusicCompositionCore::Core::MusicalCore::MusicalNote::TextFormat
+	namespace MusicCompositionCore::Core::MusicalCore::MusicalNote
 	{
-		class FormatClass
+		class TextFormat
 		{
-			private:
-				uint8_t data;
+			public:
+				/////////////////////////////////////////////////////////////////////////
+				// Constants and Bitmasks
 
+					static constexpr uint8_t BitNumbering_AccidentalMode = 0;
+					static constexpr uint8_t BitNumbering_OctaveMode = 1;
+					static constexpr uint8_t BitNumbering_SpacingMode = 2;
+					static constexpr uint8_t BitNumbering_NaturalMode = 4;
+
+					static constexpr bool Accidental_Symbol = 1;
+					static constexpr bool Accidental_Text = 0;
+					static constexpr uint8_t Accidental_SymbolMask = 0b00000001;
+					static constexpr uint8_t Accidental_TextMask = 0;
+
+					static constexpr bool Octave_Enabled = 1;
+					static constexpr bool Octave_Disabled = 0;
+					static constexpr uint8_t Octave_EnabledMask = 0b000010;
+					static constexpr uint8_t Octave_DisabledMask = 0;
+
+					static constexpr uint8_t Spacing_Enabled = 0b10;
+					static constexpr uint8_t Spacing_Justified = 0b01;
+					static constexpr uint8_t Spacing_Disabled = 0;
+
+					static constexpr uint8_t Spacing_EnabledMask = 0b000001000;
+					static constexpr uint8_t Spacing_JustifiedMask = 0b000000100;
+					static constexpr uint8_t Spacing_DisabledMask = 0;
+
+					static constexpr bool Natural_Disabled = 1;
+					static constexpr bool Natural_Enabled = 0;
+					static constexpr uint8_t Natural_DisabledMask = 0b00010000;
+					static constexpr uint8_t Natural_EnabledMask = 0;
+				//
+				/////////////////////////////////////////////////////////////////////////
+			private:
+				/////////////////////////////////////////////////////////////////////////
+				// Fields
+
+					uint8_t data;
+				//
+				/////////////////////////////////////////////////////////////////////////
 			public:
 				/////////////////////////////////////////////////////////////////////////
 				// Constructors, Destructors and Clear Function
 
-					FormatClass();
+					TextFormat();
 				//
 				/////////////////////////////////////////////////////////////////////////
 				// Copy Constructor and assignment operator
 
-					FormatClass(const FormatClass& source);
-					FormatClass(uint8_t data);
-					FormatClass(bool AccidentalMode, bool OctaveEnabled, uint8_t Spacing, bool NaturalMode = TextFormat::NaturalMode::Disabled);
-					FormatClass& operator=(const FormatClass& src);
+					TextFormat(const TextFormat& source);
+					TextFormat(uint8_t data);
+					TextFormat(bool AccidentalMode, bool OctaveEnabled, uint8_t Spacing, bool NaturalMode = TextFormat::NaturalMode::Disabled);
+					TextFormat& operator=(const TextFormat& src);
 				//
 				/////////////////////////////////////////////////////////////////////////
 				// API
@@ -40,40 +77,40 @@
 
 						const bool AccidentalMode() const;
 						void SetAccidentalMode(bool x);
-						void Accidental_Symbol();
-						void Accidental_Text();
+						void SetAccidental_Symbol();
+						void SetAccidental_Text();
 					//
 					/////////////////////////////////////////////////////////////////////
 					// Octave Mode
 
 						const bool OctaveMode() const;
 						void SetOctaveMode(bool x);
-						void Octave_Enabled();
-						void Octave_Disabled();
+						void SetOctave_Enabled();
+						void SetOctave_Disabled();
 					//
 					/////////////////////////////////////////////////////////////////////
 					// Spacing Mode
 
 						const uint8_t SpacingMode() const;
 						void SetSpacingMode(uint8_t x);
-						void Spacing_Enabled();
-						void Spacing_Disabled();
-						void Spacing_Justified();
+						void SetSpacing_Enabled();
+						void SetSpacing_Disabled();
+						void SetSpacing_Justified();
 					//
 					/////////////////////////////////////////////////////////////////////
 					// Natural Mode
 
 						const bool NaturalMode() const;
 						void SetNaturalMode(bool x);
-						void Natural_Enabled();
-						void Natural_Disabled();
+						void SetNatural_Enabled();
+						void SetNatural_Disabled();
 					//
 					/////////////////////////////////////////////////////////////////////
 				//
 				/////////////////////////////////////////////////////////////////////////
 		};
 
-		extern FormatClass DefaultFormat;
+		extern TextFormat DefaultFormat;
 	}
 
 #endif//MCC_NOTE_FORMAT_CLASS_H
