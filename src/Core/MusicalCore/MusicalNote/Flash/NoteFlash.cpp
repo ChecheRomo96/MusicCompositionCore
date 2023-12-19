@@ -26,7 +26,7 @@ char Flash::Buffer[24];
 	char* Flash::GetName(char* buff, const Pitch& source, const TextFormat& Format)
 	{
 		TextFormat tmp = Format;
-        tmp.Octave_Disabled();
+        tmp.SetOctave_Disabled();
 
 		return GetName(buff, source.GetLetter(), source.GetAccidental(), 0, tmp);
 	}
@@ -34,7 +34,7 @@ char Flash::Buffer[24];
 	const char* Flash::GetName(const Pitch& source, const TextFormat& Format)
 	{
 		TextFormat tmp = Format;
-		tmp.Octave_Disabled();
+		tmp.SetOctave_Disabled();
 
 		return GetName(Flash::Buffer, source.GetLetter(), source.GetAccidental(), 0, tmp);
 	}
@@ -58,7 +58,7 @@ char Flash::Buffer[24];
 	char* Flash::GetName(char* buff, const Pitch::Letter& Letter, const Pitch::Accidental& Accidental, const TextFormat& Format)
 	{
         TextFormat tmp = Format;
-        tmp.Octave_Disabled();
+        tmp.SetOctave_Disabled();
 
 		return GetName(buff, Letter.ID(), Accidental.ID(), tmp);
 	}
@@ -66,7 +66,7 @@ char Flash::Buffer[24];
 	const char* Flash::GetName(const Pitch::Letter& Letter, const Pitch::Accidental& Accidental, const TextFormat& Format)
 	{
         TextFormat tmp = Format;
-        tmp.Octave_Disabled();
+        tmp.SetOctave_Disabled();
         
 		return GetName(Flash::Buffer, Letter.ID(), Accidental.ID(), tmp);
 	}
@@ -91,7 +91,7 @@ char Flash::Buffer[24];
 	char* Flash::GetName(char* buff, const Pitch::Letter::LetterType& Letter, const Pitch::Accidental::AccidentalType& Accidental, const TextFormat& Format)
 	{
 		TextFormat tmp = Format;
-        tmp.Octave_Disabled();
+        tmp.SetOctave_Disabled();
 
 		return GetName(buff,Letter,Accidental,0,tmp);
 	}
@@ -99,7 +99,7 @@ char Flash::Buffer[24];
 	const char* Flash::GetName(const Pitch::Letter::LetterType& Letter, const Pitch::Accidental::AccidentalType& Accidental, const TextFormat& Format)
 	{
 		TextFormat tmp = Format;
-        tmp.Octave_Disabled();
+        tmp.SetOctave_Disabled();
         
 		return GetName(Flash::Buffer,Letter,Accidental,0,tmp);
 	}
