@@ -28,7 +28,7 @@ using namespace MusicCompositionCore::Core::MusicalCore::MusicalNote;
 /////////////////////////////////////////////////////////////////////////
 // Copy Constructor and assignment operator
 
-	TextFormat::TextFormat(const FormatClass& source)
+	TextFormat::TextFormat(const TextFormat& source)
 	{
 		data = source.RawData();
 	}
