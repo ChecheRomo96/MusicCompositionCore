@@ -61,11 +61,11 @@
                                 Scale(const Flash::Container_Notes& source);
                                 Scale(const MCC_MusicalNote::Note& root, const Flash::Container_Notes& source);
                                 Scale(const MCC_MusicalNote::Pitch& root, const Flash::Container_Notes& source);
-                                Scale(const MCC_MusicalNote::Pitch::PitchType& root, const Flash::Container_Notes& source);
+                                Scale(const MCC_MusicalNote::Pitch::Type& root, const Flash::Container_Notes& source);
 
                                 Scale(const MCC_MusicalNote::Note &root, const Flash::Container_Mapping& source);
                                 Scale(const MCC_MusicalNote::Pitch& root, const Flash::Container_Mapping& source);
-                                Scale(const MCC_MusicalNote::Pitch::PitchType& root, const Flash::Container_Mapping& source);
+                                Scale(const MCC_MusicalNote::Pitch::Type& root, const Flash::Container_Mapping& source);
 
                                 Scale(const MCC_MusicalNote::Note &root, const Flash::Container* source, uint8_t ID);
                                 Scale(const MCC_MusicalNote::Pitch& root, const Flash::Container* source, uint8_t ID);
