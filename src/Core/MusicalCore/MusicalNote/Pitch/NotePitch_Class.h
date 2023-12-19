@@ -30,8 +30,8 @@
                                 
                                 typedef uint8_t Type;
 
-                                static Pitch PitchBuffer;
-                                static Type TypeBuffer;
+                                extern static Pitch PitchBuffer;
+                                extern static Type TypeBuffer;
                           
                                 static constexpr Type C_QuadrupleFlat = 0u;
                                 static constexpr Type C_TripleFlat = 1u;
