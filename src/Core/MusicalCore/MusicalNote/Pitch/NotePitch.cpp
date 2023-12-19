@@ -13,9 +13,10 @@ using namespace MusicCompositionCore::Core::MusicalCore;
 using namespace MusicCompositionCore::Core::MusicalCore::MusicalNote;
 
 /////////////////////////////////////////////////////////////////////////
-//  Pitch Type Buffer
+//  Buffers
     
-    Pitch::Type Pitch::TypeBuffer;
+    Pitch MusicalNote::PitchBuffer;
+    Pitch::Type MusicalNote::TypeBuffer;
 //
 /////////////////////////////////////////////////////////////////////////
 //  Notes Array
@@ -127,10 +128,7 @@ using namespace MusicCompositionCore::Core::MusicalCore::MusicalNote;
     constexpr int8_t Pitch::Accidental::MaxIterator;
     constexpr int8_t Pitch::Accidental::MinIterator;
 //
-/////////////////////////////////////////////////////////////////////////
-
-Pitch MusicalNote::PitchBuffer;
-Pitch::Type MusicalNote::TypeBuffer;
+////////////////////////////////////////////////////////////////////////
 
 Pitch::Pitch()
 {
