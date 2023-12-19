@@ -488,10 +488,10 @@ void Pitch::Previous()
 const char* Pitch::Name(MusicalNote::TextFormat& Format) const
 {
     bool flag = 0;
-    if(Format.OctaveMode() == TextFormat::Octave_Enabled)
+    if(Format.OctaveMode() == TextFormat::SetOctave_Enabled)
     {
         flag = 1;
-        Format.Octave_Disabled();
+        Format.SetOctave_Disabled();
     }
     
     if(Format.AccidentalMode() == MusicalNote::TextFormat::AccidentalMode::Symbol)
@@ -527,7 +527,7 @@ const char* Pitch::Name(MusicalNote::TextFormat& Format) const
         }
     }
     
-    if(flag){Format.Octave_Enabled();}
+    if(flag){Format.SetOctave_Enabled();}
     
     return Flash::Buffer;
 }
@@ -538,7 +538,7 @@ char* Pitch::Name(char* buff, MusicalNote::TextFormat& Format)const
     if(Format.OctaveMode())
     {
         flag = 1;
-        Format.Octave_Disabled();
+        Format.SetOctave_Disabled();
     }
     
     if(Format.AccidentalMode() == MusicalNote::TextFormat::AccidentalMode::Symbol)
@@ -572,7 +572,7 @@ char* Pitch::Name(char* buff, MusicalNote::TextFormat& Format)const
         }
     }
     
-    if(flag){Format.Octave_Enabled();}
+    if(flag){Format.SetOctave_Enabled();}
     
     return buff;
 }
