@@ -116,7 +116,7 @@ char Flash::Buffer[24];
 		switch(Format.SpacingMode())
 		{
 			
-			case TextFormat::SpacingMode::Justified:
+			case TextFormat::Spacing_Justified:
 			{
 				OutputStr = Flash::GetLetterText(Letter);
 
