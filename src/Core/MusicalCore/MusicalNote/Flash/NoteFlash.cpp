@@ -220,7 +220,7 @@ char Flash::Buffer[24];
 			}
 			break;
 			
-			case TextFormat::SpacingMode::Disabled:
+			case TextFormat::Spacing_Disabled:
 			{
 				OutputStr = Flash::GetLetterText(Letter);
 		
