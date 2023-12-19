@@ -179,7 +179,7 @@ char Flash::Buffer[24];
 					}
 				}
 
-	            if(Format.OctaveMode() == TextFormat::OctaveMode::Enabled)
+	            if(Format.OctaveMode() == TextFormat::Octave_Enabled)
 				{
 					uint8_t max_chars = 3;
 
@@ -200,7 +200,7 @@ char Flash::Buffer[24];
 			}
 			break;
 			
-			case TextFormat::SpacingMode::Enabled:
+			case TextFormat::Spacing_Enabled:
 			{
 
 				OutputStr = Flash::GetLetterText(Letter);
@@ -212,7 +212,7 @@ char Flash::Buffer[24];
 
 				OutputStr += Flash::GetAccidentalText(Accidental, Format);
 
-				if (Format.OctaveMode() == TextFormat::OctaveMode::Enabled)
+				if (Format.OctaveMode() == TextFormat::Octave_Enabled)
 				{
 					OutputStr += " ";
 					OutputStr += cpstd::to_string(Octave);
@@ -231,7 +231,7 @@ char Flash::Buffer[24];
 
 				OutputStr += Flash::GetAccidentalText(Accidental, Format);
 
-				if(Format.OctaveMode() == TextFormat::OctaveMode::Enabled)
+				if(Format.OctaveMode() == TextFormat::Octave_Enabled)
 				{
 					OutputStr += cpstd::to_string(Octave);
 				}
@@ -263,7 +263,7 @@ char Flash::Buffer[24];
 	char* Flash::GetAccidentalText(char* buff, const Pitch::Accidental& Accidental, const TextFormat& Format)
 	{
 	    #if defined(__AVR__)
-	        if((Accidental == Pitch::Accidental::Natural) && (Format.NaturalMode() == TextFormat::NaturalMode::Enabled) && (Format.AccidentalMode() == TextFormat::AccidentalMode::Symbol))
+	        if((Accidental == Pitch::Accidental::Natural) && (Format.NaturalMode() == TextFormat::Natural_Enabled) && (Format.AccidentalMode() == TextFormat::AccidentalMode::Symbol))
 	        {
 	        	buff[0] = '\0';
 	        }
@@ -272,7 +272,7 @@ char Flash::Buffer[24];
 				strcpy_P(buff, (PGM_P)pgm_read_word(&(AccidentalNames[Accidental.ID() + 4][Format.AccidentalMode()])));
 	        }
 	    #else
-	        if(((Accidental == Pitch::Accidental::Natural) && (Format.NaturalMode() == TextFormat::NaturalMode::Enabled) && (Format.AccidentalMode() == TextFormat::AccidentalMode::Symbol)) || (Accidental == Pitch::Accidental::InvalidID) )
+	        if(((Accidental == Pitch::Accidental::Natural) && (Format.NaturalMode() == TextFormat::Natural_Enabled) && (Format.AccidentalMode() == TextFormat::AccidentalMode::Symbol)) || (Accidental == Pitch::Accidental::InvalidID) )
 	        {
 	        	buff[0] = '\0';
 	        }
