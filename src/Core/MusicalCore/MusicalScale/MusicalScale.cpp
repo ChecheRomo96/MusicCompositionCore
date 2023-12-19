@@ -147,7 +147,7 @@ cpstd::string MusicCompositionCore::Core::MusicalCore::MusicalScale::NameBuffer(
                 }
             }
 
-            MCC_MusicalScale::Scale::Scale(const MCC_MusicalNote::Pitch::PitchType& root, const Flash::Container_Notes& source): _Data(0)
+            MCC_MusicalScale::Scale::Scale(const MCC_MusicalNote::Pitch::Type& root, const Flash::Container_Notes& source): _Data(0)
             {
                 *this = Scale(source);
                 auto Root = MCC_MusicalNote::Pitch(root);
@@ -172,7 +172,7 @@ cpstd::string MusicCompositionCore::Core::MusicalCore::MusicalScale::NameBuffer(
         //////////////////////////////////////////////////////////////////////////////////////////////
         // FlashContainer Mapping
         
-            MCC_MusicalScale::Scale::Scale(const MCC_MusicalNote::Pitch::PitchType& root, const Flash::Container_Mapping& source): _Data(0)
+            MCC_MusicalScale::Scale::Scale(const MCC_MusicalNote::Pitch::Type& root, const Flash::Container_Mapping& source): _Data(0)
             {
                 uint16_t mapping = Flash::GetScaleMapping(source);
                 auto Root = MCC_MusicalNote::Pitch(root);
