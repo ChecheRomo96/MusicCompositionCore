@@ -342,7 +342,7 @@
                     };
                     
                     extern Pitch PitchBuffer;
-                    extern Type TypeBuffer;
+                    extern Pitch::Type TypeBuffer;
 
                     bool operator < (const Pitch& lhs, const Pitch& rhs);
                     bool operator <= (const Pitch& lhs, const Pitch& rhs);
