@@ -84,12 +84,12 @@ using namespace MusicCompositionCore::Core::MusicalCore::MusicalNote;
 
 		void TextFormat::SetAccidental_Symbol()
 		{
-		    SetAccidentalMode(TextFormat::AccidentalMode::Symbol);
+		    SetAccidentalMode(TextFormat::Accidental_Symbol);
 		}
 
 		void TextFormat::SetAccidental_Text()
 		{
-		    SetAccidentalMode(TextFormat::AccidentalMode::Text);
+		    SetAccidentalMode(TextFormat::Accidental_Text);
 		}
 	//
 	/////////////////////////////////////////////////////////////////////////
@@ -107,12 +107,12 @@ using namespace MusicCompositionCore::Core::MusicalCore::MusicalNote;
 		    data |= (Mode<<BitNumbering_OctaveMode);
 		}
 
-		void TextFormat::Octave_Enabled()
+		void TextFormat::SetOctave_Enabled()
 		{
 		    SetOctaveMode(TextFormat::OctaveMode::Enabled);
 		}
 
-		void TextFormat::Octave_Disabled()
+		void TextFormat::SetOctave_Disabled()
 		{
 		    SetOctaveMode(TextFormat::OctaveMode::Disabled);
 		}
