@@ -29,9 +29,6 @@
                             public:
                                 
                                 typedef uint8_t Type;
-
-                                extern static Pitch PitchBuffer;
-                                extern static Type TypeBuffer;
                           
                                 static constexpr Type C_QuadrupleFlat = 0u;
                                 static constexpr Type C_TripleFlat = 1u;
@@ -344,6 +341,8 @@
 
                     };
                     
+                    extern Pitch PitchBuffer;
+                    extern Type TypeBuffer;
 
                     bool operator < (const Pitch& lhs, const Pitch& rhs);
                     bool operator <= (const Pitch& lhs, const Pitch& rhs);
