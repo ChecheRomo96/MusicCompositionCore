@@ -9,14 +9,14 @@ using namespace MusicCompositionCore::Core::MusicalCore::MusicalNote;
 	/////////////////////////////////////////////////////////////////////
 	//    Default Format
 
-		TextFormat::FormatClass TextFormat::DefaultFormat;
+		TextFormat TextFormat::DefaultFormat;
 	//
 	/////////////////////////////////////////////////////////////////////
 //
 /////////////////////////////////////////////////////////////////////////
 // Constructors, Destructors and Clear Function
 
-	TextFormat::FormatClass::FormatClass()
+	TextFormat::FormatClass()
 	{
 	    data = 
 	    AccidentalMode_SymbolMask |
@@ -28,17 +28,17 @@ using namespace MusicCompositionCore::Core::MusicalCore::MusicalNote;
 /////////////////////////////////////////////////////////////////////////
 // Copy Constructor and assignment operator
 
-	TextFormat::FormatClass::FormatClass(const FormatClass& source)
+	TextFormat::FormatClass(const FormatClass& source)
 	{
 		data = source.RawData();
 	}
 
-	TextFormat::FormatClass::FormatClass(uint8_t newData)
+	TextFormat::FormatClass(uint8_t newData)
 	{
 	    data = newData;
 	}
 
-	TextFormat::FormatClass::FormatClass(bool AccidentalMode, bool OctaveEnabled, uint8_t SpacingMode, bool NaturalMode)
+	TextFormat::FormatClass(bool AccidentalMode, bool OctaveEnabled, uint8_t SpacingMode, bool NaturalMode)
 	{
 	    SetAccidentalMode(AccidentalMode);
 	    SetSpacingMode(SpacingMode);
@@ -46,7 +46,7 @@ using namespace MusicCompositionCore::Core::MusicalCore::MusicalNote;
 	    SetNaturalMode(NaturalMode);
 	}
 
-	TextFormat::FormatClass& TextFormat::FormatClass::operator=(const TextFormat::FormatClass& src)
+	TextFormat& TextFormat::operator=(const TextFormat& src)
 	{
 		data = src.RawData();
 		return *this;
@@ -58,12 +58,12 @@ using namespace MusicCompositionCore::Core::MusicalCore::MusicalNote;
 	/////////////////////////////////////////////////////////////////////////
 	// Raw Data
 
-		const uint8_t TextFormat::FormatClass::RawData() const
+		const uint8_t TextFormat::RawData() const
 		{
 		    return data;
 		}
 
-		void TextFormat::FormatClass::SetRawData(uint8_t RawData)
+		void TextFormat::SetRawData(uint8_t RawData)
 		{
 		    data = RawData;
 		}
@@ -71,23 +71,23 @@ using namespace MusicCompositionCore::Core::MusicalCore::MusicalNote;
 	/////////////////////////////////////////////////////////////////////////
 	// Accidental Mode
 
-		const bool TextFormat::FormatClass::AccidentalMode() const
+		const bool TextFormat::AccidentalMode() const
 		{
 		    return (data>>BitNumbering_AccidentalMode)&1u;
 		}
 
-		void TextFormat::FormatClass::SetAccidentalMode(bool Mode)
+		void TextFormat::SetAccidentalMode(bool Mode)
 		{
 			data &=  ~(1u<<BitNumbering_AccidentalMode);
 		    data |= (Mode<<BitNumbering_AccidentalMode);
 		}
 
-		void TextFormat::FormatClass::Accidental_Symbol()
+		void TextFormat::Accidental_Symbol()
 		{
 		    SetAccidentalMode(TextFormat::AccidentalMode::Symbol);
 		}
 
-		void TextFormat::FormatClass::Accidental_Text()
+		void TextFormat::Accidental_Text()
 		{
 		    SetAccidentalMode(TextFormat::AccidentalMode::Text);
 		}
@@ -96,23 +96,23 @@ using namespace MusicCompositionCore::Core::MusicalCore::MusicalNote;
 	// Octave Mode
 
 
-		const bool TextFormat::FormatClass::OctaveMode() const
+		const bool TextFormat::OctaveMode() const
 		{
 		    return (data>>BitNumbering_OctaveMode)&1u;
 		}
 
-		void TextFormat::FormatClass::SetOctaveMode(bool Mode)
+		void TextFormat::SetOctaveMode(bool Mode)
 		{
 			data &=  ~(1u<<BitNumbering_OctaveMode);
 		    data |= (Mode<<BitNumbering_OctaveMode);
 		}
 
-		void TextFormat::FormatClass::Octave_Enabled()
+		void TextFormat::Octave_Enabled()
 		{
 		    SetOctaveMode(TextFormat::OctaveMode::Enabled);
 		}
 
-		void TextFormat::FormatClass::Octave_Disabled()
+		void TextFormat::Octave_Disabled()
 		{
 		    SetOctaveMode(TextFormat::OctaveMode::Disabled);
 		}
@@ -120,12 +120,12 @@ using namespace MusicCompositionCore::Core::MusicalCore::MusicalNote;
 	/////////////////////////////////////////////////////////////////////////
 	// Spacing Mode
 
-		const uint8_t TextFormat::FormatClass::SpacingMode() const
+		const uint8_t TextFormat::SpacingMode() const
 		{
 		    return (data>>BitNumbering_SpacingMode)&0b11;
 		}
 
-		void TextFormat::FormatClass::SetSpacingMode(uint8_t Mode)
+		void TextFormat::SetSpacingMode(uint8_t Mode)
 		{
 		    if(Mode>=0b11){return;}
 		    
@@ -133,17 +133,17 @@ using namespace MusicCompositionCore::Core::MusicalCore::MusicalNote;
 		    data |=  (Mode<<BitNumbering_SpacingMode);
 		}
 
-		void TextFormat::FormatClass::Spacing_Enabled()
+		void TextFormat::Spacing_Enabled()
 		{
 		    SetSpacingMode(TextFormat::SpacingMode::Enabled);
 		}
 
-		void TextFormat::FormatClass::Spacing_Disabled()
+		void TextFormat::Spacing_Disabled()
 		{
 		    SetSpacingMode(TextFormat::SpacingMode::Disabled);
 		}
 
-		void TextFormat::FormatClass::Spacing_Justified()
+		void TextFormat::Spacing_Justified()
 		{
 		    SetSpacingMode(TextFormat::SpacingMode::Justified);
 		}
@@ -151,23 +151,23 @@ using namespace MusicCompositionCore::Core::MusicalCore::MusicalNote;
 	/////////////////////////////////////////////////////////////////////////
 	// Natural Mode
 
-		const bool TextFormat::FormatClass::NaturalMode() const
+		const bool TextFormat::NaturalMode() const
 		{
 		    return (data>>BitNumbering_NaturalMode)&1u;
 		}
 
-		void TextFormat::FormatClass::SetNaturalMode(bool Mode)
+		void TextFormat::SetNaturalMode(bool Mode)
 		{
 			data &=  ~(1u<<BitNumbering_NaturalMode);
 		    data |= (Mode<<BitNumbering_NaturalMode);
 		}
 
-		void TextFormat::FormatClass::Natural_Enabled()
+		void TextFormat::Natural_Enabled()
 		{
 		    SetNaturalMode(TextFormat::NaturalMode::Enabled);
 		}
 
-		void TextFormat::FormatClass::Natural_Disabled()
+		void TextFormat::Natural_Disabled()
 		{
 		    SetNaturalMode(TextFormat::NaturalMode::Disabled);
 		}
