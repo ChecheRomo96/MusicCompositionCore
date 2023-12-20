@@ -2,7 +2,7 @@
 #define MCC_MIDI_NOTE_H
 
 #include <MCC_BuildSettings.h>
-#include "../MidiDefinitions.h"
+#include "../MidiProtocol.h"
 #include "../../MusicalCore/MusicalNote/MusicalNote.h"
 
 namespace MusicCompositionCore::MidiCore
