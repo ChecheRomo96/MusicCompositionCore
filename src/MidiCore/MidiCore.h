@@ -107,8 +107,8 @@
 		static constexpr uint32_t BaudRate = 31250;
 	}
 
-    namespace MCC_MidiCore = MusicCompositionCore::Core::MidiCore;
-    namespace MCC_MidiProtocol = MusicCompositionCore::Core::MidiCore::Protocol;
+    namespace MCC_MidiCore = MusicCompositionCore::MidiCore;
+    namespace MCC_MidiProtocol = MusicCompositionCore::MidiCore::Protocol;
 
 	#if defined MCC_MIDI_NOTE_ENABLED
 		#include "MidiNote/MidiNote.h"
