@@ -9,8 +9,8 @@
     #include "../../MusicalInterval/MusicalInterval.h"
 #endif
 
-using namespace MusicCompositionCore::Core::MusicalCore;
-using namespace MusicCompositionCore::Core::MusicalCore::MusicalNote;
+using namespace MusicCompositionCore::MusicalCore;
+using namespace MusicCompositionCore::MusicalCore::MusicalNote;
 
 /////////////////////////////////////////////////////////////////////////
 //  Buffers
@@ -604,49 +604,49 @@ const Pitch::Type& Pitch::ID() const
     return TypeBuffer;
 }
 
-bool MusicCompositionCore::Core::MusicalCore::MusicalNote::operator < (const Pitch &lhs, const Pitch &rhs)
+bool MusicCompositionCore::MusicalCore::MusicalNote::operator < (const Pitch &lhs, const Pitch &rhs)
 {
     if(lhs.NotePitch() < rhs.NotePitch()){return 1;}
     return 0;
 }
 
-bool MusicCompositionCore::Core::MusicalCore::MusicalNote::operator <= (const Pitch &lhs, const Pitch &rhs)
+bool MusicCompositionCore::MusicalCore::MusicalNote::operator <= (const Pitch &lhs, const Pitch &rhs)
 {
     if(lhs.NotePitch() <= rhs.NotePitch()){return 1;}
     return 0;
 }
 
-bool MusicCompositionCore::Core::MusicalCore::MusicalNote::operator > (const Pitch &lhs, const Pitch &rhs)
+bool MusicCompositionCore::MusicalCore::MusicalNote::operator > (const Pitch &lhs, const Pitch &rhs)
 {
     if(lhs.NotePitch() > rhs.NotePitch()){return 1;}
     return 0;
 }
 
-bool MusicCompositionCore::Core::MusicalCore::MusicalNote::operator >= (const Pitch &lhs, const Pitch &rhs)
+bool MusicCompositionCore::MusicalCore::MusicalNote::operator >= (const Pitch &lhs, const Pitch &rhs)
 {
     if(lhs.NotePitch() >= rhs.NotePitch()){return 1;}
     return 0;
 }
 
-bool MusicCompositionCore::Core::MusicalCore::MusicalNote::operator == (const Pitch &lhs, const Pitch &rhs)
+bool MusicCompositionCore::MusicalCore::MusicalNote::operator == (const Pitch &lhs, const Pitch &rhs)
 {
     if(lhs.NotePitch() == rhs.NotePitch()){return 1;}
     return 0;
 }
 
-bool MusicCompositionCore::Core::MusicalCore::MusicalNote::operator == (const Pitch::Type& lhs, const Pitch& rhs)
+bool MusicCompositionCore::MusicalCore::MusicalNote::operator == (const Pitch::Type& lhs, const Pitch& rhs)
 {
     if(Pitch(lhs).NotePitch() == rhs.NotePitch()){return 1;}
     return 0;
 }
 
-bool MusicCompositionCore::Core::MusicalCore::MusicalNote::operator == (const Pitch &lhs, const Pitch::Type &rhs)
+bool MusicCompositionCore::MusicalCore::MusicalNote::operator == (const Pitch &lhs, const Pitch::Type &rhs)
 {
     if(lhs.NotePitch() == Pitch(rhs).NotePitch()){return 1;}
     return 0;
 }
 
-bool MusicCompositionCore::Core::MusicalCore::MusicalNote::operator != (const Pitch &lhs, const Pitch &rhs)
+bool MusicCompositionCore::MusicalCore::MusicalNote::operator != (const Pitch &lhs, const Pitch &rhs)
 {
     if(lhs.NotePitch() == rhs.NotePitch()){return 0;}
     return 1;
