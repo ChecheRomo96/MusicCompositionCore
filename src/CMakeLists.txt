@@ -41,102 +41,37 @@
 ######################################################################################################
 # Add Compliler Definitions
 
-	if(${MCC_COMPILE_CORE})
-		target_compile_definitions(MCC PUBLIC MCC_CORE_ENABLED)
+	if(${MCC_COMPILE_MUSICAL_CORE})
+		target_compile_definitions(MCC PUBLIC MCC_MUSICAL_CORE_ENABLED)
 
-		if(${MCC_COMPILE_UTILITY_CORE})
-			target_compile_definitions(MCC PUBLIC MCC_UTILITY_CORE_ENABLED)
-
-			if(${MCC_COMPILE_ACCUMULATOR})
-				target_compile_definitions(MCC PUBLIC MCC_ACCUMULATOR_ENABLED)
-			endif()
-
+		if(${MCC_COMPILE_MUSICAL_NOTE})
+			target_compile_definitions(MCC PUBLIC MCC_MUSICAL_NOTE_ENABLED)
 		endif()
 
-		if(${MCC_COMPILE_MUSICAL_CORE})
-			target_compile_definitions(MCC PUBLIC MCC_MUSICAL_CORE_ENABLED)
-
-			if(${MCC_COMPILE_MUSICAL_NOTE})
-				target_compile_definitions(MCC PUBLIC MCC_MUSICAL_NOTE_ENABLED)
-			endif()
-
-			if(${MCC_COMPILE_MUSICAL_INERVAL})
-				target_compile_definitions(MCC PUBLIC MCC_MUSICAL_INTERVAL_ENABLED)
-			endif()
-
-			if(${MCC_COMPILE_MUSICAL_SCALE})
-				target_compile_definitions(MCC PUBLIC MCC_MUSICAL_SCALE_ENABLED)
-			endif()
-
-			if(${MCC_COMPILE_MUSICAL_CHORD})
-				target_compile_definitions(MCC PUBLIC MCC_MUSICAL_CHORD_ENABLED)
-			endif()
+		if(${MCC_COMPILE_MUSICAL_INERVAL})
+			target_compile_definitions(MCC PUBLIC MCC_MUSICAL_INTERVAL_ENABLED)
 		endif()
 
-		if(${MCC_COMPILE_MIDI_CORE})
-			target_compile_definitions(MCC PUBLIC MCC_MIDI_CORE_ENABLED)
-
-			if(${MCC_COMPILE_MIDI_NOTE})
-				target_compile_definitions(MCC PUBLIC MCC_MIDI_NOTE_ENABLED)
-			endif()
-
-			if(${MCC_COMPILE_MIDI_MESSAGE})
-				target_compile_definitions(MCC PUBLIC MCC_MIDI_MESSAGE_ENABLED)
-			endif()
-
+		if(${MCC_COMPILE_MUSICAL_SCALE})
+			target_compile_definitions(MCC PUBLIC MCC_MUSICAL_SCALE_ENABLED)
 		endif()
 
+		if(${MCC_COMPILE_MUSICAL_CHORD})
+			target_compile_definitions(MCC PUBLIC MCC_MUSICAL_CHORD_ENABLED)
+		endif()
 	endif()
 
+	if(${MCC_COMPILE_MIDI_CORE})
+		target_compile_definitions(MCC PUBLIC MCC_MIDI_CORE_ENABLED)
 
-	if(${MCC_COMPILE_COMMUNICATIONS})
-		target_compile_definitions(MCC PUBLIC MCC_COMMUNICATIONS_ENABLED)
-
-		if(${MCC_COMPILE_UART_PORT})
-			target_compile_definitions(MCC PUBLIC MCC_UART_PORT_ENABLED)
-
-			if(${MCC_COMPILE_UART_IN_PORT})
-				target_compile_definitions(MCC PUBLIC MCC_UART_IN_ENABLED)
-			endif()
-
-			if(${MCC_COMPILE_UART_OUT_PORT})
-				target_compile_definitions(MCC PUBLIC MCC_UART_OUT_ENABLED)
-			endif()
-
-			if(${MCC_COMPILE_UART_DUPLEX_PORT})
-				target_compile_definitions(MCC PUBLIC MCC_UART_DUPLEX_ENABLED)
-			endif()
+		if(${MCC_COMPILE_MIDI_NOTE})
+			target_compile_definitions(MCC PUBLIC MCC_MIDI_NOTE_ENABLED)
 		endif()
-		
-		if(${MCC_COMPILE_MIDI_PORT})
-			target_compile_definitions(MCC PUBLIC MCC_CORE_ENABLED)
-			target_compile_definitions(MCC PUBLIC MCC_MIDI_PORT_ENABLED)
-			target_compile_definitions(MCC PUBLIC MCC_MIDI_CORE_ENABLED)
+
+		if(${MCC_COMPILE_MIDI_MESSAGE})
 			target_compile_definitions(MCC PUBLIC MCC_MIDI_MESSAGE_ENABLED)
-			set(MCC_COMPILE_CORE TRUE CACHE BOOL "Compile MCC::Core" FORCE)
-			set(MCC_COMPILE_MIDI_CORE TRUE CACHE BOOL "Compile MCC::Core::MidiCore" FORCE)
-			set(MCC_COMPILE_MIDI_MESSAGE TRUE CACHE BOOL "Compile MCC::Core::MidiCore::MidiMessage" FORCE)
-
-			if(${MCC_COMPILE_UART_MIDI})
-				target_compile_definitions(MCC PUBLIC MCC_UART_MIDI_ENABLED)
-			endif()
-
-			if(${MCC_COMPILE_RTMIDI})
-				target_compile_definitions(MCC PUBLIC MCC_RTMIDI_ENABLED)
-
-				if(${MCC_COMPILE_RTMIDI_VIRTUAL})
-					target_compile_definitions(MCC PUBLIC MCC_RTMIDI_VIRTUAL_PORT_ENABLED)
-
-					if(${MCC_COMPILE_RTMIDI_VIRTUAL_OUT})
-						target_compile_definitions(MCC PUBLIC MCC_RTMIDI_VIRTUAL_OUT_ENABLED)
-					endif()
-
-				endif()
-
-
-			endif()
-
 		endif()
+
 	endif()
 #
 ######################################################################################################

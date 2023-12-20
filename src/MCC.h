@@ -30,16 +30,14 @@
 	}
 
     namespace MCC = MusicCompositionCore;
-	
 
+    #if defined(MCC_MUSICAL_CORE_ENABLED)
+        #include "MusicalCore/MusicalCore.h"
+    #endif
 
-	#ifdef MCC_CORE_ENABLED
-	    #include "Core/MCC_Core.h"
-	#endif
-
-	#ifdef MCC_COMMUNICATIONS_ENABLED
-	    #include "Communications/MCC_Communications.h"
-	#endif
+    #if defined(MCC_MIDI_CORE_ENABLED)
+        #include "MidiCore/MidiCore.h"
+    #endif
 
 	
 	//#include "MidiDevices/MidiDevices.h"
