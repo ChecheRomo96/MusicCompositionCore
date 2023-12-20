@@ -4,7 +4,7 @@
 #include <MCC_BuildSettings.h>
 #include <CPvector.h>
 
-#include "../MidiProtocol.h"
+#include "../MidiCore.h"
 
 #if defined (MCC_MIDI_NOTE_ENABLED)
     #include "../MidiNote/MidiNote.h"
