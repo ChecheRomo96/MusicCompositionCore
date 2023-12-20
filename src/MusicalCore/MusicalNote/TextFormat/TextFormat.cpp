@@ -1,7 +1,7 @@
 #include "TextFormat.h"
 #include <MCC.h>
 
-using namespace MusicCompositionCore::Core::MusicalCore::MusicalNote;
+using namespace MusicCompositionCore::MusicalCore::MusicalNote;
 
 /////////////////////////////////////////////////////////////////////////
 //    Declarations
