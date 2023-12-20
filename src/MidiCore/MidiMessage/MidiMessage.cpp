@@ -1,5 +1,5 @@
 #include "MidiMessage.h"
-#include "../MidiProtocol.h"
+#include "../MidiCore.h"
 #include "../../MusicalCore/MusicalCore.h"
 
 #include <CPvector.h>
