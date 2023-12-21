@@ -5,7 +5,7 @@
 
 	#include "TextFormat.h"
 
-	namespace MusicCompositionCore::Core::MusicalCore::MusicalNote
+	namespace MusicCompositionCore::MusicalCore::MusicalNote
 	{
 		class TextFormat
 		{
