@@ -78,6 +78,6 @@
         }
     }
     
-    namespace MCC_MusicalScaleConstants = MusicCompositionCore::Core::MusicalCore::MusicalScale::Constants;
+    namespace MCC_MusicalScaleConstants = MusicCompositionCore::MusicalCore::MusicalScale::Constants;
 
 #endif//MCC_MUSICAL_SCALE_DEFINITIONS_H
