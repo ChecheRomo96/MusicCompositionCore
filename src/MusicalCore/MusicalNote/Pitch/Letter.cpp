@@ -1,9 +1,9 @@
 #include "NotePitch_Class.h"
 #include "../Flash/NoteFlash.h"
 
-using namespace MusicCompositionCore::Core::MusicalCore::MusicalNote;
+using namespace MusicCompositionCore::MusicalCore::MusicalNote;
 
-Pitch::Letter MusicCompositionCore::Core::MusicalCore::MusicalNote::Pitch::Letter::Buffer;
+Pitch::Letter MusicCompositionCore::MusicalCore::MusicalNote::Pitch::Letter::Buffer;
 
 Pitch::Letter::Letter()
 {
@@ -57,63 +57,63 @@ Pitch::Letter& Pitch::Letter::operator=(const Pitch& token)
     return (*this);
 }
 
-MusicCompositionCore::Core::MusicalCore::MusicalNote::Pitch::Letter::operator const LetterType() const{return _ID;}
+MusicCompositionCore::MusicalCore::MusicalNote::Pitch::Letter::operator const LetterType() const{return _ID;}
 
-bool MusicCompositionCore::Core::MusicalCore::MusicalNote::operator < (const Pitch::Letter &lhs, const Pitch::Letter &rhs)
+bool MusicCompositionCore::MusicalCore::MusicalNote::operator < (const Pitch::Letter &lhs, const Pitch::Letter &rhs)
 {
     if(lhs.ID() < rhs.ID()){return 1;}
     return 0;
 }
 
-bool MusicCompositionCore::Core::MusicalCore::MusicalNote::operator <= (const Pitch::Letter &lhs, const Pitch::Letter &rhs)
+bool MusicCompositionCore::MusicalCore::MusicalNote::operator <= (const Pitch::Letter &lhs, const Pitch::Letter &rhs)
 {
     if(lhs.ID() <= rhs.ID()){return 1;}
     return 0;
 }
 
-bool MusicCompositionCore::Core::MusicalCore::MusicalNote::operator > (const Pitch::Letter &lhs, const Pitch::Letter &rhs)
+bool MusicCompositionCore::MusicalCore::MusicalNote::operator > (const Pitch::Letter &lhs, const Pitch::Letter &rhs)
 {
     if(lhs.ID() > rhs.ID()){return 1;}
     return 0;
 }
 
-bool MusicCompositionCore::Core::MusicalCore::MusicalNote::operator >= (const Pitch::Letter &lhs, const Pitch::Letter &rhs)
+bool MusicCompositionCore::MusicalCore::MusicalNote::operator >= (const Pitch::Letter &lhs, const Pitch::Letter &rhs)
 {
     if(lhs.ID() >= rhs.ID()){return 1;}
     return 0;
 }
 
-bool MusicCompositionCore::Core::MusicalCore::MusicalNote::operator == (const Pitch::Letter &lhs, const Pitch::Letter &rhs)
+bool MusicCompositionCore::MusicalCore::MusicalNote::operator == (const Pitch::Letter &lhs, const Pitch::Letter &rhs)
 {
     if(lhs.ID() == rhs.ID()){return 1;}
     return 0;
 }
 
-bool MusicCompositionCore::Core::MusicalCore::MusicalNote::operator == (const Pitch::Letter::LetterType &lhs, const Pitch::Letter &rhs)
+bool MusicCompositionCore::MusicalCore::MusicalNote::operator == (const Pitch::Letter::LetterType &lhs, const Pitch::Letter &rhs)
 {
     if(Pitch::Letter(lhs).ID() == rhs.ID()){return 1;}
     return 0;
 }
 
-bool MusicCompositionCore::Core::MusicalCore::MusicalNote::operator == (const Pitch::Letter &lhs, const Pitch::Letter::LetterType &rhs)
+bool MusicCompositionCore::MusicalCore::MusicalNote::operator == (const Pitch::Letter &lhs, const Pitch::Letter::LetterType &rhs)
 {
     if(lhs.ID() == Pitch::Letter(rhs).ID()){return 1;}
     return 0;
 }
 
-bool MusicCompositionCore::Core::MusicalCore::MusicalNote::operator != (const Pitch::Letter &lhs, const Pitch::Letter &rhs)
+bool MusicCompositionCore::MusicalCore::MusicalNote::operator != (const Pitch::Letter &lhs, const Pitch::Letter &rhs)
 {
     if(lhs.ID() == rhs.ID()){return 0;}
     return 1;
 }
 
-bool MusicCompositionCore::Core::MusicalCore::MusicalNote::operator != (const Pitch::Letter::LetterType &lhs, const Pitch::Letter &rhs)
+bool MusicCompositionCore::MusicalCore::MusicalNote::operator != (const Pitch::Letter::LetterType &lhs, const Pitch::Letter &rhs)
 {
     if(Pitch::Letter(lhs).ID() == rhs.ID()){return 0;}
     return 1;
 }
 
-bool MusicCompositionCore::Core::MusicalCore::MusicalNote::operator != (const Pitch::Letter &lhs, const Pitch::Letter::LetterType &rhs)
+bool MusicCompositionCore::MusicalCore::MusicalNote::operator != (const Pitch::Letter &lhs, const Pitch::Letter::LetterType &rhs)
 {
     if(lhs.ID() == Pitch::Letter(rhs).ID()){return 0;}
     return 1;
@@ -135,7 +135,7 @@ const Pitch::Letter::LetterType& Pitch::Letter::ID() const
     return _ID;
 }
 
-MusicCompositionCore::Core::MusicalCore::MusicalNote::Pitch& Pitch::Letter::GenerateToken(const Pitch::Accidental& source)
+MusicCompositionCore::MusicalCore::MusicalNote::Pitch& Pitch::Letter::GenerateToken(const Pitch::Accidental& source)
 {
     PitchBuffer = Pitch(ID(), source.ID());
     return PitchBuffer;

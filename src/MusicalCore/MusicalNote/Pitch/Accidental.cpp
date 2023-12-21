@@ -3,9 +3,9 @@
 #include "../Flash/NoteFlash.h"
 #include <CPVector.h>
 
-using namespace MusicCompositionCore::Core::MusicalCore::MusicalNote;
+using namespace MusicCompositionCore::MusicalCore::MusicalNote;
 
-Pitch::Accidental MusicCompositionCore::Core::MusicalCore::MusicalNote::Pitch::Accidental::Buffer;
+Pitch::Accidental MusicCompositionCore::MusicalCore::MusicalNote::Pitch::Accidental::Buffer;
 
 Pitch::Accidental::Accidental()
 {
@@ -71,19 +71,19 @@ bool Pitch::Accidental::operator!=(const Pitch::Accidental& rhs) const
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//
 
-		bool MusicCompositionCore::Core::MusicalCore::MusicalNote::operator < (const Pitch::Accidental &lhs, const Pitch::Accidental &rhs)
+		bool MusicCompositionCore::MusicalCore::MusicalNote::operator < (const Pitch::Accidental &lhs, const Pitch::Accidental &rhs)
 		{
 		    if(lhs.ID() < rhs.ID()){return 1;}
 		    return 0;
 		}
 
-		bool MusicCompositionCore::Core::MusicalCore::MusicalNote::operator < (const Pitch::Accidental::AccidentalType &lhs, const Pitch::Accidental &rhs)
+		bool MusicCompositionCore::MusicalCore::MusicalNote::operator < (const Pitch::Accidental::AccidentalType &lhs, const Pitch::Accidental &rhs)
 		{
 		    if(lhs < rhs.ID()){return 1;}
 		    return 0;
 		}
 
-		bool MusicCompositionCore::Core::MusicalCore::MusicalNote::operator < (const Pitch::Accidental &lhs, const Pitch::Accidental::AccidentalType &rhs)
+		bool MusicCompositionCore::MusicalCore::MusicalNote::operator < (const Pitch::Accidental &lhs, const Pitch::Accidental::AccidentalType &rhs)
 		{
 		    if(lhs.ID() < rhs){return 1;}
 		    return 0;
@@ -92,19 +92,19 @@ bool Pitch::Accidental::operator!=(const Pitch::Accidental& rhs) const
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//
 
-		bool MusicCompositionCore::Core::MusicalCore::MusicalNote::operator <= (const Pitch::Accidental &lhs, const Pitch::Accidental &rhs)
+		bool MusicCompositionCore::MusicalCore::MusicalNote::operator <= (const Pitch::Accidental &lhs, const Pitch::Accidental &rhs)
 		{
 		    if(lhs.ID() <= rhs.ID()){return 1;}
 		    return 0;
 		}
 
-		bool MusicCompositionCore::Core::MusicalCore::MusicalNote::operator <= (const Pitch::Accidental::AccidentalType &lhs, const Pitch::Accidental &rhs)
+		bool MusicCompositionCore::MusicalCore::MusicalNote::operator <= (const Pitch::Accidental::AccidentalType &lhs, const Pitch::Accidental &rhs)
 		{
 		    if(lhs <= rhs.ID()){return 1;}
 		    return 0;
 		}
 
-		bool MusicCompositionCore::Core::MusicalCore::MusicalNote::operator <= (const Pitch::Accidental &lhs, const Pitch::Accidental::AccidentalType &rhs)
+		bool MusicCompositionCore::MusicalCore::MusicalNote::operator <= (const Pitch::Accidental &lhs, const Pitch::Accidental::AccidentalType &rhs)
 		{
 		    if(lhs.ID() <= rhs){return 1;}
 		    return 0;
@@ -112,19 +112,19 @@ bool Pitch::Accidental::operator!=(const Pitch::Accidental& rhs) const
 	//
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//
-		bool MusicCompositionCore::Core::MusicalCore::MusicalNote::operator > (const Pitch::Accidental &lhs, const Pitch::Accidental &rhs)
+		bool MusicCompositionCore::MusicalCore::MusicalNote::operator > (const Pitch::Accidental &lhs, const Pitch::Accidental &rhs)
 		{
 		    if(lhs.ID() > rhs.ID()){return 1;}
 		    return 0;
 		}
 
-		bool MusicCompositionCore::Core::MusicalCore::MusicalNote::operator > (const Pitch::Accidental::AccidentalType &lhs, const Pitch::Accidental &rhs)
+		bool MusicCompositionCore::MusicalCore::MusicalNote::operator > (const Pitch::Accidental::AccidentalType &lhs, const Pitch::Accidental &rhs)
 		{
 		    if(lhs > rhs.ID()){return 1;}
 		    return 0;
 		}
 
-		bool MusicCompositionCore::Core::MusicalCore::MusicalNote::operator > (const Pitch::Accidental &lhs, const Pitch::Accidental::AccidentalType &rhs)
+		bool MusicCompositionCore::MusicalCore::MusicalNote::operator > (const Pitch::Accidental &lhs, const Pitch::Accidental::AccidentalType &rhs)
 		{
 		    if(lhs.ID() > rhs){return 1;}
 		    return 0;
@@ -132,19 +132,19 @@ bool Pitch::Accidental::operator!=(const Pitch::Accidental& rhs) const
 	//
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//
-		bool MusicCompositionCore::Core::MusicalCore::MusicalNote::operator >= (const Pitch::Accidental &lhs, const Pitch::Accidental &rhs)
+		bool MusicCompositionCore::MusicalCore::MusicalNote::operator >= (const Pitch::Accidental &lhs, const Pitch::Accidental &rhs)
 		{
 		    if(lhs.ID() >= rhs.ID()){return 1;}
 		    return 0;
 		}
 
-		bool MusicCompositionCore::Core::MusicalCore::MusicalNote::operator >= (const Pitch::Accidental::AccidentalType &lhs, const Pitch::Accidental &rhs)
+		bool MusicCompositionCore::MusicalCore::MusicalNote::operator >= (const Pitch::Accidental::AccidentalType &lhs, const Pitch::Accidental &rhs)
 		{
 		    if(lhs >= rhs.ID()){return 1;}
 		    return 0;
 		}
 
-		bool MusicCompositionCore::Core::MusicalCore::MusicalNote::operator >= (const Pitch::Accidental &lhs, const Pitch::Accidental::AccidentalType &rhs)
+		bool MusicCompositionCore::MusicalCore::MusicalNote::operator >= (const Pitch::Accidental &lhs, const Pitch::Accidental::AccidentalType &rhs)
 		{
 		    if(lhs.ID() >= rhs){return 1;}
 		    return 0;
@@ -152,21 +152,21 @@ bool Pitch::Accidental::operator!=(const Pitch::Accidental& rhs) const
 	//
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//
-		bool MusicCompositionCore::Core::MusicalCore::MusicalNote::operator == (const Pitch::Accidental &lhs, const Pitch::Accidental &rhs)
+		bool MusicCompositionCore::MusicalCore::MusicalNote::operator == (const Pitch::Accidental &lhs, const Pitch::Accidental &rhs)
 		{
 		    if(lhs.ID() == rhs.ID()){return 1;}
 		    return 0;
 		}
 
 
-		bool MusicCompositionCore::Core::MusicalCore::MusicalNote::operator == (const Pitch::Accidental::AccidentalType &lhs, const Pitch::Accidental &rhs)
+		bool MusicCompositionCore::MusicalCore::MusicalNote::operator == (const Pitch::Accidental::AccidentalType &lhs, const Pitch::Accidental &rhs)
 		{
 		    if(lhs == rhs.ID()){return 1;}
 		    return 0;
 		}
 
 
-		bool MusicCompositionCore::Core::MusicalCore::MusicalNote::operator == (const Pitch::Accidental &lhs, const Pitch::Accidental::AccidentalType &rhs)
+		bool MusicCompositionCore::MusicalCore::MusicalNote::operator == (const Pitch::Accidental &lhs, const Pitch::Accidental::AccidentalType &rhs)
 		{
 		    if(lhs.ID() == rhs){return 1;}
 		    return 0;
@@ -174,19 +174,19 @@ bool Pitch::Accidental::operator!=(const Pitch::Accidental& rhs) const
 	//
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//
-		bool MusicCompositionCore::Core::MusicalCore::MusicalNote::operator != (const Pitch::Accidental &lhs, const Pitch::Accidental &rhs)
+		bool MusicCompositionCore::MusicalCore::MusicalNote::operator != (const Pitch::Accidental &lhs, const Pitch::Accidental &rhs)
 		{
 		    if(lhs.ID() == rhs.ID()){return 0;}
 		    return 1;
 		}
 
-		bool MusicCompositionCore::Core::MusicalCore::MusicalNote::operator != (const Pitch::Accidental::AccidentalType &lhs, const Pitch::Accidental &rhs)
+		bool MusicCompositionCore::MusicalCore::MusicalNote::operator != (const Pitch::Accidental::AccidentalType &lhs, const Pitch::Accidental &rhs)
 		{
 		    if(lhs == rhs.ID()){return 0;}
 		    return 1;
 		}
 
-		bool MusicCompositionCore::Core::MusicalCore::MusicalNote::operator != (const Pitch::Accidental &lhs, const Pitch::Accidental::AccidentalType &rhs)
+		bool MusicCompositionCore::MusicalCore::MusicalNote::operator != (const Pitch::Accidental &lhs, const Pitch::Accidental::AccidentalType &rhs)
 		{
 		    if(lhs.ID() == rhs){return 0;}
 		    return 1;
