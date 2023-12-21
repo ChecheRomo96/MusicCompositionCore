@@ -5,21 +5,18 @@
 
   namespace MusicCompositionCore
   {
-      namespace Core
+      namespace MusicalCore
       {
-          namespace MusicalCore
+          namespace MusicalInterval
           {
-              namespace MusicalInterval
-              {
 
-                  
+              
 
-              }
           }
       }
   }
 
-  namespace MCC_MusicalInterval = MusicCompositionCore::Core::MusicalCore::MusicalInterval;
+  namespace MCC_MusicalInterval = MusicCompositionCore::MusicalCore::MusicalInterval;
 
   #include "MusicalInterval_Definitions.h"
   #include "Interval_Class.h"
