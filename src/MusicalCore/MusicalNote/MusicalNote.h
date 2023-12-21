@@ -3,12 +3,12 @@
 
 	#include <MCC_BuildSettings.h>
 
-	namespace MusicCompositionCore::Core::MusicalCore::MusicalNote
+	namespace MusicCompositionCore::MusicalCore::MusicalNote
 	{
 		void Start();
 	}
 
-	namespace MCC_MusicalNote = MusicCompositionCore::Core::MusicalCore::MusicalNote;
+	namespace MCC_MusicalNote = MusicCompositionCore::MusicalCore::MusicalNote;
 
 	#include "Flash/NoteFlash.h"
 	#include "TextFormat/TextFormat.h"
