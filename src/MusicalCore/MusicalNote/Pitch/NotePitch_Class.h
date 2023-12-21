@@ -390,7 +390,6 @@
             bool operator != (const Pitch::Accidental::AccidentalType& lhs, const Pitch::Accidental& rhs);
             bool operator != (const Pitch::Accidental& lhs, const Pitch::Accidental::AccidentalType& rhs);
         }
-        
     }
 
 
