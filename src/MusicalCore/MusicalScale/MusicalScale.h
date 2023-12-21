@@ -5,19 +5,16 @@
 
     namespace MusicCompositionCore
     {
-        namespace Core
+        namespace MusicalCore
         {
-            namespace MusicalCore
+            namespace MusicalScale
             {
-                namespace MusicalScale
-                {
-                    
-                }
+                
             }
         }
     }
 
-    namespace MCC_MusicalScale = MusicCompositionCore::Core::MusicalCore::MusicalScale;
+    namespace MCC_MusicalScale = MusicCompositionCore::MusicalCore::MusicalScale;
 
     #include "MusicalScale_Definitions.h"
 
