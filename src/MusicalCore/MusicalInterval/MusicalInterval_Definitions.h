@@ -47,6 +47,6 @@
         }
     }
 
-    namespace MCC_MusicalInterval = MusicCompositionCore::Core::MusicalCore::MusicalInterval;
+    namespace MCC_MusicalInterval = MusicCompositionCore::MusicalCore::MusicalInterval;
 
 #endif//MCC_MUSICAL_INTERVAL_DEFINITIONS_H
