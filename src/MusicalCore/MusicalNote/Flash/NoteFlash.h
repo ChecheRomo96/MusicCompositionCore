@@ -80,6 +80,6 @@
         }
     }
 
-   namespace MCC_MusicalNoteFlash = MusicCompositionCore::Core::MusicalCore::MusicalNote::Flash;  
+   namespace MCC_MusicalNoteFlash = MusicCompositionCore::MusicalCore::MusicalNote::Flash;  
 
 #endif//MCC_MUSICAL_NOTE_FLASH_H
