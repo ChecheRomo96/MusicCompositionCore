@@ -1,18 +1,12 @@
 #ifndef MCC_NOTE_TOKEN_DEFINITIONS_H
 #define MCC_NOTE_TOKEN_DEFINITIONS_H
 
-	namespace MusicCompositionCore
+	namespace MusicCompositionCore::MusicalCore
 	{
-	  namespace Core
-	  {
-	  	namespace MusicalCore
-	 		{
-	 			namespace MusicalNote
-	 			{
-	      			extern const int8_t NotesArray[7];
-	 			}
-	 		}
-	 	}
+		namespace MusicalNote
+		{
+			extern const int8_t NotesArray[7];
+		}
 	}
 
 #endif//MCC_NOTE_TOKEN_DEFINITIONS_H
