@@ -1,7 +1,7 @@
 #include "MusicalScale.h"
 
-cpstd::string MusicCompositionCore::Core::MusicalCore::MusicalScale::DefaultName("No Name");
-cpstd::string MusicCompositionCore::Core::MusicalCore::MusicalScale::NameBuffer("");
+cpstd::string MusicCompositionCore::MusicalCore::MusicalScale::DefaultName("No Name");
+cpstd::string MusicCompositionCore::MusicalCore::MusicalScale::NameBuffer("");
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 // Constructor, Destructor
