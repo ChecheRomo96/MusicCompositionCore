@@ -6,7 +6,7 @@
 	
 	#include "../../Pitch/NotePitch.h"
 
-	namespace MusicCompositionCore::Core::MusicalCore::MusicalNote::Sorting::Accidental
+	namespace MusicCompositionCore::MusicalCore::MusicalNote::Sorting::Accidental
 	{
 		const auto Ascending = [](const Pitch::Accidental& Element, const Pitch::Accidental& Pivot){
 			return Element < Pivot;

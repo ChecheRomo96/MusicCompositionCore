@@ -7,7 +7,7 @@
 	#include "../../Note_Class.h"
 
 
-	namespace MusicCompositionCore::Core::MusicalCore::MusicalNote::Sorting::Note
+	namespace MusicCompositionCore::MusicalCore::MusicalNote::Sorting::Note
 	{
 
 		const auto Letter_Ascending = [](const MusicalNote::Note& Element, const MusicalNote::Note& Pivot){
