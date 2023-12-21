@@ -2,8 +2,8 @@
 #include <MCC_BuildSettings.h>
 #include <CPstring.h>
 
-using namespace MusicCompositionCore::Core::MusicalCore::MusicalNote;
-//using namespace MusicCompositionCore::Core::UtilityCore;
+using namespace MusicCompositionCore::MusicalCore::MusicalNote;
+//using namespace MusicCompositionCore::UtilityCore;
 
 char Flash::Buffer[24];
 

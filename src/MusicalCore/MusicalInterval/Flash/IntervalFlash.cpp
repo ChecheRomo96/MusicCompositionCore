@@ -1,9 +1,9 @@
 #include "IntervalFlash.h" 
 #include <string.h>
 
-using namespace MusicCompositionCore::Core::MusicalCore::MusicalInterval;
+using namespace MusicCompositionCore::MusicalCore::MusicalInterval;
 
-char MusicCompositionCore::Core::MusicalCore::MusicalInterval::Flash::buffer[41];
+char MusicCompositionCore::MusicalCore::MusicalInterval::Flash::buffer[41];
 
 uint8_t Flash::GetIntervalSemitones(uint8_t IntervalType, uint8_t IntervalQuality)
 {
