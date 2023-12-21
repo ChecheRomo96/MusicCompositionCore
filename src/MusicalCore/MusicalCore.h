@@ -5,15 +5,13 @@
 
 	namespace MusicCompositionCore
 	{
-		namespace Core
+		namespace MusicalCore
 		{
-			namespace MusicalCore
-			{
-			}
+		
 		}
 	}
 
-	namespace MCC_MusicalCore = MusicCompositionCore::Core::MusicalCore;
+	namespace MCC_MusicalCore = MusicCompositionCore::MusicalCore;
 
 	#if defined (MCC_MUSICAL_NOTE_ENABLED)
 		#include "MusicalNote/MusicalNote.h"
