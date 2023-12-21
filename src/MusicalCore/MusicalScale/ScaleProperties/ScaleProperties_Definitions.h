@@ -7,18 +7,18 @@
    		{
    			namespace MusicalScale
    			{
-					namespace ScaleProperties
-					{
-						/////////////////////////////////////////////////////////////
-						// Notes Mode
-						//
-						// Fixed Mapping: ScaleMapping will remain the same, this
-						// 				  means you'll have the same intervals
-						// 				  as you change the root note.
-						//
-						// Dynamic Mapping: ScaleMapping will change , this menas
-						// 				   	you'll have the same notes but different
-						// 				  	intervals as you change the root note.
+				namespace ScaleProperties
+				{
+					/////////////////////////////////////////////////////////////
+					// Notes Mode
+					//
+					// Fixed Mapping: ScaleMapping will remain the same, this
+					// 				  means you'll have the same intervals
+					// 				  as you change the root note.
+					//
+					// Dynamic Mapping: ScaleMapping will change , this menas
+					// 				   	you'll have the same notes but different
+					// 				  	intervals as you change the root note.
 
 						namespace MappingMode
 						{
@@ -31,8 +31,8 @@
 							static constexpr uint8_t bitshift = 0u;
 						}
 					//
-						/////////////////////////////////////////////////////////////
-						// Scale Location
+					/////////////////////////////////////////////////////////////
+					// Scale Location
 					//
 					//	This flag is used to determine wether the scale was built
 					//	from flash, EEPROM, or if it was user created.
@@ -62,8 +62,8 @@
 							static constexpr uint8_t bitshift = 1u;
 						}
 					//
-						/////////////////////////////////////////////////////////////
-						//  Name Flag
+					/////////////////////////////////////////////////////////////
+					//  Name Flag
 					//
 					//	This flag is used to determine wether the scale has an
 					//	user defined name. 
@@ -79,7 +79,7 @@
 							static constexpr uint8_t bitshift = 3u;
 						}
 					//
-						/////////////////////////////////////////////////////////////
+					/////////////////////////////////////////////////////////////
 				}
 			}
    		}
