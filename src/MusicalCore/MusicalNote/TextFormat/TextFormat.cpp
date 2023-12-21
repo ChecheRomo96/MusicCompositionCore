@@ -1,6 +1,8 @@
 #include "TextFormat.h"
 #include <MCC.h>
 
+using namespace MusicCompositionCore::MusicalCore::MusicalNote;
+
 /////////////////////////////////////////////////////////////////////////
 //    Declarations
 
