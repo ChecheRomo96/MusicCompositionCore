@@ -5,8 +5,6 @@
 
 int main()
 {
-    std::cout << "This project uses CPString version: " << CPSTRING_VERSION << std::endl;
-    std::cout << "This project uses CPVector version: " << CPVECTOR_VERSION << std::endl;
     std::cout << "This project uses MCC version: " << MCC_VERSION << std::endl << std::endl;
 
     std::cout << "Checking MCC compile congif:" << std::endl << std::endl;
@@ -97,12 +95,6 @@ int main()
         #endif
 
     #endif
-
-    MCC_Communications::Midi::RtMidi::Virtual::OutputPort myVirtualPort(CPString::string("RtMidi"));
-    
-    myVirtualPort.OpenPort();
-    
-    while(1){}
 
 	return 0;
 }

@@ -1,4 +1,0 @@
-// Exotic Scales Array
-
-static constexpr uint8_t Exotic_Size = 20;
-extern const Container Exotic[20];

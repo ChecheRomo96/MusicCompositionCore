@@ -1,0 +1,24 @@
+// Arabic Scale
+
+static const char ArabicStr[] PROGMEM_MACRO = {'A','r','a','b','i','c','\0'};
+
+static const uint8_t ArabicNumbers[] PROGMEM_MACRO =
+{
+    MCC_MusicalInterval::Numbers::Second,
+    MCC_MusicalInterval::Numbers::Third,
+    MCC_MusicalInterval::Numbers::Fourth,
+    MCC_MusicalInterval::Numbers::Fourth,
+    MCC_MusicalInterval::Numbers::Fifth,
+    MCC_MusicalInterval::Numbers::Seventh
+};
+
+static constexpr uint8_t ArabicScaleID = 18u;
+
+const Container_Mapping Arabic PROGMEM_MACRO =
+{
+    ArabicScaleID,
+    (ScaleProperties::MappingMode::Dynamic_Mapping|ScaleProperties::Location::Flash_Mapping),
+    ArabicStr,
+    0x7AEA,
+    ArabicNumbers
+};

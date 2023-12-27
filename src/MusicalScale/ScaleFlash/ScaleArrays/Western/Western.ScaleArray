@@ -1,0 +1,4 @@
+// Western Theroy Scale Array
+
+static constexpr uint8_t Western_Size = 6;
+extern const Container Western[6];

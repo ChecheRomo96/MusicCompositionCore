@@ -1,0 +1,24 @@
+// Byzantine Scale
+
+static const char ByzantineStr[] PROGMEM_MACRO = {'B','y','z','a','n','t','i','n','e','\0'};
+
+static const uint8_t ByzantineNumbers[] PROGMEM_MACRO =
+{
+    MCC_MusicalInterval::Numbers::Second,
+    MCC_MusicalInterval::Numbers::Third,
+    MCC_MusicalInterval::Numbers::Fourth,
+    MCC_MusicalInterval::Numbers::Fifth,
+    MCC_MusicalInterval::Numbers::Sixth,
+    MCC_MusicalInterval::Numbers::Seventh
+};
+
+static constexpr uint8_t ByzantineScaleID = 21u;
+
+const Container_Mapping Byzantine PROGMEM_MACRO =
+{
+    ByzantineScaleID,
+    (ScaleProperties::MappingMode::Dynamic_Mapping|ScaleProperties::Location::Flash_Mapping),
+    ByzantineStr,
+    0x6999,
+    ByzantineNumbers
+};

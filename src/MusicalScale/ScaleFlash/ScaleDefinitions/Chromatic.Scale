@@ -1,0 +1,53 @@
+// Chromatic Scale
+
+static const char ChromaticStr[] PROGMEM_MACRO = {'C','h','r','o','m','a','t','i','c','\0'};
+static const uint8_t ChromaticNotesSharps[] PROGMEM_MACRO =
+{
+    MCC_MusicalNote::Pitch::C_Natural,
+    MCC_MusicalNote::Pitch::C_Sharp,
+    MCC_MusicalNote::Pitch::D_Natural,
+    MCC_MusicalNote::Pitch::D_Sharp,
+    MCC_MusicalNote::Pitch::E_Natural,
+    MCC_MusicalNote::Pitch::F_Natural,
+    MCC_MusicalNote::Pitch::F_Sharp,
+    MCC_MusicalNote::Pitch::G_Natural,
+    MCC_MusicalNote::Pitch::G_Sharp,
+    MCC_MusicalNote::Pitch::A_Natural,
+    MCC_MusicalNote::Pitch::A_Sharp,
+    MCC_MusicalNote::Pitch::B_Natural,
+    MCC_MusicalNote::Pitch::InvaildPitch
+};
+static const uint8_t ChromaticNotesFlats[] PROGMEM_MACRO =
+{
+    MCC_MusicalNote::Pitch::C_Natural,
+    MCC_MusicalNote::Pitch::D_Flat,
+    MCC_MusicalNote::Pitch::D_Natural,
+    MCC_MusicalNote::Pitch::E_Flat,
+    MCC_MusicalNote::Pitch::E_Natural,
+    MCC_MusicalNote::Pitch::F_Natural,
+    MCC_MusicalNote::Pitch::G_Flat,
+    MCC_MusicalNote::Pitch::G_Natural,
+    MCC_MusicalNote::Pitch::A_Flat,
+    MCC_MusicalNote::Pitch::A_Natural,
+    MCC_MusicalNote::Pitch::B_Flat,
+    MCC_MusicalNote::Pitch::B_Natural,
+    MCC_MusicalNote::Pitch::InvaildPitch
+};
+
+static constexpr uint8_t ChromaticScaleID = 0u;
+static constexpr uint8_t ChromaticScaleID_Flats = 1u;
+
+const Container_Notes Chromatic PROGMEM_MACRO =
+{
+    ChromaticScaleID,
+    (ScaleProperties::MappingMode::Fixed_Mapping|ScaleProperties::Location::Flash_Mapping),
+    ChromaticStr,
+    ChromaticNotesSharps
+};
+const Container_Notes Chromatic_Flats PROGMEM_MACRO =
+{
+    ChromaticScaleID_Flats,
+    (ScaleProperties::MappingMode::Fixed_Mapping|ScaleProperties::Location::Flash_Mapping),
+    ChromaticStr,
+    ChromaticNotesFlats
+};

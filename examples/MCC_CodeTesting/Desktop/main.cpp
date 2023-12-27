@@ -1,108 +1,251 @@
+#include <iostream>
 #include <MCC.h>
-#include <math.h>
-#include <CPVector.h>
 
-CPVector::vector<uint8_t> Buffer;
-
-
-uint8_t UART_BytesAvailable()
-{
-	return Buffer.size();
-}
-
-uint8_t UART_ReadByte()
-{
-	return Buffer.pop_first();
-}
-
-void UART_MidiMessageCallback(const CPVector::vector<uint8_t>& Message)
-{
-	std::cout << "Midi Message Callback -> ";
-
-	for (uint8_t i = 0; i < Message.size(); i++)
-	{
-		std::cout << (uint32_t)Message[i];
-		if (i < Message.size()-1) { std::cout << ", "; }
-		else { std::cout << "."; }
-	} std::cout << std::endl;
-}
-
-
+using namespace MCC_MusicalScale;
+using namespace MCC_MusicalInterval;
 
 int main()
 {
-	MCC::Start();
+    MCC::Start();
 
-	// Crate an Uart::Input Port, and retrieve the data on the input buffer
+    ///////////////////////////////////////////////////////////////////////////////////////////
+    // MusicalScale::Scale(const CPVector::vector<MCC_MusicalNote::Pitch> &noteTokens, CPString::string& name)
 
-	MCC_Communications::Uart::Input::Port Port;
-	Port.SetName("Uart Input Port");
-	Port.HLAPI_Link(UART_BytesAvailable, UART_ReadByte);
+    {
+        cpstd::vector<MCC_MusicalNote::Pitch> NoteVector;
 
-	std::cout << Port.Name() << " :" << std::endl;
-	
-	Buffer.resize(3);
-	Buffer[0] = 0x90;	Buffer[1] = 60;	Buffer[2] = 100;
+        NoteVector.push_back(MCC_MusicalNote::Pitch::C_Natural);
+        NoteVector.push_back(MCC_MusicalNote::Pitch::D_Natural);
+        NoteVector.push_back(MCC_MusicalNote::Pitch::E_Natural);
+        NoteVector.push_back(MCC_MusicalNote::Pitch::F_Natural);
+        NoteVector.push_back(MCC_MusicalNote::Pitch::G_Natural);
+        NoteVector.push_back(MCC_MusicalNote::Pitch::A_Natural);
+        NoteVector.push_back(MCC_MusicalNote::Pitch::B_Natural);
 
-	while (Port.BytesAvailable())
-	{
-		std::cout << (uint16_t)Port.ReadByte();
-		if (Buffer.size() >= 1) {std::cout << ", "; }
-		else { std::cout << "."; }
-	}  std::cout << std::endl << std::endl;
+        cpstd::string ScaleName("Major");
 
-
-	// Crate an Uart::Input Port, bind it to the Uart::SystemPorts, and retrieve the data on the input buffer
-	MCC_Communications::Uart::Input::Port Port2("Uart Port", UART_BytesAvailable, UART_ReadByte);
-
-	std::cout << Port2.Name() << " :" << std::endl;
-
-	if (Port2.Uart_BindPort())
-	{
-		Buffer.resize(3);
-		Buffer[0] = 0x90;	Buffer[1] = 60;	Buffer[2] = 100;
+        Scale myScale(NoteVector, ScaleName);
+        std::cout << myScale.Name() << ": ";
 
 
-		while (Port2.Uart_Port().BytesAvailable())
-		{
-			std::cout << (uint16_t)Port2.Uart_Port().ReadByte();
-			if (Buffer.size() >= 1) { std::cout << ", "; }
-			else { std::cout << "."; }
-		}  std::cout << std::endl << std::endl;
-	}
-
-	#if defined(MCC_UART_MIDI_ENABLED)
-	// Crate an Uart::Input Port, bind it to the Midi::UartMidi::SystemPorts, and retrieve the data on the input buffer
-	MCC_Communications::Uart::Input::Port Port3("UartMidi Port", UART_BytesAvailable, UART_ReadByte);
-
-	std::cout << Port3.Name() << " :" << std::endl;
-
-	if (Port3.UartMidi_BindPort())
-	{
-		Port3.UartMidi_Port().AppendCallback(UART_MidiMessageCallback);
-
-		Buffer.resize(3);
-		Buffer[0] = 0x90;	Buffer[1] = 60;	Buffer[2] = 100;
+        MCC_MusicalNote::DefaultFormat.SetOctave_Disabled();
+        MCC_MusicalNote::DefaultFormat.SetAccidental_Symbol();
 
 
-		Port3.UartMidi_Port().Service();
-	} std::cout<<std::endl;
+        for (uint8_t i = 0; i < myScale.size(); i++)
+        {
+            std::cout << myScale.Note(myScale.RootOffset() + i).Name();
+
+            if (i < myScale.size() - 1)
+            {
+                std::cout << ", ";
+            }
+            else
+            {
+                std::cout << "." << std::endl;
+            }
+        }
+    }
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////////
+    // MusicalScale::Scale(const MCC_MusicalNote::Pitch &root, const CPVector::vector<Interval> &intervals, CPString::string& name = DefaultName);
+
+    {
+        using namespace MCC_MusicalInterval::Qualities;
+        using namespace MCC_MusicalInterval::Numbers;
+
+        cpstd::vector<Interval> IntervalVector;
+
+        IntervalVector.push_back(Interval(Qualities::Major, Numbers::Second));
+        IntervalVector.push_back(Interval(Minor, Third));
+        IntervalVector.push_back(Interval(Perfect, Fourth));
+        IntervalVector.push_back(Interval(Perfect, Fifth));
+        IntervalVector.push_back(Interval(Minor, Sixth));
+        IntervalVector.push_back(Interval(Minor, Seventh));
+
+        cpstd::string ScaleName("Minor");
+
+        Scale myScale(MCC_MusicalNote::Pitch(MCC_MusicalNote::Pitch::C_Natural), IntervalVector, ScaleName);
+        std::cout << myScale.Name() << ": ";
 
 
-	// Crate an Uart::Input Port, bind it to the Midi::SystemPorts, and retrieve the data on the input buffer
-	MCC_Communications::Uart::Input::Port Port4("Midi Port", UART_BytesAvailable, UART_ReadByte);
-
-	std::cout << Port4.Name() << " :" << std::endl;
-
-	if (Port4.Midi_BindPort())
-	{
-		Port4.Midi_Port().AppendCallback(UART_MidiMessageCallback);
-
-		Buffer.resize(3);
-		Buffer[0] = 0x90;	Buffer[1] = 60;	Buffer[2] = 100;
+        MCC_MusicalNote::DefaultFormat.SetOctave_Disabled();
+        MCC_MusicalNote::DefaultFormat.SetAccidental_Symbol();
 
 
-		Port4.Midi_Port().Service();
-	}
-	#endif
+        for (uint8_t i = 0; i < myScale.size(); i++)
+        {
+            std::cout << myScale.Note(myScale.RootOffset() + i).Name();
+
+            if (i < myScale.size() - 1)
+            {
+                std::cout << ", ";
+            }
+            else
+            {
+                std::cout << "." << std::endl;
+            }
+        }
+    }
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////////
+    // MusicalScale:: Scale(const MCC_MusicalNote::Pitch& root, const Flash::Container_Mapping& source)
+
+    {
+        Scale myScale(MCC_MusicalNote::Pitch::C_Natural, MCC_MusicalScale::Flash::Scales::Dorian);
+        std::cout << myScale.Name() << ": ";
+
+
+        MCC_MusicalNote::DefaultFormat.SetOctave_Disabled();
+        MCC_MusicalNote::DefaultFormat.SetAccidental_Symbol();
+
+
+        for (uint8_t i = 0; i < myScale.size(); i++)
+        {
+            std::cout << myScale.Note(myScale.RootOffset() + i).Name();
+
+            if (i < myScale.size() - 1)
+            {
+                std::cout << ", ";
+            }
+            else
+            {
+                std::cout << "." << std::endl;
+            }
+        }
+    }
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////////
+    // MusicalScale:: Scale(const MCC_MusicalNote::Note& root, const Flash::Container_Notes& source)
+
+    {
+        Scale myScale(MCC_MusicalNote::Pitch(MCC_MusicalNote::Pitch::C_Natural), MCC_MusicalScale::Flash::Scales::Chromatic);
+        std::cout << myScale.Name() << ": ";
+
+
+        MCC_MusicalNote::DefaultFormat.SetOctave_Disabled();
+        MCC_MusicalNote::DefaultFormat.SetAccidental_Symbol();
+
+
+        for (uint8_t i = 0; i < myScale.size(); i++)
+        {
+            std::cout << myScale.Note(myScale.RootOffset() + i).Name();
+
+            if (i < myScale.size() - 1)
+            {
+                std::cout << ", ";
+            }
+            else
+            {
+                std::cout << "." << std::endl;
+            }
+        }
+    }
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////////
+// MusicalScale::Scale(const MCC_MusicalNote::Pitch& root, const Flash::Container* source, uint8_t ID);
+
+    {
+        Scale myScale(MCC_MusicalNote::Pitch(MCC_MusicalNote::Pitch::C_Natural), MCC_MusicalScale::Flash::ScaleArrays::Exotic, 9);
+        std::cout << myScale.Name() << ": ";
+
+
+        MCC_MusicalNote::DefaultFormat.SetOctave_Disabled();
+        MCC_MusicalNote::DefaultFormat.SetAccidental_Symbol();
+
+
+        for (uint8_t i = 0; i < myScale.size(); i++)
+        {
+            std::cout << myScale.Note(myScale.RootOffset() + i).Name();
+
+            if (i < myScale.size() - 1)
+            {
+                std::cout << ", ";
+            }
+            else
+            {
+                std::cout << "." << std::endl;
+            }
+        }
+    }
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////////
+    // MusicalScale::Scale(const MCC_MusicalNote::Pitch& root, uint8_t ID);
+
+    {
+        Scale myScale(MCC_MusicalNote::Pitch(MCC_MusicalNote::Pitch::C_Natural), 15);
+        std::cout << myScale.Name() << ": ";
+
+
+        MCC_MusicalNote::DefaultFormat.SetOctave_Disabled();
+        MCC_MusicalNote::DefaultFormat.SetAccidental_Symbol();
+
+
+        for (uint8_t i = 0; i < myScale.size(); i++)
+        {
+            std::cout << myScale.Note(myScale.RootOffset() + i).Name();
+
+            if (i < myScale.size() - 1)
+            {
+                std::cout << ", ";
+            }
+            else
+            {
+                std::cout << "." << std::endl;
+            }
+        }
+    }
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////////
+
+
+    MCC::Start();
+
+    MCC_MusicalNote::Pitch pitchArray[12] = {
+        MCC_MusicalNote::Pitch::C_Natural,
+        MCC_MusicalNote::Pitch::C_Sharp,
+        MCC_MusicalNote::Pitch::D_Natural,
+        MCC_MusicalNote::Pitch::D_Sharp,
+        MCC_MusicalNote::Pitch::E_Natural,
+        MCC_MusicalNote::Pitch::F_Natural,
+        MCC_MusicalNote::Pitch::F_Sharp,
+        MCC_MusicalNote::Pitch::G_Natural,
+        MCC_MusicalNote::Pitch::G_Sharp,
+        MCC_MusicalNote::Pitch::A_Natural,
+        MCC_MusicalNote::Pitch::A_Sharp,
+        MCC_MusicalNote::Pitch::B_Natural
+    };
+
+    double frequencyArray[12] = {
+        16.35, // C0
+        17.32, // C#0
+        18.35, // D0
+        19.45, // D#0
+        20.60, // E0
+        21.83, // F0
+        23.12, // F#0
+        24.50, // G0
+        25.96, // G#0
+        27.50, // A0
+        29.14, // A#0
+        30.87  // B0
+    };
+
+    MCC_MusicalNote::Note myNote;
+    for (int16_t i = -12; i <= MCC_MidiProtocol::MidiNoteRange + 12; i++) {
+        auto pitchId = i % 12;
+        while (pitchId < 0) { pitchId += 12; }
+
+        auto octave = (i < 0) ? ((i - 11) / 12) : (i / 12);
+
+        myNote = MCC_MusicalNote::Note(pitchArray[pitchId], octave);
+        auto a = (i >= 0 && i < MCC_MidiProtocol::MidiNoteRange) ? i : MCC_MidiProtocol::InvalidMidiNote ;
+        auto b = (octave < 0) ?  frequencyArray[pitchId] / ((( - 1 * (i-11)) / 12) + 1) : frequencyArray[pitchId] * (pow(2,octave));
+
+        std::cout << (int16_t) myNote.NotePitch() << " - " << i << std::endl;
+        std::cout << (int16_t) myNote.MidiPitch() << " - " << a << std::endl;
+        std::cout << myNote.Frequency() << " - " << b << std::endl;
+    }
+
+    return 0;
 }

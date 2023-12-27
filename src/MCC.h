@@ -31,12 +31,26 @@
 
     namespace MCC = MusicCompositionCore;
 
-    #if defined(MCC_MUSICAL_CORE_ENABLED)
-        #include "MusicalCore/MusicalCore.h"
+	#if defined (MCC_MUSICAL_NOTE_ENABLED)
+		#include "MusicalNote/MusicalNote.h"
+	#endif
+
+	#if defined (MCC_MUSICAL_INTERVAL_ENABLED)
+		#include "MusicalInterval/MusicalInterval.h"
+	#endif
+
+	#if defined (MCC_MUSICAL_SCALE_ENABLED)
+	    #include "MusicalScale/MusicalScale.h"
+	#endif
+
+	#include "MidiProtocol/MCC_MidiProtocol.h"
+	
+    #if defined(MCC_MIDI_NOTE_ENABLED)
+        #include "MidiNote/MidiNote.h"
     #endif
 
-    #if defined(MCC_MIDI_CORE_ENABLED)
-        #include "MidiCore/MidiCore.h"
+    #if defined(MCC_MIDI_MESSAGE_ENABLED)
+        #include "MidiMessage/MidiMessage.h"
     #endif
 
 	

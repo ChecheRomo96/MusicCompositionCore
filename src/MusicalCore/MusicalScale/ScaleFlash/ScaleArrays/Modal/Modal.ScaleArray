@@ -1,4 +1,0 @@
-// Modal Scales Array
-
-static constexpr uint8_t ModalScales_Size = 7;
-extern const Container ModalScales[7];

@@ -1,0 +1,25 @@
+// Eight Tone Spanish
+
+static const char EightToneSpanishStr[] PROGMEM_MACRO = {'E','i','g','h','t',' ','T','o','n','e',' ','S','p','a','n','i','s','h','\0'};
+
+static const uint8_t EightToneSpanishNumbers[] PROGMEM_MACRO =
+{
+    MCC_MusicalInterval::Numbers::Second,
+    MCC_MusicalInterval::Numbers::Second,
+    MCC_MusicalInterval::Numbers::Third,
+    MCC_MusicalInterval::Numbers::Fourth,
+    MCC_MusicalInterval::Numbers::Fifth,
+    MCC_MusicalInterval::Numbers::Sixth,
+    MCC_MusicalInterval::Numbers::Seventh
+};
+
+static constexpr uint8_t EightToneSpanishScaleID = 25u;
+
+const Container_Mapping EightToneSpanish PROGMEM_MACRO =
+{
+    EightToneSpanishScaleID,
+    (ScaleProperties::MappingMode::Dynamic_Mapping|ScaleProperties::Location::Flash_Mapping),
+    EightToneSpanishStr,
+    0x8DEA,
+    EightToneSpanishNumbers
+};

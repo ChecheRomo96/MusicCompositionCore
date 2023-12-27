@@ -1,0 +1,4 @@
+// Flash Scales Array
+
+static constexpr uint8_t Flash_Size = 37;
+extern const Container Flash[37];

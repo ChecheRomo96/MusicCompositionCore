@@ -23,14 +23,32 @@
 ######################################################################################################
 # Add Subdirectories
 
-	if(${MCC_COMPILE_CORE})
-		message(STATUS "Compiling MCC::Core...")
-		add_subdirectory(Core)
+	add_subdirectory(MidiProtocol)
+
+	if(${MCC_COMPILE_MUSICAL_NOTE})
+		message(STATUS "Compiling MCC::MusicalNote...")
+		add_subdirectory(MusicalNote)
 	endif()
 
-	if(${MCC_COMPILE_COMMUNICATIONS})
-		message(STATUS "Compiling MCC::Communications...")
-		add_subdirectory(Communications)
+	if(${MCC_COMPILE_MUSICAL_INTERVAL})
+		message(STATUS "Compiling MCC::MusicalInterval...")
+		add_subdirectory(MusicalInterval)
+	endif()
+
+	if(${MCC_COMPILE_MUSICAL_SCALE})
+		message(STATUS "Compiling MCC::MusicalScale...")
+		add_subdirectory(MusicalScale)
+	endif()
+
+
+	if(${MCC_COMPILE_MIDI_NOTE})
+		message(STATUS "Compiling MCC::MidiNote...")
+		add_subdirectory(MidiNote)
+	endif()
+
+	if(${MCC_COMPILE_MIDI_MESSAGE})
+		message(STATUS "Compiling MCC::MidiMessage...")
+		add_subdirectory(MidiMessage)
 	endif()
 #
 ######################################################################################################
@@ -48,7 +66,7 @@
 			target_compile_definitions(MCC PUBLIC MCC_MUSICAL_NOTE_ENABLED)
 		endif()
 
-		if(${MCC_COMPILE_MUSICAL_INERVAL})
+		if(${MCC_COMPILE_MUSICAL_INTERVAL})
 			target_compile_definitions(MCC PUBLIC MCC_MUSICAL_INTERVAL_ENABLED)
 		endif()
 

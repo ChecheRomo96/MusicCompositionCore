@@ -1,0 +1,22 @@
+// Egyptian Scale
+
+static const char EgyptianStr[] PROGMEM_MACRO = {'E','g','y','p','t','i','a','n','\0'};
+
+static const uint8_t EgyptianNumbers[] PROGMEM_MACRO =
+{
+    MCC_MusicalInterval::Numbers::Second,
+    MCC_MusicalInterval::Numbers::Fourth,
+    MCC_MusicalInterval::Numbers::Fifth,
+    MCC_MusicalInterval::Numbers::Seventh
+};
+
+static constexpr uint8_t EgyptianScaleID = 24u;
+
+const Container_Mapping Egyptian PROGMEM_MACRO =
+{
+    EgyptianScaleID,
+    (ScaleProperties::MappingMode::Dynamic_Mapping|ScaleProperties::Location::Flash_Mapping),
+    EgyptianStr,
+    0x5A52,
+    EgyptianNumbers
+};

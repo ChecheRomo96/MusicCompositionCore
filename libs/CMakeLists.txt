@@ -3,9 +3,13 @@
     
     if(NOT TARGET CPSTL)
         if(EXISTS ${CMAKE_CURRENT_LIST_DIR}/CPSTL)
-            set( CPSTL_EXAMPLES FALSE CACHE BOOL "")
-            set( CPSTL_TESTING FALSE CACHE BOOL "")
-            set( CPSTL_INSTALL FALSE CACHE BOOL "")
+            set( CPSTL_BUILD_TARGET "Submodule" CACHE STRING "")
+
+            set( CPSTL_STRING_STATUS TRUE CACHE BOOL "")
+            set( CPSTL_STRING_ALLOCATION_METHOD "std::string" CACHE STRING "")
+
+            set( CPSTL_VECTOR_STATUS TRUE CACHE BOOL "")
+            set( CPSTL_VECTOR_ALLOCATION_METHOD "std::vector" CACHE STRING "")
 
             message("Using the CPSTL Source on: MusicCompositonCore/libs/CPSTL")
             add_subdirectory(CPSTL)
@@ -21,7 +25,7 @@
         endif()
     endif()
 
-    target_link_libraries( MCC INTERFACE CPSTL )
+    target_link_libraries( MCC PUBLIC CPSTL )
 #
 ######################################################################################################
 # RtMidi

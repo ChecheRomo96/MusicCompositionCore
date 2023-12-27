@@ -31,37 +31,18 @@
 ######################################################################################################
 # Compile Configuration
 
-	set(MCC_COMPILE_CORE CACHE BOOL "Compile MCC::Core")
-		
-		set(MCC_COMPILE_UTILITY_CORE CACHE BOOL "Compile MCC::Core::UtilityCore")	
-			set(MCC_COMPILE_ACCUMULATOR CACHE BOOL "Compile MCC::Core::UtilityCore::Accumulator")
-		
-		set(MCC_COMPILE_MUSICAL_CORE CACHE BOOL "Compile MCC::Core::MusicalCore")
-			set(MCC_COMPILE_MUSICAL_NOTE CACHE BOOL "Compile MCC::Core::MusicalCore::Note")
-			set(MCC_COMPILE_MUSICAL_INTERVAL CACHE BOOL "Compile MCC::Core::MusicalCore::Interval")	
-			set(MCC_COMPILE_MUSICAL_SCALE CACHE BOOL "Compile MCC::Core::MusicalCore::Scale")
+	set(MCC_COMPILE_MUSICAL_CORE CACHE BOOL "Compile MCC::Core::MusicalCore")
+		set(MCC_COMPILE_MUSICAL_NOTE CACHE BOOL "Compile MCC::Core::MusicalCore::Note")
+		set(MCC_COMPILE_MUSICAL_INTERVAL CACHE BOOL "Compile MCC::Core::MusicalCore::Interval")	
+		set(MCC_COMPILE_MUSICAL_SCALE CACHE BOOL "Compile MCC::Core::MusicalCore::Scale")
 
-		set(MCC_COMPILE_MIDI_CORE CACHE BOOL "Compile MCC::Core::MidiCore")
-			set(MCC_COMPILE_MIDI_NOTE CACHE BOOL "Compile MCC::Core::MidiCore::MidiNote")
-			set(MCC_COMPILE_MIDI_MESSAGE CACHE BOOL "Compile MCC::Core::MidiCore::MidiMessage")
+	set(MCC_COMPILE_MIDI_CORE CACHE BOOL "Compile MCC::Core::MidiCore")
+		set(MCC_COMPILE_MIDI_NOTE CACHE BOOL "Compile MCC::Core::MidiCore::MidiNote")
+		set(MCC_COMPILE_MIDI_MESSAGE CACHE BOOL "Compile MCC::Core::MidiCore::MidiMessage")
 			
 
-	set(MCC_COMPILE_COMMUNICATIONS CACHE BOOL "Compile MCC::Communications")
-
-		set(MCC_COMPILE_MIDI_PORT CACHE BOOL "Compile MCC::Communications::MidiPort")
-	
-			set(MCC_COMPILE_UART_MIDI  CACHE BOOL "Compile MCC::Communications::MidiPort::Uart")
-
-			set(MCC_COMPILE_RTMIDI CACHE BOOL "Compile MCC::Communications::MidiPort::RtMidi")
-				set(MCC_COMPILE_RTMIDI_VIRTUAL CACHE BOOL "Compile MCC::Communications::MidiPort::RtMidi")
-					set(MCC_COMPILE_RTMIDI_VIRTUAL_OUT CACHE BOOL "Compile MCC::Communications::MidiPort::RtMidi")
-
-		set(MCC_COMPILE_UART_PORT CACHE BOOL "Compile MCC::Communications::MidiPort::Uart")
-			set(MCC_COMPILE_UART_IN_PORT CACHE BOOL "Compile MCC::Communications::Uart::InputPort")
-			set(MCC_COMPILE_UART_OUT_PORT CACHE BOOL "Compile MCC::Communications::Uart::OutputPort")
-			set(MCC_COMPILE_UART_DUPLEX_PORT CACHE BOOL "Compile MCC::Communications::Uart::DuplexPort")
-
 	set(MCC_BUILD_EXAMPLES CACHE BOOL "Build MCC Examples")
+	set(MCC_TESTING CACHE BOOL "Build MCC Unit Tests")
 #
 ######################################################################################################
 # Set RtMidi Status (MIDI Interface for desktop builds)
@@ -82,3 +63,28 @@
 	endif()
 #
 ######################################################################################################
+# Append Tests
+
+	if( ${MCC_TESTING} )
+		message("Building ${CMAKE_PROJECT_NAME} Tests...")
+
+		cmake_policy(SET CMP0135 NEW)
+
+		include(FetchContent)
+
+		FetchContent_Declare(
+		  googletest
+		  URL https://github.com/google/googletest/archive/f8d7d77c06936315286eb55f8de22cd23c188571.zip
+		)
+		# For Windows: Prevent overriding the parent project's compiler/linker settings
+		set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+		FetchContent_MakeAvailable(googletest)
+
+		enable_testing()
+		include(GoogleTest)
+		set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${${PROJECT_NAME_UPPER}_ROOT_DIRECTORY}/bin")
+		add_subdirectory(tests)
+	endif()
+#
+######################################################################################################
+
