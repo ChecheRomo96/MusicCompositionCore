@@ -59,37 +59,30 @@
 ######################################################################################################
 # Add Compliler Definitions
 
-	if(${MCC_COMPILE_MUSICAL_CORE})
-		target_compile_definitions(MCC PUBLIC MCC_MUSICAL_CORE_ENABLED)
 
-		if(${MCC_COMPILE_MUSICAL_NOTE})
-			target_compile_definitions(MCC PUBLIC MCC_MUSICAL_NOTE_ENABLED)
-		endif()
-
-		if(${MCC_COMPILE_MUSICAL_INTERVAL})
-			target_compile_definitions(MCC PUBLIC MCC_MUSICAL_INTERVAL_ENABLED)
-		endif()
-
-		if(${MCC_COMPILE_MUSICAL_SCALE})
-			target_compile_definitions(MCC PUBLIC MCC_MUSICAL_SCALE_ENABLED)
-		endif()
-
-		if(${MCC_COMPILE_MUSICAL_CHORD})
-			target_compile_definitions(MCC PUBLIC MCC_MUSICAL_CHORD_ENABLED)
-		endif()
+	if(${MCC_COMPILE_MUSICAL_NOTE})
+		target_compile_definitions(MCC PUBLIC MCC_MUSICAL_NOTE_ENABLED)
 	endif()
 
-	if(${MCC_COMPILE_MIDI_CORE})
-		target_compile_definitions(MCC PUBLIC MCC_MIDI_CORE_ENABLED)
+	if(${MCC_COMPILE_MUSICAL_INTERVAL})
+		target_compile_definitions(MCC PUBLIC MCC_MUSICAL_INTERVAL_ENABLED)
+	endif()
 
-		if(${MCC_COMPILE_MIDI_NOTE})
-			target_compile_definitions(MCC PUBLIC MCC_MIDI_NOTE_ENABLED)
-		endif()
+	if(${MCC_COMPILE_MUSICAL_SCALE})
+		target_compile_definitions(MCC PUBLIC MCC_MUSICAL_SCALE_ENABLED)
+	endif()
 
-		if(${MCC_COMPILE_MIDI_MESSAGE})
-			target_compile_definitions(MCC PUBLIC MCC_MIDI_MESSAGE_ENABLED)
-		endif()
+	if(${MCC_COMPILE_MUSICAL_CHORD})
+		target_compile_definitions(MCC PUBLIC MCC_MUSICAL_CHORD_ENABLED)
+	endif()
 
+
+	if(${MCC_COMPILE_MIDI_NOTE})
+		target_compile_definitions(MCC PUBLIC MCC_MIDI_NOTE_ENABLED)
+	endif()
+
+	if(${MCC_COMPILE_MIDI_MESSAGE})
+		target_compile_definitions(MCC PUBLIC MCC_MIDI_MESSAGE_ENABLED)
 	endif()
 #
 ######################################################################################################
