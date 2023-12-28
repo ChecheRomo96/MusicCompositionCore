@@ -8,10 +8,6 @@ using namespace MusicCompositionCore;
 //////////////////////////////////////////////////////////////////
 // Constructor and Assignment operator
 
-	MidiMessage::MidiMessage()
-	{
-
-	}
 
 	MidiMessage& MidiMessage::operator=(const MidiMessage& Source)
 	{

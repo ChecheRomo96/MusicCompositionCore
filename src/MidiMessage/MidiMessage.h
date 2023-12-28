@@ -30,7 +30,7 @@ namespace MusicCompositionCore
         //////////////////////////////////////////////////////////////////
         // Constructor and Assignment operator
 
-            MidiMessage();
+            MidiMessage() = default;
 
             MidiMessage& operator=(const MidiMessage& Source);
         //

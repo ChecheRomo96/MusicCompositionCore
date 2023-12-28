@@ -96,9 +96,10 @@
 # Include directories for install and for build 
 
 	target_include_directories( 
-		MCC PUBLIC 
-		$<INSTALL_INTERFACE:include/MCC> 
-		$<BUILD_INTERFACE:${MCC_SRC_DIRECTORY}> 
+		MCC 
+		PUBLIC 
+		#$<INSTALL_INTERFACE:include/MCC> 
+		"$<BUILD_INTERFACE:${MCC_SRC_DIRECTORY}>"
 	)
 
 #
@@ -110,23 +111,11 @@
 ######################################################################################################
 # Music Composition Core install process
 
-	if(INSTALL STREQUAL "ON")
+	if(NOT MCC_BUILD_TARGET STREQUAL "Dev" AND NOT MCC_BUILD_TARGET STREQUAL "Submodule")
 
 		install(
 			FILES ${HEADERS_LIST} 
-			DESTINATION ${CMAKE_INSTALL_PREFIX}/include/MCC 
-		)
-
-		install(
-			TARGETS MCC 
-			EXPORT MCCExport
-			DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/MCC
-		)
-
-		install(
-			EXPORT MCCExport
-			FILE MCC-config.cmake
-			DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/MCC
+			DESTINATION "include/MCC-${MCC_VERSION}"
 		)
 
 	endif()

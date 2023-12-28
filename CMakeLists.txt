@@ -45,11 +45,6 @@
 	set(MCC_TESTING CACHE BOOL "Build MCC Unit Tests")
 #
 ######################################################################################################
-# Set RtMidi Status (MIDI Interface for desktop builds)
-
-	set(MCC_RTMIDI_STATUS CACHE BOOL "Build MCC Examples")
-#
-######################################################################################################
 # Append Source
 
 	add_subdirectory(src)
