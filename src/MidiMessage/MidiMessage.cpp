@@ -20,7 +20,7 @@ using namespace MusicCompositionCore;
 		return *this;
 	}
 
-	MidiMessage& MidiMessage::operator=(const MidiMessage&& Source)
+	MidiMessage& MidiMessage::operator=(MidiMessage&& Source)
 	{
 		_Buffer = cpstd::move(Source.Buffer());
 		return *this;
