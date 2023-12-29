@@ -3,10 +3,10 @@
 
 	#include <MCC_BuildSettings.h>
 
-	namespace MusicCompositionCore::MidiProtocol
-	{
-		namespace ChannelVoice
-		{
+	namespace MusicCompositionCore::MidiProtocol{
+
+		namespace ChannelVoice{
+
 			static constexpr uint8_t NoteOff = 0x80;
 			static constexpr uint8_t NoteOn = 0x90;
 			static constexpr uint8_t AfterTouch = 0xA0;
@@ -15,17 +15,27 @@
 			static constexpr uint8_t ChannelPressure = 0xD0;
 			static constexpr uint8_t PitchBend = 0xE0;
 		}
+
+		namespace ChannelMode{
+			static constexpr uint8_t AllSoundOff = 120;
+			static constexpr uint8_t AllControllersOff = 121;
+			static constexpr uint8_t LocalControl = 122;
+			static constexpr uint8_t AllNotesOff = 122;
+
+			static constexpr uint8_t LocalControlOff = 0;
+			static constexpr uint8_t LocalControlOn = 127;
+		}
 		
-		namespace System
-		{
-			namespace Common
-			{
+		namespace System{
+
+			namespace Common{
+
 				static constexpr uint8_t SongPositionPointer = 0xF2;
 				static constexpr uint8_t SongSelect = 0xF3;
 				static constexpr uint8_t TuningRequest = 0xF6;
 
-				namespace MTC
-				{		
+				namespace MTC{	
+
 					static constexpr uint8_t QuarterFrame = 0xF1;
 
 					static constexpr uint8_t Frames_Lsb = 0u;
