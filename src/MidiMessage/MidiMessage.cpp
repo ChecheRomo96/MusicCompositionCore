@@ -54,6 +54,32 @@ using namespace MusicCompositionCore;
 //////////////////////////////////////////////////////////////////
 // Channel Voice Messages
 
+
+    #ifdef MCC_MIDI_NOTE_ENABLED
+    
+		MidiMessage& MidiMessage::NoteOn(const MCC::MidiNote& Note)
+		{
+			_Buffer.resize(3);
+
+			_Buffer[0] = MCC_MidiProtocol::ChannelVoice::NoteOn | (Note.Channel());
+			_Buffer[1] = Note.Pitch() & 0x7F;
+			_Buffer[2] = Note.OnVelocity() & 0x7F;
+
+			return *this;
+		}
+
+		MidiMessage& MidiMessage::NoteOff(const MCC::MidiNote& Note)
+		{
+			_Buffer.resize(3);
+
+			_Buffer[0] = MCC_MidiProtocol::ChannelVoice::NoteOn | (Note.Channel());
+			_Buffer[1] = Note.Pitch() & 0x7F;
+			_Buffer[2] = Note.OffVelocity() & 0x7F;
+
+			return *this;
+		}
+	#endif
+
 	MidiMessage& MidiMessage::NoteOn(uint8_t Pitch, uint8_t Vel, uint8_t Channel)
 	{
 		_Buffer.resize(3);
