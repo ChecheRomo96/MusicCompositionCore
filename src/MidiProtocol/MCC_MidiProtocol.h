@@ -18,7 +18,7 @@
 
 		namespace ChannelMode{
 			static constexpr uint8_t AllSoundOff = 120;
-			static constexpr uint8_t AllControllersOff = 121;
+			static constexpr uint8_t ResetAllControllers = 121;
 			static constexpr uint8_t LocalControl = 122;
 			static constexpr uint8_t AllNotesOff = 122;
 
