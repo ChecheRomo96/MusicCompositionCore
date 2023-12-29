@@ -20,7 +20,11 @@
 			static constexpr uint8_t AllSoundOff = 120;
 			static constexpr uint8_t ResetAllControllers = 121;
 			static constexpr uint8_t LocalControl = 122;
-			static constexpr uint8_t AllNotesOff = 122;
+			static constexpr uint8_t AllNotesOff = 123;
+			static constexpr uint8_t OmniModeOff = 124;
+			static constexpr uint8_t OmniModeOn = 125;
+			static constexpr uint8_t MonoModeOn = 126;
+			static constexpr uint8_t PolyModeOn = 127;
 
 			static constexpr uint8_t LocalControlOff = 0;
 			static constexpr uint8_t LocalControlOn = 127;
