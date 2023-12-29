@@ -31,8 +31,17 @@ namespace MusicCompositionCore
         // Constructor and Assignment operator
 
             MidiMessage() = default;
+            MidiMessage(const MidiMessage& MessageBuffer);
+            MidiMessage(const MidiMessage&& MessageBuffer);
+
+            MidiMessage(const cpstd::vector<uint8_t>& MessageBuffer);
+            MidiMessage(cpstd::vector<uint8_t>&& MessageBuffer);
 
             MidiMessage& operator=(const MidiMessage& Source);
+            MidiMessage& operator=(MidiMessage&& Source);
+
+            MidiMessage& operator=(const cpstd::vector<uint8_t>& MessageBuffer);
+            MidiMessage& operator=(cpstd::vector<uint8_t>&& MessageBuffer);
         //
         //////////////////////////////////////////////////////////////////
         // Buffer API

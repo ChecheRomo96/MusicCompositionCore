@@ -13,11 +13,33 @@ using namespace MusicCompositionCore;
 	{
 		_Buffer.resize(Source.Buffer().size());
 
-		for(uint8_t i = 0; i < _Buffer.size(); i++)
-		{
+		for(uint8_t i = 0; i < _Buffer.size(); i++){
 			_Buffer[i] = Source.Buffer()[i];
 		}
 
+		return *this;
+	}
+
+	MidiMessage& MidiMessage::operator=(const MidiMessage&& Source)
+	{
+		_Buffer = cpstd::move(Source.Buffer());
+		return *this;
+	}
+
+	MidiMessage& MidiMessage::operator=(const cpstd::vector<uint8_t>& MessageBuffer)
+	{
+		_Buffer.resize(MessageBuffer.size());
+
+		for(uint8_t i = 0; i < _Buffer.size(); i++){
+			_Buffer[i] = MessageBuffer[i];
+		}
+
+		return *this;
+	}
+
+	MidiMessage& MidiMessage::operator=(cpstd::vector<uint8_t>&& MessageBuffer)
+	{
+		_Buffer = cpstd::move(MessageBuffer);
 		return *this;
 	}
 //
