@@ -51,6 +51,11 @@ namespace MusicCompositionCore
         //////////////////////////////////////////////////////////////////
         // Channel Voice Messages
             
+            #ifdef MCC_MIDI_NOTE_ENABLED
+                MidiMessage& NoteOff(const MCC::MidiNote& Note, uint8_t Channel = 0);
+                MidiMessage& NoteOn(const MCC::MidiNote& Note, uint8_t Channel = 0);
+            #endif
+                
             MidiMessage& NoteOff(uint8_t Pitch, uint8_t Vel = 0, uint8_t Channel = 0);
             MidiMessage& NoteOn(uint8_t Pitch, uint8_t Vel , uint8_t Channel = 0);
             MidiMessage& AfterTouch(uint8_t Note, uint8_t Pressure, uint8_t Channel = 0);
