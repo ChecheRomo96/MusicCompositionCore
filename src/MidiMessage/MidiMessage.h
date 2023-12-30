@@ -38,7 +38,7 @@ namespace MusicCompositionCore
             MidiMessage(cpstd::vector<uint8_t>&& MessageBuffer);
 
             MidiMessage& operator=(const MidiMessage& Source);
-            MidiMessage& operator=(MidiMessage&& Source);
+            MidiMessage& operator=(MidiMessage&& Source) noexcept;
 
             MidiMessage& operator=(const cpstd::vector<uint8_t>& MessageBuffer);
             MidiMessage& operator=(cpstd::vector<uint8_t>&& MessageBuffer);
