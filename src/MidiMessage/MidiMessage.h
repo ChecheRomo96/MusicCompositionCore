@@ -10,7 +10,7 @@
     #include "../MidiNote/MidiNote.h"
 #endif
 
-#if defined (MCC_MUSICAL_CORE_ENABLED)
+#if defined (MCC_MUSICAL_NOTE_ENABLED)
     #include "../MusicalNote/MusicalNote.h"
 #endif
 
