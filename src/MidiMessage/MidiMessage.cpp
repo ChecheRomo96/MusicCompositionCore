@@ -20,7 +20,7 @@ using namespace MusicCompositionCore;
 		return *this;
 	}
 
-	MidiMessage& MidiMessage::operator=(MidiMessage&& Source)
+	MidiMessage& MidiMessage::operator=(MidiMessage&& Source) noexcept
 	{
 		_Buffer = cpstd::move(Source.Buffer());
 		return *this;
@@ -361,37 +361,43 @@ using namespace MusicCompositionCore;
 
 	MidiMessage& MidiMessage::SystemExclusive(const cpstd::vector<uint8_t>& Data)
 	{
-		uint8_t counter = 0;
-		bool flag1 = 0;
-		bool flag2 = 0;
+		cpstd::size_t counter = 0;
+		bool addStartMarker = false;
+		bool addEndMarker = false;
 
-		if(Data[0] != (MCC_MidiProtocol::System::Exclusive::Start))
-		{
-			counter++;
-			flag1 = 1;
+		if (Data.size() > 0) {
+			if (Data[0] != (MCC_MidiProtocol::System::Exclusive::Start)) {
+				counter++;
+				addStartMarker = true;
+			}
+
+			if (Data[Data.size() - 1] != (MCC_MidiProtocol::System::Exclusive::End)) {
+				counter++;
+				addEndMarker = true;
+			}
 		}
-		if(Data[Data.size() - 1] != (MCC_MidiProtocol::System::Exclusive::End))
-		{
-			counter++;
-			flag2 = 1;
+		else {
+			// Handle the case when Data is empty
+			// For example, set counter to 2 if both markers need to be added
+			counter = static_cast<cpstd::size_t>(addStartMarker) + static_cast<cpstd::size_t>(addEndMarker);
 		}
 
 		_Buffer.resize(Data.size() + counter);
 
-		if(flag1){ _Buffer[0] = MCC_MidiProtocol::System::Exclusive::Start; }
-		if(flag2){ _Buffer[_Buffer.size() - 1] = MCC_MidiProtocol::System::Exclusive::End; }
-		
-		for(uint8_t i = flag1; i < _Buffer.size() - flag2; i++)
-		{
-			_Buffer[i] = Data[i-flag1];
+		if (addStartMarker) { _Buffer[0] = MCC_MidiProtocol::System::Exclusive::Start; }
+		if (addEndMarker) { _Buffer[_Buffer.size() - 1] = MCC_MidiProtocol::System::Exclusive::End; }
+
+		for (size_t i = addStartMarker ? 1 : 0; i < _Buffer.size() - (addEndMarker ? 1 : 0); i++) {
+			_Buffer[i] = Data[i - addStartMarker];
 		}
+
 
 		return *this;
 	}
 
 	MidiMessage& MidiMessage::SystemExclusive(uint8_t* Data, uint8_t Length)
 	{
-		uint8_t counter = 0;
+		cpstd::size_t counter = 0;
 		bool flag1 = 0;
 		bool flag2 = 0;
 
