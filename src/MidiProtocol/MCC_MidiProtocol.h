@@ -42,19 +42,22 @@
 
 					static constexpr uint8_t QuarterFrame = 0xF1;
 
-					static constexpr uint8_t Frames_Lsb = 0u;
-					static constexpr uint8_t Frames_Msb = 1u;
+					static constexpr uint8_t Frames_Lsb = 0x00;
+					static constexpr uint8_t Frames_Msb = 0x10;
 
-					static constexpr uint8_t Seconds_Lsb = 2u;
-					static constexpr uint8_t Seconds_Msb = 3u;
+					static constexpr uint8_t Seconds_Lsb = 0x20;
+					static constexpr uint8_t Seconds_Msb = 0x30;
 
-					static constexpr uint8_t Minutes_Lsb = 4u;
-					static constexpr uint8_t Minutes_Msb = 5u;
+					static constexpr uint8_t Minutes_Lsb = 0x40;
+					static constexpr uint8_t Minutes_Msb = 0x50;
 
-					static constexpr uint8_t Hours_Lsb = 6u;
-					static constexpr uint8_t Hours_Msb = 7u;
+					static constexpr uint8_t Hours_Lsb = 0x60;
+					static constexpr uint8_t Hours_Msb = 0x70;
 
-					static constexpr uint8_t Rate = 7u;
+					constexpr uint8_t FrameRate_24FPS = 0x0;
+					constexpr uint8_t FrameRate_25FPS = 0x1;
+					constexpr uint8_t FrameRate_30FPS_DropFrame = 0x2;
+					constexpr uint8_t FrameRate_30FPS = 0x3;
 				}
 			}
 
