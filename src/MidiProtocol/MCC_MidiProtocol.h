@@ -54,10 +54,10 @@
 					static constexpr uint8_t Hours_Lsb = 0x60;
 					static constexpr uint8_t Hours_Msb = 0x70;
 
-					constexpr uint8_t FrameRate_24FPS = 0x0;
-					constexpr uint8_t FrameRate_25FPS = 0x1;
-					constexpr uint8_t FrameRate_30FPS_DropFrame = 0x2;
-					constexpr uint8_t FrameRate_30FPS = 0x3;
+					constexpr uint8_t FrameRate_24FPS = 0b000;
+					constexpr uint8_t FrameRate_25FPS = 0b010;
+					constexpr uint8_t FrameRate_30FPS_DropFrame = 0b100;
+					constexpr uint8_t FrameRate_30FPS = 0b110;
 				}
 			}
 
