@@ -89,6 +89,26 @@ namespace MusicCompositionCore
             //////////////////////////////////////////////////////////////
         //
         //////////////////////////////////////////////////////////////////
+        // Channel Mode Messages
+                
+            MidiMessage& SetLocalControl(uint8_t Mode);
+            MidiMessage& SetLocalControlOn();
+            MidiMessage& SetLocalControlOff();
+            
+            MidiMessage& SetAllSoundOff();
+            MidiMessage& SetAllNotesOff();
+
+            MidiMessage& SetChannelMode(uint8_t Omni, uint8_t Poly);
+
+            MidiMessage& SetChannelMode_Onmi(uint8_t Mode);
+            MidiMessage& SetChannelMode_OmniOn();
+            MidiMessage& SetChannelMode_OmniOff();
+            
+            MidiMessage& SetChannelMode_Polyphony(uint8_t Mode);
+            MidiMessage& SetChannelMode_Mono();
+            MidiMessage& SetChannelMode_Poly();
+        //
+        //////////////////////////////////////////////////////////////////
         // System Common Messages
 
             MidiMessage& MTC_QuarterFrame(uint8_t MTC_ID, uint8_t Data);
@@ -112,6 +132,15 @@ namespace MusicCompositionCore
             MidiMessage& SystemExclusive(const cpstd::vector<uint8_t>& Data);
             MidiMessage& SystemExclusive(uint8_t* Data, uint8_t Length);
         //
+        //////////////////////////////////////////////////////////////////
+        // NRPN and RPN Messages
+
+            MidiMessage& NRPN(uint16_t ParameterID, uint8_t Data);
+            MidiMessage& NRPN(uint16_t ParameterID, uint16_t Data);
+
+            MidiMessage& NRPN_DataIncrement();
+            MidiMessage& NRPN_DataDecrement();
+        // 
         //////////////////////////////////////////////////////////////////
         
     };
