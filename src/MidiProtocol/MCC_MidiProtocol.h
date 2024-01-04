@@ -30,6 +30,8 @@
 
 			static constexpr uint8_t DataEntryLsb = 6;
 
+			static constexpr uint8_t NrpnDataIncrement = 96;
+			static constexpr uint8_t NrpnDataDecrement = 97;
 			static constexpr uint8_t NrpnLsb = 98;
 			static constexpr uint8_t NrpnMsb = 99;
 			static constexpr uint8_t RpnLsb = 100;
