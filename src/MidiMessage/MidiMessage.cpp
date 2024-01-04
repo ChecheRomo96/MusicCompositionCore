@@ -258,6 +258,132 @@ using namespace MusicCompositionCore;
 	//////////////////////////////////////////////////////////////
 //
 //////////////////////////////////////////////////////////////////
+// Channel Mode Messages
+                
+    MidiMessage& MidiMessage::SetLocalControl(uint8_t Mode){
+
+    	if(Mode){SetLocalControlOn();}
+    	else{SetLocalControlOff();}
+
+		return *this;
+    }
+
+    MidiMessage& MidiMessage::SetLocalControlOn(){
+
+		_Buffer.resize(3);
+
+		_Buffer[0] = MCC_MidiProtocol::ChannelVoice::ControlChange;
+		_Buffer[1] = MCC_MidiProtocol::ChannelMode::LocalControl;
+		_Buffer[2] = MCC_MidiProtocol::ChannelMode::LocalControlOn;
+
+		return *this;
+    }
+
+    MidiMessage& MidiMessage::SetLocalControlOff(){
+
+		_Buffer.resize(3);
+
+		_Buffer[0] = MCC_MidiProtocol::ChannelVoice::ControlChange;
+		_Buffer[1] = MCC_MidiProtocol::ChannelMode::LocalControl;
+		_Buffer[2] = MCC_MidiProtocol::ChannelMode::LocalControlOff;
+
+		return *this;
+    }
+
+    MidiMessage& MidiMessage::SetAllSoundOff(){
+
+		_Buffer.resize(3);
+
+		_Buffer[0] = MCC_MidiProtocol::ChannelVoice::ControlChange;
+		_Buffer[1] = MCC_MidiProtocol::ChannelMode::AllSoundOff;
+		_Buffer[2] = 0;
+
+		return *this;
+    }
+
+    MidiMessage& MidiMessage::SetAllNotesOff(){
+
+		_Buffer.resize(3);
+
+		_Buffer[0] = MCC_MidiProtocol::ChannelVoice::ControlChange;
+		_Buffer[1] = MCC_MidiProtocol::ChannelMode::SetAllNotesOff;
+		_Buffer[2] = 0;
+
+		return *this;
+    }
+
+    MidiMessage& MidiMessage::SetChannelMode(uint8_t Omni, uint8_t Poly){
+    	SetChannelMode_Onmi(Omni);
+    	SetChannelMode_Polyphony(Poly);
+    }
+
+    MidiMessage& MidiMessage::SetChannelMode_Onmi(uint8_t Mode){
+
+    	switch(Mode){
+    	case MCC_MidiProtocol::ChannelMode::OmniModeOn: SetChannelMode_OmniOn(); break;
+    	case MCC_MidiProtocol::ChannelMode::OmniModeOff: SetChannelMode_OmniOff(); break;
+    	default: break;
+    	}
+
+		return *this;
+    }
+
+    MidiMessage& MidiMessage::SetChannelMode_OmniOn(){
+
+		_Buffer.resize(3);
+
+		_Buffer[0] = MCC_MidiProtocol::ChannelVoice::ControlChange;
+		_Buffer[1] = MCC_MidiProtocol::ChannelMode::OmniModeOn;
+		_Buffer[2] = 0;
+
+		return *this;
+    }
+
+    MidiMessage& MidiMessage::SetChannelMode_OmniOff(){
+
+		_Buffer.resize(3);
+
+		_Buffer[0] = MCC_MidiProtocol::ChannelVoice::ControlChange;
+		_Buffer[1] = MCC_MidiProtocol::ChannelMode::OmniModeOff;
+		_Buffer[2] = 0;
+
+		return *this;
+    }
+    
+    MidiMessage& MidiMessage::SetChannelMode_Polyphony(uint8_t Mode){
+
+    	switch(Mode){
+    	case MCC_MidiProtocol::ChannelMode::MonoModeOn: SetChannelMode_Mono(); break;
+    	case MCC_MidiProtocol::ChannelMode::MonoModeOn: SetChannelMode_Poly(); break;
+    	default: break;
+    	}
+
+		return *this;
+    }
+
+    MidiMessage& MidiMessage::SetChannelMode_Mono(){
+
+		_Buffer.resize(3);
+
+		_Buffer[0] = MCC_MidiProtocol::ChannelVoice::ControlChange;
+		_Buffer[1] = MCC_MidiProtocol::ChannelMode::MonoModeOn;
+		_Buffer[2] = 0;
+
+		return *this;
+    }
+
+    MidiMessage& MidiMessage::SetChannelMode_Poly(){
+
+		_Buffer.resize(3);
+
+		_Buffer[0] = MCC_MidiProtocol::ChannelVoice::ControlChange;
+		_Buffer[1] = MCC_MidiProtocol::ChannelMode::PolyModeOn;
+		_Buffer[2] = 0;
+
+		return *this;
+    }
+//
+//////////////////////////////////////////////////////////////////
 // System Common Messages
 
 	MidiMessage& MidiMessage::MTC_QuarterFrame(uint8_t MTC_ID, uint8_t Data)
@@ -425,4 +551,64 @@ using namespace MusicCompositionCore;
 		return *this;
 	}
 //
+//////////////////////////////////////////////////////////////////
+// NRPN and RPN Messages
+
+    MidiMessage& MidiMessage::NRPN(uint16_t ParameterID, uint8_t Data){
+
+		_Buffer.resize(9);
+
+		_Buffer[0] = MCC_MidiProtocol::ChannelVoice::ControlChange;
+		_Buffer[1] = MCC_MidiProtocol::ChannelMode::NrpnMsb;
+		_Buffer[2] = (ParameterID>>7) & 0x7F;
+		_Buffer[3] = MCC_MidiProtocol::ChannelVoice::ControlChange;
+		_Buffer[4] = MCC_MidiProtocol::ChannelMode::NrpnLsb;
+		_Buffer[5] = (ParameterID) & 0x7F;
+		_Buffer[6] = MCC_MidiProtocol::ChannelVoice::ControlChange;
+		_Buffer[7] = MCC_MidiProtocol::ChannelMode::DataEntryLsb;
+		_Buffer[8] = (Data) & 0x7F;
+
+		return *this;
+    }
+
+    MidiMessage& MidiMessage::NRPN(uint16_t ParameterID, uint16_t Data){
+
+		_Buffer.resize(12);
+
+		_Buffer[0] = MCC_MidiProtocol::ChannelVoice::ControlChange;
+		_Buffer[1] = MCC_MidiProtocol::ChannelMode::NrpnMsb;
+		_Buffer[2] = (ParameterID>>7) & 0x7F;
+		_Buffer[3] = MCC_MidiProtocol::ChannelVoice::ControlChange;
+		_Buffer[4] = MCC_MidiProtocol::ChannelMode::NrpnLsb;
+		_Buffer[5] = (ParameterID) & 0x7F;
+		_Buffer[6] = MCC_MidiProtocol::ChannelVoice::ControlChange;
+		_Buffer[7] = MCC_MidiProtocol::ChannelMode::DataEntryMsb;
+		_Buffer[8] = (Data>>7) & 0x7F;
+		_Buffer[9] = MCC_MidiProtocol::ChannelVoice::ControlChange;
+		_Buffer[10] = MCC_MidiProtocol::ChannelMode::DataEntryLsb;
+		_Buffer[11] = (Data) & 0x7F;
+
+		return *this;
+    }
+
+    MidiMessage& MidiMessage::NRPN_DataIncrement(){
+
+		_Buffer.resize(2);
+
+		_Buffer[0] = MCC_MidiProtocol::ChannelVoice::ControlChange;
+		_Buffer[1] = MCC_MidiProtocol::ChannelMode::NRPN_DataIncrement;
+
+		return *this;
+    }
+
+    MidiMessage& MidiMessage::NRPN_DataDecrement(){
+
+		_Buffer.resize(2);
+
+		_Buffer[0] = MCC_MidiProtocol::ChannelVoice::ControlChange;
+		_Buffer[1] = MCC_MidiProtocol::ChannelMode::NRPN_DataDecrement;
+
+		return *this;
+    }
+// 
 //////////////////////////////////////////////////////////////////
