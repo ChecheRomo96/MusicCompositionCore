@@ -306,7 +306,7 @@ using namespace MusicCompositionCore;
 		_Buffer.resize(3);
 
 		_Buffer[0] = MCC_MidiProtocol::ChannelVoice::ControlChange;
-		_Buffer[1] = MCC_MidiProtocol::ChannelMode::SetAllNotesOff;
+		_Buffer[1] = MCC_MidiProtocol::ChannelMode::AllNotesOff;
 		_Buffer[2] = 0;
 
 		return *this;
@@ -596,7 +596,7 @@ using namespace MusicCompositionCore;
 		_Buffer.resize(2);
 
 		_Buffer[0] = MCC_MidiProtocol::ChannelVoice::ControlChange;
-		_Buffer[1] = MCC_MidiProtocol::ChannelMode::NRPN_DataIncrement;
+		_Buffer[1] = MCC_MidiProtocol::ChannelMode::NrpnDataIncrement;
 
 		return *this;
     }
@@ -606,7 +606,7 @@ using namespace MusicCompositionCore;
 		_Buffer.resize(2);
 
 		_Buffer[0] = MCC_MidiProtocol::ChannelVoice::ControlChange;
-		_Buffer[1] = MCC_MidiProtocol::ChannelMode::NRPN_DataDecrement;
+		_Buffer[1] = MCC_MidiProtocol::ChannelMode::NrpnDataDecrement;
 
 		return *this;
     }
