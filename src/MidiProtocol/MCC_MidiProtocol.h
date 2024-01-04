@@ -17,6 +17,24 @@
 		}
 
 		namespace ChannelMode{
+			static constexpr uint8_t BankSelect = 0;
+			static constexpr uint8_t Modulation = 1;
+			static constexpr uint8_t BreathControl = 2;
+			static constexpr uint8_t FootPedal = 4;
+			static constexpr uint8_t Portamento = 5;
+			static constexpr uint8_t DataEntryMsb = 6;
+			static constexpr uint8_t Volume = 7;
+			static constexpr uint8_t Balance = 8;
+			static constexpr uint8_t Pan = 10;
+			static constexpr uint8_t Expression = 11;
+
+			static constexpr uint8_t DataEntryLsb = 6;
+
+			static constexpr uint8_t NrpnLsb = 98;
+			static constexpr uint8_t NrpnMsb = 99;
+			static constexpr uint8_t RpnLsb = 100;
+			static constexpr uint8_t RpnMsb = 101;
+			
 			static constexpr uint8_t AllSoundOff = 120;
 			static constexpr uint8_t ResetAllControllers = 121;
 			static constexpr uint8_t LocalControl = 122;
