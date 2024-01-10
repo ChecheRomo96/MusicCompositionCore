@@ -354,7 +354,7 @@ using namespace MusicCompositionCore;
 
     	switch(Mode){
     	case MCC_MidiProtocol::ChannelMode::MonoModeOn: SetChannelMode_Mono(); break;
-    	case MCC_MidiProtocol::ChannelMode::MonoModeOn: SetChannelMode_Poly(); break;
+    	case MCC_MidiProtocol::ChannelMode::PolyModeOn: SetChannelMode_Poly(); break;
     	default: break;
     	}
 
