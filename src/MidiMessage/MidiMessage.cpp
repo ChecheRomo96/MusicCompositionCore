@@ -315,6 +315,8 @@ using namespace MusicCompositionCore;
     MidiMessage& MidiMessage::SetChannelMode(uint8_t Omni, uint8_t Poly){
     	SetChannelMode_Onmi(Omni);
     	SetChannelMode_Polyphony(Poly);
+
+		return *this;
     }
 
     MidiMessage& MidiMessage::SetChannelMode_Onmi(uint8_t Mode){
