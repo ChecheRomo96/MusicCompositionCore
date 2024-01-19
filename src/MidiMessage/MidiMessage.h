@@ -44,9 +44,13 @@ namespace MusicCompositionCore
             MidiMessage& operator=(cpstd::vector<uint8_t>&& MessageBuffer);
         //
         //////////////////////////////////////////////////////////////////
-        // Buffer API
+        // Vector API
 
             const cpstd::vector<uint8_t>& Buffer() const;
+            cpstd::vector<uint8_t>::iterator begin() noexcept;
+            cpstd::vector<uint8_t>::const_iterator begin() const noexcept;
+            cpstd::vector<uint8_t>::iterator end() const;
+            cpstd::vector<uint8_t>::const_iterator end() const noexcept;
         //
         //////////////////////////////////////////////////////////////////
         // Channel Voice Messages
