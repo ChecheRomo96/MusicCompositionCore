@@ -50,19 +50,19 @@ using namespace MusicCompositionCore;
 		return _Buffer;
 	}
 
-    cpstd::vector<uint8_t>::iterator begin() noexcept{
+    cpstd::vector<uint8_t>::iterator MidiMessage::begin() noexcept{
     	return _Buffer.begin();
     }
 
-    cpstd::vector<uint8_t>::const_iterator begin() const noexcept{
+    cpstd::vector<uint8_t>::const_iterator MidiMessage::begin() const noexcept{
     	return _Buffer.begin();
     }
 
-    cpstd::vector<uint8_t>::iterator end() const{
+    cpstd::vector<uint8_t>::iterator MidiMessage::end() const{
     	return _Buffer.end();
     }
 
-    cpstd::vector<uint8_t>::const_iterator end() const noexcept{
+    cpstd::vector<uint8_t>::const_iterator MidiMessage::end() const noexcept{
     	return _Buffer.end();
     }
 //
