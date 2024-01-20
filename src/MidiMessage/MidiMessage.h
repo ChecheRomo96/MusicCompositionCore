@@ -49,7 +49,7 @@ namespace MusicCompositionCore
             const cpstd::vector<uint8_t>& Buffer() const;
             cpstd::vector<uint8_t>::iterator begin() noexcept;
             cpstd::vector<uint8_t>::const_iterator begin() const noexcept;
-            cpstd::vector<uint8_t>::iterator end() const;
+            cpstd::vector<uint8_t>::iterator end() noexcept;
             cpstd::vector<uint8_t>::const_iterator end() const noexcept;
         //
         //////////////////////////////////////////////////////////////////
