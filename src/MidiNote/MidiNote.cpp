@@ -53,6 +53,8 @@ MusicCompositionCore::MidiNote& MusicCompositionCore::MidiNote::operator=(const 
 	_onVelocity = Source._onVelocity;
 	_offVelocity = Source._offVelocity;
 	_channel = Source._channel;
+
+	return (*this);
 }
 
 const uint8_t MusicCompositionCore::MidiNote::Pitch() const
