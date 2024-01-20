@@ -16,7 +16,7 @@ namespace MusicCompositionCore
 
         public:
 
-            MidiNote();
+            MidiNote() = default;
 
             MidiNote(uint8_t Pitch, uint8_t OnVel , uint8_t Channel = 0, uint8_t OffVel = 0);
             MidiNote(const MusicalNote::Note& Source, uint8_t OnVel, uint8_t Channel = 0, uint8_t OffVel = 0);
