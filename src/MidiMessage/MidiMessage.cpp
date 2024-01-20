@@ -58,7 +58,7 @@ using namespace MusicCompositionCore;
     	return _Buffer.begin();
     }
 
-    cpstd::vector<uint8_t>::iterator MidiMessage::end() const{
+    cpstd::vector<uint8_t>::iterator MidiMessage::end() noexcept{
     	return _Buffer.end();
     }
 
