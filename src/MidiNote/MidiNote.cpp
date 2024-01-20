@@ -47,6 +47,14 @@ MusicCompositionCore::MidiNote::MidiNote(const MCC_MusicalNote::Pitch& source, u
 	else{_channel = Channel;}
 }
 
+
+MidiNote& MusicCompositionCore::MidiNote::operator=(const MidiNote& Source){
+	_pitch = Source._pitch;
+	_onVelocity = Source._onVelocity;
+	_offVelocity = Source._offVelocity;
+	_channel = Source._channel;
+}
+
 const uint8_t MusicCompositionCore::MidiNote::Pitch() const
 {
 	return _pitch;
