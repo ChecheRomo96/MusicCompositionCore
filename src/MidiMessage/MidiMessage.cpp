@@ -9,6 +9,40 @@ using namespace MusicCompositionCore;
 // Constructor and Assignment operator
 
 
+	MidiMessage::MidiMessage(const MidiMessage& Source)
+	{
+		_Buffer.resize(Source.Buffer().size());
+
+		for(uint8_t i = 0; i < _Buffer.size(); i++){
+			_Buffer[i] = Source.Buffer()[i];
+		}
+
+		return *this;
+	}
+
+	MidiMessage::MidiMessage(MidiMessage&& Source)
+	{
+		_Buffer = cpstd::move(Source._Buffer);
+		return *this;
+	}
+
+	MidiMessage::MidiMessage(const cpstd::vector<uint8_t>& Source)
+	{
+		_Buffer.resize(Source.size());
+
+		for(uint8_t i = 0; i < _Buffer.size(); i++){
+			_Buffer[i] = Source[i];
+		}
+
+		return *this;
+	}
+
+	MidiMessage::MidiMessage(cpstd::vector<uint8_t>&& Source)
+	{
+		_Buffer = cpstd::move(Source);
+		return *this;
+	}
+
 	MidiMessage& MidiMessage::operator=(const MidiMessage& Source)
 	{
 		_Buffer.resize(Source.Buffer().size());
