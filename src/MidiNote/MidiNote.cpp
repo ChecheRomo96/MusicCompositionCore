@@ -2,6 +2,14 @@
 
 using namespace MCC_MidiProtocol;
 
+MusicCompositionCore::MidiNote::MidiNote(const MidiNote& Source)
+{
+    _pitch = Source._pitch;
+	_onVelocity = Source._onVelocity;
+	_offVelocity = Source._offVelocity;
+	_channel = Source._channel;
+}
+
 MusicCompositionCore::MidiNote::MidiNote(uint8_t Pitch, uint8_t OnVel , uint8_t Channel, uint8_t OffVel)
 {
     if(Pitch >= MidiNoteRange){_pitch = InvalidMidiNote;}

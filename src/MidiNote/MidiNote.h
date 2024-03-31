@@ -40,6 +40,4 @@ namespace MusicCompositionCore
     };
 }
 
-
-
 #endif//MCC_MIDI_NOTE_H
