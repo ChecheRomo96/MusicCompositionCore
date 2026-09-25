@@ -1,0 +1,9 @@
+/**
+ * @defgroup MCC_BuildGuide_Platforms Platform Presets
+ * @ingroup MCC_BuildGuide
+ * @brief Presets and toolchains inherited from the Foundation workflow model.
+ *
+ * MCC provides native Windows, macOS, and Linux presets plus AVR-GCC and GNU
+ * Arm Embedded profiles. A preset is usable only when a matching Foundation
+ * Release package and the required compiler toolchain are available.
+ */

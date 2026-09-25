@@ -1,0 +1,15 @@
+/**
+ * @defgroup MCC_BuildGuide Build Guide
+ * @brief Configure MCC against a matching Foundation package.
+ *
+ * Export Foundation first, then point MCC at that prefix:
+ *
+ * @code{.bash}
+ * ./scripts/configure.sh macos_arm64 --fresh -- \
+ *   -DMCC_FOUNDATION_PREFIX=../Foundation/dist/macos_arm64
+ * ./scripts/build.sh macos_arm64 --config Debug
+ * @endcode
+ *
+ * When MCC and Foundation are sibling repositories, MCC automatically checks
+ * `../Foundation/dist/<preset>` before using normal CMake package discovery.
+ */

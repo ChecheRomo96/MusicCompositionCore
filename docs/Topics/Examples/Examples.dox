@@ -1,0 +1,24 @@
+/**
+ * @defgroup MCC_Examples Examples
+ * @brief Runnable demonstrations of MCC APIs.
+ *
+ * Examples mirror the source hierarchy and share portable code between the
+ * Arduino sketch and native desktop adapter:
+ *
+ * @code
+ * examples/MCC/<module>/<example>/
+ * |-- CMakeLists.txt
+ * |-- <example>.ino
+ * |-- Shared.h
+ * |-- Shared.cpp
+ * `-- Desktop/
+ *     |-- CMakeLists.txt
+ *     `-- main.cpp
+ * @endcode
+ *
+ * Enable and export Release examples with:
+ *
+ * @code{.bash}
+ * ./scripts/export.sh macos_arm64 --fresh --examples-on
+ * @endcode
+ */

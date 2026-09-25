@@ -1,0 +1,70 @@
+@echo off
+setlocal EnableExtensions EnableDelayedExpansion
+
+:menu
+cls
+echo MCC Examples
+echo ===================
+echo.
+
+set "MCC_EXAMPLE_COUNT=0"
+for %%F in ("%~dp0MCC_*.exe") do (
+    if exist "%%~fF" (
+        set /a MCC_EXAMPLE_COUNT+=1
+        set "MCC_EXAMPLE[!MCC_EXAMPLE_COUNT!]=%%~fF"
+        echo   !MCC_EXAMPLE_COUNT!^) %%~nF
+    )
+)
+
+if !MCC_EXAMPLE_COUNT! EQU 0 goto no_examples
+
+echo.
+set "MCC_SELECTION="
+set /p "MCC_SELECTION=Select an example [1-!MCC_EXAMPLE_COUNT!] or q to quit: "
+
+if /I "!MCC_SELECTION!"=="Q" exit /b 0
+if "!MCC_SELECTION!"=="" goto invalid_selection
+for /f "delims=0123456789" %%A in ("!MCC_SELECTION!") do goto invalid_selection
+if !MCC_SELECTION! LSS 1 goto invalid_selection
+if !MCC_SELECTION! GTR !MCC_EXAMPLE_COUNT! goto invalid_selection
+
+set "MCC_SELECTED_EXAMPLE="
+for /L %%I in (1,1,!MCC_EXAMPLE_COUNT!) do (
+    if "!MCC_SELECTION!"=="%%I" (
+        set "MCC_SELECTED_EXAMPLE=!MCC_EXAMPLE[%%I]!"
+    )
+)
+
+echo.
+echo Running !MCC_SELECTED_EXAMPLE!...
+echo.
+
+"!MCC_SELECTED_EXAMPLE!"
+set "MCC_STATUS=!ERRORLEVEL!"
+
+echo ----------------------------------------
+echo Process finished with exit code !MCC_STATUS!
+echo.
+
+:run_another
+set "MCC_RUN_ANOTHER="
+set /p "MCC_RUN_ANOTHER=Run another example? [Y/n]: "
+if "!MCC_RUN_ANOTHER!"=="" goto menu
+if /I "!MCC_RUN_ANOTHER!"=="Y" goto menu
+if /I "!MCC_RUN_ANOTHER!"=="N" exit /b 0
+if /I "!MCC_RUN_ANOTHER!"=="Q" exit /b 0
+echo Please enter Y or N.
+goto run_another
+
+:invalid_selection
+echo.
+echo Invalid selection.
+pause
+goto menu
+
+:no_examples
+echo No executable examples were found in:
+echo %~dp0
+echo.
+pause
+exit /b 1

@@ -1,0 +1,16 @@
+/**
+ * @defgroup MCC_BuildGuide_Dependency Foundation Dependency
+ * @ingroup MCC_BuildGuide
+ * @brief Foundation package resolution and compatibility contract.
+ *
+ * MCC links `Foundation::Foundation` publicly, so downstream CMake consumers
+ * must also make a compatible Foundation package discoverable. MCC rejects a
+ * package whose recorded platform differs from the selected MCC preset.
+ *
+ * Resolution order is:
+ *
+ * 1. `-DMCC_FOUNDATION_PREFIX=<prefix>`.
+ * 2. The `MCC_FOUNDATION_PREFIX` environment variable.
+ * 3. `../Foundation/dist/<preset>` for sibling repositories.
+ * 4. Normal `find_package(Foundation CONFIG)` search rules.
+ */

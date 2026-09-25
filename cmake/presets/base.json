@@ -1,0 +1,42 @@
+{
+    "version": 6,
+
+    "configurePresets": [
+        {
+            "name": "base",
+            "hidden": true,
+
+            "binaryDir": "${sourceDir}/build/${presetName}",
+
+            "cacheVariables": {
+                "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
+
+                "MCC_FULL_BUILD": "OFF",
+                "MCC_DOCS": "OFF",
+                "MCC_TESTING": "OFF",
+                "MCC_EXAMPLES": "OFF",
+                "MCC_COVERAGE": "OFF"
+            }
+        },
+
+        {
+            "name": "docs_base",
+            "hidden": true,
+            "inherits": "base",
+
+            "cacheVariables": {
+                "MCC_DOCS": "ON"
+            }
+        },
+
+        {
+            "name": "testing_base",
+            "hidden": true,
+            "inherits": "base",
+
+            "cacheVariables": {
+                "MCC_TESTING": "ON"
+            }
+        }
+    ]
+}

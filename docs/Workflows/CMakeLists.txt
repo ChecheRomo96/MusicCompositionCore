@@ -1,0 +1,4 @@
+mcc_add_dox(
+    "${CMAKE_CURRENT_LIST_DIR}/Workflows.dox"
+    "${CMAKE_CURRENT_LIST_DIR}/PackageConsumerTest.dox"
+    "${CMAKE_CURRENT_LIST_DIR}/MigrationBacklog.dox")

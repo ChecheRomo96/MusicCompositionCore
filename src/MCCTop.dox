@@ -1,0 +1,8 @@
+/**
+ * @defgroup MCC Music Composition Core
+ * @brief Portable music-composition primitives built on Foundation.
+ *
+ * MCC uses the `MCC` namespace and consumes the stable CMake target
+ * `Foundation::Foundation`. Applications may include `MCC.h` for the complete
+ * enabled surface or a documented module/component header for narrow access.
+ */

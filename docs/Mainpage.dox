@@ -1,0 +1,20 @@
+/**
+ * @mainpage Music Composition Core
+ *
+ * MCC is a portable C++17 music-composition library reconstructed on top of
+ * Foundation. This initial `0.1.0` scaffold establishes the build, package,
+ * test, example, export, and documentation contracts before legacy musical
+ * concepts are migrated.
+ *
+ * @section MCCMainDependency Dependency
+ *
+ * MCC consumes the exported CMake target `Foundation::Foundation`. Each MCC
+ * preset must use a Foundation package built for the same platform,
+ * architecture, compiler ABI, and configuration policy.
+ *
+ * @section MCCMainNext Migration Direction
+ *
+ * Legacy notes, pitches, intervals, scales, MIDI representations, and related
+ * utilities will be audited individually. Old code is reference material, not
+ * an API compatibility promise.
+ */

@@ -1,0 +1,25 @@
+/**
+ * @defgroup MCC_Workflows_Migration Legacy Migration Backlog
+ * @ingroup MCC_Workflows
+ * @brief Controlled reconstruction plan for the historical MCC codebases.
+ *
+ * Historical code is design input, not source to copy without review. Every
+ * migrated concept must define its namespace, ownership, invalid states,
+ * embedded constraints, Foundation dependencies, tests, examples, and Doxygen
+ * contract before becoming public.
+ *
+ * | ID | State | Candidate domain |
+ * | -- | ----- | ---------------- |
+ * | MIG-001 | `NEXT` | Inventory and reconcile legacy public concepts |
+ * | MIG-002 | `TODO` | Pitch: letters, accidentals, octave, ordering |
+ * | MIG-003 | `TODO` | Musical note and textual formatting |
+ * | MIG-004 | `TODO` | Musical interval representation and arithmetic |
+ * | MIG-005 | `TODO` | Scale structure, properties, and definitions |
+ * | MIG-006 | `TODO` | MIDI note, message, and protocol representations |
+ * | MIG-007 | `TODO` | Evaluate communications/ports as a separate library |
+ * | MIG-008 | `TODO` | Validate MCC as a dependency of MIDILAR |
+ *
+ * Communications, hardware ports, and runtime MIDI transports should not enter
+ * the composition core merely because they existed in an old monolithic tree.
+ * Their ownership will be decided during the inventory.
+ */

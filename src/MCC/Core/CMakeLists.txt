@@ -1,0 +1,14 @@
+set(MCC_CORE_HEADERS
+    "${CMAKE_CURRENT_LIST_DIR}/Version.h")
+set(MCC_CORE_SOURCES
+    "${CMAKE_CURRENT_LIST_DIR}/Version.cpp")
+
+target_sources(MCC PRIVATE ${MCC_CORE_HEADERS} ${MCC_CORE_SOURCES})
+mcc_stage_headers(${MCC_CORE_HEADERS})
+mcc_add_dox(
+    ${MCC_CORE_HEADERS}
+    "${CMAKE_CURRENT_LIST_DIR}/Core.dox")
+
+install(FILES ${MCC_CORE_HEADERS}
+    DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/MCC/Core"
+    CONFIGURATIONS Release)

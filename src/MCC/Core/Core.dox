@@ -1,0 +1,20 @@
+/**
+ * @defgroup MCC_Core Core
+ * @ingroup MCC
+ * @brief Root module for the reconstructed music domain.
+ *
+ * The initial scaffold exposes only version/dependency information. Musical
+ * concepts from the legacy repositories will be audited and migrated here in
+ * small, tested modules rather than copied wholesale.
+ */
+
+/**
+ * @namespace MCC
+ * @brief Music Composition Core public namespace.
+ */
+
+/**
+ * @namespace MCC::Core
+ * @ingroup MCC_Core
+ * @brief MCC core services.
+ */
