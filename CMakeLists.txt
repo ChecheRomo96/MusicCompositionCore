@@ -60,12 +60,12 @@ if(MCC_FOUNDATION_PREFIX STREQUAL "")
 endif()
 
 if(NOT MCC_FOUNDATION_PREFIX STREQUAL "")
-    find_package(Foundation 1.0 CONFIG QUIET
+    find_package(Foundation 1.1 CONFIG QUIET
         PATHS "${MCC_FOUNDATION_PREFIX}"
         NO_DEFAULT_PATH
         NO_CMAKE_FIND_ROOT_PATH)
 else()
-    find_package(Foundation 1.0 CONFIG QUIET)
+    find_package(Foundation 1.1 CONFIG QUIET)
 endif()
 
 if(NOT TARGET Foundation::Foundation)

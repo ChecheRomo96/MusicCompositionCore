@@ -3,9 +3,10 @@
 
 #include <stdint.h>
 
+#include <Foundation/Math/Arithmetic.h>
+
 #include <MCC/Pitch/Accidental.h>
 #include <MCC/Pitch/ChromaticClass.h>
-#include <MCC/Pitch/Detail/Modulo.h>
 #include <MCC/Pitch/Letter.h>
 
 namespace MCC {
@@ -81,7 +82,7 @@ public:
         if (!IsValid()) {
             return MCC::ChromaticClass::Invalid();
         }
-        return MCC::ChromaticClass(Detail::FloorMod(
+        return MCC::ChromaticClass(Foundation::Math::FloorMod(
             NaturalSemitone(Letter()) + _accidental.Semitones(),
             MCC::ChromaticClass::Count));
     }

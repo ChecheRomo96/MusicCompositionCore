@@ -3,7 +3,7 @@
 
 #include <stdint.h>
 
-#include <MCC/Pitch/Detail/Modulo.h>
+#include <Foundation/Math/Arithmetic.h>
 
 namespace MCC {
 
@@ -64,8 +64,8 @@ constexpr uint8_t NaturalSemitone(Letter letter) noexcept {
  * @ingroup MCC_Pitch
  */
 constexpr Letter MoveLetter(Letter letter, int steps) noexcept {
-    return static_cast<Letter>(Detail::FloorMod(
-        DiatonicIndex(letter) + Detail::FloorMod(steps, LetterCount),
+    return static_cast<Letter>(Foundation::Math::FloorMod(
+        DiatonicIndex(letter) + Foundation::Math::FloorMod(steps, LetterCount),
         LetterCount));
 }
 

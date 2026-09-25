@@ -185,8 +185,8 @@ Decisions:
 - `ChromaticClass` construction checks its input; `Transposed()` reduces
   modulo 12.
 - Invalid values sort after every valid value.
-- `MCC::Detail::FloorMod` is private until Foundation::Math provides a
-  floored modulo.
+- Floored modulo arithmetic uses `Foundation::Math::FloorMod`, added in
+  Foundation `1.1.0`; MCC now requires Foundation 1.1 or newer.
 
 ## Phase 4 - Pitches and tuning
 

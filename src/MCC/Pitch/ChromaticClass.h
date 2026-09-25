@@ -3,7 +3,7 @@
 
 #include <stdint.h>
 
-#include <MCC/Pitch/Detail/Modulo.h>
+#include <Foundation/Math/Arithmetic.h>
 
 namespace MCC {
 
@@ -65,8 +65,8 @@ public:
         if (!IsValid()) {
             return Invalid();
         }
-        return ChromaticClass(Detail::FloorMod(
-            _value + Detail::FloorMod(semitones, Count), Count));
+        return ChromaticClass(Foundation::Math::FloorMod(
+            _value + Foundation::Math::FloorMod(semitones, Count), Count));
     }
 
     /** @brief Equality; all invalid classes are equal (SPEC-ERR-6). */
