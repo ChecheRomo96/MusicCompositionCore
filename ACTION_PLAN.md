@@ -22,6 +22,8 @@ MIDILAR.
   parsers, ports and transports belong to MIDILAR.
 - Public value types live directly in the `MCC` namespace, for example
   `MCC::Pitch`, `MCC::Note`, `MCC::Interval` and `MCC::Scale`.
+- Top-level `MCC_*.h` facades detect physically available modules with
+  `__has_include()` and define the same availability macros exported by CMake.
 - Catalog namespaces use plural names, such as `MCC::Scales` and
   `MCC::Chords`.
 - Historical MCC repositories are design and data sources, not code to copy
@@ -30,6 +32,32 @@ MIDILAR.
 - Fundamental value types avoid dynamic allocation and support `constexpr`
   operations where practical.
 - The library must remain suitable for desktop and embedded targets.
+
+## MCC versus Foundation
+
+Add functionality to Foundation when it:
+
+- Has no musical meaning and would be useful to unrelated libraries, such as
+  integer arithmetic, fixed-capacity containers, bit manipulation, text
+  buffers or status/result types.
+- Abstracts the platform, toolchain or build environment.
+- Would be duplicated if MIDILAR or another library needed it independently.
+
+Add functionality to MCC when it:
+
+- Encodes a music-theory concept, rule, name or catalog entry.
+- Depends on musical conventions such as spelling, octave numbering, tuning,
+  interval quality, scale or chord structure, meter or rhythm.
+- Is a musical value type or algorithm, even when implemented with generic
+  Foundation building blocks.
+
+Rules:
+
+- MCC may depend on Foundation; Foundation must never depend on MCC.
+- Generic helpers discovered while building MCC are proposed to Foundation
+  first, and MCC keeps only a private detail until Foundation provides them.
+- MCC does not wrap or re-export Foundation APIs under the `MCC` namespace.
+- MIDI and real-time concerns belong to neither: they belong to MIDILAR.
 
 ## Phase 0 - Establish the baseline
 
@@ -54,12 +82,16 @@ Baseline validation results:
 
 ## Phase 1 - Repository and package architecture
 
-Restructure public and private code around conventional include and source
-trees:
+Status: complete
+
+Keep the Arduino-compatible public tree under `src/`, following Foundation's
+facade and staged-header model:
 
 ```text
-include/MCC/      Public API
-src/MCC/          Implementations and private details
+src/MCC.h         Complete library facade
+src/MCC_*.h       Top-level module facades
+src/MCC/*.h       Hierarchical module aggregators
+src/MCC/*/        Public types, implementations and private details
 data/             Canonical scale and chord definitions
 tests/            Unit, property, catalog and package tests
 examples/         Focused music-theory examples
@@ -69,19 +101,21 @@ docs/             Architecture and theory documentation
 
 Actions:
 
-- [ ] Move public headers from `src/` to `include/MCC/`.
-- [ ] Preserve the installed `MCC::MCC` CMake target.
-- [ ] Remove public feature macros that change the visible API.
-- [ ] Apply the C++ standard and warning settings at target scope.
-- [ ] Allow tests to use an installed or cached GoogleTest before downloading.
-- [ ] Add architecture checks to the installed package configuration.
-- [ ] Define rules for adding functionality to MCC versus Foundation.
+- [x] Keep public headers under `src/` for direct Arduino consumption.
+- [x] Preserve the installed `MCC::MCC` CMake target.
+- [x] Define module macros from facades when Arduino discovers their headers.
+- [x] Export the same module macros through CMake targets.
+- [x] Apply the C++ standard at target scope.
+- [x] Allow tests to use an installed GoogleTest before downloading it.
+- [x] Add Foundation compatibility checks to the installed package.
+- [x] Define rules for adding functionality to MCC versus Foundation.
 
 Exit criteria:
 
 - Build-tree and installed-package consumers compile successfully.
 - macOS and AVR validation remain green.
 - No public MCC header references MIDILAR or MIDI.
+- CMake and Arduino expose the same module-availability macros.
 
 ## Phase 2 - Music-domain specification
 

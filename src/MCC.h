@@ -3,7 +3,7 @@
 
 #include <MCC_BuildSettings.h>
 
-#ifdef MCC_CORE
+#if __has_include(<MCC_Core.h>)
     #include <MCC_Core.h>
 #endif
 
