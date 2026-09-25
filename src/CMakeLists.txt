@@ -32,6 +32,11 @@ if(MCC_CORE)
         "${CMAKE_CURRENT_LIST_DIR}/MCC_Core.h")
 endif()
 
+if(MCC_PITCH)
+    list(APPEND MCC_TOP_LEVEL_HEADERS
+        "${CMAKE_CURRENT_LIST_DIR}/MCC_Pitch.h")
+endif()
+
 target_sources(MCC PRIVATE
     "${CMAKE_CURRENT_LIST_DIR}/MCC.cpp"
     ${MCC_TOP_LEVEL_HEADERS})
@@ -48,6 +53,13 @@ mcc_add_dox(
 
 if(MCC_CORE)
     mcc_add_macro(PUBLIC MCC_CORE)
+endif()
+
+if(MCC_PITCH)
+    mcc_add_macro(PUBLIC MCC_PITCH)
+endif()
+
+if(MCC_CORE OR MCC_PITCH)
     add_subdirectory(MCC)
 endif()
 

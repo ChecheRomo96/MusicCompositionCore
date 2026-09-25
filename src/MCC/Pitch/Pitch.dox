@@ -1,0 +1,14 @@
+/**
+ * @defgroup MCC_Pitch Pitch
+ * @ingroup MCC
+ * @brief Written pitch primitives: letters, accidentals and pitch classes.
+ *
+ * `MCC::Letter` + `MCC::Accidental` form a `MCC::PitchClass`, which keeps
+ * its written spelling. `MCC::ChromaticClass` discards the spelling and is
+ * obtained explicitly through `PitchClass::ChromaticClass()`. Written
+ * equality and enharmonic equivalence are separate operations; see
+ * @ref MCC_Specification.
+ *
+ * All types are trivially copyable, allocation-free and `constexpr`.
+ * Available when `MCC_PITCH` is defined.
+ */

@@ -149,6 +149,8 @@ Exit criteria:
 
 ## Phase 3 - Pitch primitives
 
+Status: complete (`src/MCC/Pitch/`, module macro `MCC_PITCH`)
+
 Implement:
 
 ```cpp
@@ -160,17 +162,31 @@ MCC::ChromaticClass
 
 Required behavior:
 
-- [ ] Preserve written spelling.
-- [ ] Derive the chromatic class.
-- [ ] Compare written pitch classes.
-- [ ] Test enharmonic equivalence explicitly.
-- [ ] Move diatonically without losing spelling.
-- [ ] Support boundary accidentals safely.
+- [x] Preserve written spelling.
+- [x] Derive the chromatic class.
+- [x] Compare written pitch classes.
+- [x] Test enharmonic equivalence explicitly.
+- [x] Move diatonically without losing spelling.
+- [x] Support boundary accidentals safely.
 
 Exit criteria:
 
 - Exhaustive tests cover supported letters and accidentals.
 - Enharmonic equivalence is distinct from written equality.
+
+Decisions:
+
+- `Letter` is an `enum class` with free queries `DiatonicIndex()`,
+  `NaturalSemitone()` and `MoveLetter()`; non-enumerator casts are rejected by
+  `PitchClass`.
+- `PitchClass::MovedDiatonically()` moves the letter and keeps the written
+  accidental; `PitchClass::Altered()` keeps the letter and changes the
+  accidental, returning the invalid value outside `[-4, +4]`.
+- `ChromaticClass` construction checks its input; `Transposed()` reduces
+  modulo 12.
+- Invalid values sort after every valid value.
+- `MCC::Detail::FloorMod` is private until Foundation::Math provides a
+  floored modulo.
 
 ## Phase 4 - Pitches and tuning
 
