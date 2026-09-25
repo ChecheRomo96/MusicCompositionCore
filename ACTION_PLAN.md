@@ -119,17 +119,28 @@ Exit criteria:
 
 ## Phase 2 - Music-domain specification
 
+Status: complete (`docs/Topics/Specification/MusicDomain.dox`)
+
 Document and approve the invariants that all later modules will use:
 
-- [ ] Octave convention and middle-C definition.
-- [ ] Written equality versus enharmonic equivalence.
-- [ ] Diatonic, chromatic and absolute ordering.
-- [ ] Supported accidental range.
-- [ ] Absolute chromatic-coordinate origin and representation.
-- [ ] Directed, simple and compound interval semantics.
-- [ ] Error-handling policy without exceptions.
-- [ ] Embedded memory and object-size constraints.
-- [ ] Text formatting and caller-provided buffer policy.
+- [x] Octave convention and middle-C definition.
+- [x] Written equality versus enharmonic equivalence.
+- [x] Diatonic, chromatic and absolute ordering.
+- [x] Supported accidental range.
+- [x] Absolute chromatic-coordinate origin and representation.
+- [x] Directed, simple and compound interval semantics.
+- [x] Error-handling policy without exceptions.
+- [x] Embedded memory and object-size constraints.
+- [x] Text formatting and caller-provided buffer policy.
+
+Decisions:
+
+- Scientific pitch notation: middle C is `C4`, `A4 = 440 Hz`.
+- `Letter + Accidental -> PitchClass`, `PitchClass + Octave -> Pitch`;
+  `MCC::Note` is reserved for pitch + rhythmic value.
+- Accidentals range from -4 to +4.
+- `ChromaticIndex` origin is `C-1 = 0` (`C4 = 60`).
+- Errors use one canonical invalid value per type plus `IsValid()`.
 
 Exit criteria:
 
@@ -144,14 +155,14 @@ Implement:
 MCC::Letter
 MCC::Accidental
 MCC::PitchClass
-MCC::Pitch
+MCC::ChromaticClass
 ```
 
 Required behavior:
 
 - [ ] Preserve written spelling.
 - [ ] Derive the chromatic class.
-- [ ] Compare written pitches.
+- [ ] Compare written pitch classes.
 - [ ] Test enharmonic equivalence explicitly.
 - [ ] Move diatonically without losing spelling.
 - [ ] Support boundary accidentals safely.
@@ -161,24 +172,24 @@ Exit criteria:
 - Exhaustive tests cover supported letters and accidentals.
 - Enharmonic equivalence is distinct from written equality.
 
-## Phase 4 - Notes and tuning
+## Phase 4 - Pitches and tuning
 
 Implement:
 
 ```cpp
 MCC::ChromaticIndex
-MCC::Note
+MCC::Pitch
 MCC::Tuning
 MCC::EqualTemperament
 ```
 
 Required behavior:
 
-- [ ] Combine a written pitch with an octave.
+- [ ] Combine a written pitch class with an octave.
 - [ ] Calculate an unbounded absolute chromatic position.
 - [ ] Transpose across octave boundaries.
 - [ ] Calculate frequency from an explicit tuning.
-- [ ] Support notes outside the MIDI range.
+- [ ] Support pitches outside the MIDI range.
 - [ ] Verify `A4 = 440 Hz` under the standard tuning.
 
 MCC will not expose `MidiPitch`, `MidiNote` or MIDI-number conversions.
@@ -198,10 +209,10 @@ Required behavior:
 
 - [ ] Preserve diatonic and chromatic distance.
 - [ ] Construct intervals from number and quality.
-- [ ] Calculate intervals between pitches and notes.
+- [ ] Calculate intervals between pitch classes and pitches.
 - [ ] Support ascending, descending and compound intervals.
 - [ ] Invert intervals.
-- [ ] Transpose pitches and notes while preserving spelling.
+- [ ] Transpose pitch classes and pitches while preserving spelling.
 - [ ] Add property tests for inversion and transposition.
 
 ## Phase 6 - Scales and scale catalog
@@ -253,8 +264,8 @@ Actions:
 - [ ] Migrate triads, sevenths, extensions and suspended chords.
 - [ ] Generate static catalog data.
 - [ ] Validate interval patterns and duplicate definitions.
-- [ ] Generate chord notes from a root and inversion.
-- [ ] Add basic recognition tests for unordered note collections.
+- [ ] Generate chord pitches from a root and inversion.
+- [ ] Add basic recognition tests for unordered pitch collections.
 
 ## Phase 8 - Keys and notation
 
@@ -271,7 +282,7 @@ Actions:
 
 - [ ] Model tonic, mode and key signature separately from a scale.
 - [ ] Resolve degree spelling from the key context.
-- [ ] Format notes, intervals, scales and chords.
+- [ ] Format pitch classes, pitches, intervals, scales and chords.
 - [ ] Support ASCII output and optional Unicode symbols.
 - [ ] Support caller-provided fixed buffers for embedded builds.
 - [ ] Avoid mandatory `std::string` allocation in the core API.
@@ -282,6 +293,7 @@ Implement theory and composition concepts only:
 
 ```cpp
 MCC::NoteValue
+MCC::Note
 MCC::Meter
 MCC::Tuplet
 MCC::RhythmPattern
@@ -291,6 +303,7 @@ MCC::EuclideanPattern
 Actions:
 
 - [ ] Represent note values and dotted values exactly.
+- [ ] Combine a pitch with a note value into `MCC::Note`.
 - [ ] Represent simple and compound meter.
 - [ ] Represent tuplets independently of runtime timing.
 - [ ] Migrate and verify the historical Euclidean-rhythm algorithm.
@@ -318,14 +331,14 @@ MIDILAR owns:
 - Control Change, NRPN and SysEx.
 - UART, USB and desktop MIDI transports.
 - Devices, routing, callbacks and real-time processing.
-- Conversion between `MCC::Note` and MIDI note numbers.
+- Conversion between `MCC::Pitch` and MIDI note numbers.
 
 Integration actions:
 
 - [ ] Export MCC as a transitive MIDILAR package dependency.
 - [ ] Move or recreate historical MIDI functionality in MIDILAR.
 - [ ] Implement checked conversions for values inside the MIDI range.
-- [ ] Test rejection of musical notes outside the MIDI range.
+- [ ] Test rejection of pitches outside the MIDI range.
 - [ ] Test scale, chord and rhythm integration without adding MIDI to MCC.
 
 ## Phase 11 - Quality and release readiness
@@ -344,7 +357,7 @@ Integration actions:
 | Version | Scope |
 | --- | --- |
 | `0.1.0` | Build, package, test and documentation scaffold |
-| `0.2.0` | Pitch, notes, tuning and intervals |
+| `0.2.0` | Pitch classes, pitches, tuning and intervals |
 | `0.3.0` | Scales and reviewed scale catalog |
 | `0.4.0` | Chords, keys and notation |
 | `0.5.0` | Rhythm and compositional patterns |
