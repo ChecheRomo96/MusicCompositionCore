@@ -14,23 +14,21 @@ if ($Preset -notmatch "^(macos|linux|windows)_") {
     throw "Package consumer tests require a runnable desktop preset"
 }
 
-if (-not $FoundationPrefix) {
-    if ($env:MCC_FOUNDATION_PREFIX) {
-        $FoundationPrefix = $env:MCC_FOUNDATION_PREFIX
-    }
-    else {
-        $FoundationPrefix = Join-Path $script:MCCRoot "../Foundation/dist/$Preset"
-    }
+# Without an explicit prefix, MCC resolves Foundation itself: sibling export,
+# GitHub Release package or sources (see cmake/MCCFoundation.cmake).
+if (-not $FoundationPrefix -and $env:MCC_FOUNDATION_PREFIX) {
+    $FoundationPrefix = $env:MCC_FOUNDATION_PREFIX
 }
-$FoundationPrefix = Resolve-MCCPath -Path $FoundationPrefix
-$foundationConfig = Join-Path $FoundationPrefix "lib/cmake/Foundation/FoundationConfig.cmake"
-if (-not (Test-Path -LiteralPath $foundationConfig -PathType Leaf)) {
-    throw "Foundation package not found at $FoundationPrefix"
-}
-
 $exportParameters = @{
     Preset = $Preset
-    CMakeArguments = @("-DMCC_FOUNDATION_PREFIX=$FoundationPrefix")
+}
+if ($FoundationPrefix) {
+    $FoundationPrefix = Resolve-MCCPath -Path $FoundationPrefix
+    $foundationConfig = Join-Path $FoundationPrefix "lib/cmake/Foundation/FoundationConfig.cmake"
+    if (-not (Test-Path -LiteralPath $foundationConfig -PathType Leaf)) {
+        throw "Foundation package not found at $FoundationPrefix"
+    }
+    $exportParameters.CMakeArguments = @("-DMCC_FOUNDATION_PREFIX=$FoundationPrefix")
 }
 if ($Parallel -gt 0) {
     $exportParameters.Parallel = $Parallel
@@ -41,6 +39,16 @@ if ($Fresh) {
 & "$PSScriptRoot/export.ps1" @exportParameters
 if ($LASTEXITCODE -ne 0) {
     exit $LASTEXITCODE
+}
+
+# The Foundation package MCC used; empty when Foundation was built from
+# sources and installed next to MCC.
+$cachePath = Join-Path (Get-MCCBuildDirectory -Preset $Preset) "CMakeCache.txt"
+$resolvedFoundationPrefix = ""
+$resolvedLine = Select-String -LiteralPath $cachePath `
+    -Pattern "^MCC_FOUNDATION_RESOLVED_PREFIX:INTERNAL=(.*)$" | Select-Object -First 1
+if ($resolvedLine) {
+    $resolvedFoundationPrefix = $resolvedLine.Matches[0].Groups[1].Value
 }
 
 $mccPrefix = Join-Path $script:MCCDistRoot $Preset
@@ -56,7 +64,7 @@ Invoke-MCCCMake -Arguments @(
     "-B", $consumerBuild,
     "-DCMAKE_BUILD_TYPE=Release",
     "-DMCC_DIR=$(Join-Path $mccPrefix 'lib/cmake/MCC')",
-    "-DFoundation_DIR=$(Join-Path $FoundationPrefix 'lib/cmake/Foundation')"
+    "-DCMAKE_PREFIX_PATH=$mccPrefix;$resolvedFoundationPrefix"
 )
 
 $buildArguments = @("--build", $consumerBuild, "--config", "Release")

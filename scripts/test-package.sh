@@ -53,19 +53,31 @@ case "$PRESET" in
         ;;
 esac
 
+# Without an explicit prefix, MCC resolves Foundation itself: sibling export,
+# GitHub Release package or sources (see cmake/MCCFoundation.cmake).
 if [ -z "$FOUNDATION_PREFIX" ]; then
-    FOUNDATION_PREFIX=${MCC_FOUNDATION_PREFIX:-"$MCC_ROOT/../Foundation/dist/$PRESET"}
+    FOUNDATION_PREFIX=${MCC_FOUNDATION_PREFIX:-}
 fi
-FOUNDATION_PREFIX=$(mcc_absolute_path "$FOUNDATION_PREFIX")
-FOUNDATION_CONFIG="$FOUNDATION_PREFIX/lib/cmake/Foundation/FoundationConfig.cmake"
-[ -f "$FOUNDATION_CONFIG" ] || \
-    mcc_die "Foundation package not found at $FOUNDATION_PREFIX"
+if [ -n "$FOUNDATION_PREFIX" ]; then
+    FOUNDATION_PREFIX=$(mcc_absolute_path "$FOUNDATION_PREFIX")
+    FOUNDATION_CONFIG="$FOUNDATION_PREFIX/lib/cmake/Foundation/FoundationConfig.cmake"
+    [ -f "$FOUNDATION_CONFIG" ] || \
+        mcc_die "Foundation package not found at $FOUNDATION_PREFIX"
+fi
 
 set -- "$SCRIPT_DIR/export.sh" "$PRESET"
 [ "$FRESH" -eq 0 ] || set -- "$@" --fresh
 [ -z "$PARALLEL" ] || set -- "$@" --parallel "$PARALLEL"
-set -- "$@" -- -DMCC_FOUNDATION_PREFIX="$FOUNDATION_PREFIX"
+if [ -n "$FOUNDATION_PREFIX" ]; then
+    set -- "$@" -- -DMCC_FOUNDATION_PREFIX="$FOUNDATION_PREFIX"
+fi
 "$@"
+
+# The Foundation package MCC used; empty when Foundation was built from
+# sources and installed next to MCC.
+RESOLVED_FOUNDATION_PREFIX=$(sed -n \
+    's/^MCC_FOUNDATION_RESOLVED_PREFIX:INTERNAL=//p' \
+    "$(mcc_build_dir "$PRESET")/CMakeCache.txt")
 
 MCC_PREFIX="$MCC_DIST_ROOT/$PRESET"
 CONSUMER_SOURCE="$MCC_ROOT/tests/PackageConsumer"
@@ -80,7 +92,7 @@ cmake \
     -B "$CONSUMER_BUILD" \
     -DCMAKE_BUILD_TYPE=Release \
     -DMCC_DIR="$MCC_PREFIX/lib/cmake/MCC" \
-    -DFoundation_DIR="$FOUNDATION_PREFIX/lib/cmake/Foundation"
+    -DCMAKE_PREFIX_PATH="$MCC_PREFIX;$RESOLVED_FOUNDATION_PREFIX"
 
 set -- cmake --build "$CONSUMER_BUILD" --config Release
 [ -z "$PARALLEL" ] || set -- "$@" --parallel "$PARALLEL"

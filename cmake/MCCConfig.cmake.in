@@ -1,7 +1,7 @@
 @PACKAGE_INIT@
 
 include(CMakeFindDependencyMacro)
-find_dependency(Foundation 1.1 CONFIG)
+find_dependency(Foundation @MCC_FOUNDATION_VERSION@ CONFIG)
 
 include("${CMAKE_CURRENT_LIST_DIR}/MCCBuildInfo.cmake")
 

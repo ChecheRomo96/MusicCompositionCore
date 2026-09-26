@@ -28,7 +28,10 @@ MIDILAR.
   `MCC::Chords`.
 - Historical MCC repositories are design and data sources, not code to copy
   without review.
-- Foundation is the only required MCC dependency.
+- Foundation is the only required MCC dependency. CMake resolves a local
+  package first and otherwise fetches the pinned Foundation tag from GitHub:
+  its Release package when one exists for the preset, or its sources
+  (`cmake/MCCFoundation.cmake`).
 - Fundamental value types avoid dynamic allocation and support `constexpr`
   operations where practical.
 - The library must remain suitable for desktop and embedded targets.
