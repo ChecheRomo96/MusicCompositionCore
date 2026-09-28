@@ -4,9 +4,16 @@ MCC is a portable C++17 library for music-composition primitives. This
 repository is a clean reconstruction of earlier Music Composition Core
 experiments and uses Foundation as its low-level dependency.
 
-The initial `0.1.0` scaffold intentionally exposes only build/version
-information. Legacy notes, pitches, intervals, scales, MIDI representations,
-and utilities will be reviewed and migrated as independently tested modules.
+It contains music theory only: no MIDI concepts. Available modules:
+
+- **Pitch**: `Letter`, `Accidental`, `NoteName` (spelled, `C#` != `Db`),
+  `PitchClass` (0-11), `ChromaticIndex` and `Pitch` (middle C is `C4`).
+- **Tuning**: `Tuning` and `EqualTemperament` frequencies (`A4 = 440 Hz`).
+- **Core**: version information.
+
+The rules every type follows are in
+`docs/Topics/Specification/MusicDomain.dox`, and the roadmap is in
+`ACTION_PLAN.md`. The API documentation is published to the `docs` branch.
 
 ## Dependency
 
