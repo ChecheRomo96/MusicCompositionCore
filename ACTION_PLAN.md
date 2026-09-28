@@ -193,6 +193,9 @@ Decisions:
 
 ## Phase 4 - Pitches and tuning
 
+Status: complete (`src/MCC/Pitch/`, `src/MCC/Tuning/`, module macro
+`MCC_TUNING`)
+
 Implement:
 
 ```cpp
@@ -204,14 +207,38 @@ MCC::EqualTemperament
 
 Required behavior:
 
-- [ ] Combine a written pitch class with an octave.
-- [ ] Calculate an unbounded absolute chromatic position.
-- [ ] Transpose across octave boundaries.
-- [ ] Calculate frequency from an explicit tuning.
-- [ ] Support pitches outside the MIDI range.
-- [ ] Verify `A4 = 440 Hz` under the standard tuning.
+- [x] Combine a written pitch class with an octave.
+- [x] Calculate an unbounded absolute chromatic position.
+- [x] Transpose across octave boundaries.
+- [x] Calculate frequency from an explicit tuning.
+- [x] Support pitches outside the MIDI range.
+- [x] Verify `A4 = 440 Hz` under the standard tuning.
 
 MCC will not expose `MidiPitch`, `MidiNote` or MIDI-number conversions.
+
+Decisions:
+
+- `ChromaticIndex` is a 16-bit value type with one invalid value; valid
+  indices are exactly the writable pitch range `[-1528, 1551]`.
+- `Pitch` is 3 bytes: a `PitchClass` plus a signed 8-bit octave.
+- Transposition in this phase preserves spelling: `MovedDiatonically()`
+  (octave changes between `B` and `C`), `Altered()` and `MovedByOctaves()`.
+  Transposing by semitones needs an interval to choose the spelling and
+  belongs to Phase 5.
+- `MCC::IsLowerThan()` implements pitch-height order (SPEC-ORD-6);
+  `operator<` stays written order.
+- Tuning lives in its own `MCC_TUNING` module because it is the only module
+  that uses `float`; it requires `MCC_PITCH`.
+- `Tuning` is a value (reference pitch + frequency) and `EqualTemperament`
+  holds one; there are no virtual functions.
+- Frequencies use a table of the twelve semitone ratios plus exact octave
+  doublings, with no `pow()` or math library, and are `constexpr`.
+  Frequencies above the `float` range (after `B123` under `A4 = 440 Hz`)
+  return `0`.
+- Every integer input of the pitch API is `int32_t`, so behavior is the same
+  where `int` is 16 bits (AVR).
+- Octave and floored-division arithmetic use `Foundation::Math::FloorDiv`,
+  added in Foundation `1.2.0`.
 
 ## Phase 5 - Intervals
 

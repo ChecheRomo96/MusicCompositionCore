@@ -40,7 +40,7 @@ public:
      * @brief Creates the accidental `semitones`; values outside
      * `[Minimum, Maximum]` produce the invalid value (SPEC-ERR-3).
      */
-    constexpr explicit Accidental(int semitones) noexcept
+    constexpr explicit Accidental(int32_t semitones) noexcept
         : _semitones(IsInRange(semitones)
               ? static_cast<int8_t>(semitones)
               : InvalidValue) {}
@@ -92,7 +92,7 @@ public:
      * The result is invalid when this accidental is invalid (SPEC-ERR-4) or
      * when it would leave `[Minimum, Maximum]` (SPEC-ACC-3, SPEC-ERR-5).
      */
-    constexpr Accidental Altered(int semitones) const noexcept {
+    constexpr Accidental Altered(int32_t semitones) const noexcept {
         if (!IsValid() ||
             semitones < Minimum - Maximum ||
             semitones > Maximum - Minimum) {
@@ -128,7 +128,7 @@ public:
     }
 
 private:
-    static constexpr bool IsInRange(int semitones) noexcept {
+    static constexpr bool IsInRange(int32_t semitones) noexcept {
         return semitones >= Minimum && semitones <= Maximum;
     }
 };

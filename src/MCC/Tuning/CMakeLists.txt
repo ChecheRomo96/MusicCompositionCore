@@ -1,0 +1,15 @@
+set(MCC_TUNING_HEADERS
+    "${CMAKE_CURRENT_LIST_DIR}/EqualTemperament.h"
+    "${CMAKE_CURRENT_LIST_DIR}/Tuning.h")
+set(MCC_TUNING_SOURCES
+    "${CMAKE_CURRENT_LIST_DIR}/Tuning.cpp")
+
+target_sources(MCC PRIVATE ${MCC_TUNING_HEADERS} ${MCC_TUNING_SOURCES})
+mcc_stage_headers(${MCC_TUNING_HEADERS})
+mcc_add_dox(
+    ${MCC_TUNING_HEADERS}
+    "${CMAKE_CURRENT_LIST_DIR}/Tuning.dox")
+
+install(FILES ${MCC_TUNING_HEADERS}
+    DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/MCC/Tuning"
+    CONFIGURATIONS Release)

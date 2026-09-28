@@ -63,7 +63,7 @@ constexpr uint8_t NaturalSemitone(Letter letter) noexcept {
  * octave: `MoveLetter(Letter::B, 1) == Letter::C`.
  * @ingroup MCC_Pitch
  */
-constexpr Letter MoveLetter(Letter letter, int steps) noexcept {
+constexpr Letter MoveLetter(Letter letter, int32_t steps) noexcept {
     return static_cast<Letter>(Foundation::Math::FloorMod(
         DiatonicIndex(letter) + Foundation::Math::FloorMod(steps, LetterCount),
         LetterCount));

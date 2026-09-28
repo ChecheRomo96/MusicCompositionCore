@@ -8,6 +8,10 @@ if(MCC_PITCH)
     list(APPEND MCC_MODULE_HEADERS "${CMAKE_CURRENT_LIST_DIR}/Pitch.h")
 endif()
 
+if(MCC_TUNING)
+    list(APPEND MCC_MODULE_HEADERS "${CMAKE_CURRENT_LIST_DIR}/Tuning.h")
+endif()
+
 target_sources(MCC PRIVATE ${MCC_MODULE_HEADERS})
 mcc_stage_headers(${MCC_MODULE_HEADERS})
 mcc_add_dox(${MCC_MODULE_HEADERS})
@@ -22,4 +26,8 @@ endif()
 
 if(MCC_PITCH)
     add_subdirectory(Pitch)
+endif()
+
+if(MCC_TUNING)
+    add_subdirectory(Tuning)
 endif()

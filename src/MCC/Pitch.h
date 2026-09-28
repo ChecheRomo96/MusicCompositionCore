@@ -5,5 +5,7 @@
 #include <MCC/Pitch/Accidental.h>
 #include <MCC/Pitch/ChromaticClass.h>
 #include <MCC/Pitch/PitchClass.h>
+#include <MCC/Pitch/ChromaticIndex.h>
+#include <MCC/Pitch/Pitch.h>
 
 #endif // MCC_PITCH_H

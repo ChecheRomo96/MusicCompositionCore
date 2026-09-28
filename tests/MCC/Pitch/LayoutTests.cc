@@ -53,10 +53,41 @@ constexpr PitchClass kCMajor[] = {
     PitchClass(Letter::B)};
 static_assert(kCMajor[3].ChromaticClass() == ChromaticClass(5));
 
+using MCC::ChromaticIndex;
+using MCC::Pitch;
+
+// SPEC-EMB-2: ChromaticIndex is 16 bits and Pitch fits in 4 bytes.
+static_assert(sizeof(ChromaticIndex) == 2);
+static_assert(sizeof(Pitch) <= 4);
+
+// SPEC-EMB-1: trivially copyable, no virtual functions.
+static_assert(std::is_trivially_copyable_v<ChromaticIndex>);
+static_assert(std::is_trivially_copyable_v<Pitch>);
+static_assert(!std::is_polymorphic_v<ChromaticIndex>);
+static_assert(!std::is_polymorphic_v<Pitch>);
+
+// SPEC-EMB-3: pitch construction, queries, comparison and movement are
+// constexpr.
+constexpr Pitch kBSharp3(Letter::B, Accidental::Sharp(), 3);
+constexpr Pitch kC4(Letter::C, 4);
+static_assert(kC4.ChromaticIndex() == ChromaticIndex(60));
+static_assert(kC4.DiatonicIndex() == 28);
+static_assert(MCC::IsEnharmonic(kBSharp3, kC4));
+static_assert(kBSharp3 != kC4);
+static_assert(kBSharp3 < kC4);
+static_assert(MCC::IsLowerThan(Pitch(Letter::C, Accidental::Flat(), 4), kBSharp3));
+static_assert(kBSharp3.MovedDiatonically(1) == Pitch(Letter::C, Accidental::Sharp(), 4));
+static_assert(kC4.MovedByOctaves(-1) == Pitch(Letter::C, 3));
+static_assert(kC4.Altered(1) == Pitch(Letter::C, Accidental::Sharp(), 4));
+static_assert(ChromaticIndex(60).Transposed(9) == ChromaticIndex(69));
+static_assert(!Pitch(Letter::B, 127).MovedDiatonically(1).IsValid());
+
 // SPEC-EMB-1..3: layout guarantees are checked at compile time above.
 TEST(LayoutTests, ReportsSizes) {
     EXPECT_EQ(sizeof(Letter), 1U);
     EXPECT_EQ(sizeof(Accidental), 1U);
     EXPECT_EQ(sizeof(ChromaticClass), 1U);
     EXPECT_EQ(sizeof(PitchClass), 2U);
+    EXPECT_EQ(sizeof(ChromaticIndex), 2U);
+    EXPECT_EQ(sizeof(Pitch), 3U);
 }

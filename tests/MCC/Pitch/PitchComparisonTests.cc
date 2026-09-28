@@ -3,6 +3,7 @@
 #include "PitchTestSupport.h"
 
 #include <algorithm>
+#include <vector>
 #include <type_traits>
 
 using MCC::Accidental;
@@ -97,4 +98,99 @@ TEST(PitchComparisonTests, WrittenOrderIsLetterThenAccidentalExhaustively) {
     std::reverse(shuffled.begin(), shuffled.end());
     std::sort(shuffled.begin(), shuffled.end());
     EXPECT_EQ(shuffled, all);
+}
+
+// SPEC-EQ-1: written equality of pitches includes the octave; C#4 != Db4.
+TEST(PitchComparisonTests, PitchWrittenEquality) {
+    using MCC::Pitch;
+    const Pitch cSharp4(Letter::C, Accidental::Sharp(), 4);
+    const Pitch dFlat4(Letter::D, Accidental::Flat(), 4);
+    EXPECT_NE(cSharp4, dFlat4);
+    EXPECT_NE(cSharp4, Pitch(Letter::C, Accidental::Sharp(), 5));
+    EXPECT_EQ(cSharp4, Pitch(MCC::PitchClass(Letter::C, Accidental::Sharp()), 4));
+    MCCTests::ForEachPitch([](Pitch pitch) {
+        EXPECT_EQ(pitch, Pitch(pitch.PitchClass(), pitch.Octave()));
+    });
+}
+
+// SPEC-EQ-2: pitch enharmony compares chromatic indices: B#3 ~ C4, not C3.
+TEST(PitchComparisonTests, PitchEnharmonicEquivalence) {
+    using MCC::Pitch;
+    const Pitch bSharp3(Letter::B, Accidental::Sharp(), 3);
+    EXPECT_TRUE(MCC::IsEnharmonic(bSharp3, Pitch(Letter::C, 4)));
+    EXPECT_FALSE(MCC::IsEnharmonic(bSharp3, Pitch(Letter::C, 3)));
+    EXPECT_TRUE(MCC::IsEnharmonic(Pitch(Letter::C, Accidental::Sharp(), 4),
+        Pitch(Letter::D, Accidental::Flat(), 4)));
+    EXPECT_FALSE(MCC::IsEnharmonic(Pitch(Letter::C, Accidental::Sharp(), 4),
+        Pitch(Letter::D, Accidental::Flat(), 5)));
+
+    // Every pitch is enharmonic to exactly the spellings with its index.
+    const Pitch reference(Letter::E, 2);
+    int enharmonics = 0;
+    MCCTests::ForEachPitch([&](Pitch pitch) {
+        const bool expected = pitch.ChromaticIndex() == reference.ChromaticIndex();
+        EXPECT_EQ(MCC::IsEnharmonic(pitch, reference), expected);
+        enharmonics += expected ? 1 : 0;
+    });
+    EXPECT_EQ(enharmonics, 5);  // C####2, D##2, E2, Fb2, Gbbb2.
+}
+
+// SPEC-EQ-3: no implicit conversions between pitch and index types.
+TEST(PitchComparisonTests, NoImplicitPitchConversions) {
+    using MCC::ChromaticIndex;
+    using MCC::Pitch;
+    static_assert(!std::is_convertible_v<Pitch, ChromaticIndex>);
+    static_assert(!std::is_convertible_v<ChromaticIndex, Pitch>);
+    static_assert(!std::is_convertible_v<Pitch, PitchClass>);
+    static_assert(!std::is_convertible_v<PitchClass, Pitch>);
+    static_assert(!std::is_convertible_v<ChromaticIndex, ChromaticClass>);
+    static_assert(!std::is_convertible_v<int, ChromaticIndex>);
+    static_assert(!std::is_convertible_v<ChromaticIndex, int>);
+    SUCCEED();
+}
+
+// SPEC-ORD-5: written order is octave, letter, accidental: B#3 < Cb4 although
+// B#3 sounds higher.
+TEST(PitchComparisonTests, PitchWrittenOrder) {
+    using MCC::Pitch;
+    const Pitch bSharp3(Letter::B, Accidental::Sharp(), 3);
+    const Pitch cFlat4(Letter::C, Accidental::Flat(), 4);
+    EXPECT_LT(bSharp3, cFlat4);
+    EXPECT_GT(bSharp3.ChromaticIndex(), cFlat4.ChromaticIndex());
+
+    // ForEachPitch visits pitches in written order.
+    Pitch previous = Pitch::Invalid();
+    bool first = true;
+    MCCTests::ForEachPitch([&](Pitch pitch) {
+        if (!first) {
+            EXPECT_LT(previous, pitch);
+            EXPECT_FALSE(pitch < previous);
+        }
+        previous = pitch;
+        first = false;
+    });
+}
+
+// SPEC-ORD-6: pitch height compares chromatic indices; enharmonic ties are
+// broken by written order, so sorting is deterministic.
+TEST(PitchComparisonTests, PitchHeightOrder) {
+    using MCC::Pitch;
+    const Pitch bSharp3(Letter::B, Accidental::Sharp(), 3);
+    const Pitch cFlat4(Letter::C, Accidental::Flat(), 4);
+    const Pitch c4(Letter::C, 4);
+    EXPECT_TRUE(MCC::IsLowerThan(cFlat4, bSharp3));
+    EXPECT_FALSE(MCC::IsLowerThan(bSharp3, cFlat4));
+    EXPECT_TRUE(MCC::IsLowerThan(bSharp3, c4));   // Same height, B# written first.
+    EXPECT_FALSE(MCC::IsLowerThan(c4, bSharp3));
+    EXPECT_FALSE(MCC::IsLowerThan(c4, c4));
+
+    std::vector<Pitch> pitches = {
+        Pitch(Letter::D, 4), c4, bSharp3, cFlat4, Pitch(Letter::A, 3),
+        Pitch(Letter::D, Accidental::DoubleFlat(), 4), Pitch::Invalid()};
+    std::sort(pitches.begin(), pitches.end(), MCC::IsLowerThan);
+    const std::vector<Pitch> expected = {
+        Pitch(Letter::A, 3), cFlat4, bSharp3, c4,
+        Pitch(Letter::D, Accidental::DoubleFlat(), 4), Pitch(Letter::D, 4),
+        Pitch::Invalid()};
+    EXPECT_EQ(pitches, expected);
 }

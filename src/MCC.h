@@ -11,4 +11,8 @@
     #include <MCC_Pitch.h>
 #endif
 
+#if __has_include(<MCC_Tuning.h>)
+    #include <MCC_Tuning.h>
+#endif
+
 #endif // MCC_H

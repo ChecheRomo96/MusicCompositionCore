@@ -38,7 +38,7 @@ public:
      * @brief Creates the chromatic class `value`; values outside `[0, 11]`
      * produce the invalid value (SPEC-ERR-3).
      */
-    constexpr explicit ChromaticClass(int value) noexcept
+    constexpr explicit ChromaticClass(int32_t value) noexcept
         : _value((value >= 0 && value < Count)
               ? static_cast<uint8_t>(value)
               : InvalidValue) {}
@@ -61,7 +61,7 @@ public:
      * @brief Returns this class moved by `semitones`, reduced modulo 12.
      * An invalid class stays invalid (SPEC-ERR-4).
      */
-    constexpr ChromaticClass Transposed(int semitones) const noexcept {
+    constexpr ChromaticClass Transposed(int32_t semitones) const noexcept {
         if (!IsValid()) {
             return Invalid();
         }

@@ -41,6 +41,23 @@ inline int ExpectedChromaticClass(MCC::PitchClass pitchClass) {
     return ((semitones % 12) + 12) % 12;
 }
 
+// Calls `visit(pitch)` for every writable pitch: 7 letters x 9 accidentals x
+// 256 octaves, in written order.
+template <typename Visitor>
+void ForEachPitch(Visitor visit) {
+    for (int octave = -128; octave <= 127; ++octave) {
+        for (const MCC::PitchClass pitchClass : AllPitchClasses()) {
+            visit(MCC::Pitch(pitchClass, octave));
+        }
+    }
+}
+
+inline int ExpectedChromaticIndex(MCC::Pitch pitch) {
+    return (pitch.Octave() + 1) * 12 +
+        NaturalSemitones[MCC::DiatonicIndex(pitch.Letter())] +
+        pitch.Accidental().Semitones();
+}
+
 } // namespace MCCTests
 
 #endif // MCC_TESTS_PITCH_TEST_SUPPORT_H

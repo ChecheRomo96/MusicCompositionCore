@@ -94,7 +94,7 @@ public:
      * The spelling is never rewritten, so the accidental of a valid pitch
      * class always remains within `[-4, +4]` (SPEC-ACC-3).
      */
-    constexpr PitchClass MovedDiatonically(int steps) const noexcept {
+    constexpr PitchClass MovedDiatonically(int32_t steps) const noexcept {
         if (!IsValid()) {
             return Invalid();
         }
@@ -108,7 +108,7 @@ public:
      * A result outside `[-4, +4]` is the invalid pitch class; the note is
      * never respelled with another letter (SPEC-ACC-3, SPEC-ERR-5).
      */
-    constexpr PitchClass Altered(int semitones) const noexcept {
+    constexpr PitchClass Altered(int32_t semitones) const noexcept {
         if (!IsValid()) {
             return Invalid();
         }

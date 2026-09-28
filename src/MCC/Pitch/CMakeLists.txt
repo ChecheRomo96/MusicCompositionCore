@@ -1,7 +1,9 @@
 set(MCC_PITCH_HEADERS
     "${CMAKE_CURRENT_LIST_DIR}/Accidental.h"
     "${CMAKE_CURRENT_LIST_DIR}/ChromaticClass.h"
+    "${CMAKE_CURRENT_LIST_DIR}/ChromaticIndex.h"
     "${CMAKE_CURRENT_LIST_DIR}/Letter.h"
+    "${CMAKE_CURRENT_LIST_DIR}/Pitch.h"
     "${CMAKE_CURRENT_LIST_DIR}/PitchClass.h")
 set(MCC_PITCH_SOURCES
     "${CMAKE_CURRENT_LIST_DIR}/Pitch.cpp")
