@@ -10,6 +10,9 @@
  * - @ref MCC_Pitch "Pitch": `Letter`, `Accidental`, `NoteName` (spelled,
  *   `C#` != `Db`), `PitchClass` (0-11), `ChromaticIndex` and `Pitch`
  *   (scientific pitch notation, middle C is `C4`).
+ * - @ref MCC_Interval "Interval": `Interval` (directed diatonic + chromatic
+ *   distance, quality and number), inversion, `IntervalBetween()` and
+ *   spelling-preserving transposition (`E4 + M3 = G#4`).
  * - @ref MCC_Tuning "Tuning": `Tuning` and `EqualTemperament` frequencies
  *   (`A4 = 440 Hz`); the only module that uses `float`.
  * - @ref MCC_Core "Core": version information.

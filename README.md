@@ -8,6 +8,9 @@ It contains music theory only: no MIDI concepts. Available modules:
 
 - **Pitch**: `Letter`, `Accidental`, `NoteName` (spelled, `C#` != `Db`),
   `PitchClass` (0-11), `ChromaticIndex` and `Pitch` (middle C is `C4`).
+- **Interval**: `Interval` with quality, number and direction, inversion,
+  `IntervalBetween()` and spelling-preserving transposition
+  (`E4 + M3 = G#4`).
 - **Tuning**: `Tuning` and `EqualTemperament` frequencies (`A4 = 440 Hz`).
 - **Core**: version information.
 

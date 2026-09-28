@@ -8,6 +8,10 @@ if(MCC_PITCH)
     list(APPEND MCC_MODULE_HEADERS "${CMAKE_CURRENT_LIST_DIR}/Pitch.h")
 endif()
 
+if(MCC_INTERVAL)
+    list(APPEND MCC_MODULE_HEADERS "${CMAKE_CURRENT_LIST_DIR}/Interval.h")
+endif()
+
 if(MCC_TUNING)
     list(APPEND MCC_MODULE_HEADERS "${CMAKE_CURRENT_LIST_DIR}/Tuning.h")
 endif()
@@ -26,6 +30,10 @@ endif()
 
 if(MCC_PITCH)
     add_subdirectory(Pitch)
+endif()
+
+if(MCC_INTERVAL)
+    add_subdirectory(Interval)
 endif()
 
 if(MCC_TUNING)

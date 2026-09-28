@@ -37,6 +37,11 @@ if(MCC_PITCH)
         "${CMAKE_CURRENT_LIST_DIR}/MCC_Pitch.h")
 endif()
 
+if(MCC_INTERVAL)
+    list(APPEND MCC_TOP_LEVEL_HEADERS
+        "${CMAKE_CURRENT_LIST_DIR}/MCC_Interval.h")
+endif()
+
 if(MCC_TUNING)
     list(APPEND MCC_TOP_LEVEL_HEADERS
         "${CMAKE_CURRENT_LIST_DIR}/MCC_Tuning.h")
@@ -64,11 +69,15 @@ if(MCC_PITCH)
     mcc_add_macro(PUBLIC MCC_PITCH)
 endif()
 
+if(MCC_INTERVAL)
+    mcc_add_macro(PUBLIC MCC_INTERVAL)
+endif()
+
 if(MCC_TUNING)
     mcc_add_macro(PUBLIC MCC_TUNING)
 endif()
 
-if(MCC_CORE OR MCC_PITCH OR MCC_TUNING)
+if(MCC_CORE OR MCC_PITCH OR MCC_INTERVAL OR MCC_TUNING)
     add_subdirectory(MCC)
 endif()
 

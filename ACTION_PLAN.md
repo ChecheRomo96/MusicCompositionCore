@@ -245,6 +245,8 @@ Decisions:
 
 ## Phase 5 - Intervals
 
+Status: complete (`src/MCC/Interval/`, module macro `MCC_INTERVAL`)
+
 Implement:
 
 ```cpp
@@ -256,13 +258,36 @@ MCC::Interval
 
 Required behavior:
 
-- [ ] Preserve diatonic and chromatic distance.
-- [ ] Construct intervals from number and quality.
-- [ ] Calculate intervals between note names and pitches.
-- [ ] Support ascending, descending and compound intervals.
-- [ ] Invert intervals.
-- [ ] Transpose note names and pitches while preserving spelling.
-- [ ] Add property tests for inversion and transposition.
+- [x] Preserve diatonic and chromatic distance.
+- [x] Construct intervals from number and quality.
+- [x] Calculate intervals between note names and pitches.
+- [x] Support ascending, descending and compound intervals.
+- [x] Invert intervals.
+- [x] Transpose note names and pitches while preserving spelling.
+- [x] Add property tests for inversion and transposition.
+
+Decisions:
+
+- `Interval` stores signed diatonic steps and signed semitones (4 bytes).
+  Direction follows the steps, or the semitones for a unison, so no
+  diminished unison can exist; number and quality are derived.
+- Valid intervals span at most the writable pitch range (1791 steps, 3079
+  semitones) and need at most four augmentations or diminutions; so the
+  interval between extreme spellings such as `Cbbbb` and `C####` is invalid.
+- `Interval(quality, number, direction)` builds an interval; a perfect
+  unison ignores the direction. `Interval::FromSteps()` builds one from raw
+  counts.
+- `IntervalBetween(Pitch, Pitch)` is directed; `IntervalBetween(NoteName,
+  NoteName)` is the simple ascending interval to the next occurrence of the
+  target letter.
+- `pitch + interval`, `pitch - interval`, `noteName + interval` and
+  `noteName - interval` transpose preserving spelling; an accidental outside
+  `[-4, +4]` or an octave outside `[-128, 127]` makes the result invalid.
+- `Inverted()` inverts the simple part and keeps the direction; an
+  augmented octave inverts to the opposite-direction augmented unison
+  (clarified in SPEC-INT-6).
+- `operator==` is written equality (`A4 != d5`); `IsEnharmonic()` compares
+  signed semitones.
 
 ## Phase 6 - Scales and scale catalog
 

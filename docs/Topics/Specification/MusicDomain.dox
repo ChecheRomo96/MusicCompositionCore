@@ -108,7 +108,8 @@
  *   to `Cb` is a descending augmented unison.
  * - SPEC-INT-6: Inversion of a simple interval satisfies
  *   `number + inverted number = 9` and swaps major/minor and
- *   augmented/diminished.
+ *   augmented/diminished. Because of SPEC-INT-5, an augmented octave
+ *   inverts to an augmented unison in the opposite direction.
  * - SPEC-INT-7: Transposition preserves spelling: `pitch + interval` moves
  *   the letter by the diatonic count and sets the accidental required by the
  *   chromatic count.

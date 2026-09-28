@@ -22,6 +22,7 @@
  * | --- | --- |
  * | `MCC_Core_Version` | MCC and Foundation versions |
  * | `MCC_Pitch_NoteNames` | Pitch classes of all 7 x 9 spellings, written equality versus enharmony, diatonic movement, boundary accidentals and written order |
+ * | `MCC_Interval_Intervals` | Intervals above C4, spelling-preserving transposition, intervals between pitches and inversions |
  * | `MCC_Tuning_Pitches` | Octaves that belong to the letter, diatonic movement across octaves, written versus height order and frequencies under several tunings |
  *
  * Build and run one on the desktop:
