@@ -2,7 +2,7 @@
 
 #include "PitchTestSupport.h"
 
-using MCC::ChromaticClass;
+using MCC::PitchClass;
 using MCC::ChromaticIndex;
 
 // SPEC-CHR-1: origin C-1 = 0, so C0 = 12, C4 = 60 and A4 = 69.
@@ -35,11 +35,11 @@ TEST(ChromaticIndexTests, IsNotLimitedToAProtocolRange) {
         .ChromaticIndex(), ChromaticIndex(128));
 }
 
-// SPEC-ORD-4: the chromatic class of an index is its value mod 12.
-TEST(ChromaticIndexTests, ChromaticClassIsFlooredModulo) {
+// SPEC-ORD-4: the pitch class of an index is its value mod 12.
+TEST(ChromaticIndexTests, PitchClassIsFlooredModulo) {
     for (int value = -1528; value <= 1551; ++value) {
-        EXPECT_EQ(ChromaticIndex(value).ChromaticClass(),
-            ChromaticClass(((value % 12) + 12) % 12)) << value;
+        EXPECT_EQ(ChromaticIndex(value).PitchClass(),
+            PitchClass(((value % 12) + 12) % 12)) << value;
     }
 }
 

@@ -5,53 +5,53 @@
 #include <type_traits>
 
 using MCC::Accidental;
-using MCC::ChromaticClass;
-using MCC::Letter;
 using MCC::PitchClass;
+using MCC::Letter;
+using MCC::NoteName;
 
 // SPEC-EMB-2: size budgets.
 static_assert(sizeof(Letter) == 1);
 static_assert(sizeof(Accidental) == 1);
-static_assert(sizeof(ChromaticClass) == 1);
-static_assert(sizeof(PitchClass) <= 2);
+static_assert(sizeof(PitchClass) == 1);
+static_assert(sizeof(NoteName) <= 2);
 
 // SPEC-EMB-1: trivially copyable, no virtual functions.
 static_assert(std::is_trivially_copyable_v<Letter>);
 static_assert(std::is_trivially_copyable_v<Accidental>);
-static_assert(std::is_trivially_copyable_v<ChromaticClass>);
 static_assert(std::is_trivially_copyable_v<PitchClass>);
+static_assert(std::is_trivially_copyable_v<NoteName>);
 static_assert(!std::is_polymorphic_v<Accidental>);
-static_assert(!std::is_polymorphic_v<ChromaticClass>);
 static_assert(!std::is_polymorphic_v<PitchClass>);
+static_assert(!std::is_polymorphic_v<NoteName>);
 static_assert(std::is_standard_layout_v<Accidental>);
-static_assert(std::is_standard_layout_v<ChromaticClass>);
 static_assert(std::is_standard_layout_v<PitchClass>);
+static_assert(std::is_standard_layout_v<NoteName>);
 
 // SPEC-EMB-3: construction, queries, comparison and movement are constexpr.
-constexpr PitchClass kCSharp(Letter::C, Accidental::Sharp());
-constexpr PitchClass kDFlat(Letter::D, Accidental::Flat());
+constexpr NoteName kCSharp(Letter::C, Accidental::Sharp());
+constexpr NoteName kDFlat(Letter::D, Accidental::Flat());
 static_assert(kCSharp.IsValid());
 static_assert(kCSharp.Letter() == Letter::C);
 static_assert(kCSharp.Accidental() == Accidental::Sharp());
-static_assert(kCSharp.ChromaticClass() == ChromaticClass(1));
+static_assert(kCSharp.PitchClass() == PitchClass(1));
 static_assert(kCSharp != kDFlat);
 static_assert(MCC::IsEnharmonic(kCSharp, kDFlat));
 static_assert(kCSharp < kDFlat);
-static_assert(kCSharp.MovedDiatonically(2) == PitchClass(Letter::E, Accidental::Sharp()));
-static_assert(kCSharp.Altered(1) == PitchClass(Letter::C, Accidental::DoubleSharp()));
-static_assert(!PitchClass().IsValid());
+static_assert(kCSharp.MovedDiatonically(2) == NoteName(Letter::E, Accidental::Sharp()));
+static_assert(kCSharp.Altered(1) == NoteName(Letter::C, Accidental::DoubleSharp()));
+static_assert(!NoteName().IsValid());
 static_assert(!Accidental(5).IsValid());
-static_assert(ChromaticClass(11).Transposed(1) == ChromaticClass(0));
+static_assert(PitchClass(11).Transposed(1) == PitchClass(0));
 static_assert(MCC::MoveLetter(Letter::B, 1) == Letter::C);
 static_assert(MCC::NaturalSemitone(Letter::A) == 9);
 static_assert(MCC::DiatonicIndex(Letter::G) == 4);
 
 // SPEC-EMB-3: values usable as constexpr table data (flash-friendly).
-constexpr PitchClass kCMajor[] = {
-    PitchClass(Letter::C), PitchClass(Letter::D), PitchClass(Letter::E),
-    PitchClass(Letter::F), PitchClass(Letter::G), PitchClass(Letter::A),
-    PitchClass(Letter::B)};
-static_assert(kCMajor[3].ChromaticClass() == ChromaticClass(5));
+constexpr NoteName kCMajor[] = {
+    NoteName(Letter::C), NoteName(Letter::D), NoteName(Letter::E),
+    NoteName(Letter::F), NoteName(Letter::G), NoteName(Letter::A),
+    NoteName(Letter::B)};
+static_assert(kCMajor[3].PitchClass() == PitchClass(5));
 
 using MCC::ChromaticIndex;
 using MCC::Pitch;
@@ -86,8 +86,8 @@ static_assert(!Pitch(Letter::B, 127).MovedDiatonically(1).IsValid());
 TEST(LayoutTests, ReportsSizes) {
     EXPECT_EQ(sizeof(Letter), 1U);
     EXPECT_EQ(sizeof(Accidental), 1U);
-    EXPECT_EQ(sizeof(ChromaticClass), 1U);
-    EXPECT_EQ(sizeof(PitchClass), 2U);
+    EXPECT_EQ(sizeof(PitchClass), 1U);
+    EXPECT_EQ(sizeof(NoteName), 2U);
     EXPECT_EQ(sizeof(ChromaticIndex), 2U);
     EXPECT_EQ(sizeof(Pitch), 3U);
 }

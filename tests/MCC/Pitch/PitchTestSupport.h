@@ -23,21 +23,21 @@ inline std::array<MCC::Accidental, 9> AllAccidentals() {
 }
 
 // The 63 supported spellings in written order: letter, then accidental.
-inline std::array<MCC::PitchClass, 63> AllPitchClasses() {
-    std::array<MCC::PitchClass, 63> pitchClasses{};
+inline std::array<MCC::NoteName, 63> AllNoteNames() {
+    std::array<MCC::NoteName, 63> noteNames{};
     int i = 0;
     for (const MCC::Letter letter : AllLetters) {
         for (const MCC::Accidental accidental : AllAccidentals()) {
-            pitchClasses[i++] = MCC::PitchClass(letter, accidental);
+            noteNames[i++] = MCC::NoteName(letter, accidental);
         }
     }
-    return pitchClasses;
+    return noteNames;
 }
 
-inline int ExpectedChromaticClass(MCC::PitchClass pitchClass) {
+inline int ExpectedPitchClass(MCC::NoteName noteName) {
     const int semitones =
-        NaturalSemitones[MCC::DiatonicIndex(pitchClass.Letter())] +
-        pitchClass.Accidental().Semitones();
+        NaturalSemitones[MCC::DiatonicIndex(noteName.Letter())] +
+        noteName.Accidental().Semitones();
     return ((semitones % 12) + 12) % 12;
 }
 
@@ -46,8 +46,8 @@ inline int ExpectedChromaticClass(MCC::PitchClass pitchClass) {
 template <typename Visitor>
 void ForEachPitch(Visitor visit) {
     for (int octave = -128; octave <= 127; ++octave) {
-        for (const MCC::PitchClass pitchClass : AllPitchClasses()) {
-            visit(MCC::Pitch(pitchClass, octave));
+        for (const MCC::NoteName noteName : AllNoteNames()) {
+            visit(MCC::Pitch(noteName, octave));
         }
     }
 }

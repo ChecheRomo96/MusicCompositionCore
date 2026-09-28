@@ -4,7 +4,7 @@ void setup() {
     Serial.begin(115200);
     while(!Serial) {}
 
-    MCCExamples::Pitch::PitchClasses::Run(
+    MCCExamples::Pitch::NoteNames::Run(
         [](const char* text) { Serial.print(text); });
 }
 

@@ -6,7 +6,7 @@
 
 #include <Foundation/Math/Arithmetic.h>
 
-#include <MCC/Pitch/ChromaticClass.h>
+#include <MCC/Pitch/PitchClass.h>
 #include <MCC/Pitch/Pitch.h>
 #include <MCC/Tuning/Tuning.h>
 
@@ -59,7 +59,7 @@ public:
         }
 
         // 2^(k / 12) for k = 0..11.
-        constexpr float ratios[MCC::ChromaticClass::Count] = {
+        constexpr float ratios[MCC::PitchClass::Count] = {
             1.0f,
             1.0594630943592953f,
             1.1224620483093730f,
@@ -77,9 +77,9 @@ public:
             static_cast<int32_t>(pitch.ChromaticIndex().Value()) -
             _tuning.Reference().ChromaticIndex().Value();
         int32_t octaves = Foundation::Math::FloorDiv(
-            distance, MCC::ChromaticClass::Count);
+            distance, MCC::PitchClass::Count);
         const int32_t semitones = Foundation::Math::FloorMod(
-            distance, MCC::ChromaticClass::Count);
+            distance, MCC::PitchClass::Count);
 
         float frequency = _tuning.ReferenceFrequency() * ratios[semitones];
         for (; octaves > 0; --octaves) {

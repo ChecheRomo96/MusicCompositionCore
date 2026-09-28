@@ -1,12 +1,12 @@
 /**
  * @defgroup MCC_Pitch Pitch
  * @ingroup MCC
- * @brief Written pitch primitives: letters, accidentals, pitch classes and
+ * @brief Written pitch primitives: letters, accidentals, note names and
  * pitches.
  *
- * `MCC::Letter` + `MCC::Accidental` form a `MCC::PitchClass`, which keeps
- * its written spelling, and a pitch class plus an octave forms a
- * `MCC::Pitch` (middle C is `C4`). `MCC::ChromaticClass` and
+ * `MCC::Letter` + `MCC::Accidental` form a `MCC::NoteName`, which keeps
+ * its written spelling, and a note name plus an octave forms a
+ * `MCC::Pitch` (middle C is `C4`). `MCC::PitchClass` and
  * `MCC::ChromaticIndex` discard the spelling and are obtained explicitly.
  * Written equality and order are separate from enharmonic equivalence and
  * pitch height; see @ref MCC_Specification.

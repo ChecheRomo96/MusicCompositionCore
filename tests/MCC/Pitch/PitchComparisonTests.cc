@@ -7,14 +7,14 @@
 #include <type_traits>
 
 using MCC::Accidental;
-using MCC::ChromaticClass;
-using MCC::Letter;
 using MCC::PitchClass;
-using MCCTests::AllPitchClasses;
+using MCC::Letter;
+using MCC::NoteName;
+using MCCTests::AllNoteNames;
 
 // SPEC-EQ-1: operator== compares written spelling; C# != Db.
 TEST(PitchComparisonTests, WrittenEqualityIsSpellingEqualityExhaustively) {
-    const auto all = AllPitchClasses();
+    const auto all = AllNoteNames();
     for (size_t i = 0; i < all.size(); ++i) {
         for (size_t j = 0; j < all.size(); ++j) {
             const bool sameSpelling =
@@ -25,20 +25,20 @@ TEST(PitchComparisonTests, WrittenEqualityIsSpellingEqualityExhaustively) {
             EXPECT_EQ(all[i] != all[j], !sameSpelling);
         }
     }
-    EXPECT_NE(PitchClass(Letter::C, Accidental::Sharp()),
-        PitchClass(Letter::D, Accidental::Flat()));
+    EXPECT_NE(NoteName(Letter::C, Accidental::Sharp()),
+        NoteName(Letter::D, Accidental::Flat()));
 }
 
-// SPEC-EQ-2: enharmonic equivalence compares chromatic classes and is
+// SPEC-EQ-2: enharmonic equivalence compares pitch classes and is
 // distinct from written equality.
 TEST(PitchComparisonTests, EnharmonicEquivalenceComparesClassesExhaustively) {
-    const auto all = AllPitchClasses();
+    const auto all = AllNoteNames();
     int enharmonicButUnequal = 0;
-    for (const PitchClass a : all) {
-        for (const PitchClass b : all) {
+    for (const NoteName a : all) {
+        for (const NoteName b : all) {
             const bool sameClass =
-                MCCTests::ExpectedChromaticClass(a) ==
-                MCCTests::ExpectedChromaticClass(b);
+                MCCTests::ExpectedPitchClass(a) ==
+                MCCTests::ExpectedPitchClass(b);
             EXPECT_EQ(MCC::IsEnharmonic(a, b), sameClass);
             EXPECT_EQ(MCC::IsEnharmonic(a, b), MCC::IsEnharmonic(b, a));
             if (a == b) {
@@ -51,27 +51,27 @@ TEST(PitchComparisonTests, EnharmonicEquivalenceComparesClassesExhaustively) {
     }
     EXPECT_GT(enharmonicButUnequal, 0);
 
-    const PitchClass cSharp(Letter::C, Accidental::Sharp());
-    const PitchClass dFlat(Letter::D, Accidental::Flat());
+    const NoteName cSharp(Letter::C, Accidental::Sharp());
+    const NoteName dFlat(Letter::D, Accidental::Flat());
     EXPECT_TRUE(MCC::IsEnharmonic(cSharp, dFlat));
     EXPECT_FALSE(cSharp == dFlat);
-    EXPECT_TRUE(MCC::IsEnharmonic(PitchClass(Letter::B, Accidental::Sharp()),
-        PitchClass(Letter::C)));
-    EXPECT_TRUE(MCC::IsEnharmonic(PitchClass(Letter::C, Accidental::QuadrupleFlat()),
-        PitchClass(Letter::G, Accidental::Sharp())));
-    EXPECT_FALSE(MCC::IsEnharmonic(PitchClass(Letter::C), PitchClass(Letter::D)));
+    EXPECT_TRUE(MCC::IsEnharmonic(NoteName(Letter::B, Accidental::Sharp()),
+        NoteName(Letter::C)));
+    EXPECT_TRUE(MCC::IsEnharmonic(NoteName(Letter::C, Accidental::QuadrupleFlat()),
+        NoteName(Letter::G, Accidental::Sharp())));
+    EXPECT_FALSE(MCC::IsEnharmonic(NoteName(Letter::C), NoteName(Letter::D)));
 }
 
 // SPEC-EQ-3: no implicit conversions between pitch types or from integers.
 TEST(PitchComparisonTests, NoImplicitConversions) {
-    static_assert(!std::is_convertible_v<PitchClass, ChromaticClass>);
-    static_assert(!std::is_convertible_v<ChromaticClass, PitchClass>);
-    static_assert(!std::is_convertible_v<int, ChromaticClass>);
+    static_assert(!std::is_convertible_v<NoteName, PitchClass>);
+    static_assert(!std::is_convertible_v<PitchClass, NoteName>);
+    static_assert(!std::is_convertible_v<int, PitchClass>);
     static_assert(!std::is_convertible_v<int, Accidental>);
-    static_assert(!std::is_convertible_v<Letter, PitchClass>);
-    static_assert(!std::is_convertible_v<PitchClass, int>);
+    static_assert(!std::is_convertible_v<Letter, NoteName>);
+    static_assert(!std::is_convertible_v<NoteName, int>);
     static_assert(!std::is_convertible_v<Accidental, int>);
-    static_assert(!std::is_convertible_v<ChromaticClass, int>);
+    static_assert(!std::is_convertible_v<PitchClass, int>);
     static_assert(!std::is_convertible_v<Letter, int>);
     SUCCEED();
 }
@@ -79,7 +79,7 @@ TEST(PitchComparisonTests, NoImplicitConversions) {
 // SPEC-ORD-5: operator< is written order: letter, then accidental. It is
 // not chromatic order: C## sorts before Db although its class is higher.
 TEST(PitchComparisonTests, WrittenOrderIsLetterThenAccidentalExhaustively) {
-    const auto all = AllPitchClasses();  // Generated in written order.
+    const auto all = AllNoteNames();  // Generated in written order.
     for (size_t i = 0; i < all.size(); ++i) {
         for (size_t j = 0; j < all.size(); ++j) {
             EXPECT_EQ(all[i] < all[j], i < j);
@@ -89,10 +89,10 @@ TEST(PitchComparisonTests, WrittenOrderIsLetterThenAccidentalExhaustively) {
         }
     }
 
-    const PitchClass cDoubleSharp(Letter::C, Accidental::DoubleSharp());
-    const PitchClass dFlat(Letter::D, Accidental::Flat());
+    const NoteName cDoubleSharp(Letter::C, Accidental::DoubleSharp());
+    const NoteName dFlat(Letter::D, Accidental::Flat());
     EXPECT_LT(cDoubleSharp, dFlat);
-    EXPECT_GT(cDoubleSharp.ChromaticClass(), dFlat.ChromaticClass());
+    EXPECT_GT(cDoubleSharp.PitchClass(), dFlat.PitchClass());
 
     auto shuffled = all;
     std::reverse(shuffled.begin(), shuffled.end());
@@ -107,9 +107,9 @@ TEST(PitchComparisonTests, PitchWrittenEquality) {
     const Pitch dFlat4(Letter::D, Accidental::Flat(), 4);
     EXPECT_NE(cSharp4, dFlat4);
     EXPECT_NE(cSharp4, Pitch(Letter::C, Accidental::Sharp(), 5));
-    EXPECT_EQ(cSharp4, Pitch(MCC::PitchClass(Letter::C, Accidental::Sharp()), 4));
+    EXPECT_EQ(cSharp4, Pitch(MCC::NoteName(Letter::C, Accidental::Sharp()), 4));
     MCCTests::ForEachPitch([](Pitch pitch) {
-        EXPECT_EQ(pitch, Pitch(pitch.PitchClass(), pitch.Octave()));
+        EXPECT_EQ(pitch, Pitch(pitch.NoteName(), pitch.Octave()));
     });
 }
 
@@ -141,9 +141,9 @@ TEST(PitchComparisonTests, NoImplicitPitchConversions) {
     using MCC::Pitch;
     static_assert(!std::is_convertible_v<Pitch, ChromaticIndex>);
     static_assert(!std::is_convertible_v<ChromaticIndex, Pitch>);
-    static_assert(!std::is_convertible_v<Pitch, PitchClass>);
-    static_assert(!std::is_convertible_v<PitchClass, Pitch>);
-    static_assert(!std::is_convertible_v<ChromaticIndex, ChromaticClass>);
+    static_assert(!std::is_convertible_v<Pitch, NoteName>);
+    static_assert(!std::is_convertible_v<NoteName, Pitch>);
+    static_assert(!std::is_convertible_v<ChromaticIndex, PitchClass>);
     static_assert(!std::is_convertible_v<int, ChromaticIndex>);
     static_assert(!std::is_convertible_v<ChromaticIndex, int>);
     SUCCEED();

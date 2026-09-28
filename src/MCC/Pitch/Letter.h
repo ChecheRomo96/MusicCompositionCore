@@ -14,7 +14,7 @@ namespace MCC {
  * Closed enumeration ordered `C D E F G A B` with diatonic indices 0-6
  * (SPEC-ORD-1). Every enumerator is valid; `Letter` has no invalid state
  * (SPEC-ERR-1). Values produced by casting integers outside 0-6 are not
- * letters: `PitchClass` rejects them and the queries below treat them as
+ * letters: `NoteName` rejects them and the queries below treat them as
  * `Letter::C`.
  */
 enum class Letter : uint8_t {

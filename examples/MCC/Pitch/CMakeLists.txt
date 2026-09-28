@@ -1,1 +1,1 @@
-add_subdirectory(PitchClasses)
+add_subdirectory(NoteNames)

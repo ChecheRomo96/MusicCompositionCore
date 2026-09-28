@@ -6,9 +6,9 @@ using MCC::Accidental;
 using MCC::ChromaticIndex;
 using MCC::Letter;
 using MCC::Pitch;
-using MCC::PitchClass;
+using MCC::NoteName;
 
-// SPEC-OCT-1, SPEC-OCT-4: every pitch class in every octave -128..127 is
+// SPEC-OCT-1, SPEC-OCT-4: every note name in every octave -128..127 is
 // writable and keeps its spelling and octave.
 TEST(PitchTests, PreservesSpellingAndOctaveExhaustively) {
     int count = 0;
@@ -19,13 +19,13 @@ TEST(PitchTests, PreservesSpellingAndOctaveExhaustively) {
     EXPECT_EQ(count, 7 * 9 * 256);
 
     for (int octave = -128; octave <= 127; ++octave) {
-        for (const PitchClass pitchClass : MCCTests::AllPitchClasses()) {
-            const Pitch pitch(pitchClass, octave);
-            EXPECT_EQ(pitch.PitchClass(), pitchClass);
-            EXPECT_EQ(pitch.Letter(), pitchClass.Letter());
-            EXPECT_EQ(pitch.Accidental(), pitchClass.Accidental());
+        for (const NoteName noteName : MCCTests::AllNoteNames()) {
+            const Pitch pitch(noteName, octave);
+            EXPECT_EQ(pitch.NoteName(), noteName);
+            EXPECT_EQ(pitch.Letter(), noteName.Letter());
+            EXPECT_EQ(pitch.Accidental(), noteName.Accidental());
             EXPECT_EQ(pitch.Octave(), octave);
-            EXPECT_EQ(pitch.ChromaticClass(), pitchClass.ChromaticClass());
+            EXPECT_EQ(pitch.PitchClass(), noteName.PitchClass());
         }
     }
 }
@@ -34,7 +34,7 @@ TEST(PitchTests, PreservesSpellingAndOctaveExhaustively) {
 TEST(PitchTests, MiddleCIsC4) {
     EXPECT_EQ(Pitch(Letter::C, 4).ChromaticIndex(), ChromaticIndex(60));
     EXPECT_EQ(Pitch(Letter::C, 4), Pitch(Letter::C, Accidental::Natural(), 4));
-    EXPECT_EQ(Pitch(Letter::C, 4), Pitch(PitchClass(Letter::C), 4));
+    EXPECT_EQ(Pitch(Letter::C, 4), Pitch(NoteName(Letter::C), 4));
 }
 
 // SPEC-OCT-4: octaves outside [-128, 127] are invalid.
@@ -64,7 +64,7 @@ TEST(PitchTests, ChromaticIndexExhaustively) {
         const ChromaticIndex index = pitch.ChromaticIndex();
         EXPECT_TRUE(index.IsValid());
         EXPECT_EQ(index.Value(), MCCTests::ExpectedChromaticIndex(pitch));
-        EXPECT_EQ(index.ChromaticClass(), pitch.ChromaticClass());
+        EXPECT_EQ(index.PitchClass(), pitch.PitchClass());
     });
     EXPECT_EQ(Pitch(Letter::C, Accidental::QuadrupleFlat(), -128).ChromaticIndex(),
         ChromaticIndex(-1528));
@@ -91,8 +91,8 @@ TEST(PitchTests, OctaveBelongsToTheLetter) {
 // and keeps the written accidental.
 TEST(PitchTests, MovedDiatonicallyCrossesOctavesExhaustively) {
     for (int octave = -3; octave <= 3; ++octave) {
-        for (const PitchClass pitchClass : MCCTests::AllPitchClasses()) {
-            const Pitch pitch(pitchClass, octave);
+        for (const NoteName noteName : MCCTests::AllNoteNames()) {
+            const Pitch pitch(noteName, octave);
             for (int steps = -22; steps <= 22; ++steps) {
                 const Pitch moved = pitch.MovedDiatonically(steps);
                 const int index = pitch.DiatonicIndex() + steps;

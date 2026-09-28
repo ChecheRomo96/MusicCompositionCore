@@ -6,10 +6,10 @@ namespace {
 
 static_assert(sizeof(MCC::Letter) == 1, "Letter must fit in 1 byte");
 static_assert(sizeof(MCC::Accidental) == 1, "Accidental must fit in 1 byte");
-static_assert(sizeof(MCC::ChromaticClass) == 1,
-    "ChromaticClass must fit in 1 byte");
-static_assert(sizeof(MCC::PitchClass) <= 2,
-    "PitchClass must fit in 2 bytes");
+static_assert(sizeof(MCC::PitchClass) == 1,
+    "PitchClass must fit in 1 byte");
+static_assert(sizeof(MCC::NoteName) <= 2,
+    "NoteName must fit in 2 bytes");
 static_assert(sizeof(MCC::ChromaticIndex) == 2,
     "ChromaticIndex must fit in 2 bytes");
 static_assert(sizeof(MCC::Pitch) <= 4, "Pitch must fit in 4 bytes");
@@ -25,11 +25,11 @@ static_assert(MCC::Pitch(MCC::Letter::B, MCC::Accidental::QuadrupleSharp(), 127)
     .ChromaticIndex() == MCC::ChromaticIndex(MCC::ChromaticIndex::Maximum),
     "B####127 must be the highest index");
 
-static_assert(MCC::PitchClass(MCC::Letter::B, MCC::Accidental::Sharp())
-    .ChromaticClass() == MCC::ChromaticClass(0), "B# must be class 0");
-static_assert(MCC::PitchClass(MCC::Letter::C, MCC::Accidental::Flat())
-    .ChromaticClass() == MCC::ChromaticClass(11), "Cb must be class 11");
-static_assert(!MCC::PitchClass(MCC::Letter::C, MCC::Accidental::QuadrupleSharp())
+static_assert(MCC::NoteName(MCC::Letter::B, MCC::Accidental::Sharp())
+    .PitchClass() == MCC::PitchClass(0), "B# must be class 0");
+static_assert(MCC::NoteName(MCC::Letter::C, MCC::Accidental::Flat())
+    .PitchClass() == MCC::PitchClass(11), "Cb must be class 11");
+static_assert(!MCC::NoteName(MCC::Letter::C, MCC::Accidental::QuadrupleSharp())
     .Altered(1).IsValid(), "Accidental overflow must be invalid");
 
 } // namespace

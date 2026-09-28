@@ -6,22 +6,26 @@
  * implement and test against it. Identifiers such as
  * `SPEC-OCT-1` are referenced from unit tests.
  *
+ * Terminology revision (after Phase 4): the spelled letter + accidental type
+ * is `NoteName` and `PitchClass` is the integer class 0-11, following the
+ * standard music-theory meaning of "pitch class". The rules are unchanged.
+ *
  * @section MCCSpecTerms Terminology
  *
  * MCC builds absolute pitch in two steps:
  *
  * @code{.text}
- * Letter + Accidental   -> PitchClass   (written spelling, no octave)
- * PitchClass + Octave   -> Pitch        (written, absolute)
+ * Letter + Accidental   -> NoteName   (written spelling, no octave)
+ * NoteName + Octave     -> Pitch      (written, absolute)
  * @endcode
  *
  * | Type | Meaning | Example |
  * | --- | --- | --- |
  * | `MCC::Letter` | Diatonic letter name | `D` |
  * | `MCC::Accidental` | Chromatic alteration of a letter | sharp (+1) |
- * | `MCC::PitchClass` | Letter + accidental, spelling preserved | `D#` |
- * | `MCC::Pitch` | Pitch class + octave | `D#4` |
- * | `MCC::ChromaticClass` | Chromatic class 0-11, spelling discarded | `3` |
+ * | `MCC::NoteName` | Letter + accidental, spelling preserved | `D#` |
+ * | `MCC::Pitch` | Note name + octave | `D#4` |
+ * | `MCC::PitchClass` | Pitch class 0-11, spelling discarded | `3` |
  * | `MCC::ChromaticIndex` | Absolute semitone position of a pitch | `63` |
  * | `MCC::Interval` | Directed diatonic + chromatic distance | ascending major third |
  *
@@ -43,11 +47,11 @@
  * - SPEC-EQ-1: `operator==` compares written spelling: letter, accidental
  *   and, for pitches, octave. `C# != Db` and `C#4 != Db4`.
  * - SPEC-EQ-2: Enharmonic equivalence is always explicit:
- *   `MCC::IsEnharmonic(a, b)`. For pitch classes it compares chromatic
+ *   `MCC::IsEnharmonic(a, b)`. For note names it compares pitch
  *   classes; for pitches it compares chromatic indices. `B#3` and `C4` are
  *   enharmonic; `B#3` and `C3` are not.
- * - SPEC-EQ-3: No implicit conversion exists between `PitchClass`,
- *   `Pitch`, `ChromaticClass` and `ChromaticIndex`.
+ * - SPEC-EQ-3: No implicit conversion exists between `NoteName`,
+ *   `Pitch`, `PitchClass` and `ChromaticIndex`.
  *
  * @section MCCSpecOrdering Ordering
  *
@@ -56,7 +60,7 @@
  * - SPEC-ORD-2: Diatonic index of a pitch = `octave * 7 + letterIndex`.
  * - SPEC-ORD-3: Chromatic index of a pitch =
  *   `(octave + 1) * 12 + letterSemitone + accidental`.
- * - SPEC-ORD-4: Chromatic class of a pitch class =
+ * - SPEC-ORD-4: Pitch class of a note name =
  *   `(letterSemitone + accidental)`
  *   reduced modulo 12 into `[0, 11]`.
  * - SPEC-ORD-5: `operator<` is written order, used for sorting and
@@ -113,7 +117,7 @@
  *
  * MCC never throws and never has undefined behavior on invalid input.
  *
- * - SPEC-ERR-1: `Accidental`, `PitchClass`, `Pitch` and `Interval` each have one
+ * - SPEC-ERR-1: `Accidental`, `NoteName`, `Pitch` and `Interval` each have one
  *   canonical invalid value and an `IsValid()` query. `Letter` is a closed
  *   enumeration and is always valid.
  * - SPEC-ERR-2: Default construction produces the invalid value.
@@ -134,8 +138,8 @@
  *
  * - SPEC-EMB-1: Fundamental value types are trivially copyable, have no
  *   virtual functions and never allocate.
- * - SPEC-EMB-2: Size budgets: `Letter`, `Accidental` and `ChromaticClass`
- *   1 byte, `PitchClass` at most 2 bytes, `Pitch` at most 4 bytes,
+ * - SPEC-EMB-2: Size budgets: `Letter`, `Accidental` and `PitchClass`
+ *   1 byte, `NoteName` at most 2 bytes, `Pitch` at most 4 bytes,
  *   `Interval` at most 4 bytes.
  *   Enforced with `static_assert` in tests.
  * - SPEC-EMB-3: Construction, comparison, transposition and interval
@@ -162,7 +166,7 @@
  *
  * | Invariants | Planned test suite | Phase |
  * | --- | --- | --- |
- * | SPEC-ORD-1, ORD-4, ACC-1..3 | `PitchClassTests` (exhaustive 7 x 9 spellings) | 3 |
+ * | SPEC-ORD-1, ORD-4, ACC-1..3 | `NoteNameTests` (exhaustive 7 x 9 spellings) | 3 |
  * | SPEC-EQ-1..3, ORD-5..6 | `PitchComparisonTests` | 3-4 |
  * | SPEC-OCT-1..4, ORD-2..3, CHR-1..2 | `PitchTests` (octave and B#/Cb boundaries) | 4 |
  * | SPEC-OCT-2 | `TuningTests` (A4 = 440 Hz, C4 ~ 261.63 Hz) | 4 |

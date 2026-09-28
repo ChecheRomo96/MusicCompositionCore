@@ -139,11 +139,14 @@ Document and approve the invariants that all later modules will use:
 Decisions:
 
 - Scientific pitch notation: middle C is `C4`, `A4 = 440 Hz`.
-- `Letter + Accidental -> PitchClass`, `PitchClass + Octave -> Pitch`;
+- `Letter + Accidental -> NoteName`, `NoteName + Octave -> Pitch`;
   `MCC::Note` is reserved for pitch + rhythmic value.
 - Accidentals range from -4 to +4.
 - `ChromaticIndex` origin is `C-1 = 0` (`C4 = 60`).
 - Errors use one canonical invalid value per type plus `IsValid()`.
+- Terminology (revised after Phase 4): `NoteName` is the spelled letter +
+  accidental (`C#` != `Db`) and `PitchClass` is the integer class 0-11
+  (`C#` and `Db` are both 1), matching standard music-theory usage.
 
 Exit criteria:
 
@@ -159,15 +162,15 @@ Implement:
 ```cpp
 MCC::Letter
 MCC::Accidental
+MCC::NoteName
 MCC::PitchClass
-MCC::ChromaticClass
 ```
 
 Required behavior:
 
 - [x] Preserve written spelling.
-- [x] Derive the chromatic class.
-- [x] Compare written pitch classes.
+- [x] Derive the pitch class.
+- [x] Compare written note names.
 - [x] Test enharmonic equivalence explicitly.
 - [x] Move diatonically without losing spelling.
 - [x] Support boundary accidentals safely.
@@ -181,11 +184,11 @@ Decisions:
 
 - `Letter` is an `enum class` with free queries `DiatonicIndex()`,
   `NaturalSemitone()` and `MoveLetter()`; non-enumerator casts are rejected by
-  `PitchClass`.
-- `PitchClass::MovedDiatonically()` moves the letter and keeps the written
-  accidental; `PitchClass::Altered()` keeps the letter and changes the
+  `NoteName`.
+- `NoteName::MovedDiatonically()` moves the letter and keeps the written
+  accidental; `NoteName::Altered()` keeps the letter and changes the
   accidental, returning the invalid value outside `[-4, +4]`.
-- `ChromaticClass` construction checks its input; `Transposed()` reduces
+- `PitchClass` construction checks its input; `Transposed()` reduces
   modulo 12.
 - Invalid values sort after every valid value.
 - Floored modulo arithmetic uses `Foundation::Math::FloorMod`, added in
@@ -207,7 +210,7 @@ MCC::EqualTemperament
 
 Required behavior:
 
-- [x] Combine a written pitch class with an octave.
+- [x] Combine a written note name with an octave.
 - [x] Calculate an unbounded absolute chromatic position.
 - [x] Transpose across octave boundaries.
 - [x] Calculate frequency from an explicit tuning.
@@ -220,7 +223,7 @@ Decisions:
 
 - `ChromaticIndex` is a 16-bit value type with one invalid value; valid
   indices are exactly the writable pitch range `[-1528, 1551]`.
-- `Pitch` is 3 bytes: a `PitchClass` plus a signed 8-bit octave.
+- `Pitch` is 3 bytes: a `NoteName` plus a signed 8-bit octave.
 - Transposition in this phase preserves spelling: `MovedDiatonically()`
   (octave changes between `B` and `C`), `Altered()` and `MovedByOctaves()`.
   Transposing by semitones needs an interval to choose the spelling and
@@ -255,10 +258,10 @@ Required behavior:
 
 - [ ] Preserve diatonic and chromatic distance.
 - [ ] Construct intervals from number and quality.
-- [ ] Calculate intervals between pitch classes and pitches.
+- [ ] Calculate intervals between note names and pitches.
 - [ ] Support ascending, descending and compound intervals.
 - [ ] Invert intervals.
-- [ ] Transpose pitch classes and pitches while preserving spelling.
+- [ ] Transpose note names and pitches while preserving spelling.
 - [ ] Add property tests for inversion and transposition.
 
 ## Phase 6 - Scales and scale catalog
@@ -328,7 +331,7 @@ Actions:
 
 - [ ] Model tonic, mode and key signature separately from a scale.
 - [ ] Resolve degree spelling from the key context.
-- [ ] Format pitch classes, pitches, intervals, scales and chords.
+- [ ] Format note names, pitches, intervals, scales and chords.
 - [ ] Support ASCII output and optional Unicode symbols.
 - [ ] Support caller-provided fixed buffers for embedded builds.
 - [ ] Avoid mandatory `std::string` allocation in the core API.
@@ -403,7 +406,7 @@ Integration actions:
 | Version | Scope |
 | --- | --- |
 | `0.1.0` | Build, package, test and documentation scaffold |
-| `0.2.0` | Pitch classes, pitches, tuning and intervals |
+| `0.2.0` | Note names, pitches, tuning and intervals |
 | `0.3.0` | Scales and reviewed scale catalog |
 | `0.4.0` | Chords, keys and notation |
 | `0.5.0` | Rhythm and compositional patterns |

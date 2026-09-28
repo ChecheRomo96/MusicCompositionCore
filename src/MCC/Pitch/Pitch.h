@@ -6,15 +6,15 @@
 #include <Foundation/Math/Arithmetic.h>
 
 #include <MCC/Pitch/Accidental.h>
-#include <MCC/Pitch/ChromaticClass.h>
+#include <MCC/Pitch/PitchClass.h>
 #include <MCC/Pitch/ChromaticIndex.h>
 #include <MCC/Pitch/Letter.h>
-#include <MCC/Pitch/PitchClass.h>
+#include <MCC/Pitch/NoteName.h>
 
 namespace MCC {
 
 /**
- * @brief Written absolute pitch: a pitch class plus an octave.
+ * @brief Written absolute pitch: a note name plus an octave.
  * @ingroup MCC_Pitch
  *
  * MCC uses scientific pitch notation: middle C is `C4` (SPEC-OCT-1). The
@@ -25,7 +25,7 @@ namespace MCC {
  * SPEC-ORD-5); sounding pitch is compared through `ChromaticIndex()`,
  * `MCC::IsEnharmonic()` and `MCC::IsLowerThan()` (SPEC-EQ-2, SPEC-ORD-6).
  *
- * Default construction, an invalid pitch class or an out-of-range octave
+ * Default construction, an invalid note name or an out-of-range octave
  * produce the single invalid value (SPEC-ERR-1..3). Operations on the
  * invalid value, and operations whose result leaves the octave or
  * accidental ranges, return the invalid value (SPEC-ERR-4, SPEC-ERR-5).
@@ -45,53 +45,53 @@ public:
     static constexpr int16_t InvalidDiatonicIndex = 32767;
 
 private:
-    MCC::PitchClass _pitchClass;
+    MCC::NoteName _noteName;
     int8_t _octave;
 
 public:
     /** @brief Creates the invalid pitch (SPEC-ERR-2). */
-    constexpr Pitch() noexcept : _pitchClass(), _octave(0) {}
+    constexpr Pitch() noexcept : _noteName(), _octave(0) {}
 
     /**
-     * @brief Creates `pitchClass` written in `octave`. An invalid pitch
-     * class or an octave outside `[-128, 127]` produces the invalid pitch
+     * @brief Creates `noteName` written in `octave`. An invalid note
+     * name or an octave outside `[-128, 127]` produces the invalid pitch
      * (SPEC-ERR-3).
      */
-    constexpr Pitch(MCC::PitchClass pitchClass, int32_t octave) noexcept
-        : _pitchClass(IsWritable(pitchClass, octave)
-              ? pitchClass
-              : MCC::PitchClass::Invalid()),
-          _octave(IsWritable(pitchClass, octave)
+    constexpr Pitch(MCC::NoteName noteName, int32_t octave) noexcept
+        : _noteName(IsWritable(noteName, octave)
+              ? noteName
+              : MCC::NoteName::Invalid()),
+          _octave(IsWritable(noteName, octave)
               ? static_cast<int8_t>(octave)
               : 0) {}
 
     /** @brief Creates `letter` + `accidental` written in `octave`. */
     constexpr Pitch(MCC::Letter letter, MCC::Accidental accidental,
                     int32_t octave) noexcept
-        : Pitch(MCC::PitchClass(letter, accidental), octave) {}
+        : Pitch(MCC::NoteName(letter, accidental), octave) {}
 
     /** @brief Creates the natural `letter` written in `octave`. */
     constexpr Pitch(MCC::Letter letter, int32_t octave) noexcept
-        : Pitch(MCC::PitchClass(letter), octave) {}
+        : Pitch(MCC::NoteName(letter), octave) {}
 
     /** @brief Returns the invalid pitch. */
     static constexpr Pitch Invalid() noexcept { return Pitch(); }
 
     /** @brief Returns `true` unless this is the invalid pitch. */
-    constexpr bool IsValid() const noexcept { return _pitchClass.IsValid(); }
+    constexpr bool IsValid() const noexcept { return _noteName.IsValid(); }
 
-    /** @brief Returns the written pitch class; invalid for the invalid pitch. */
-    constexpr MCC::PitchClass PitchClass() const noexcept { return _pitchClass; }
+    /** @brief Returns the written note name; invalid for the invalid pitch. */
+    constexpr MCC::NoteName NoteName() const noexcept { return _noteName; }
 
     /**
      * @brief Returns the written letter, or `Letter::C` for the invalid
      * pitch (SPEC-ERR-7).
      */
-    constexpr MCC::Letter Letter() const noexcept { return _pitchClass.Letter(); }
+    constexpr MCC::Letter Letter() const noexcept { return _noteName.Letter(); }
 
     /** @brief Returns the written accidental; invalid for the invalid pitch. */
     constexpr MCC::Accidental Accidental() const noexcept {
-        return _pitchClass.Accidental();
+        return _noteName.Accidental();
     }
 
     /**
@@ -121,16 +121,16 @@ public:
             return MCC::ChromaticIndex::Invalid();
         }
         return MCC::ChromaticIndex(
-            (static_cast<int32_t>(_octave) + 1) * MCC::ChromaticClass::Count +
+            (static_cast<int32_t>(_octave) + 1) * MCC::PitchClass::Count +
             NaturalSemitone(Letter()) + Accidental().Semitones());
     }
 
     /**
-     * @brief Returns the chromatic class of the written pitch class
+     * @brief Returns the pitch class of the written note name
      * (SPEC-ORD-4); the invalid pitch yields the invalid class.
      */
-    constexpr MCC::ChromaticClass ChromaticClass() const noexcept {
-        return _pitchClass.ChromaticClass();
+    constexpr MCC::PitchClass PitchClass() const noexcept {
+        return _noteName.PitchClass();
     }
 
     /**
@@ -147,7 +147,7 @@ public:
         }
         const int32_t index = DiatonicIndex() + steps;
         return Pitch(
-            MCC::PitchClass(
+            MCC::NoteName(
                 static_cast<MCC::Letter>(
                     Foundation::Math::FloorMod(index, LetterCount)),
                 Accidental()),
@@ -163,7 +163,7 @@ public:
         if (!IsValid()) {
             return Invalid();
         }
-        return Pitch(_pitchClass.Altered(semitones), _octave);
+        return Pitch(_noteName.Altered(semitones), _octave);
     }
 
     /**
@@ -176,7 +176,7 @@ public:
             octaves > MaximumOctave - MinimumOctave) {
             return Invalid();
         }
-        return Pitch(_pitchClass, _octave + octaves);
+        return Pitch(_noteName, _octave + octaves);
     }
 
     /**
@@ -184,7 +184,7 @@ public:
      * All invalid pitches are equal (SPEC-ERR-6).
      */
     friend constexpr bool operator==(Pitch a, Pitch b) noexcept {
-        return a._pitchClass == b._pitchClass && a._octave == b._octave;
+        return a._noteName == b._noteName && a._octave == b._octave;
     }
 
     friend constexpr bool operator!=(Pitch a, Pitch b) noexcept {
@@ -202,7 +202,7 @@ public:
         }
         return (a._octave != b._octave)
             ? a._octave < b._octave
-            : a._pitchClass < b._pitchClass;
+            : a._noteName < b._noteName;
     }
 
     friend constexpr bool operator>(Pitch a, Pitch b) noexcept {
@@ -222,9 +222,9 @@ private:
     static constexpr int32_t DiatonicSpan =
         (static_cast<int32_t>(MaximumOctave) - MinimumOctave + 1) * LetterCount;
 
-    static constexpr bool IsWritable(MCC::PitchClass pitchClass,
+    static constexpr bool IsWritable(MCC::NoteName noteName,
                                      int32_t octave) noexcept {
-        return pitchClass.IsValid() &&
+        return noteName.IsValid() &&
             octave >= MinimumOctave && octave <= MaximumOctave;
     }
 };

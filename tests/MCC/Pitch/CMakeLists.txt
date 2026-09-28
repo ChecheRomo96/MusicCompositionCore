@@ -1,10 +1,10 @@
 mcc_add_test(MCCPitchTests
     AccidentalTests.cc
-    ChromaticClassTests.cc
+    PitchClassTests.cc
     ChromaticIndexTests.cc
     InvalidStateTests.cc
     LayoutTests.cc
     LetterTests.cc
-    PitchClassTests.cc
+    NoteNameTests.cc
     PitchComparisonTests.cc
     PitchTests.cc)

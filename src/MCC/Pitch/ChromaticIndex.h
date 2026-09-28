@@ -5,7 +5,7 @@
 
 #include <Foundation/Math/Arithmetic.h>
 
-#include <MCC/Pitch/ChromaticClass.h>
+#include <MCC/Pitch/PitchClass.h>
 
 namespace MCC {
 
@@ -66,15 +66,15 @@ public:
     constexpr int16_t Value() const noexcept { return _value; }
 
     /**
-     * @brief Returns the chromatic class `Value() mod 12` (SPEC-ORD-4); the
+     * @brief Returns the pitch class `Value() mod 12` (SPEC-ORD-4); the
      * invalid index yields the invalid class (SPEC-ERR-4).
      */
-    constexpr MCC::ChromaticClass ChromaticClass() const noexcept {
+    constexpr MCC::PitchClass PitchClass() const noexcept {
         if (!IsValid()) {
-            return MCC::ChromaticClass::Invalid();
+            return MCC::PitchClass::Invalid();
         }
-        return MCC::ChromaticClass(
-            Foundation::Math::FloorMod(_value, MCC::ChromaticClass::Count));
+        return MCC::PitchClass(
+            Foundation::Math::FloorMod(_value, MCC::PitchClass::Count));
     }
 
     /**
