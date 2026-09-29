@@ -93,9 +93,6 @@ private:
             : IntervalQuality::Diminished(-deviation - 1);
     }
 
-    constexpr Interval(int16_t steps, int16_t semitones, bool) noexcept
-        : _steps(steps), _semitones(semitones) {}
-
 public:
     /** @brief Creates the invalid interval (SPEC-ERR-2). */
     constexpr Interval() noexcept : _steps(InvalidSteps), _semitones(0) {}
@@ -115,8 +112,9 @@ public:
             semitones < -MaximumSemitones || semitones > MaximumSemitones) {
             return Interval();
         }
-        const Interval candidate(static_cast<int16_t>(diatonicSteps),
-                                 static_cast<int16_t>(semitones), true);
+        Interval candidate;
+        candidate._steps = static_cast<int16_t>(diatonicSteps);
+        candidate._semitones = static_cast<int16_t>(semitones);
         return candidate.Quality().IsValid() ? candidate : Interval();
     }
 
@@ -138,7 +136,7 @@ public:
     static constexpr Interval Invalid() noexcept { return Interval(); }
 
     /** @brief Returns the perfect unison. */
-    static constexpr Interval Unison() noexcept { return Interval(0, 0, true); }
+    static constexpr Interval Unison() noexcept { return FromSteps(0, 0); }
 
     /** @brief Returns `true` unless this is the invalid interval. */
     constexpr bool IsValid() const noexcept { return _steps != InvalidSteps; }
@@ -227,8 +225,8 @@ public:
         if (!IsValid()) {
             return Invalid();
         }
-        return Interval(static_cast<int16_t>(-_steps),
-                        static_cast<int16_t>(-_semitones), true);
+        return FromSteps(-static_cast<int32_t>(_steps),
+                         -static_cast<int32_t>(_semitones));
     }
 
     /**
