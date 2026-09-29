@@ -8,14 +8,16 @@ param(
     [string[]]$CMakeArguments
 )
 
-. "$PSScriptRoot/common.ps1"
+. "$PSScriptRoot/romodular-adapter.ps1"
 
-$arguments = @("--preset", $Preset)
+$parameters = @{
+    Preset = $Preset
+}
 if ($Fresh) {
-    $arguments += "--fresh"
+    $parameters.Fresh = $true
 }
 if ($CMakeArguments) {
-    $arguments += $CMakeArguments
+    $parameters.CMakeArguments = $CMakeArguments
 }
 
-Invoke-MCCCMake -Arguments $arguments
+& (Join-Path $script:MCCRoModularScripts "configure.ps1") @parameters

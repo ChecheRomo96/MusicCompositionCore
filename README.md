@@ -4,6 +4,18 @@ MCC is a portable C++17 library for music-composition primitives. This
 repository is a clean reconstruction of earlier Music Composition Core
 experiments and uses Foundation as its low-level dependency.
 
+Clone MCC with its pinned build infrastructure:
+
+```bash
+git clone --recurse-submodules https://github.com/ChecheRomo96/MusicCompositionCore.git
+```
+
+For an existing checkout:
+
+```bash
+git submodule update --init --recursive
+```
+
 It contains music theory only: no MIDI concepts. Available modules:
 
 - **Pitch**: `Letter`, `Accidental`, `NoteName` (spelled, `C#` != `Db`),
@@ -54,6 +66,12 @@ Use `-DMCC_FETCH_FOUNDATION=OFF` to forbid network access. MCC rejects
 Foundation packages recorded for a different platform preset.
 
 ## Build and test
+
+Public MCC presets and scripts remain the supported interface. Their generic
+configure, build, test, install, clean, native preset, and cross-toolchain
+implementation comes from the pinned `tools/RoModularBuild` submodule; MCC
+retains its module options, Foundation resolution, packaging, examples,
+documentation, and release policy.
 
 ```bash
 ./scripts/build.sh macos_arm64 --config Debug
