@@ -6,13 +6,12 @@ dependency direction `Foundation <- MCC <- MIDILAR`.
 
 ## Shared RoModular guidance
 
-Before starting work, look for the shared guidance at
-`../RoModular/.romodular/CONTRACT.md`.
+Before starting work, look for the shared guidance in
+`../RoModularAgents`.
 
-- If it exists and is readable, read it completely.
-- Select the applicable role from `../RoModular/.romodular/roles/`.
-- When relevant, follow the matching procedure under
-  `../RoModular/.romodular/workflows/`.
+- If it exists and is readable, read `AGENTS.md` and `CONTRACT.md` completely.
+- Read `repositories/MCC.md` for the canonical repository adapter.
+- Use the relevant skill under `skills/` when the request matches one.
 - If the sibling repository is unavailable, continue with the rules in this
   file and report that the shared guidance was not loaded.
 
