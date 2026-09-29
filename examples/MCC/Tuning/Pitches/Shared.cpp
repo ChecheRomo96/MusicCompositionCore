@@ -125,8 +125,9 @@ void HeightVersusWritten(PrintFunction print) noexcept {
     }
 
     // Insertion sort: no standard library on AVR.
-    auto sort = [](MCC::Pitch* values, bool (*less)(MCC::Pitch, MCC::Pitch)) {
-        for (int i = 1; i < count; ++i) {
+    auto sort = [](MCC::Pitch* values, int valueCount,
+                   bool (*less)(MCC::Pitch, MCC::Pitch)) {
+        for (int i = 1; i < valueCount; ++i) {
             const MCC::Pitch current = values[i];
             int j = i - 1;
             while (j >= 0 && less(current, values[j])) {
@@ -136,8 +137,8 @@ void HeightVersusWritten(PrintFunction print) noexcept {
             values[j + 1] = current;
         }
     };
-    sort(written, [](MCC::Pitch a, MCC::Pitch b) { return a < b; });
-    sort(height, MCC::IsLowerThan);
+    sort(written, count, [](MCC::Pitch a, MCC::Pitch b) { return a < b; });
+    sort(height, count, MCC::IsLowerThan);
 
     char text[16];
     print("   operator<:   ");
