@@ -53,34 +53,82 @@ case "$PRESET" in
         ;;
 esac
 
+# Without an explicit prefix, MCC resolves Foundation itself: sibling export,
+# GitHub Release package or sources (see cmake/MCCFoundation.cmake).
 if [ -z "$FOUNDATION_PREFIX" ]; then
-    FOUNDATION_PREFIX=${MCC_FOUNDATION_PREFIX:-"$MCC_ROOT/../Foundation/dist/$PRESET"}
+    FOUNDATION_PREFIX=${MCC_FOUNDATION_PREFIX:-}
 fi
-FOUNDATION_PREFIX=$(mcc_absolute_path "$FOUNDATION_PREFIX")
-FOUNDATION_CONFIG="$FOUNDATION_PREFIX/lib/cmake/Foundation/FoundationConfig.cmake"
-[ -f "$FOUNDATION_CONFIG" ] || \
-    mcc_die "Foundation package not found at $FOUNDATION_PREFIX"
+if [ -n "$FOUNDATION_PREFIX" ]; then
+    FOUNDATION_PREFIX=$(mcc_absolute_path "$FOUNDATION_PREFIX")
+    FOUNDATION_CONFIG="$FOUNDATION_PREFIX/lib/cmake/Foundation/FoundationConfig.cmake"
+    [ -f "$FOUNDATION_CONFIG" ] || \
+        mcc_die "Foundation package not found at $FOUNDATION_PREFIX"
+fi
 
 set -- "$SCRIPT_DIR/export.sh" "$PRESET"
 [ "$FRESH" -eq 0 ] || set -- "$@" --fresh
 [ -z "$PARALLEL" ] || set -- "$@" --parallel "$PARALLEL"
-set -- "$@" -- -DMCC_FOUNDATION_PREFIX="$FOUNDATION_PREFIX"
+if [ -n "$FOUNDATION_PREFIX" ]; then
+    set -- "$@" -- -DMCC_FOUNDATION_PREFIX="$FOUNDATION_PREFIX"
+fi
 "$@"
+
+# The Foundation package MCC used; empty when Foundation was built from
+# sources and installed next to MCC.
+RESOLVED_FOUNDATION_PREFIX=$(sed -n \
+    's/^MCC_FOUNDATION_RESOLVED_PREFIX:INTERNAL=//p' \
+    "$(mcc_build_dir "$PRESET")/CMakeCache.txt")
 
 MCC_PREFIX="$MCC_DIST_ROOT/$PRESET"
 CONSUMER_SOURCE="$MCC_ROOT/tests/PackageConsumer"
 CONSUMER_BUILD="$MCC_BUILD_ROOT/package-consumer/$PRESET"
 
-if [ "$FRESH" -eq 1 ]; then
-    cmake -E remove_directory "$CONSUMER_BUILD"
-fi
+MCC_CACHE="$(mcc_build_dir "$PRESET")/CMakeCache.txt"
 
-cmake \
+mcc_cache_value() {
+    sed -n "s/^$1:[^=]*=//p" "$MCC_CACHE" | sed -n '1p'
+}
+
+GENERATOR=$(mcc_cache_value CMAKE_GENERATOR)
+GENERATOR_PLATFORM=$(mcc_cache_value CMAKE_GENERATOR_PLATFORM)
+CXX_COMPILER=$(mcc_cache_value CMAKE_CXX_COMPILER)
+TOOLCHAIN_FILE=$(mcc_cache_value CMAKE_TOOLCHAIN_FILE)
+OSX_ARCHITECTURES=$(mcc_cache_value CMAKE_OSX_ARCHITECTURES)
+CROSSCOMPILING=$(mcc_cache_value CMAKE_CROSSCOMPILING)
+
+[ "$CROSSCOMPILING" != "TRUE" ] || \
+    mcc_die "package execution requires a native preset"
+[ -n "$GENERATOR" ] || mcc_die "configured preset has no CMake generator"
+
+# The package consumer must use the same ABI and compiler family as the
+# package. Recreate it so a previous run cannot retain another generator.
+cmake -E remove_directory "$CONSUMER_BUILD"
+
+set -- cmake \
     -S "$CONSUMER_SOURCE" \
     -B "$CONSUMER_BUILD" \
-    -DCMAKE_BUILD_TYPE=Release \
+    -G "$GENERATOR" \
     -DMCC_DIR="$MCC_PREFIX/lib/cmake/MCC" \
-    -DFoundation_DIR="$FOUNDATION_PREFIX/lib/cmake/Foundation"
+    -DCMAKE_PREFIX_PATH="$MCC_PREFIX;$RESOLVED_FOUNDATION_PREFIX"
+
+[ -z "$GENERATOR_PLATFORM" ] || set -- "$@" -A "$GENERATOR_PLATFORM"
+[ -z "$OSX_ARCHITECTURES" ] || \
+    set -- "$@" "-DCMAKE_OSX_ARCHITECTURES=$OSX_ARCHITECTURES"
+
+if [ -n "$TOOLCHAIN_FILE" ]; then
+    set -- "$@" "-DCMAKE_TOOLCHAIN_FILE=$TOOLCHAIN_FILE"
+else
+    case "$GENERATOR" in
+        "Visual Studio"*|Xcode)
+            ;;
+        *)
+            [ -z "$CXX_COMPILER" ] || \
+                set -- "$@" "-DCMAKE_CXX_COMPILER=$CXX_COMPILER"
+            ;;
+    esac
+fi
+
+"$@"
 
 set -- cmake --build "$CONSUMER_BUILD" --config Release
 [ -z "$PARALLEL" ] || set -- "$@" --parallel "$PARALLEL"

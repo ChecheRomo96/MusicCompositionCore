@@ -6,30 +6,12 @@ param(
     [switch]$Dist
 )
 
-. "$PSScriptRoot/common.ps1"
+. "$PSScriptRoot/romodular-adapter.ps1"
 
-if ($All -and $Preset) {
-    throw "Specify either a preset or -All, not both"
-}
-if (-not $All -and -not $Preset) {
-    throw "A preset or -All is required"
+$parameters = @{
+    Preset = $Preset
+    All = $All
+    Dist = $Dist
 }
 
-if ($All) {
-    if (Test-Path -LiteralPath $script:MCCBuildRoot) {
-        Remove-Item -LiteralPath $script:MCCBuildRoot -Recurse -Force
-    }
-    if ($Dist -and (Test-Path -LiteralPath $script:MCCDistRoot)) {
-        Remove-Item -LiteralPath $script:MCCDistRoot -Recurse -Force
-    }
-}
-else {
-    $buildDirectory = Get-MCCBuildDirectory -Preset $Preset
-    $distDirectory = Join-Path $script:MCCDistRoot $Preset
-    if (Test-Path -LiteralPath $buildDirectory) {
-        Remove-Item -LiteralPath $buildDirectory -Recurse -Force
-    }
-    if ($Dist -and (Test-Path -LiteralPath $distDirectory)) {
-        Remove-Item -LiteralPath $distDirectory -Recurse -Force
-    }
-}
+& (Join-Path $script:MCCRoModularScripts "clean.ps1") @parameters

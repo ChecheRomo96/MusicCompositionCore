@@ -1,0 +1,14 @@
+/**
+ * @defgroup MCC_Interval Interval
+ * @ingroup MCC
+ * @brief Directed intervals and spelling-preserving transposition.
+ *
+ * `MCC::Interval` stores a diatonic step count and a semitone count, from
+ * which its `MCC::IntervalDirection`, `MCC::IntervalNumber` and
+ * `MCC::IntervalQuality` are derived. `MCC::IntervalBetween()` measures the
+ * interval between two pitches or note names, and `pitch + interval`
+ * transposes while preserving spelling: `E4 + M3 = G#4`, never `Ab4`.
+ * See @ref MCC_Specification (SPEC-INT-*).
+ *
+ * Available when `MCC_INTERVAL` is defined. Requires the Pitch module.
+ */

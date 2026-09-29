@@ -5,17 +5,8 @@ param(
     [string]$Prefix = ""
 )
 
-. "$PSScriptRoot/common.ps1"
+. "$PSScriptRoot/romodular-adapter.ps1"
 
-Assert-MCCConfigured -Preset $Preset
-
-$buildDirectory = Get-MCCBuildDirectory -Preset $Preset
-if (-not $Prefix) {
-    $Prefix = Join-Path $script:MCCDistRoot $Preset
-}
-$Prefix = Resolve-MCCPath -Path $Prefix
-
-$arguments = @("--install", $buildDirectory, "--prefix", $Prefix)
-$arguments += @("--config", "Release")
-
-Invoke-MCCCMake -Arguments $arguments
+& (Join-Path $script:MCCRoModularScripts "install.ps1") `
+    -Preset $Preset `
+    -Prefix $Prefix

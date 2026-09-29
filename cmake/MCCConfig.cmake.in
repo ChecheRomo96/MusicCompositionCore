@@ -1,9 +1,29 @@
 @PACKAGE_INIT@
 
 include(CMakeFindDependencyMacro)
-find_dependency(Foundation 1.0 CONFIG)
+find_dependency(Foundation @MCC_FOUNDATION_VERSION@ CONFIG)
 
 include("${CMAKE_CURRENT_LIST_DIR}/MCCBuildInfo.cmake")
+
+if(DEFINED Foundation_PLATFORM AND
+   NOT Foundation_PLATFORM STREQUAL "" AND
+   NOT Foundation_PLATFORM STREQUAL MCC_PLATFORM)
+    set(MCC_FOUND FALSE)
+    string(CONCAT MCC_NOT_FOUND_MESSAGE
+        "MCC package '${MCC_PLATFORM}' cannot use Foundation package "
+        "'${Foundation_PLATFORM}'.")
+    return()
+endif()
+
+if(DEFINED Foundation_CXX_STANDARD AND
+   Foundation_CXX_STANDARD GREATER MCC_CXX_STANDARD)
+    set(MCC_FOUND FALSE)
+    string(CONCAT MCC_NOT_FOUND_MESSAGE
+        "Foundation requires C++${Foundation_CXX_STANDARD}, but MCC was "
+        "built for C++${MCC_CXX_STANDARD}.")
+    return()
+endif()
+
 include("${CMAKE_CURRENT_LIST_DIR}/MCCTargets.cmake")
 
 check_required_components(MCC)

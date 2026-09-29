@@ -1,0 +1,13 @@
+/**
+ * @defgroup MCC_Tuning Tuning
+ * @ingroup MCC
+ * @brief Frequencies of written pitches under an explicit tuning.
+ *
+ * `MCC::Tuning` fixes the frequency of one reference pitch (standard:
+ * `A4 = 440 Hz`), and `MCC::EqualTemperament` derives the frequency of any
+ * `MCC::Pitch` from it. This is the only MCC module that uses `float`
+ * (SPEC-EMB-4); embedded builds that do not need frequencies can disable it
+ * with `MCC_TUNING=OFF`. Requires the Pitch module.
+ *
+ * Available when `MCC_TUNING` is defined.
+ */
