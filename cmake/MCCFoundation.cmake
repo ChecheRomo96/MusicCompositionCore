@@ -100,14 +100,30 @@ function(mcc_download_foundation_package)
     set(checksum "${CMAKE_MATCH_1}")
 
     message(STATUS "Downloading ${archive}")
+    # Do not pass EXPECTED_HASH to file(DOWNLOAD): CMake records a configure
+    # error before STATUS can be inspected when the asset is unavailable.
+    # Download first, fall back to sources on transport errors, and verify the
+    # published digest explicitly before extracting anything.
     file(DOWNLOAD "${url}/${archive}" "${root}/${archive}"
-        EXPECTED_HASH SHA256=${checksum}
         STATUS status)
     list(GET status 0 code)
     if(NOT code EQUAL 0)
         list(GET status 1 reason)
-        file(REMOVE "${root}/${archive}")
-        message(FATAL_ERROR "Unable to download ${archive}: ${reason}")
+        file(REMOVE "${root}/${archive}" "${root}/${archive}.sha256")
+        message(STATUS
+            "Foundation Release package ${archive} is unavailable (${reason}); "
+            "falling back to sources")
+        return()
+    endif()
+
+    file(SHA256 "${root}/${archive}" actual_checksum)
+    string(TOLOWER "${checksum}" checksum)
+    string(TOLOWER "${actual_checksum}" actual_checksum)
+    if(NOT actual_checksum STREQUAL checksum)
+        file(REMOVE "${root}/${archive}" "${root}/${archive}.sha256")
+        message(FATAL_ERROR
+            "SHA-256 mismatch for ${archive}: expected ${checksum}, got "
+            "${actual_checksum}")
     endif()
 
     file(ARCHIVE_EXTRACT INPUT "${root}/${archive}" DESTINATION "${root}")
