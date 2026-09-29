@@ -420,14 +420,16 @@ Integration actions:
 
 ## Phase 11 - Quality and release readiness
 
-- [ ] Add CI for macOS, Linux and Windows native builds.
-- [ ] Add AVR and Arm cross-compilation checks.
-- [ ] Run installed-package consumer tests in CI.
+Status: in progress (`.github/workflows/`)
+
+- [x] Add CI for macOS, Linux and Windows native builds.
+- [x] Add AVR and Arm cross-compilation checks.
+- [x] Run installed-package consumer tests in CI.
 - [ ] Add compiler-warning and static-analysis profiles.
 - [ ] Add desktop sanitizer builds.
 - [ ] Add compile-time and object-size checks for embedded value types.
 - [ ] Validate all catalog data during CI.
-- [ ] Generate and verify API documentation.
+- [x] Generate and verify API documentation.
 
 ## Proposed releases
 
