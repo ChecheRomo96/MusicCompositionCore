@@ -1,0 +1,135 @@
+name: Native Build, Test, and Package
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+      - rebuild-theory-core
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: native-ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  native:
+    name: ${{ matrix.name }}
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 30
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: macOS 15 / Apple Clang / Arm64
+            runner: macos-15
+            preset: macos_arm64
+            platform: unix
+            compiler: c++
+
+          - name: Ubuntu 24.04 / GCC / x64
+            runner: ubuntu-24.04
+            preset: linux_gcc_x64
+            platform: unix
+            compiler: g++
+
+          - name: Ubuntu 24.04 / Clang / x64
+            runner: ubuntu-24.04
+            preset: linux_clang_x64
+            platform: unix
+            compiler: clang++
+
+          - name: Ubuntu 24.04 / GCC / Arm64
+            runner: ubuntu-24.04-arm
+            preset: linux_gcc_arm64
+            platform: unix
+            compiler: g++
+
+          - name: Ubuntu 24.04 / Clang / Arm64
+            runner: ubuntu-24.04-arm
+            preset: linux_clang_arm64
+            platform: unix
+            compiler: clang++
+
+          - name: Windows 2025 / MSVC / x64
+            runner: windows-2025-vs2026
+            preset: windows_msvc_x64
+            platform: windows
+            compiler: msvc
+
+          - name: Windows 2025 / Clang / x64
+            runner: windows-2025-vs2026
+            preset: windows_clang_x64
+            platform: windows
+            compiler: clang
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+        with:
+          submodules: recursive
+
+      - name: Verify hosted toolchain
+        uses: ./tools/RoModularBuild/actions/report-toolchain
+        with:
+          compiler: ${{ matrix.compiler }}
+
+      - name: Test Debug
+        uses: ./tools/RoModularBuild/actions/project-workflow
+        with:
+          command: test
+          preset: ${{ matrix.preset }}
+          configuration: Debug
+          fresh: true
+          parallel: 4
+          junit: build/${{ matrix.preset }}/test-results/Debug.xml
+
+      - name: Test Release
+        uses: ./tools/RoModularBuild/actions/project-workflow
+        with:
+          command: test
+          preset: ${{ matrix.preset }}
+          configuration: Release
+          parallel: 4
+          junit: build/${{ matrix.preset }}/test-results/Release.xml
+
+      - name: Build examples
+        uses: ./tools/RoModularBuild/actions/project-workflow
+        with:
+          command: build
+          preset: ${{ matrix.preset }}
+          configuration: Release
+          target: MCCExamples
+          examples-on: true
+          parallel: 4
+
+      - name: Validate installed Release package
+        if: matrix.platform == 'unix'
+        shell: bash
+        run: ./scripts/test-package.sh "${{ matrix.preset }}" --fresh --parallel 4
+
+      - name: Validate installed Release package
+        if: matrix.platform == 'windows'
+        shell: pwsh
+        run: ./scripts/test-package.ps1 "${{ matrix.preset }}" -Fresh -Parallel 4
+
+      - name: Upload native failure evidence
+        if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: failure-native-${{ matrix.preset }}-${{ github.run_attempt }}
+          path: |
+            build/${{ matrix.preset }}/CMakeCache.txt
+            build/${{ matrix.preset }}/CMakeFiles/CMakeConfigureLog.yaml
+            build/${{ matrix.preset }}/Testing/Temporary/
+            build/${{ matrix.preset }}/test-results/
+            build/package-consumer/${{ matrix.preset }}/
+            dist/${{ matrix.preset }}/
+          if-no-files-found: warn
+          retention-days: 14

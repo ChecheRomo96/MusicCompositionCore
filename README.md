@@ -4,36 +4,74 @@ MCC is a portable C++17 library for music-composition primitives. This
 repository is a clean reconstruction of earlier Music Composition Core
 experiments and uses Foundation as its low-level dependency.
 
-The initial `0.1.0` scaffold intentionally exposes only build/version
-information. Legacy notes, pitches, intervals, scales, MIDI representations,
-and utilities will be reviewed and migrated as independently tested modules.
+Clone MCC with its pinned build infrastructure:
+
+```bash
+git clone --recurse-submodules https://github.com/ChecheRomo96/MusicCompositionCore.git
+```
+
+For an existing checkout:
+
+```bash
+git submodule update --init --recursive
+```
+
+It contains music theory only: no MIDI concepts. Available modules:
+
+- **Pitch**: `Letter`, `Accidental`, `NoteName` (spelled, `C#` != `Db`),
+  `PitchClass` (0-11), `ChromaticIndex` and `Pitch` (middle C is `C4`).
+- **Interval**: `Interval` with quality, number and direction, inversion,
+  `IntervalBetween()` and spelling-preserving transposition
+  (`E4 + M3 = G#4`).
+- **Tuning**: `Tuning` and `EqualTemperament` frequencies (`A4 = 440 Hz`).
+- **Core**: version information.
+
+The rules every type follows are in
+`docs/Topics/Specification/MusicDomain.dox`, and the roadmap is in
+`ACTION_PLAN.md`. The API documentation is published to the `docs` branch.
 
 ## Dependency
 
-MCC consumes the exported CMake target `Foundation::Foundation`. Export a
-Foundation package for the same preset before configuring MCC:
+MCC consumes the CMake target `Foundation::Foundation` from Foundation
+`1.2.0` or a newer `1.x` release. Configuring MCC resolves it in this order
+(see `cmake/MCCFoundation.cmake`):
+
+1. A `Foundation::Foundation` target already defined by a parent project.
+2. `-DMCC_FOUNDATION_PREFIX=<prefix>` or the `MCC_FOUNDATION_PREFIX`
+   environment variable.
+3. A sibling export in `../Foundation/dist/<preset>`.
+4. Normal `find_package(Foundation)` rules (`Foundation_DIR`,
+   `CMAKE_PREFIX_PATH`).
+5. With `MCC_FETCH_FOUNDATION=ON` (the default), the GitHub Release package
+   for tag `v1.2.0` and the preset, verified against its SHA-256; for presets
+   without a Release package (AVR, Arm), the Foundation sources at that tag
+   are cloned and built with MCC's toolchain.
+
+Downloads are kept in `build/<preset>/_deps/` and reused. No setup is needed
+on a fresh machine:
 
 ```bash
-cd ../Foundation
-./scripts/export.sh macos_arm64 --fresh
-
-cd ../MCC
 ./scripts/configure.sh macos_arm64 --fresh
 ```
 
-Sibling repositories are discovered automatically through
-`../Foundation/dist/<preset>`. Otherwise configure the dependency explicitly:
+To develop both libraries together, export Foundation next to MCC or build
+your working copy directly:
 
 ```bash
 ./scripts/configure.sh macos_arm64 --fresh -- \
-  -DMCC_FOUNDATION_PREFIX=/path/to/Foundation/package
+  -DFETCHCONTENT_SOURCE_DIR_FOUNDATION=../Foundation
 ```
 
-The prefix can also be supplied through the `MCC_FOUNDATION_PREFIX`
-environment variable. MCC rejects Foundation packages recorded for a different
-platform preset.
+Use `-DMCC_FETCH_FOUNDATION=OFF` to forbid network access. MCC rejects
+Foundation packages recorded for a different platform preset.
 
 ## Build and test
+
+Public MCC presets and scripts remain the supported interface. Their generic
+configure, build, test, install, clean, native preset, and cross-toolchain
+implementation comes from the pinned `tools/RoModularBuild` submodule; MCC
+retains its module options, Foundation resolution, packaging, examples,
+documentation, and release policy.
 
 ```bash
 ./scripts/build.sh macos_arm64 --config Debug
@@ -73,8 +111,10 @@ discovery and the transitive Foundation dependency.
 ```
 
 Each export contains one Release MCC library, public headers, and a relocatable
-CMake package. Foundation remains a separate dependency and must be discoverable
-when a downstream project calls `find_package(MCC CONFIG REQUIRED)`.
+CMake package. When Foundation came from a package, it remains a separate
+dependency and must be discoverable when a downstream project calls
+`find_package(MCC CONFIG REQUIRED)`; when it was built from sources, it is
+installed next to MCC.
 
 ## Examples and documentation
 

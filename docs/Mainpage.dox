@@ -1,20 +1,29 @@
 /**
  * @mainpage Music Composition Core
  *
- * MCC is a portable C++17 music-composition library reconstructed on top of
- * Foundation. This initial `0.1.0` scaffold establishes the build, package,
- * test, example, export, and documentation contracts before legacy musical
- * concepts are migrated.
+ * MCC is a portable C++17 music-theory library for desktop and embedded
+ * targets, built on Foundation. Its value types are trivially copyable,
+ * allocation-free and `constexpr`, and it contains no MIDI concepts.
+ *
+ * @section MCCMainModules Modules
+ *
+ * - @ref MCC_Pitch "Pitch": `Letter`, `Accidental`, `NoteName` (spelled,
+ *   `C#` != `Db`), `PitchClass` (0-11), `ChromaticIndex` and `Pitch`
+ *   (scientific pitch notation, middle C is `C4`).
+ * - @ref MCC_Interval "Interval": `Interval` (directed diatonic + chromatic
+ *   distance, quality and number), inversion, `IntervalBetween()` and
+ *   spelling-preserving transposition (`E4 + M3 = G#4`).
+ * - @ref MCC_Tuning "Tuning": `Tuning` and `EqualTemperament` frequencies
+ *   (`A4 = 440 Hz`); the only module that uses `float`.
+ * - @ref MCC_Core "Core": version information.
+ *
+ * Every rule these types follow is defined in the
+ * @ref MCC_Specification "Music-Domain Specification".
  *
  * @section MCCMainDependency Dependency
  *
- * MCC consumes the exported CMake target `Foundation::Foundation`. Each MCC
- * preset must use a Foundation package built for the same platform,
- * architecture, compiler ABI, and configuration policy.
- *
- * @section MCCMainNext Migration Direction
- *
- * Legacy notes, pitches, intervals, scales, MIDI representations, and related
- * utilities will be audited individually. Old code is reference material, not
- * an API compatibility promise.
+ * MCC consumes the CMake target `Foundation::Foundation` (Foundation 1.2 or a
+ * newer 1.x release). It uses a local Foundation package when one is
+ * available and otherwise fetches the pinned Foundation release from GitHub;
+ * see @ref MCC_BuildGuide_Dependency.
  */
