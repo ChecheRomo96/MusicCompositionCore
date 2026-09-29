@@ -31,6 +31,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v5
+        with:
+          submodules: recursive
 
       - name: Install dependencies
         run: |
@@ -51,7 +53,9 @@ jobs:
           dot -V
           cmake --version
 
-      # Foundation is fetched from GitHub by cmake/MCCFoundation.cmake.
+      # Foundation is fetched by cmake/MCCFoundation.cmake when no compatible
+      # local package is available. RoModularBuild comes from the pinned
+      # repository submodule.
       - name: Build documentation
         shell: bash
         run: |

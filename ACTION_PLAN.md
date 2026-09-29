@@ -106,6 +106,9 @@ Actions:
 
 - [x] Keep public headers under `src/` for direct Arduino consumption.
 - [x] Preserve the installed `MCC::MCC` CMake target.
+- [x] Pin RoModularBuild as a tagged submodule and delegate generic native and
+  embedded presets, toolchains, lifecycle scripts, and CI actions through thin
+  MCC-owned adapters.
 - [x] Define module macros from facades when Arduino discovers their headers.
 - [x] Export the same module macros through CMake targets.
 - [x] Apply the C++ standard at target scope.
