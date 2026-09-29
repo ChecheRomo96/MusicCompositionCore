@@ -10,12 +10,12 @@
  *
  * | ID | State | Candidate domain |
  * | -- | ----- | ---------------- |
- * | MIG-001 | `NEXT` | Inventory and reconcile legacy public concepts |
- * | MIG-002 | `TODO` | Pitch: letters, accidentals, octave, ordering |
+ * | MIG-001 | `IN PROGRESS` | Inventory and reconcile legacy public concepts; pitch and interval concepts are reconciled, scale, chord, and rhythm inventories continue in `ACTION_PLAN.md` phases 6 through 9 |
+ * | MIG-002 | `DONE` | Pitch: letters, accidentals, octave, ordering (`ACTION_PLAN.md` phases 3 and 4) |
  * | MIG-003 | `TODO` | Musical note and textual formatting |
- * | MIG-004 | `TODO` | Musical interval representation and arithmetic |
- * | MIG-005 | `TODO` | Scale structure, properties, and definitions |
- * | MIG-006 | `TODO` | MIDI note, message, and protocol representations |
+ * | MIG-004 | `DONE` | Musical interval representation and arithmetic (`ACTION_PLAN.md` phase 5) |
+ * | MIG-005 | `NEXT` | Scale structure, properties, and definitions (`ACTION_PLAN.md` phase 6) |
+ * | MIG-006 | `MOVED` | MIDI note, message, and protocol representations belong to MIDILAR, not MCC (`ACTION_PLAN.md` phase 10) |
  * | MIG-007 | `TODO` | Evaluate communications/ports as a separate library |
  * | MIG-008 | `TODO` | Validate MCC as a dependency of MIDILAR |
  *
