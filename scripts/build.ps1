@@ -11,34 +11,16 @@ param(
     [switch]$ExamplesOn
 )
 
-. "$PSScriptRoot/common.ps1"
+. "$PSScriptRoot/romodular-adapter.ps1"
 
-$configureArguments = @("--preset", $Preset)
-if ($Fresh) {
-    $configureArguments += "--fresh"
-}
-if ($ExamplesOn) {
-    $configureArguments += "-DMCC_EXAMPLES=ON"
-}
-Invoke-MCCCMake -Arguments $configureArguments
-
-$buildDirectory = Get-MCCBuildDirectory -Preset $Preset
-$configurationName = Get-MCCConfiguration `
-    -Preset $Preset `
-    -Configuration $Configuration `
-    -DefaultConfiguration "Debug"
-Assert-MCCConfiguration -Configuration $configurationName
-$arguments = @("--build", $buildDirectory)
-
-$arguments += @("--config", $configurationName)
-if ($Target) {
-    $arguments += @("--target", $Target)
-}
-if ($Parallel -gt 0) {
-    $arguments += @("--parallel", $Parallel.ToString())
-}
-if ($CleanFirst) {
-    $arguments += "--clean-first"
+$parameters = @{
+    Preset = $Preset
+    Configuration = $Configuration
+    Target = $Target
+    Parallel = $Parallel
+    CleanFirst = $CleanFirst
+    Fresh = $Fresh
+    ExamplesOn = $ExamplesOn
 }
 
-Invoke-MCCCMake -Arguments $arguments
+& (Join-Path $script:MCCRoModularScripts "build.ps1") @parameters

@@ -2,8 +2,10 @@
 
 #include <Foundation/Math/Arithmetic.h>
 #include <MCC.h>
-#include <MCC/Core/Version.h>
-#include <MCC_Core.h>
+
+#ifndef MCC_CORE
+    #error "MCC.h must expose MCC_CORE when the Core facade is available"
+#endif
 
 TEST(MCCCoreTests, ReportsMCCVersion) {
     EXPECT_STREQ(MCC::Core::Version(), MCC_VERSION);
