@@ -436,7 +436,7 @@ Status: in progress (`.github/workflows/`)
 | Version | Scope |
 | --- | --- |
 | `0.1.0` | Build, package, test and documentation scaffold |
-| `0.2.0` | Note names, pitches, tuning and intervals (prepared; see `CHANGELOG.md`) |
+| `0.2.0` | Note names, pitches, tuning and intervals (released; see `CHANGELOG.md`) |
 | `0.3.0` | Scales and reviewed scale catalog |
 | `0.4.0` | Chords, keys and notation |
 | `0.5.0` | Rhythm and compositional patterns |
