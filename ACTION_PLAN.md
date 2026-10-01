@@ -2,9 +2,10 @@
 
 ## Objective
 
-Reconstruct Music Composition Core (MCC) as a portable C++17 library focused
-exclusively on music theory. MCC will use Foundation for low-level reusable
-infrastructure and will not contain MIDI protocol concepts.
+Reconstruct Music Composition Core (MCC) as a portable music-theory library.
+CMake packages and direct source builds use C++17, while Arduino source mode
+also supports stock C++11 cores. MCC will use Foundation for low-level
+reusable infrastructure and will not contain MIDI protocol concepts.
 
 The dependency direction is:
 
@@ -112,6 +113,7 @@ Actions:
 - [x] Define module macros from facades when Arduino discovers their headers.
 - [x] Export the same module macros through CMake targets.
 - [x] Apply the C++ standard at target scope.
+- [x] Support the stock Arduino AVR C++11 mode without global compiler flags.
 - [x] Allow tests to use an installed GoogleTest before downloading it.
 - [x] Add Foundation compatibility checks to the installed package.
 - [x] Define rules for adding functionality to MCC versus Foundation.

@@ -1,6 +1,8 @@
 #ifndef MCC_INTERVAL_INTERVAL_H
 #define MCC_INTERVAL_INTERVAL_H
 
+#include <MCC_BuildSettings.h>
+
 #include <stdint.h>
 
 #include <MCC/Interval/IntervalDirection.h>
@@ -60,7 +62,7 @@ private:
 
     // Deviation of the semitones from the perfect/major reference of the
     // same number, measured in the interval's direction.
-    constexpr int32_t Deviation() const noexcept {
+    MCC_CONSTEXPR14 int32_t Deviation() const noexcept {
         const int32_t sign = Sign();
         const int32_t steps = sign * _steps;
         const int32_t semitones = sign * _semitones;
@@ -73,7 +75,7 @@ private:
             : (_semitones < 0 ? -1 : 1);
     }
 
-    static constexpr IntervalQuality QualityFor(int32_t steps,
+    static MCC_CONSTEXPR14 IntervalQuality QualityFor(int32_t steps,
                                                 int32_t deviation) noexcept {
         if (IsPerfectSteps(steps % 7)) {
             if (deviation == 0) {
@@ -106,7 +108,7 @@ public:
      * the quality would need more than four augmentations or diminutions
      * (SPEC-ERR-3, SPEC-ERR-5).
      */
-    static constexpr Interval FromSteps(int32_t diatonicSteps,
+    static MCC_CONSTEXPR14 Interval FromSteps(int32_t diatonicSteps,
                                         int32_t semitones) noexcept {
         // Compare against both bounds: negating INT32_MIN would overflow.
         if (diatonicSteps < -MaximumSteps || diatonicSteps > MaximumSteps ||
@@ -129,7 +131,7 @@ public:
      * unison, or when either argument is invalid. A perfect unison ignores
      * `direction`.
      */
-    constexpr Interval(IntervalQuality quality, IntervalNumber number,
+    MCC_CONSTEXPR14 Interval(IntervalQuality quality, IntervalNumber number,
                        IntervalDirection direction = IntervalDirection::Ascending) noexcept
         : Interval(Build(quality, number, direction)) {}
 
@@ -137,7 +139,7 @@ public:
     static constexpr Interval Invalid() noexcept { return Interval(); }
 
     /** @brief Returns the perfect unison. */
-    static constexpr Interval Unison() noexcept { return FromSteps(0, 0); }
+    static MCC_CONSTEXPR14 Interval Unison() noexcept { return FromSteps(0, 0); }
 
     /** @brief Returns `true` unless this is the invalid interval. */
     constexpr bool IsValid() const noexcept { return _steps != InvalidSteps; }
@@ -158,7 +160,7 @@ public:
      * @brief Returns the direction (SPEC-INT-2); `Unison` for the perfect
      * unison and for the invalid interval (SPEC-ERR-7).
      */
-    constexpr IntervalDirection Direction() const noexcept {
+    MCC_CONSTEXPR14 IntervalDirection Direction() const noexcept {
         if (!IsValid() || (_steps == 0 && _semitones == 0)) {
             return IntervalDirection::Unison;
         }
@@ -167,7 +169,7 @@ public:
     }
 
     /** @brief Returns the 1-based number (SPEC-INT-2); invalid if invalid. */
-    constexpr IntervalNumber Number() const noexcept {
+    MCC_CONSTEXPR14 IntervalNumber Number() const noexcept {
         if (!IsValid()) {
             return IntervalNumber::Invalid();
         }
@@ -175,7 +177,7 @@ public:
     }
 
     /** @brief Returns the quality (SPEC-INT-4); invalid if invalid. */
-    constexpr IntervalQuality Quality() const noexcept {
+    MCC_CONSTEXPR14 IntervalQuality Quality() const noexcept {
         if (!IsValid()) {
             return IntervalQuality::Invalid();
         }
@@ -183,17 +185,17 @@ public:
     }
 
     /** @brief Returns `true` for numbers 1-8 (SPEC-INT-3). */
-    constexpr bool IsSimple() const noexcept { return Number().IsSimple(); }
+    MCC_CONSTEXPR14 bool IsSimple() const noexcept { return Number().IsSimple(); }
 
     /** @brief Returns `true` for numbers above 8 (SPEC-INT-3). */
-    constexpr bool IsCompound() const noexcept { return Number().IsCompound(); }
+    MCC_CONSTEXPR14 bool IsCompound() const noexcept { return Number().IsCompound(); }
 
     /**
      * @brief Removes whole octaves while keeping direction and quality
      * (SPEC-INT-3): a major tenth becomes a major third; an octave stays an
      * octave.
      */
-    constexpr Interval Simple() const noexcept {
+    MCC_CONSTEXPR14 Interval Simple() const noexcept {
         if (!IsValid() || Magnitude(_steps) <= 7) {
             return *this;
         }
@@ -212,7 +214,7 @@ public:
      * An augmented octave inverts to a descending augmented unison, because
      * a diminished unison does not exist (SPEC-INT-5).
      */
-    constexpr Interval Inverted() const noexcept {
+    MCC_CONSTEXPR14 Interval Inverted() const noexcept {
         if (!IsValid()) {
             return Invalid();
         }
@@ -222,7 +224,7 @@ public:
     }
 
     /** @brief Returns the same interval in the opposite direction. */
-    constexpr Interval Reversed() const noexcept {
+    MCC_CONSTEXPR14 Interval Reversed() const noexcept {
         if (!IsValid()) {
             return Invalid();
         }
@@ -235,7 +237,7 @@ public:
      * major third + minor third = perfect fifth. The result is invalid when
      * either operand is invalid or the sum is unrepresentable.
      */
-    friend constexpr Interval operator+(Interval a, Interval b) noexcept {
+    friend MCC_CONSTEXPR14 Interval operator+(Interval a, Interval b) noexcept {
         if (!a.IsValid() || !b.IsValid()) {
             return Invalid();
         }
@@ -257,7 +259,7 @@ public:
     }
 
 private:
-    static constexpr Interval Build(IntervalQuality quality, IntervalNumber number,
+    static MCC_CONSTEXPR14 Interval Build(IntervalQuality quality, IntervalNumber number,
                                     IntervalDirection direction) noexcept {
         if (!quality.IsValid() || !number.IsValid()) {
             return Interval();

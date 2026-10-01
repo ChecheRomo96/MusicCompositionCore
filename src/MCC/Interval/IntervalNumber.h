@@ -1,6 +1,8 @@
 #ifndef MCC_INTERVAL_INTERVAL_NUMBER_H
 #define MCC_INTERVAL_INTERVAL_NUMBER_H
 
+#include <MCC_BuildSettings.h>
+
 #include <stdint.h>
 
 namespace MCC {
@@ -61,7 +63,7 @@ public:
      * (SPEC-INT-3): `9 -> 2`, `10 -> 3`, `15 -> 8`. Simple numbers are
      * returned unchanged.
      */
-    constexpr IntervalNumber Simple() const noexcept {
+    MCC_CONSTEXPR14 IntervalNumber Simple() const noexcept {
         if (!IsValid() || _value <= 8) {
             return *this;
         }
@@ -72,7 +74,7 @@ public:
      * @brief Returns `true` when the simple number is a unison, fourth,
      * fifth or octave, which take perfect qualities (SPEC-INT-4).
      */
-    constexpr bool IsPerfectType() const noexcept {
+    MCC_CONSTEXPR14 bool IsPerfectType() const noexcept {
         const uint16_t simple = Simple().Value();
         return simple == 1 || simple == 4 || simple == 5 || simple == 8;
     }
@@ -81,7 +83,7 @@ public:
      * @brief Returns the inverted simple number, `9 - Simple()`
      * (SPEC-INT-6).
      */
-    constexpr IntervalNumber Inverted() const noexcept {
+    MCC_CONSTEXPR14 IntervalNumber Inverted() const noexcept {
         if (!IsValid()) {
             return Invalid();
         }

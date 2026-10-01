@@ -1,8 +1,9 @@
 # Music Composition Core (MCC)
 
-MCC is a portable C++17 library for music-composition primitives. This
-repository is a clean reconstruction of earlier Music Composition Core
-experiments and uses Foundation as its low-level dependency.
+MCC is a portable music-composition library. CMake packages and direct source
+builds use C++17; Arduino source builds also support the C++11 mode selected by
+stock cores. This repository is a clean reconstruction of earlier Music
+Composition Core experiments and uses Foundation as its low-level dependency.
 
 Clone MCC with its pinned build infrastructure:
 
@@ -148,11 +149,15 @@ the sketch includes:
 #include <MCC.h>
 ```
 
-MCC requires C++17. The stock Arduino AVR core compiles with `gnu++11`, so add
-`-std=gnu++17` (its avr-gcc 7.3 supports it), for example with
-`arduino-cli compile --build-property "compiler.cpp.extra_flags=-std=gnu++17"`.
+No language-standard override is required. Arduino source mode supports the
+C++11 default used by the stock AVR core, while CMake packages and direct
+source builds continue to require C++17. Operations that need C++14 relaxed
+`constexpr` remain `constexpr` on modern toolchains and become ordinary inline
+functions in Arduino C++11 mode; their runtime behavior is unchanged.
+
 `./scripts/test-arduino.sh` (or `.\scripts\test-arduino.ps1`) compiles every
-example sketch for the Arduino Uno that way, warning-free.
+example sketch for the Arduino Uno with the core's default flags and fails on
+warnings emitted by MCC or its examples.
 
 ## License
 

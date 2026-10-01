@@ -1,11 +1,19 @@
 #ifndef MCC_SCALE_SCALE_PATTERN_H
 #define MCC_SCALE_SCALE_PATTERN_H
 
+#include <MCC_BuildSettings.h>
+
 #include <stdint.h>
 
 #include <MCC/Interval/Interval.h>
 
 namespace MCC {
+
+/** @cond INTERNAL */
+namespace Detail {
+struct ScalePatternStorage;
+}
+/** @endcond */
 
 /**
  * @brief Root-independent scale structure: up to twelve ascending degrees.
@@ -27,8 +35,17 @@ public:
     static constexpr uint8_t MaximumDegrees = 12;
 
 private:
+    friend struct Detail::ScalePatternStorage;
+
     uint16_t _semitones;   // bit k set: a degree lies k semitones above the root
     uint8_t _steps[6];     // diatonic steps of degree i in nibble i
+
+    constexpr ScalePattern(uint16_t semitones, uint8_t steps0,
+                           uint8_t steps1, uint8_t steps2,
+                           uint8_t steps3, uint8_t steps4,
+                           uint8_t steps5) noexcept
+        : _semitones(semitones),
+          _steps{steps0, steps1, steps2, steps3, steps4, steps5} {}
 
     // Semitones of the major-scale degree `steps` above the root: 0 2 4 5 7 9 11.
     // Computed rather than tabled so AVR keeps no lookup table in RAM.
@@ -40,7 +57,7 @@ private:
         return static_cast<uint8_t>((_steps[index / 2] >> ((index % 2) * 4)) & 0x0F);
     }
 
-    constexpr int32_t SemitonesAt(uint8_t index) const noexcept {
+    MCC_CONSTEXPR14 int32_t SemitonesAt(uint8_t index) const noexcept {
         uint8_t seen = 0;
         for (int32_t k = 0; k < 12; ++k) {
             if ((static_cast<uint32_t>(_semitones) >> k) & 1u) {
@@ -68,7 +85,7 @@ public:
      * must start with `1` and its semitones must be strictly ascending inside
      * one octave; otherwise the invalid pattern is returned.
      */
-    static constexpr ScalePattern FromFormula(const char* formula) noexcept {
+    static MCC_CONSTEXPR14 ScalePattern FromFormula(const char* formula) noexcept {
         ScalePattern pattern;
         if (formula == nullptr) {
             return Invalid();
@@ -116,7 +133,7 @@ public:
     constexpr bool IsValid() const noexcept { return _semitones != 0; }
 
     /** @brief Returns the number of degrees, or 0 for the invalid pattern. */
-    constexpr uint8_t DegreeCount() const noexcept {
+    MCC_CONSTEXPR14 uint8_t DegreeCount() const noexcept {
         uint8_t count = 0;
         for (int32_t k = 0; k < 12; ++k) {
             count = static_cast<uint8_t>(count + ((static_cast<uint32_t>(_semitones) >> k) & 1u));
@@ -128,7 +145,7 @@ public:
      * @brief Returns the ascending interval from the root to `degree`
      * (1-based), or the invalid interval outside `[1, DegreeCount()]`.
      */
-    constexpr Interval DegreeInterval(int32_t degree) const noexcept {
+    MCC_CONSTEXPR14 Interval DegreeInterval(int32_t degree) const noexcept {
         if (degree < 1 || degree > DegreeCount()) {
             return Interval::Invalid();
         }
@@ -140,13 +157,13 @@ public:
      * @brief Returns `true` when a degree lies `semitones` (reduced modulo 12)
      * above the root.
      */
-    constexpr bool ContainsSemitone(int32_t semitones) const noexcept {
+    MCC_CONSTEXPR14 bool ContainsSemitone(int32_t semitones) const noexcept {
         const int32_t reduced = ((semitones % 12) + 12) % 12;
         return IsValid() && ((static_cast<uint32_t>(_semitones) >> reduced) & 1u) != 0;
     }
 
     /** @brief Compares degrees, including their written steps. */
-    friend constexpr bool operator==(const ScalePattern& a, const ScalePattern& b) noexcept {
+    friend MCC_CONSTEXPR14 bool operator==(const ScalePattern& a, const ScalePattern& b) noexcept {
         if (a._semitones != b._semitones) {
             return false;
         }
@@ -159,10 +176,26 @@ public:
     }
 
     /** @brief Negation of `operator==`. */
-    friend constexpr bool operator!=(const ScalePattern& a, const ScalePattern& b) noexcept {
+    friend MCC_CONSTEXPR14 bool operator!=(const ScalePattern& a, const ScalePattern& b) noexcept {
         return !(a == b);
     }
 };
+
+/** @cond INTERNAL */
+namespace Detail {
+
+struct ScalePatternStorage {
+    static constexpr ScalePattern Make(uint16_t semitones, uint8_t steps0,
+                                       uint8_t steps1, uint8_t steps2,
+                                       uint8_t steps3, uint8_t steps4,
+                                       uint8_t steps5) noexcept {
+        return ScalePattern(semitones, steps0, steps1, steps2,
+                            steps3, steps4, steps5);
+    }
+};
+
+} // namespace Detail
+/** @endcond */
 
 } // namespace MCC
 

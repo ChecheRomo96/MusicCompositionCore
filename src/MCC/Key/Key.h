@@ -1,6 +1,8 @@
 #ifndef MCC_KEY_KEY_H
 #define MCC_KEY_KEY_H
 
+#include <MCC_BuildSettings.h>
+
 #include <stdint.h>
 
 #include <Foundation/Math/Arithmetic.h>
@@ -75,7 +77,7 @@ public:
           _mode(IsMode(mode) ? mode : KeyMode::Major) {}
 
     /** @brief Returns the key with `signature` in `mode` (`2` sharps + Minor = B minor). */
-    static constexpr Key FromSignature(KeySignature signature, KeyMode mode) noexcept {
+    static MCC_CONSTEXPR14 Key FromSignature(KeySignature signature, KeyMode mode) noexcept {
         if (!signature.IsValid() || !IsMode(mode)) {
             return Key();
         }
@@ -111,7 +113,7 @@ public:
     MCC::Scale Scale() const noexcept { return Scales::Make(_tonic, ScaleId()); }
 
     /** @brief Writes `pitchClass` in this key's context (SPEC-KEY-3). */
-    constexpr NoteName Spell(MCC::PitchClass pitchClass) const noexcept {
+    MCC_CONSTEXPR14 NoteName Spell(MCC::PitchClass pitchClass) const noexcept {
         if (!IsValid() || !pitchClass.IsValid()) {
             return NoteName::Invalid();
         }
@@ -142,7 +144,7 @@ public:
     }
 
     /** @brief Writes a sounding chromatic index as a pitch in this key's context. */
-    constexpr MCC::Pitch Spell(MCC::ChromaticIndex index) const noexcept {
+    MCC_CONSTEXPR14 MCC::Pitch Spell(MCC::ChromaticIndex index) const noexcept {
         if (!index.IsValid()) {
             return MCC::Pitch::Invalid();
         }

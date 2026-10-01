@@ -1,6 +1,8 @@
 #ifndef MCC_INTERVAL_INTERVAL_QUALITY_H
 #define MCC_INTERVAL_INTERVAL_QUALITY_H
 
+#include <MCC_BuildSettings.h>
+
 #include <stdint.h>
 
 namespace MCC {
@@ -105,7 +107,7 @@ public:
      * @brief Returns the quality of the inverted interval: major and minor,
      * and augmented and diminished, swap; perfect stays (SPEC-INT-6).
      */
-    constexpr IntervalQuality Inverted() const noexcept {
+    MCC_CONSTEXPR14 IntervalQuality Inverted() const noexcept {
         if (!IsValid()) {
             return Invalid();
         }

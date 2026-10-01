@@ -2,7 +2,9 @@
 
 #include <MCC_Interval.h>
 
-namespace MCCExamples::Interval::Intervals {
+namespace MCCExamples {
+namespace Interval {
+namespace Intervals {
 
 namespace {
 
@@ -210,4 +212,6 @@ void Run(PrintFunction print) noexcept {
     print("========================================\n");
 }
 
-} // namespace MCCExamples::Interval::Intervals
+} // namespace Intervals
+} // namespace Interval
+} // namespace MCCExamples

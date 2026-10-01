@@ -1,6 +1,8 @@
 #ifndef MCC_PITCH_PITCH_CLASS_H
 #define MCC_PITCH_PITCH_CLASS_H
 
+#include <MCC_BuildSettings.h>
+
 #include <stdint.h>
 
 #include <Foundation/Math/Arithmetic.h>
@@ -61,7 +63,7 @@ public:
      * @brief Returns this class moved by `semitones`, reduced modulo 12.
      * An invalid class stays invalid (SPEC-ERR-4).
      */
-    constexpr PitchClass Transposed(int32_t semitones) const noexcept {
+    MCC_CONSTEXPR14 PitchClass Transposed(int32_t semitones) const noexcept {
         if (!IsValid()) {
             return Invalid();
         }
