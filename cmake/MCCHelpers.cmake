@@ -18,6 +18,10 @@ function(mcc_add_test test_target)
             GTest::gtest_main
     )
 
+    # Test sources spell Unicode accidentals as escapes in narrow literals,
+    # which need a UTF-8 execution character set on MSVC.
+    target_compile_options(${test_target} PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/utf-8>)
+
     gtest_discover_tests(${test_target}
         TEST_PREFIX "${test_target}."
         DISCOVERY_MODE PRE_TEST
