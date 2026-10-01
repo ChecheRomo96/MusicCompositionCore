@@ -43,10 +43,11 @@ private:
     int16_t _steps;
     int16_t _semitones;
 
-    // Semitones of the perfect or major simple interval for 0-6 steps.
+    // Semitones of the perfect or major simple interval for 0-6 steps
+    // (0 2 4 5 7 9 11). Computed rather than tabled so AVR keeps no lookup
+    // table in RAM.
     static constexpr int32_t ReferenceSemitones(int32_t simpleSteps) noexcept {
-        constexpr int8_t semitones[7] = {0, 2, 4, 5, 7, 9, 11};
-        return semitones[simpleSteps];
+        return simpleSteps * 2 - (simpleSteps >= 3 ? 1 : 0);
     }
 
     static constexpr bool IsPerfectSteps(int32_t simpleSteps) noexcept {

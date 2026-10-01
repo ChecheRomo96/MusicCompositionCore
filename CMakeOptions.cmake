@@ -9,6 +9,7 @@ option(MCC_PITCH "Enable MCC pitch primitives" ON)
 option(MCC_INTERVAL "Enable MCC intervals and transposition" ON)
 option(MCC_TUNING "Enable MCC tuning and frequencies (uses float)" ON)
 option(MCC_SCALE "Enable MCC scales and the scale catalog" ON)
+option(MCC_CHORD "Enable MCC chords and the chord catalog" ON)
 
 if(MCC_FULL_BUILD)
     set(MCC_CORE ON CACHE BOOL "Enable MCC::Core" FORCE)
@@ -16,10 +17,15 @@ if(MCC_FULL_BUILD)
     set(MCC_INTERVAL ON CACHE BOOL "Enable MCC intervals and transposition" FORCE)
     set(MCC_TUNING ON CACHE BOOL "Enable MCC tuning and frequencies (uses float)" FORCE)
     set(MCC_SCALE ON CACHE BOOL "Enable MCC scales and the scale catalog" FORCE)
+    set(MCC_CHORD ON CACHE BOOL "Enable MCC chords and the chord catalog" FORCE)
 endif()
 
 if(MCC_INTERVAL AND NOT MCC_PITCH)
     message(FATAL_ERROR "MCC_INTERVAL requires MCC_PITCH")
+endif()
+
+if(MCC_CHORD AND NOT MCC_SCALE)
+    message(FATAL_ERROR "MCC_CHORD requires MCC_SCALE")
 endif()
 
 if(MCC_SCALE AND NOT MCC_INTERVAL)

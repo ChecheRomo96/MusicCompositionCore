@@ -1,0 +1,76 @@
+/**
+ * @defgroup MCC_Chord Chord
+ * @ingroup MCC
+ * @brief Chord patterns, spelled chords, inversions and the reviewed chord catalog.
+ *
+ * `MCC::ChordPattern` stores up to seven tones within two octaves as diatonic
+ * steps and semitones above the root, built at compile time from a chord
+ * formula such as `"1 3 5 b7 9"`. `MCC::Chord` spells a pattern from a root
+ * `MCC::NoteName` and voices its inversions in close position. `MCC::Chords`
+ * holds the named catalog with symbols in program memory, read through
+ * `Foundation::Utils::Flash`, and `MCC::Chords::FromScale()` lists every
+ * catalog chord whose tones are written in a scale, as the historical
+ * `ChordPool` did.
+ * See @ref MCC_Specification (SPEC-CHD-*).
+ *
+ * @code{.cpp}
+ * const MCC::Chord e9 =
+ *     MCC::Chords::Make(MCC::NoteName(MCC::Letter::E), MCC::Chords::Id::DominantNinth);
+ * MCC::NoteName ninth = e9.ToneAt(5);                    // F#
+ *
+ * MCC::Chords::ScaleChord pool[64];
+ * size_t count = MCC::Chords::FromScale(cMajorScale, pool, 64);
+ * @endcode
+ *
+ * Available when `MCC_CHORD` is defined. Requires the Scale module and
+ * Foundation 1.4.0 or newer.
+ *
+ * @section MCCChordCatalog Catalog and Provenance
+ *
+ * Identifiers are stable. Entries 0-22 come from the historical OLD MCC
+ * `.Chord` files under `ChordFlash/ChordDefinitions`, read with their interval
+ * lists and modifiers applied; the Arduino copy and the older
+ * MusicCompositionCore copy carry the same entries. Their `NoteLayout`
+ * inversion masks were copied between chords and were not migrated:
+ * inversions are computed instead. Spellings are shown from C.
+ *
+ * | Id | Name | Symbol | From C | Provenance |
+ * | -- | ---- | ------ | ------ | ---------- |
+ * | 0 | Major | | C E G | Legacy |
+ * | 1 | Minor | m | C Eb G | Legacy |
+ * | 2 | Augmented | aug | C E G# | Legacy |
+ * | 3 | Diminished | dim | C Eb Gb | Corrected: legacy intervals duplicated Augmented |
+ * | 4 | Sixth | 6 | C E G A | Legacy |
+ * | 5 | Minor Sixth | m6 | C Eb G A | Corrected: legacy used a minor sixth |
+ * | 6 | Dominant Seventh | 7 | C E G Bb | Legacy |
+ * | 7 | Major Seventh | maj7 | C E G B | Legacy |
+ * | 8 | Minor Seventh | m7 | C Eb G Bb | Legacy |
+ * | 9 | Half Diminished Seventh (Half Diminished, Minor Seventh Flat Five) | m7b5 | C Eb Gb Bb | Corrected: legacy lacked the flat fifth |
+ * | 10 | Diminished Seventh | dim7 | C Eb Gb Bbb | Corrected: legacy lacked the flat fifth |
+ * | 11 | Dominant Ninth | 9 | C E G Bb D | Legacy |
+ * | 12 | Dominant Minor Ninth (Seventh Flat Ninth) | 7b9 | C E G Bb Db | Legacy |
+ * | 13 | Major Ninth | maj9 | C E G B D | Legacy |
+ * | 14 | Minor Ninth | m9 | C Eb G Bb D | Legacy |
+ * | 15 | Dominant Eleventh | 11 | C E G Bb D F | Legacy |
+ * | 16 | Major Eleventh | maj11 | C E G B D F | Legacy |
+ * | 17 | Minor Eleventh | m11 | C Eb G Bb D F | Legacy |
+ * | 18 | Dominant Thirteenth | 13 | C E G Bb D A | Revised: the eleventh is omitted, as is standard |
+ * | 19 | Major Thirteenth | maj13 | C E G B D A | Revised: legacy added a sharp eleventh; omitted |
+ * | 20 | Minor Thirteenth | m13 | C Eb G Bb D F A | Legacy |
+ * | 21 | Suspended Second (Sus2) | sus2 | C D G | Legacy |
+ * | 22 | Suspended Fourth (Sus4) | sus4 | C F G | Legacy |
+ * | 23 | Minor Major Seventh | mMaj7 | C Eb G B | New |
+ * | 24 | Augmented Seventh (Seventh Sharp Five) | aug7 | C E G# Bb | New |
+ * | 25 | Added Ninth | add9 | C E G D | New |
+ * | 26 | Seventh Suspended Fourth | 7sus4 | C F G Bb | New |
+ * | 27 | Power (Fifth) | 5 | C G | New |
+ *
+ * Names in parentheses are aliases accepted by `MCC::Chords::Find()`.
+ * `ChordCatalogTests` checks this table, uniqueness of identifiers, names,
+ * symbols, aliases and patterns, and spelling from all 35 roots with up to
+ * two accidentals. On AVR the catalog is emitted in `.progmem.data`.
+ *
+ * Recognition of a chord from loose notes is not part of this module yet:
+ * a pitch-class set is often ambiguous (`C6` and `Am7` share their notes) and
+ * loses spelling, so it will be designed with the MIDILAR integration.
+ */

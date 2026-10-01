@@ -343,24 +343,43 @@ Initial catalog families:
 
 ## Phase 7 - Chords and chord catalog
 
+Status: complete (`src/MCC/Chord/`, module macro `MCC_CHORD`)
+
 Implement:
 
 ```cpp
 MCC::ChordPattern
-MCC::ChordInversion
 MCC::Chord
 MCC::Chords
 ```
 
 Actions:
 
-- [ ] Inventory every historical `.Chord` and `.ChordArray` definition.
-- [ ] Normalize names, symbols and aliases.
-- [ ] Migrate triads, sevenths, extensions and suspended chords.
-- [ ] Generate static catalog data.
-- [ ] Validate interval patterns and duplicate definitions.
-- [ ] Generate chord pitches from a root and inversion.
-- [ ] Add basic recognition tests for unordered pitch collections.
+- [x] Inventory every historical `.Chord` and `.ChordArray` definition.
+- [x] Normalize names, symbols and aliases.
+- [x] Migrate triads, sevenths, extensions and suspended chords.
+- [x] Store the static catalog in program memory on AVR.
+- [x] Validate interval patterns and duplicate definitions.
+- [x] Generate chord pitches from a root and inversion.
+- [x] Rebuild the historical `ChordPool`: `Chords::FromScale()` lists every
+  catalog chord written in a scale.
+- [ ] Recognize chords from unordered pitch collections. Deferred to the
+  MIDILAR integration: pitch-class sets are ambiguous (`C6` and `Am7`) and
+  lose spelling, so ranking needs the bass and real voicings.
+
+Decisions:
+
+- Same design as scales: an eight-byte `ChordPattern` built at compile time
+  from formulas such as `"1 3 5 b7 9"`, tones up to the thirteenth.
+- Inversions are a 0-based integer on `Chord::Voicing()`; a separate
+  `ChordInversion` type was not needed.
+- The legacy data had four defects, now corrected and recorded in
+  `Chord.dox`: Diminished duplicated Augmented, Minor Sixth used a minor
+  sixth, and Half Diminished and Diminished Seventh lacked the flat fifth.
+  Dominant and major thirteenths omit the eleventh; the legacy `NoteLayout`
+  inversion masks were copied between chords and were not migrated.
+- New entries: Minor Major Seventh, Augmented Seventh, Added Ninth, Seventh
+  Suspended Fourth and Power.
 
 ## Phase 8 - Keys and notation
 

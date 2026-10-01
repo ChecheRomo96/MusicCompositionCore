@@ -54,8 +54,9 @@ constexpr uint8_t DiatonicIndex(Letter letter) noexcept {
  * @ingroup MCC_Pitch
  */
 constexpr uint8_t NaturalSemitone(Letter letter) noexcept {
-    constexpr uint8_t semitones[LetterCount] = {0, 2, 4, 5, 7, 9, 11};
-    return semitones[DiatonicIndex(letter)];
+    // Computed rather than tabled so AVR keeps no lookup table in RAM.
+    const int32_t index = DiatonicIndex(letter);
+    return static_cast<uint8_t>(index * 2 - (index >= 3 ? 1 : 0));
 }
 
 /**

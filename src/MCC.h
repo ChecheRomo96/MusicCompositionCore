@@ -23,4 +23,8 @@
     #include <MCC_Scale.h>
 #endif
 
+#if __has_include(<MCC_Chord.h>)
+    #include <MCC_Chord.h>
+#endif
+
 #endif // MCC_H
