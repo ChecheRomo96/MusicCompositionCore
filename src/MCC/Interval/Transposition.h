@@ -1,6 +1,8 @@
 #ifndef MCC_INTERVAL_TRANSPOSITION_H
 #define MCC_INTERVAL_TRANSPOSITION_H
 
+#include <MCC_BuildSettings.h>
+
 #include <stdint.h>
 
 #include <Foundation/Math/Arithmetic.h>
@@ -24,7 +26,7 @@ namespace MCC {
  * `C####4`).
  * @ingroup MCC_Interval
  */
-constexpr Interval IntervalBetween(Pitch from, Pitch to) noexcept {
+MCC_CONSTEXPR14 Interval IntervalBetween(Pitch from, Pitch to) noexcept {
     if (!from.IsValid() || !to.IsValid()) {
         return Interval::Invalid();
     }
@@ -42,7 +44,7 @@ constexpr Interval IntervalBetween(Pitch from, Pitch to) noexcept {
  * SPEC-INT-5).
  * @ingroup MCC_Interval
  */
-constexpr Interval IntervalBetween(NoteName from, NoteName to) noexcept {
+MCC_CONSTEXPR14 Interval IntervalBetween(NoteName from, NoteName to) noexcept {
     if (!from.IsValid() || !to.IsValid()) {
         return Interval::Invalid();
     }
@@ -66,7 +68,7 @@ constexpr Interval IntervalBetween(NoteName from, NoteName to) noexcept {
  * (SPEC-OCT-4).
  * @ingroup MCC_Interval
  */
-constexpr Pitch operator+(Pitch pitch, Interval interval) noexcept {
+MCC_CONSTEXPR14 Pitch operator+(Pitch pitch, Interval interval) noexcept {
     if (!pitch.IsValid() || !interval.IsValid()) {
         return Pitch::Invalid();
     }
@@ -85,7 +87,7 @@ constexpr Pitch operator+(Pitch pitch, Interval interval) noexcept {
  * @brief Transposes `pitch` down by `interval`: `pitch + interval.Reversed()`.
  * @ingroup MCC_Interval
  */
-constexpr Pitch operator-(Pitch pitch, Interval interval) noexcept {
+MCC_CONSTEXPR14 Pitch operator-(Pitch pitch, Interval interval) noexcept {
     return pitch + interval.Reversed();
 }
 
@@ -98,7 +100,7 @@ constexpr Pitch operator-(Pitch pitch, Interval interval) noexcept {
  * leave `[-4, +4]` (SPEC-ACC-3).
  * @ingroup MCC_Interval
  */
-constexpr NoteName operator+(NoteName noteName, Interval interval) noexcept {
+MCC_CONSTEXPR14 NoteName operator+(NoteName noteName, Interval interval) noexcept {
     if (!noteName.IsValid() || !interval.IsValid()) {
         return NoteName::Invalid();
     }
@@ -113,7 +115,7 @@ constexpr NoteName operator+(NoteName noteName, Interval interval) noexcept {
  * @brief Transposes a note name down by `interval`.
  * @ingroup MCC_Interval
  */
-constexpr NoteName operator-(NoteName noteName, Interval interval) noexcept {
+MCC_CONSTEXPR14 NoteName operator-(NoteName noteName, Interval interval) noexcept {
     return noteName + interval.Reversed();
 }
 

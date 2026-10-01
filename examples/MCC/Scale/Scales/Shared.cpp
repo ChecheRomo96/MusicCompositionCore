@@ -2,7 +2,9 @@
 
 #include <MCC_Scale.h>
 
-namespace MCCExamples::Scale::Scales {
+namespace MCCExamples {
+namespace Scale {
+namespace Scales {
 
 namespace {
 
@@ -90,4 +92,6 @@ void Run(PrintFunction print) noexcept {
     print("============================================================\n");
 }
 
-} // namespace MCCExamples::Scale::Scales
+} // namespace Scales
+} // namespace Scale
+} // namespace MCCExamples

@@ -1,6 +1,8 @@
 #ifndef MCC_PITCH_NOTE_NAME_H
 #define MCC_PITCH_NOTE_NAME_H
 
+#include <MCC_BuildSettings.h>
+
 #include <stdint.h>
 
 #include <Foundation/Math/Arithmetic.h>
@@ -78,7 +80,7 @@ public:
      * in `[0, 11]` (SPEC-ORD-4). The invalid note name yields the invalid
      * pitch class (SPEC-ERR-4).
      */
-    constexpr MCC::PitchClass PitchClass() const noexcept {
+    MCC_CONSTEXPR14 MCC::PitchClass PitchClass() const noexcept {
         if (!IsValid()) {
             return MCC::PitchClass::Invalid();
         }
@@ -94,7 +96,7 @@ public:
      * The spelling is never rewritten, so the accidental of a valid note
      * name always remains within `[-4, +4]` (SPEC-ACC-3).
      */
-    constexpr NoteName MovedDiatonically(int32_t steps) const noexcept {
+    MCC_CONSTEXPR14 NoteName MovedDiatonically(int32_t steps) const noexcept {
         if (!IsValid()) {
             return Invalid();
         }
@@ -108,7 +110,7 @@ public:
      * A result outside `[-4, +4]` is the invalid note name; the note is
      * never respelled with another letter (SPEC-ACC-3, SPEC-ERR-5).
      */
-    constexpr NoteName Altered(int32_t semitones) const noexcept {
+    MCC_CONSTEXPR14 NoteName Altered(int32_t semitones) const noexcept {
         if (!IsValid()) {
             return Invalid();
         }

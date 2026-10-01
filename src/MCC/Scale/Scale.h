@@ -1,6 +1,8 @@
 #ifndef MCC_SCALE_SCALE_H
 #define MCC_SCALE_SCALE_H
 
+#include <MCC_BuildSettings.h>
+
 #include <stdint.h>
 
 #include <MCC/Interval/Transposition.h>
@@ -51,13 +53,13 @@ public:
     constexpr ScalePattern Pattern() const noexcept { return _pattern; }
 
     /** @brief Returns the number of degrees, or 0 for the invalid scale. */
-    constexpr uint8_t DegreeCount() const noexcept { return _pattern.DegreeCount(); }
+    MCC_CONSTEXPR14 uint8_t DegreeCount() const noexcept { return _pattern.DegreeCount(); }
 
     /**
      * @brief Returns the note name of `degree` (1-based), or the invalid note
      * name outside the scale or when it cannot be spelled.
      */
-    constexpr NoteName NoteAt(int32_t degree) const noexcept {
+    MCC_CONSTEXPR14 NoteName NoteAt(int32_t degree) const noexcept {
         return _root + _pattern.DegreeInterval(degree);
     }
 
@@ -65,7 +67,7 @@ public:
      * @brief Returns the pitch of `degree` when the root is placed in
      * `rootOctave`; degrees above the root may fall in the next octave.
      */
-    constexpr MCC::Pitch PitchAt(int32_t degree, int32_t rootOctave) const noexcept {
+    MCC_CONSTEXPR14 MCC::Pitch PitchAt(int32_t degree, int32_t rootOctave) const noexcept {
         return MCC::Pitch(_root, rootOctave) + _pattern.DegreeInterval(degree);
     }
 
@@ -73,7 +75,7 @@ public:
      * @brief Returns the 1-based degree written exactly as `noteName`, or 0
      * when no degree has that spelling.
      */
-    constexpr uint8_t DegreeOf(NoteName noteName) const noexcept {
+    MCC_CONSTEXPR14 uint8_t DegreeOf(NoteName noteName) const noexcept {
         if (!noteName.IsValid()) {
             return 0;
         }
@@ -87,7 +89,7 @@ public:
     }
 
     /** @brief Returns `true` when a degree is written exactly as `noteName`. */
-    constexpr bool Contains(NoteName noteName) const noexcept {
+    MCC_CONSTEXPR14 bool Contains(NoteName noteName) const noexcept {
         return DegreeOf(noteName) != 0;
     }
 

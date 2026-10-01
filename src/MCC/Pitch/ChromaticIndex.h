@@ -1,6 +1,8 @@
 #ifndef MCC_PITCH_CHROMATIC_INDEX_H
 #define MCC_PITCH_CHROMATIC_INDEX_H
 
+#include <MCC_BuildSettings.h>
+
 #include <stdint.h>
 
 #include <Foundation/Math/Arithmetic.h>
@@ -69,7 +71,7 @@ public:
      * @brief Returns the pitch class `Value() mod 12` (SPEC-ORD-4); the
      * invalid index yields the invalid class (SPEC-ERR-4).
      */
-    constexpr MCC::PitchClass PitchClass() const noexcept {
+    MCC_CONSTEXPR14 MCC::PitchClass PitchClass() const noexcept {
         if (!IsValid()) {
             return MCC::PitchClass::Invalid();
         }
@@ -82,7 +84,7 @@ public:
      * when this index is invalid or the result leaves
      * `[Minimum, Maximum]` (SPEC-ERR-4, SPEC-ERR-5).
      */
-    constexpr ChromaticIndex Transposed(int32_t semitones) const noexcept {
+    MCC_CONSTEXPR14 ChromaticIndex Transposed(int32_t semitones) const noexcept {
         if (!IsValid() ||
             semitones < Minimum - Maximum ||
             semitones > Maximum - Minimum) {

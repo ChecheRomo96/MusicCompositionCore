@@ -1,6 +1,8 @@
 #ifndef MCC_PITCH_ACCIDENTAL_H
 #define MCC_PITCH_ACCIDENTAL_H
 
+#include <MCC_BuildSettings.h>
+
 #include <stdint.h>
 
 namespace MCC {
@@ -92,7 +94,7 @@ public:
      * The result is invalid when this accidental is invalid (SPEC-ERR-4) or
      * when it would leave `[Minimum, Maximum]` (SPEC-ACC-3, SPEC-ERR-5).
      */
-    constexpr Accidental Altered(int32_t semitones) const noexcept {
+    MCC_CONSTEXPR14 Accidental Altered(int32_t semitones) const noexcept {
         if (!IsValid() ||
             semitones < Minimum - Maximum ||
             semitones > Maximum - Minimum) {

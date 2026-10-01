@@ -15,8 +15,21 @@
     #endif
 #endif
 
-#if !defined(DOXYGEN) && (MCC_CPLUSPLUS < 201703L)
+#if !defined(DOXYGEN) && defined(ARDUINO) && (MCC_CPLUSPLUS < 201103L)
+    #error "MCC requires C++11 or newer for Arduino source builds"
+#elif !defined(DOXYGEN) && !defined(ARDUINO) && (MCC_CPLUSPLUS < 201703L)
     #error "MCC requires C++17 or newer"
+#endif
+
+// C++14 relaxed constexpr permits local variables, branches, and loops.
+// Preserve constexpr evaluation on modern toolchains and expose the same API
+// as ordinary inline functions to stock Arduino cores that compile as C++11.
+#ifndef MCC_CONSTEXPR14
+    #if MCC_CPLUSPLUS >= 201402L
+        #define MCC_CONSTEXPR14 constexpr
+    #else
+        #define MCC_CONSTEXPR14 inline
+    #endif
 #endif
 
 #endif // MCC_BUILD_SETTINGS_H

@@ -5,7 +5,9 @@
 #include <MCC_Notation.h>
 #include <MCC_Scale.h>
 
-namespace MCCExamples::Key::Keys {
+namespace MCCExamples {
+namespace Key {
+namespace Keys {
 
 namespace {
 
@@ -115,4 +117,6 @@ void Run(PrintFunction print) noexcept {
     print("============================================================\n");
 }
 
-} // namespace MCCExamples::Key::Keys
+} // namespace Keys
+} // namespace Key
+} // namespace MCCExamples

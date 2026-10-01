@@ -40,15 +40,6 @@ command -v arduino-cli >/dev/null 2>&1 || mcc_die "arduino-cli not found"
     mcc_die "Foundation Arduino library not found at $FOUNDATION"
 FOUNDATION=$(mcc_absolute_path "$FOUNDATION")
 
-# MCC requires C++17. The stock Arduino AVR core compiles with gnu++11, and
-# its avr-gcc 7.3 supports C++17 when asked; other cores keep their flags.
-set --
-case "$FQBN" in
-    arduino:avr:*)
-        set -- --build-property "compiler.cpp.extra_flags=-std=gnu++17"
-        ;;
-esac
-
 BUILD_ROOT="$MCC_ROOT/build/arduino/$(printf '%s' "$FQBN" | tr ':' '_')"
 rm -rf "$BUILD_ROOT"
 
@@ -69,7 +60,6 @@ for SKETCH in "$MCC_ROOT"/examples/MCC/*/*/*.ino; do
         --library "$FOUNDATION" \
         --build-path "$BUILD_ROOT/$NAME" \
         --warnings default \
-        "$@" \
         "$SKETCH_DIR" >"$LOG" 2>&1 || STATUS=$?
     cat -- "$LOG"
     [ "$STATUS" -eq 0 ] || mcc_die "$NAME failed to compile"

@@ -21,37 +21,44 @@ namespace {
         char name[NameCapacity];
     };
 
-    // Reviewed definitions; provenance is recorded in Chord.dox. Chord
-    // formulas are evaluated at compile time into eight-byte patterns.
+    constexpr ChordPattern CatalogPattern(uint32_t semitones,
+                                          uint8_t steps0, uint8_t steps1,
+                                          uint8_t steps2, uint8_t steps3) noexcept {
+        return Detail::ChordPatternStorage::Make(
+            semitones, steps0, steps1, steps2, steps3);
+    }
+
+    // Reviewed definitions; provenance is recorded in Chord.dox. The encoded
+    // patterns are precomputed from the formulas recorded beside each entry.
     constexpr Entry Catalog[Count] FOUNDATION_FLASH = {
-        {ChordPattern::FromFormula("1 3 5"), "", "Major"},
-        {ChordPattern::FromFormula("1 b3 5"), "m", "Minor"},
-        {ChordPattern::FromFormula("1 3 #5"), "aug", "Augmented"},
-        {ChordPattern::FromFormula("1 b3 b5"), "dim", "Diminished"},
-        {ChordPattern::FromFormula("1 3 5 6"), "6", "Sixth"},
-        {ChordPattern::FromFormula("1 b3 5 6"), "m6", "Minor Sixth"},
-        {ChordPattern::FromFormula("1 3 5 b7"), "7", "Dominant Seventh"},
-        {ChordPattern::FromFormula("1 3 5 7"), "maj7", "Major Seventh"},
-        {ChordPattern::FromFormula("1 b3 5 b7"), "m7", "Minor Seventh"},
-        {ChordPattern::FromFormula("1 b3 b5 b7"), "m7b5", "Half Diminished Seventh"},
-        {ChordPattern::FromFormula("1 b3 b5 bb7"), "dim7", "Diminished Seventh"},
-        {ChordPattern::FromFormula("1 3 5 b7 9"), "9", "Dominant Ninth"},
-        {ChordPattern::FromFormula("1 3 5 b7 b9"), "7b9", "Dominant Minor Ninth"},
-        {ChordPattern::FromFormula("1 3 5 7 9"), "maj9", "Major Ninth"},
-        {ChordPattern::FromFormula("1 b3 5 b7 9"), "m9", "Minor Ninth"},
-        {ChordPattern::FromFormula("1 3 5 b7 9 11"), "11", "Dominant Eleventh"},
-        {ChordPattern::FromFormula("1 3 5 7 9 11"), "maj11", "Major Eleventh"},
-        {ChordPattern::FromFormula("1 b3 5 b7 9 11"), "m11", "Minor Eleventh"},
-        {ChordPattern::FromFormula("1 3 5 b7 9 13"), "13", "Dominant Thirteenth"},
-        {ChordPattern::FromFormula("1 3 5 7 9 13"), "maj13", "Major Thirteenth"},
-        {ChordPattern::FromFormula("1 b3 5 b7 9 11 13"), "m13", "Minor Thirteenth"},
-        {ChordPattern::FromFormula("1 2 5"), "sus2", "Suspended Second"},
-        {ChordPattern::FromFormula("1 4 5"), "sus4", "Suspended Fourth"},
-        {ChordPattern::FromFormula("1 b3 5 7"), "mMaj7", "Minor Major Seventh"},
-        {ChordPattern::FromFormula("1 3 #5 b7"), "aug7", "Augmented Seventh"},
-        {ChordPattern::FromFormula("1 3 5 9"), "add9", "Added Ninth"},
-        {ChordPattern::FromFormula("1 4 5 b7"), "7sus4", "Seventh Suspended Fourth"},
-        {ChordPattern::FromFormula("1 5"), "5", "Power"},
+        {CatalogPattern(0x00000091u, 0x20u, 0x04u, 0x00u, 0x00u), "", "Major"}, // 1 3 5
+        {CatalogPattern(0x00000089u, 0x20u, 0x04u, 0x00u, 0x00u), "m", "Minor"}, // 1 b3 5
+        {CatalogPattern(0x00000111u, 0x20u, 0x04u, 0x00u, 0x00u), "aug", "Augmented"}, // 1 3 #5
+        {CatalogPattern(0x00000049u, 0x20u, 0x04u, 0x00u, 0x00u), "dim", "Diminished"}, // 1 b3 b5
+        {CatalogPattern(0x00000291u, 0x20u, 0x54u, 0x00u, 0x00u), "6", "Sixth"}, // 1 3 5 6
+        {CatalogPattern(0x00000289u, 0x20u, 0x54u, 0x00u, 0x00u), "m6", "Minor Sixth"}, // 1 b3 5 6
+        {CatalogPattern(0x00000491u, 0x20u, 0x64u, 0x00u, 0x00u), "7", "Dominant Seventh"}, // 1 3 5 b7
+        {CatalogPattern(0x00000891u, 0x20u, 0x64u, 0x00u, 0x00u), "maj7", "Major Seventh"}, // 1 3 5 7
+        {CatalogPattern(0x00000489u, 0x20u, 0x64u, 0x00u, 0x00u), "m7", "Minor Seventh"}, // 1 b3 5 b7
+        {CatalogPattern(0x00000449u, 0x20u, 0x64u, 0x00u, 0x00u), "m7b5", "Half Diminished Seventh"}, // 1 b3 b5 b7
+        {CatalogPattern(0x00000249u, 0x20u, 0x64u, 0x00u, 0x00u), "dim7", "Diminished Seventh"}, // 1 b3 b5 bb7
+        {CatalogPattern(0x00004491u, 0x20u, 0x64u, 0x08u, 0x00u), "9", "Dominant Ninth"}, // 1 3 5 b7 9
+        {CatalogPattern(0x00002491u, 0x20u, 0x64u, 0x08u, 0x00u), "7b9", "Dominant Minor Ninth"}, // 1 3 5 b7 b9
+        {CatalogPattern(0x00004891u, 0x20u, 0x64u, 0x08u, 0x00u), "maj9", "Major Ninth"}, // 1 3 5 7 9
+        {CatalogPattern(0x00004489u, 0x20u, 0x64u, 0x08u, 0x00u), "m9", "Minor Ninth"}, // 1 b3 5 b7 9
+        {CatalogPattern(0x00024491u, 0x20u, 0x64u, 0xA8u, 0x00u), "11", "Dominant Eleventh"}, // 1 3 5 b7 9 11
+        {CatalogPattern(0x00024891u, 0x20u, 0x64u, 0xA8u, 0x00u), "maj11", "Major Eleventh"}, // 1 3 5 7 9 11
+        {CatalogPattern(0x00024489u, 0x20u, 0x64u, 0xA8u, 0x00u), "m11", "Minor Eleventh"}, // 1 b3 5 b7 9 11
+        {CatalogPattern(0x00204491u, 0x20u, 0x64u, 0xC8u, 0x00u), "13", "Dominant Thirteenth"}, // 1 3 5 b7 9 13
+        {CatalogPattern(0x00204891u, 0x20u, 0x64u, 0xC8u, 0x00u), "maj13", "Major Thirteenth"}, // 1 3 5 7 9 13
+        {CatalogPattern(0x00224489u, 0x20u, 0x64u, 0xA8u, 0x0Cu), "m13", "Minor Thirteenth"}, // 1 b3 5 b7 9 11 13
+        {CatalogPattern(0x00000085u, 0x10u, 0x04u, 0x00u, 0x00u), "sus2", "Suspended Second"}, // 1 2 5
+        {CatalogPattern(0x000000A1u, 0x30u, 0x04u, 0x00u, 0x00u), "sus4", "Suspended Fourth"}, // 1 4 5
+        {CatalogPattern(0x00000889u, 0x20u, 0x64u, 0x00u, 0x00u), "mMaj7", "Minor Major Seventh"}, // 1 b3 5 7
+        {CatalogPattern(0x00000511u, 0x20u, 0x64u, 0x00u, 0x00u), "aug7", "Augmented Seventh"}, // 1 3 #5 b7
+        {CatalogPattern(0x00004091u, 0x20u, 0x84u, 0x00u, 0x00u), "add9", "Added Ninth"}, // 1 3 5 9
+        {CatalogPattern(0x000004A1u, 0x30u, 0x64u, 0x00u, 0x00u), "7sus4", "Seventh Suspended Fourth"}, // 1 4 5 b7
+        {CatalogPattern(0x00000081u, 0x40u, 0x00u, 0x00u, 0x00u), "5", "Power"}, // 1 5
     };
 
     constexpr Alias Aliases[AliasCount] FOUNDATION_FLASH = {

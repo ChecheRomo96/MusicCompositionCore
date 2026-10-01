@@ -1,11 +1,19 @@
 #ifndef MCC_CHORD_CHORD_PATTERN_H
 #define MCC_CHORD_CHORD_PATTERN_H
 
+#include <MCC_BuildSettings.h>
+
 #include <stdint.h>
 
 #include <MCC/Interval/Interval.h>
 
 namespace MCC {
+
+/** @cond INTERNAL */
+namespace Detail {
+struct ChordPatternStorage;
+}
+/** @endcond */
 
 /**
  * @brief Root-independent chord structure: up to seven ascending tones within
@@ -28,8 +36,15 @@ public:
     static constexpr uint8_t MaximumTones = 7;
 
 private:
+    friend struct Detail::ChordPatternStorage;
+
     uint32_t _semitones;   // bit k set: a tone lies k semitones above the root
     uint8_t _steps[4];     // diatonic steps of tone i in nibble i
+
+    constexpr ChordPattern(uint32_t semitones, uint8_t steps0,
+                           uint8_t steps1, uint8_t steps2,
+                           uint8_t steps3) noexcept
+        : _semitones(semitones), _steps{steps0, steps1, steps2, steps3} {}
 
     // Semitones of the major-scale degree `steps` above the root, extended
     // past the octave. Computed rather than tabled so AVR keeps no RAM table.
@@ -41,7 +56,7 @@ private:
         return static_cast<uint8_t>((_steps[index / 2] >> ((index % 2) * 4)) & 0x0F);
     }
 
-    constexpr int32_t SemitonesAt(uint8_t index) const noexcept {
+    MCC_CONSTEXPR14 int32_t SemitonesAt(uint8_t index) const noexcept {
         uint8_t seen = 0;
         for (int32_t k = 0; k < 24; ++k) {
             if ((_semitones >> k) & 1u) {
@@ -70,7 +85,7 @@ public:
      * ascending semitones below two octaves; otherwise the invalid pattern is
      * returned.
      */
-    static constexpr ChordPattern FromFormula(const char* formula) noexcept {
+    static MCC_CONSTEXPR14 ChordPattern FromFormula(const char* formula) noexcept {
         ChordPattern pattern;
         if (formula == nullptr) {
             return Invalid();
@@ -119,7 +134,7 @@ public:
     constexpr bool IsValid() const noexcept { return _semitones != 0; }
 
     /** @brief Returns the number of tones, or 0 for the invalid pattern. */
-    constexpr uint8_t ToneCount() const noexcept {
+    MCC_CONSTEXPR14 uint8_t ToneCount() const noexcept {
         uint8_t count = 0;
         for (int32_t k = 0; k < 24; ++k) {
             count = static_cast<uint8_t>(count + ((_semitones >> k) & 1u));
@@ -132,7 +147,7 @@ public:
      * (1-based, in root-position order), or the invalid interval outside
      * `[1, ToneCount()]`.
      */
-    constexpr Interval ToneInterval(int32_t tone) const noexcept {
+    MCC_CONSTEXPR14 Interval ToneInterval(int32_t tone) const noexcept {
         if (tone < 1 || tone > ToneCount()) {
             return Interval::Invalid();
         }
@@ -149,7 +164,7 @@ public:
     }
 
     /** @brief Compares tones, including their written steps. */
-    friend constexpr bool operator==(const ChordPattern& a, const ChordPattern& b) noexcept {
+    friend MCC_CONSTEXPR14 bool operator==(const ChordPattern& a, const ChordPattern& b) noexcept {
         if (a._semitones != b._semitones) {
             return false;
         }
@@ -162,10 +177,24 @@ public:
     }
 
     /** @brief Negation of `operator==`. */
-    friend constexpr bool operator!=(const ChordPattern& a, const ChordPattern& b) noexcept {
+    friend MCC_CONSTEXPR14 bool operator!=(const ChordPattern& a, const ChordPattern& b) noexcept {
         return !(a == b);
     }
 };
+
+/** @cond INTERNAL */
+namespace Detail {
+
+struct ChordPatternStorage {
+    static constexpr ChordPattern Make(uint32_t semitones, uint8_t steps0,
+                                       uint8_t steps1, uint8_t steps2,
+                                       uint8_t steps3) noexcept {
+        return ChordPattern(semitones, steps0, steps1, steps2, steps3);
+    }
+};
+
+} // namespace Detail
+/** @endcond */
 
 } // namespace MCC
 

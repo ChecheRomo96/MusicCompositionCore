@@ -2,7 +2,9 @@
 
 #include <MCC_Pitch.h>
 
-namespace MCCExamples::Pitch::NoteNames {
+namespace MCCExamples {
+namespace Pitch {
+namespace NoteNames {
 
 namespace {
 
@@ -208,4 +210,6 @@ void Run(PrintFunction print) noexcept {
     print("========================================\n");
 }
 
-} // namespace MCCExamples::Pitch::NoteNames
+} // namespace NoteNames
+} // namespace Pitch
+} // namespace MCCExamples

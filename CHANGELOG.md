@@ -3,6 +3,21 @@
 This file records user-visible changes to Music Composition Core (MCC).
 Release dates use the `YYYY-MM-DD` format.
 
+## [Unreleased]
+
+### Fixed
+
+- Arduino source builds now compile with the stock core's C++11 mode without
+  requiring a global `-std=gnu++17` override.
+- Scale and chord catalogs remain compile-time data in AVR program memory when
+  the public formula parsers are exposed as runtime functions under C++11.
+
+### Changed
+
+- C++14 relaxed-`constexpr` operations remain `constexpr` for CMake and modern
+  Arduino toolchains and become inline functions only in Arduino C++11 mode.
+- Arduino example CI now exercises the core's default language flags.
+
 ## [0.5.1] - 2026-10-01
 
 ### Added
@@ -15,7 +30,7 @@ Release dates use the `YYYY-MM-DD` format.
   `scripts/analyze.ps1`) with warnings as errors, and a CI job running it.
 - `scripts/test-arduino.sh` and `scripts/test-arduino.ps1`, and an Arduino CI
   job on Linux and Windows, compiling every example sketch for the Arduino
-  Uno with `-std=gnu++17` against the pinned Foundation release.
+  Uno against the pinned Foundation release.
 
 ### Fixed
 

@@ -1,6 +1,8 @@
 #ifndef MCC_KEY_KEY_SIGNATURE_H
 #define MCC_KEY_KEY_SIGNATURE_H
 
+#include <MCC_BuildSettings.h>
+
 #include <stdint.h>
 
 #include <MCC/Pitch/Accidental.h>
@@ -57,7 +59,7 @@ public:
      * @brief Returns the accidental the signature applies to `letter`:
      * sharp, flat or natural; invalid for the invalid signature.
      */
-    constexpr MCC::Accidental AccidentalOf(Letter letter) const noexcept {
+    MCC_CONSTEXPR14 MCC::Accidental AccidentalOf(Letter letter) const noexcept {
         if (!IsValid()) {
             return MCC::Accidental::Invalid();
         }

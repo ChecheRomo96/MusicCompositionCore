@@ -1,6 +1,8 @@
 #ifndef MCC_PITCH_LETTER_H
 #define MCC_PITCH_LETTER_H
 
+#include <MCC_BuildSettings.h>
+
 #include <stdint.h>
 
 #include <Foundation/Math/Arithmetic.h>
@@ -53,7 +55,7 @@ constexpr uint8_t DiatonicIndex(Letter letter) noexcept {
  * `0 2 4 5 7 9 11` (SPEC-ORD-1).
  * @ingroup MCC_Pitch
  */
-constexpr uint8_t NaturalSemitone(Letter letter) noexcept {
+MCC_CONSTEXPR14 uint8_t NaturalSemitone(Letter letter) noexcept {
     // Computed rather than tabled so AVR keeps no lookup table in RAM.
     const int32_t index = DiatonicIndex(letter);
     return static_cast<uint8_t>(index * 2 - (index >= 3 ? 1 : 0));
