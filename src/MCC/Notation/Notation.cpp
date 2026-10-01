@@ -14,11 +14,11 @@ namespace {
     constexpr char ModeNames[7][12] FOUNDATION_FLASH = {
         " Lydian", " major", " Mixolydian", " Dorian", " minor", " Phrygian", " Locrian"};
 
-    constexpr uint32_t NaturalSign = 0x266E;      // ♮
-    constexpr uint32_t SharpSign = 0x266F;        // ♯
-    constexpr uint32_t FlatSign = 0x266D;         // ♭
-    constexpr uint32_t DoubleSharpSign = 0x1D12A; // 𝄪
-    constexpr uint32_t DoubleFlatSign = 0x1D12B;  // 𝄫
+    constexpr uint32_t NaturalSign = 0x266E;      // U+266E natural
+    constexpr uint32_t SharpSign = 0x266F;        // U+266F sharp
+    constexpr uint32_t FlatSign = 0x266D;         // U+266D flat
+    constexpr uint32_t DoubleSharpSign = 0x1D12A; // U+1D12A double sharp
+    constexpr uint32_t DoubleFlatSign = 0x1D12B;  // U+1D12B double flat
 
     ////////////////////////////////////////////////////////////////////////////
     // Writing: each function works on a buffer Writer or a SinkWriter.
@@ -166,7 +166,7 @@ namespace {
             in.Advance();
             return NoteName(static_cast<Letter>(letter));
         }
-        // Sharps (#, ♯, x, 𝄪) and flats (b, ♭, 𝄫) may be mixed within one
+        // Sharps (#, U+266F sharp, x, U+1D12A double sharp) and flats (b, U+266D flat, U+1D12B double flat) may be mixed within one
         // direction, but never with each other.
         int32_t accidental = 0;
         int32_t direction = 0;

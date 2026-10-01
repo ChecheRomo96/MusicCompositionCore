@@ -26,7 +26,7 @@ namespace MCC {
  */
 enum class NotationSymbols : uint8_t {
     Ascii,      ///< `#`, `b` and `n`, repeated for multiples.
-    Unicode     ///< U+266F ♯, U+266D ♭, U+266E ♮, U+1D12A 𝄪 and U+1D12B 𝄫.
+    Unicode     ///< U+266F sharp, U+266D flat, U+266E natural, U+1D12A double sharp and U+1D12B double flat.
 };
 
 /**
@@ -36,7 +36,7 @@ enum class NotationSymbols : uint8_t {
 struct NotationOptions {
     /** @brief Accidental symbols; ASCII by default. */
     NotationSymbols symbols = NotationSymbols::Ascii;
-    /** @brief Write the natural sign explicitly (`Cn` or `C♮`). */
+    /** @brief Write the natural sign explicitly (`Cn`, or U+266E with Unicode symbols). */
     bool explicitNatural = false;
 };
 
@@ -49,7 +49,7 @@ struct NotationOptions {
  * | Buffer | Encoding |
  * | ------ | -------- |
  * | `char` | ASCII with `NotationSymbols::Ascii`, otherwise UTF-8 |
- * | `char16_t` | UTF-16, with surrogate pairs for 𝄪 and 𝄫 |
+ * | `char16_t` | UTF-16, with surrogate pairs for the double sharp and double flat |
  * | `char32_t` | UTF-32 |
  *
  * Every buffer `Format` function writes with `snprintf` semantics measured
@@ -62,8 +62,8 @@ struct NotationOptions {
  * `"(invalid)"`.
  *
  * Parsing reads the same three encodings and accepts both symbol sets: a
- * letter in either case, then `#`/`♯` (+1), `x`/`𝄪` (+2), `b`/`♭` (-1),
- * `𝄫` (-2), or a single `n`/`♮`. Malformed text returns the invalid value
+ * letter in either case, then `#`/U+266F (+1), `x`/U+1D12A (+2), `b`/U+266D
+ * (-1), U+1D12B (-2), or a single `n`/U+266E. Malformed text returns the invalid value
  * (SPEC-TXT-4).
  */
 namespace Notation {
@@ -71,7 +71,7 @@ namespace Notation {
     /** @brief Receives one Unicode code point of formatted text. */
     using CodePointSink = void (*)(uint32_t codePoint, void* context);
 
-    /** @brief Writes `C`, `F#`, `Bbb` (or `F♯`, `B𝄫` with Unicode symbols). */
+    /** @brief Writes `C`, `F#`, `Bbb` (or the Unicode sharp and flat signs). */
     template <typename CharT>
     size_t Format(CharT* destination, size_t capacity, NoteName noteName,
                   NotationOptions options = NotationOptions()) noexcept;
@@ -101,11 +101,11 @@ namespace Notation {
     size_t Format(CodePointSink sink, void* context, Interval interval,
                   NotationOptions options = NotationOptions()) noexcept;
 
-    /** @brief Parses `C`, `f#`, `Ebb`, `Gx`, `B♭`, `Bn`; up to four accidentals. */
+    /** @brief Parses `C`, `f#`, `Ebb`, `Gx`, `Bn`; up to four accidentals. */
     template <typename CharT>
     NoteName ParseNoteName(const CharT* text) noexcept;
 
-    /** @brief Parses a note name followed by a signed octave: `C4`, `bb-1`, `F♯3`. */
+    /** @brief Parses a note name followed by a signed octave: `C4`, `bb-1`, Unicode accidentals. */
     template <typename CharT>
     Pitch ParsePitch(const CharT* text) noexcept;
 

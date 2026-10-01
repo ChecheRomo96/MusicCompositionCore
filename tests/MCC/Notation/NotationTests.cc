@@ -41,12 +41,12 @@ TEST(NotationTests, FormatsNoteNamesInAscii) {
 TEST(NotationTests, FormatsUnicodeAccidentals) {
     NotationOptions unicode;
     unicode.symbols = MCC::NotationSymbols::Unicode;
-    EXPECT_EQ(Text(NoteName(Letter::F, Accidental::Sharp()), unicode), "F♯");
-    EXPECT_EQ(Text(NoteName(Letter::B, Accidental::Flat()), unicode), "B♭");
+    EXPECT_EQ(Text(NoteName(Letter::F, Accidental::Sharp()), unicode), "F\u266F");
+    EXPECT_EQ(Text(NoteName(Letter::B, Accidental::Flat()), unicode), "B\u266D");
     EXPECT_EQ(Text(NoteName(Letter::C, Accidental(2)), unicode), "C\U0001D12A");
-    EXPECT_EQ(Text(NoteName(Letter::D, Accidental(-3)), unicode), "D\U0001D12B♭");
+    EXPECT_EQ(Text(NoteName(Letter::D, Accidental(-3)), unicode), "D\U0001D12B\u266D");
     unicode.explicitNatural = true;
-    EXPECT_EQ(Text(NoteName(Letter::G), unicode), "G♮");
+    EXPECT_EQ(Text(NoteName(Letter::G), unicode), "G\u266E");
 }
 
 TEST(NotationTests, FormatsPitchesAndIntervals) {
@@ -73,7 +73,7 @@ TEST(NotationTests, EncodesUtf16AndUtf32) {
     EXPECT_EQ(utf16[1], char16_t(0xD834));
     EXPECT_EQ(utf16[2], char16_t(0xDD2A));
     EXPECT_EQ(Notation::Format(utf16, 8, Pitch(Letter::B, Accidental::Flat(), 3), unicode), 3U);
-    EXPECT_EQ(std::u16string(utf16), u"B♭3");
+    EXPECT_EQ(std::u16string(utf16), u"B\u266D3");
 
     char32_t utf32[8];
     EXPECT_EQ(Notation::Format(utf32, 8, cDoubleSharp, unicode), 3U);
@@ -84,7 +84,7 @@ TEST(NotationTests, EncodesUtf16AndUtf32) {
     char16_t chord[16];
     Notation::Format(chord, 16, NoteName(Letter::C, Accidental::Sharp()),
                      MCC::Chords::Id::HalfDiminishedSeventh, unicode);
-    EXPECT_EQ(std::u16string(chord), u"C♯m7b5");
+    EXPECT_EQ(std::u16string(chord), u"C\u266Fm7b5");
 }
 
 TEST(NotationTests, TruncationNeverSplitsACharacter) {
@@ -149,13 +149,13 @@ TEST(NotationTests, ParsingIsFlexible) {
     EXPECT_EQ(Notation::ParseNoteName("Gx"), gDoubleSharp);
     EXPECT_EQ(Notation::ParseNoteName("Gx#"), NoteName(Letter::G, Accidental(3)));
     // Unicode symbols in UTF-8, UTF-16 and UTF-32.
-    EXPECT_EQ(Notation::ParseNoteName("F♯"), fSharp);
+    EXPECT_EQ(Notation::ParseNoteName("F\u266F"), fSharp);
     EXPECT_EQ(Notation::ParseNoteName("G\U0001D12A"), gDoubleSharp);
-    EXPECT_EQ(Notation::ParseNoteName("B♮"), NoteName(Letter::B));
-    EXPECT_EQ(Notation::ParseNoteName(u"B♭"), bFlat);
+    EXPECT_EQ(Notation::ParseNoteName("B\u266E"), NoteName(Letter::B));
+    EXPECT_EQ(Notation::ParseNoteName(u"B\u266D"), bFlat);
     EXPECT_EQ(Notation::ParseNoteName(u"E\U0001D12B"), NoteName(Letter::E, Accidental(-2)));
-    EXPECT_EQ(Notation::ParseNoteName(U"f♯"), fSharp);
-    EXPECT_EQ(Notation::ParsePitch(u"F♯3"), Pitch(Letter::F, Accidental::Sharp(), 3));
+    EXPECT_EQ(Notation::ParseNoteName(U"f\u266F"), fSharp);
+    EXPECT_EQ(Notation::ParsePitch(u"F\u266F3"), Pitch(Letter::F, Accidental::Sharp(), 3));
     EXPECT_EQ(Notation::ParsePitch(U"cx-1"), Pitch(Letter::C, Accidental(2), -1));
     EXPECT_EQ(Notation::ParseInterval("+M3"), Interval(IntervalQuality::Major(), IntervalNumber(3)));
     EXPECT_EQ(Notation::ParseInterval(u"-AA4"), Interval(IntervalQuality::Augmented(2), IntervalNumber(4),
