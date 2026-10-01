@@ -1,0 +1,15 @@
+set(MCC_KEY_HEADERS
+    "${CMAKE_CURRENT_LIST_DIR}/Key.h"
+    "${CMAKE_CURRENT_LIST_DIR}/KeySignature.h")
+set(MCC_KEY_SOURCES
+    "${CMAKE_CURRENT_LIST_DIR}/Key.cpp")
+
+target_sources(MCC PRIVATE ${MCC_KEY_HEADERS} ${MCC_KEY_SOURCES})
+mcc_stage_headers(${MCC_KEY_HEADERS})
+mcc_add_dox(
+    ${MCC_KEY_HEADERS}
+    "${CMAKE_CURRENT_LIST_DIR}/Key.dox")
+
+install(FILES ${MCC_KEY_HEADERS}
+    DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/MCC/Key"
+    CONFIGURATIONS Release)

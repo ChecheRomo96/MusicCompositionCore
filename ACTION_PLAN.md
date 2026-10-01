@@ -432,7 +432,6 @@ MCC::Note
 MCC::Meter
 MCC::Tuplet
 MCC::RhythmPattern
-MCC::EuclideanPattern
 ```
 
 Actions:
@@ -441,8 +440,16 @@ Actions:
 - [ ] Combine a pitch with a note value into `MCC::Note`.
 - [ ] Represent simple and compound meter.
 - [ ] Represent tuplets independently of runtime timing.
-- [ ] Migrate and verify the historical Euclidean-rhythm algorithm.
 - [ ] Keep clocks, scheduling, callbacks and PPQN execution outside MCC.
+
+Decisions:
+
+- Deferred until the MIDILAR migration is planned, so rhythm types are
+  designed together with their first consumer (MIDILAR's sequencer).
+- The historical Euclidean sequence (`OLD MCC`
+  `MusicalUtilityCore/Sequences/Euclidean`) is not classical music theory and
+  does not belong in MCC: the generic k-in-n distribution goes to Foundation
+  and the sequencer that plays it goes to MIDILAR.
 
 ## Phase 10 - Required MIDILAR integration
 
