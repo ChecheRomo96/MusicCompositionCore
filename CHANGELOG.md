@@ -11,6 +11,13 @@ Release dates use the `YYYY-MM-DD` format.
   UndefinedBehaviorSanitizer on Linux GCC/Clang and macOS.
 - Size-budget and trivial-copyability checks for every value type, compiled
   into the library for every target, including AVR and Arm.
+- clang-tidy static analysis (`.clang-tidy`, `scripts/analyze.sh`,
+  `scripts/analyze.ps1`) with warnings as errors, and a CI job running it.
+
+### Fixed
+
+- Two implementation-defined narrowing conversions in `Pitch` and
+  `KeySignature` found by clang-tidy.
 
 ### Changed
 
