@@ -17,7 +17,7 @@ constexpr std::array<int, 7> NaturalSemitones = {0, 2, 4, 5, 7, 9, 11};
 inline std::array<MCC::Accidental, 9> AllAccidentals() {
     std::array<MCC::Accidental, 9> accidentals{};
     for (int i = 0; i < 9; ++i) {
-        accidentals[i] = MCC::Accidental(i - 4);
+        accidentals[static_cast<std::size_t>(i)] = MCC::Accidental(i - 4);
     }
     return accidentals;
 }
@@ -25,7 +25,7 @@ inline std::array<MCC::Accidental, 9> AllAccidentals() {
 // The 63 supported spellings in written order: letter, then accidental.
 inline std::array<MCC::NoteName, 63> AllNoteNames() {
     std::array<MCC::NoteName, 63> noteNames{};
-    int i = 0;
+    std::size_t i = 0;
     for (const MCC::Letter letter : AllLetters) {
         for (const MCC::Accidental accidental : AllAccidentals()) {
             noteNames[i++] = MCC::NoteName(letter, accidental);

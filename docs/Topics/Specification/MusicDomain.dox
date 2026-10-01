@@ -141,8 +141,10 @@
  *   virtual functions and never allocate.
  * - SPEC-EMB-2: Size budgets: `Letter`, `Accidental` and `PitchClass`
  *   1 byte, `NoteName` at most 2 bytes, `Pitch` at most 4 bytes,
- *   `Interval` at most 4 bytes.
- *   Enforced with `static_assert` in tests.
+ *   `Interval` at most 4 bytes; scale and chord patterns 8 bytes, `Scale`
+ *   and `Chord` at most 12 bytes, `KeySignature` 1 byte and `Key` at most
+ *   4 bytes. Enforced with `static_assert` in the unit tests and in the
+ *   library build for every target, AVR and Arm included (`src/MCC.cpp`).
  * - SPEC-EMB-3: Construction, comparison, transposition and interval
  *   arithmetic are `constexpr`.
  * - SPEC-EMB-4: Core code uses no RTTI, exceptions, iostreams or

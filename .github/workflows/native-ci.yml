@@ -133,3 +133,54 @@ jobs:
             dist/${{ matrix.preset }}/
           if-no-files-found: warn
           retention-days: 14
+
+  sanitizers:
+    name: Sanitizers / ${{ matrix.name }}
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 30
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: Ubuntu 24.04 / GCC / x64
+            runner: ubuntu-24.04
+            preset: linux_gcc_x64
+
+          - name: Ubuntu 24.04 / Clang / x64
+            runner: ubuntu-24.04
+            preset: linux_clang_x64
+
+          - name: macOS 15 / Apple Clang / Arm64
+            runner: macos-15
+            preset: macos_arm64
+
+    env:
+      CXXFLAGS: -fsanitize=address,undefined -fno-sanitize-recover=all -fno-omit-frame-pointer
+      LDFLAGS: -fsanitize=address,undefined
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+        with:
+          submodules: recursive
+
+      - name: Test Debug with AddressSanitizer and UndefinedBehaviorSanitizer
+        uses: ./tools/RoModularBuild/actions/project-workflow
+        with:
+          command: test
+          preset: ${{ matrix.preset }}
+          configuration: Debug
+          fresh: true
+          parallel: 4
+
+      - name: Upload sanitizer failure evidence
+        if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: failure-sanitizers-${{ matrix.preset }}-${{ github.run_attempt }}
+          path: |
+            build/${{ matrix.preset }}/CMakeCache.txt
+            build/${{ matrix.preset }}/Testing/Temporary/
+          if-no-files-found: warn
+          retention-days: 14
