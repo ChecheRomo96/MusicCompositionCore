@@ -475,8 +475,9 @@ Status: in progress (`.github/workflows/`)
 | `0.1.0` | Build, package, test and documentation scaffold |
 | `0.2.0` | Note names, pitches, tuning and intervals (released; see `CHANGELOG.md`) |
 | `0.3.0` | Scales and reviewed scale catalog (released; see `CHANGELOG.md`) |
-| `0.4.0` | Chords, keys and notation |
-| `0.5.0` | Rhythm and compositional patterns |
+| `0.4.0` | Chords and reviewed chord catalog (released; see `CHANGELOG.md`) |
+| `0.5.0` | Keys and notation |
+| `0.6.0` | Rhythm and compositional patterns |
 | `0.9.0` | Required MIDILAR integration validated |
 | `1.0.0` | Stable documented API on supported targets |
 
