@@ -92,7 +92,7 @@ public:
         }
         const int32_t offset =
             ((static_cast<int32_t>(pitchClass.Value()) - _root.PitchClass().Value()) % 12 + 12) % 12;
-        return ((_pattern.PitchClassMask() >> offset) & 1u) != 0;
+        return ((static_cast<uint32_t>(_pattern.PitchClassMask()) >> offset) & 1u) != 0;
     }
 
     /**
