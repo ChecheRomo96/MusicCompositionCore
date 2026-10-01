@@ -139,11 +139,20 @@ The generated documentation starts at
 
 ## Arduino
 
-Install both Foundation and MCC as Arduino libraries, then include:
+Install both Foundation and MCC as Arduino libraries, then include both from
+the sketch itself, because the Arduino builder only discovers libraries that
+the sketch includes:
 
 ```cpp
+#include <Foundation.h>
 #include <MCC.h>
 ```
+
+MCC requires C++17. The stock Arduino AVR core compiles with `gnu++11`, so add
+`-std=gnu++17` (its avr-gcc 7.3 supports it), for example with
+`arduino-cli compile --build-property "compiler.cpp.extra_flags=-std=gnu++17"`.
+`./scripts/test-arduino.sh` (or `.\scripts\test-arduino.ps1`) compiles every
+example sketch for the Arduino Uno that way, warning-free.
 
 ## License
 
