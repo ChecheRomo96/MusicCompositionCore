@@ -2,7 +2,7 @@
 #define MCC_BUILD_SETTINGS_H
 
 #ifndef MCC_VERSION
-    #define MCC_VERSION "0.5.1"
+    #define MCC_VERSION "0.5.2"
 #endif
 
 #ifndef MCC_CPLUSPLUS

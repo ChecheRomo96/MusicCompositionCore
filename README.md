@@ -159,6 +159,11 @@ functions in Arduino C++11 mode; their runtime behavior is unchanged.
 example sketch for the Arduino Uno with the core's default flags and fails on
 warnings emitted by MCC or its examples.
 
+For MCC 0.5.2, all seven example sketches were also executed successfully on
+a physical Arduino Mega 2560 with the stock AVR core and its default C++11
+mode. This is manual hardware evidence; CI currently automates compilation,
+not physical-board execution.
+
 ## License
 
 Copyright (c) 2026 José Manuel Romo. All rights reserved.

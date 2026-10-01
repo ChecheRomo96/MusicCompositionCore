@@ -503,6 +503,8 @@ Status: complete (`.github/workflows/`, `.clang-tidy`)
 - [x] Validate all catalog data during CI (`ScaleCatalogTests`,
   `ChordCatalogTests`).
 - [x] Generate and verify API documentation.
+- [x] Execute all seven Arduino examples on a physical Mega 2560 using the
+  stock AVR core and its default C++11 mode (manual hardware validation).
 
 ## Proposed releases
 
