@@ -37,4 +37,12 @@
  * @endcode
  *
  * On Windows, run `scripts/test-arduino.ps1` from PowerShell.
+ *
+ * @section MCCBuildGuideArduinoHardware Arduino Hardware Validation
+ *
+ * MCC 0.5.2 was manually validated on a physical Arduino Mega 2560 using the
+ * stock AVR core and its default C++11 mode. All seven example sketches
+ * compiled, uploaded, and produced their expected serial output. This is
+ * runtime hardware evidence in addition to the automated Arduino Uno compile
+ * gate. Physical-board execution is not yet automated in CI.
  */

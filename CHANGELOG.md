@@ -5,6 +5,8 @@ Release dates use the `YYYY-MM-DD` format.
 
 ## [Unreleased]
 
+## [0.5.2] - 2026-10-01
+
 ### Fixed
 
 - Arduino source builds now compile with the stock core's C++11 mode without
@@ -17,6 +19,8 @@ Release dates use the `YYYY-MM-DD` format.
 - C++14 relaxed-`constexpr` operations remain `constexpr` for CMake and modern
   Arduino toolchains and become inline functions only in Arduino C++11 mode.
 - Arduino example CI now exercises the core's default language flags.
+- All seven example sketches were executed successfully on a physical Arduino
+  Mega 2560 with the stock AVR core and its default C++11 mode.
 
 ## [0.5.1] - 2026-10-01
 
