@@ -41,7 +41,7 @@ public:
     constexpr bool IsValid() const noexcept { return _fifths != InvalidValue; }
 
     /** @brief Returns sharps as positive and flats as negative; 0 when invalid. */
-    constexpr int8_t Fifths() const noexcept { return IsValid() ? _fifths : 0; }
+    constexpr int8_t Fifths() const noexcept { return IsValid() ? _fifths : static_cast<int8_t>(0); }
 
     /** @brief Returns the number of sharps. */
     constexpr uint8_t Sharps() const noexcept {

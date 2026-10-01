@@ -63,7 +63,7 @@ public:
               : MCC::NoteName::Invalid()),
           _octave(IsWritable(noteName, octave)
               ? static_cast<int8_t>(octave)
-              : 0) {}
+              : static_cast<int8_t>(0)) {}
 
     /** @brief Creates `letter` + `accidental` written in `octave`. */
     constexpr Pitch(MCC::Letter letter, MCC::Accidental accidental,

@@ -184,3 +184,23 @@ jobs:
             build/${{ matrix.preset }}/Testing/Temporary/
           if-no-files-found: warn
           retention-days: 14
+
+  static-analysis:
+    name: Static Analysis / clang-tidy
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+        with:
+          submodules: recursive
+
+      - name: Install clang-tidy
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes clang-tidy
+          clang-tidy --version
+
+      - name: Run clang-tidy on the MCC sources
+        run: ./scripts/analyze.sh linux_clang_x64 --fresh
