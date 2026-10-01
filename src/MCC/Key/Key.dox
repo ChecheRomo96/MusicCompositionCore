@@ -1,0 +1,23 @@
+/**
+ * @defgroup MCC_Key Key
+ * @ingroup MCC
+ * @brief Key signatures, keys in the seven diatonic modes and spelling in a key.
+ *
+ * `MCC::KeySignature` stores zero to seven sharps or flats as a position on
+ * the circle of fifths. `MCC::Key` pairs a tonic with an `MCC::KeyMode` and
+ * derives its signature, so `E` minor has one sharp and `D` Dorian has none;
+ * `Key::FromSignature()` goes the other way. `Key::Spell()` writes a pitch
+ * class, or a sounding chromatic index, in the key's context: diatonic notes
+ * use the key's letters, and chromatic notes are raised in sharp keys and
+ * lowered in flat keys. See @ref MCC_Specification (SPEC-KEY-*).
+ *
+ * @code{.cpp}
+ * const MCC::Key key(MCC::NoteName(MCC::Letter::E), MCC::KeyMode::Minor);
+ * key.Signature().Sharps();                 // 1
+ * key.Spell(MCC::PitchClass(3));            // D#  (sharp key)
+ * MCC::Key(MCC::NoteName(MCC::Letter::F), MCC::KeyMode::Major)
+ *     .Spell(MCC::PitchClass(3));           // Eb  (flat key)
+ * @endcode
+ *
+ * Available when `MCC_KEY` is defined. Requires the Scale module.
+ */

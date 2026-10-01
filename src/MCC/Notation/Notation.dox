@@ -1,0 +1,28 @@
+/**
+ * @defgroup MCC_Notation Notation
+ * @ingroup MCC
+ * @brief Text formatting and parsing into caller-provided buffers.
+ *
+ * `MCC::Notation::Format()` writes note names, pitches, intervals and, when
+ * their modules are enabled, catalog scales, chord symbols and keys. Output
+ * follows `snprintf` semantics in code units and never allocates
+ * (SPEC-TXT-1..2). ASCII symbols are the default (`C#4`, `Bbb`, `AA4`);
+ * `NotationOptions::symbols` selects Unicode accidentals (`C♯4`, `B𝄫`) and
+ * `explicitNatural` writes the natural sign (SPEC-TXT-3). The buffer type
+ * selects the encoding: `char` for ASCII or UTF-8, `char16_t` for UTF-16 and
+ * `char32_t` for UTF-32 (SPEC-TXT-5). A `CodePointSink` overload sends each
+ * code point to a callback instead, so text can go straight to a serial port
+ * or display without a buffer. `ParseNoteName()`, `ParsePitch()` and
+ * `ParseInterval()` read any of the three encodings, ASCII or Unicode
+ * symbols, either letter case and `x` for the double sharp, and return the
+ * invalid value on malformed text (SPEC-TXT-4). Text constants are stored in
+ * program memory on AVR.
+ *
+ * @code{.cpp}
+ * char text[16];
+ * MCC::Notation::Format(text, sizeof(text), MCC::Notation::ParsePitch("F#3"));  // "F#3"
+ * MCC::Notation::Format(text, sizeof(text), root, MCC::Chords::Id::HalfDiminishedSeventh);
+ * @endcode
+ *
+ * Available when `MCC_NOTATION` is defined. Requires the Interval module.
+ */
