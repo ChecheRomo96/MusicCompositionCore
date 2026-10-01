@@ -3,7 +3,9 @@
 #include <MCC_Chord.h>
 #include <MCC_Scale.h>
 
-namespace MCCExamples::Chord::Chords {
+namespace MCCExamples {
+namespace Chord {
+namespace Chords {
 
 namespace {
 
@@ -103,4 +105,6 @@ void Run(PrintFunction print) noexcept {
     print("============================================================\n");
 }
 
-} // namespace MCCExamples::Chord::Chords
+} // namespace Chords
+} // namespace Chord
+} // namespace MCCExamples

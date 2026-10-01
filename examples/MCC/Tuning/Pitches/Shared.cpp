@@ -2,7 +2,9 @@
 
 #include <MCC_Tuning.h>
 
-namespace MCCExamples::Tuning::Pitches {
+namespace MCCExamples {
+namespace Tuning {
+namespace Pitches {
 
 namespace {
 
@@ -187,4 +189,6 @@ void Run(PrintFunction print) noexcept {
     print("========================================\n");
 }
 
-} // namespace MCCExamples::Tuning::Pitches
+} // namespace Pitches
+} // namespace Tuning
+} // namespace MCCExamples

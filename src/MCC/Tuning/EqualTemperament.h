@@ -1,6 +1,8 @@
 #ifndef MCC_TUNING_EQUAL_TEMPERAMENT_H
 #define MCC_TUNING_EQUAL_TEMPERAMENT_H
 
+#include <MCC_BuildSettings.h>
+
 #include <float.h>
 #include <stdint.h>
 
@@ -53,7 +55,7 @@ public:
      * Under `A4 = 440 Hz` that happens above `B123`; every lower pitch down
      * to octave -128 has a finite positive frequency.
      */
-    constexpr float Frequency(MCC::Pitch pitch) const noexcept {
+    MCC_CONSTEXPR14 float Frequency(MCC::Pitch pitch) const noexcept {
         if (!IsValid() || !pitch.IsValid()) {
             return 0.0f;
         }

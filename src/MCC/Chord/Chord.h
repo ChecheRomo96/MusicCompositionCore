@@ -1,6 +1,8 @@
 #ifndef MCC_CHORD_CHORD_H
 #define MCC_CHORD_CHORD_H
 
+#include <MCC_BuildSettings.h>
+
 #include <stddef.h>
 #include <stdint.h>
 
@@ -50,13 +52,13 @@ public:
     constexpr ChordPattern Pattern() const noexcept { return _pattern; }
 
     /** @brief Returns the number of tones, or 0 for the invalid chord. */
-    constexpr uint8_t ToneCount() const noexcept { return _pattern.ToneCount(); }
+    MCC_CONSTEXPR14 uint8_t ToneCount() const noexcept { return _pattern.ToneCount(); }
 
     /**
      * @brief Returns the note name of `tone` (1-based), or the invalid note
      * name outside the chord or when it cannot be spelled.
      */
-    constexpr NoteName ToneAt(int32_t tone) const noexcept {
+    MCC_CONSTEXPR14 NoteName ToneAt(int32_t tone) const noexcept {
         return _root + _pattern.ToneInterval(tone);
     }
 
@@ -64,12 +66,12 @@ public:
      * @brief Returns the root-position pitch of `tone` when the root is placed
      * in `rootOctave`; extensions keep their compound distance.
      */
-    constexpr MCC::Pitch PitchAt(int32_t tone, int32_t rootOctave) const noexcept {
+    MCC_CONSTEXPR14 MCC::Pitch PitchAt(int32_t tone, int32_t rootOctave) const noexcept {
         return MCC::Pitch(_root, rootOctave) + _pattern.ToneInterval(tone);
     }
 
     /** @brief Returns `true` when a tone is written exactly as `noteName`. */
-    constexpr bool Contains(NoteName noteName) const noexcept {
+    MCC_CONSTEXPR14 bool Contains(NoteName noteName) const noexcept {
         if (!noteName.IsValid()) {
             return false;
         }
@@ -86,7 +88,7 @@ public:
      * @brief Returns `true` when any tone sounds as `pitchClass`, regardless
      * of spelling (explicit enharmonic membership, SPEC-EQ-2).
      */
-    constexpr bool ContainsPitchClass(MCC::PitchClass pitchClass) const noexcept {
+    MCC_CONSTEXPR14 bool ContainsPitchClass(MCC::PitchClass pitchClass) const noexcept {
         if (!IsValid() || !pitchClass.IsValid()) {
             return false;
         }

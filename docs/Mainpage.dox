@@ -1,9 +1,10 @@
 /**
  * @mainpage Music Composition Core
  *
- * MCC is a portable C++17 music-theory library for desktop and embedded
- * targets, built on Foundation. Its value types are trivially copyable,
- * allocation-free and `constexpr`, and it contains no MIDI concepts.
+ * MCC is a portable music-theory library for desktop and embedded targets,
+ * built on Foundation. CMake and direct source builds use C++17; Arduino
+ * source builds support stock C++11 cores. Its value types are trivially
+ * copyable and allocation-free, and it contains no MIDI concepts.
  *
  * @section MCCMainModules Modules
  *

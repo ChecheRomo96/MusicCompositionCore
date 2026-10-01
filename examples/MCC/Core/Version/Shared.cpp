@@ -2,7 +2,9 @@
 
 #include <MCC/Core/Version.h>
 
-namespace MCCExamples::Core::Version {
+namespace MCCExamples {
+namespace Core {
+namespace Version {
 
 const char* MCCVersion() noexcept {
     return MCC::Core::Version();
@@ -12,4 +14,6 @@ const char* FoundationVersion() noexcept {
     return MCC::Core::FoundationVersion();
 }
 
-} // namespace MCCExamples::Core::Version
+} // namespace Version
+} // namespace Core
+} // namespace MCCExamples

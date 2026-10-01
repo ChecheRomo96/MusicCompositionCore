@@ -1,6 +1,8 @@
 #ifndef MCC_PITCH_PITCH_H
 #define MCC_PITCH_PITCH_H
 
+#include <MCC_BuildSettings.h>
+
 #include <stdint.h>
 
 #include <Foundation/Math/Arithmetic.h>
@@ -104,7 +106,7 @@ public:
      * @brief Returns `octave * 7 + letterIndex` (SPEC-ORD-2), or
      * `InvalidDiatonicIndex` for the invalid pitch (SPEC-ERR-7).
      */
-    constexpr int16_t DiatonicIndex() const noexcept {
+    MCC_CONSTEXPR14 int16_t DiatonicIndex() const noexcept {
         if (!IsValid()) {
             return InvalidDiatonicIndex;
         }
@@ -116,7 +118,7 @@ public:
      * @brief Returns `(octave + 1) * 12 + letterSemitone + accidental`
      * (SPEC-ORD-3); the invalid pitch yields the invalid index.
      */
-    constexpr MCC::ChromaticIndex ChromaticIndex() const noexcept {
+    MCC_CONSTEXPR14 MCC::ChromaticIndex ChromaticIndex() const noexcept {
         if (!IsValid()) {
             return MCC::ChromaticIndex::Invalid();
         }
@@ -129,7 +131,7 @@ public:
      * @brief Returns the pitch class of the written note name
      * (SPEC-ORD-4); the invalid pitch yields the invalid class.
      */
-    constexpr MCC::PitchClass PitchClass() const noexcept {
+    MCC_CONSTEXPR14 MCC::PitchClass PitchClass() const noexcept {
         return _noteName.PitchClass();
     }
 
@@ -141,7 +143,7 @@ public:
      * The result is invalid when the octave leaves `[-128, 127]`
      * (SPEC-OCT-4, SPEC-ERR-5).
      */
-    constexpr Pitch MovedDiatonically(int32_t steps) const noexcept {
+    MCC_CONSTEXPR14 Pitch MovedDiatonically(int32_t steps) const noexcept {
         if (!IsValid() || steps < -2 * DiatonicSpan || steps > 2 * DiatonicSpan) {
             return Invalid();
         }
@@ -159,7 +161,7 @@ public:
      * `semitones`; outside `[-4, +4]` the result is invalid and is never
      * respelled (SPEC-ACC-3).
      */
-    constexpr Pitch Altered(int32_t semitones) const noexcept {
+    MCC_CONSTEXPR14 Pitch Altered(int32_t semitones) const noexcept {
         if (!IsValid()) {
             return Invalid();
         }
@@ -170,7 +172,7 @@ public:
      * @brief Moves the pitch by `octaves` octaves, keeping its spelling. The
      * result is invalid outside `[-128, 127]` (SPEC-OCT-4).
      */
-    constexpr Pitch MovedByOctaves(int32_t octaves) const noexcept {
+    MCC_CONSTEXPR14 Pitch MovedByOctaves(int32_t octaves) const noexcept {
         if (!IsValid() ||
             octaves < MinimumOctave - MaximumOctave ||
             octaves > MaximumOctave - MinimumOctave) {
@@ -196,7 +198,7 @@ public:
      * (SPEC-ORD-5). `B#3 < Cb4` although `B#3` sounds higher. The invalid
      * pitch sorts last.
      */
-    friend constexpr bool operator<(Pitch a, Pitch b) noexcept {
+    friend MCC_CONSTEXPR14 bool operator<(Pitch a, Pitch b) noexcept {
         if (!a.IsValid() || !b.IsValid()) {
             return a.IsValid() && !b.IsValid();
         }
@@ -205,15 +207,15 @@ public:
             : a._noteName < b._noteName;
     }
 
-    friend constexpr bool operator>(Pitch a, Pitch b) noexcept {
+    friend MCC_CONSTEXPR14 bool operator>(Pitch a, Pitch b) noexcept {
         return b < a;
     }
 
-    friend constexpr bool operator<=(Pitch a, Pitch b) noexcept {
+    friend MCC_CONSTEXPR14 bool operator<=(Pitch a, Pitch b) noexcept {
         return !(b < a);
     }
 
-    friend constexpr bool operator>=(Pitch a, Pitch b) noexcept {
+    friend MCC_CONSTEXPR14 bool operator>=(Pitch a, Pitch b) noexcept {
         return !(a < b);
     }
 
@@ -245,7 +247,7 @@ constexpr bool IsEnharmonic(Pitch a, Pitch b) noexcept {
  * deterministic. The invalid pitch sorts last.
  * @ingroup MCC_Pitch
  */
-constexpr bool IsLowerThan(Pitch a, Pitch b) noexcept {
+MCC_CONSTEXPR14 bool IsLowerThan(Pitch a, Pitch b) noexcept {
     if (!a.IsValid() || !b.IsValid()) {
         return a.IsValid() && !b.IsValid();
     }

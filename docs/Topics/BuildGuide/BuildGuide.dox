@@ -16,4 +16,25 @@
  * ./scripts/configure.sh macos_arm64 --fresh -- \
  *   -DMCC_FOUNDATION_PREFIX=../Foundation/dist/macos_arm64
  * @endcode
+ *
+ * @section MCCBuildGuideLanguage Language Standard
+ *
+ * CMake packages and direct source builds require C++17. Arduino source mode
+ * also supports the C++11 default selected by stock cores, including the AVR
+ * core used by Arduino Uno; no global compiler-flag override is required.
+ *
+ * Functions that require C++14 relaxed `constexpr` are ordinary inline
+ * functions only under Arduino C++11. They keep the same runtime behavior and
+ * remain `constexpr` with C++14 or newer. Scale and chord catalogs are stored
+ * as precomputed constant data, so AVR continues to keep them in program
+ * memory rather than initializing them in RAM.
+ *
+ * The Arduino source-mode gate compiles every example with the core's default
+ * flags:
+ *
+ * @code{.bash}
+ * ./scripts/test-arduino.sh
+ * @endcode
+ *
+ * On Windows, run `scripts/test-arduino.ps1` from PowerShell.
  */
