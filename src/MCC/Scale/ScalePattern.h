@@ -75,36 +75,39 @@ public:
         }
         uint8_t count = 0;
         int32_t previous = -1;
-        const char* cursor = formula;
-        while (*cursor != '\0') {
-            if (*cursor == ' ') {
-                ++cursor;
-                continue;
+        // Index-based scanning without `continue`: GCC 7 (the Arduino AVR
+        // toolchain) miscounts constexpr loops that `continue` past an
+        // advancing pointer.
+        int32_t i = 0;
+        while (formula[i] != '\0') {
+            if (formula[i] == ' ') {
+                ++i;
+            } else {
+                int32_t accidental = 0;
+                while (formula[i] == 'b' || formula[i] == '#') {
+                    accidental += (formula[i] == '#') ? 1 : -1;
+                    ++i;
+                }
+                if (formula[i] < '1' || formula[i] > '7') {
+                    return Invalid();
+                }
+                const int32_t steps = formula[i] - '1';
+                ++i;
+                if (formula[i] != ' ' && formula[i] != '\0') {
+                    return Invalid();
+                }
+                const int32_t semitones = NaturalSemitones(steps) + accidental;
+                if (count == MaximumDegrees || semitones <= previous || semitones > 11 ||
+                    (count == 0 && (steps != 0 || semitones != 0)) ||
+                    !Interval::FromSteps(steps, semitones).IsValid()) {
+                    return Invalid();
+                }
+                pattern._semitones = static_cast<uint16_t>(pattern._semitones | (1u << semitones));
+                pattern._steps[count / 2] = static_cast<uint8_t>(
+                    pattern._steps[count / 2] | (steps << ((count % 2) * 4)));
+                previous = semitones;
+                ++count;
             }
-            int32_t accidental = 0;
-            while (*cursor == 'b' || *cursor == '#') {
-                accidental += (*cursor == '#') ? 1 : -1;
-                ++cursor;
-            }
-            if (*cursor < '1' || *cursor > '7') {
-                return Invalid();
-            }
-            const int32_t steps = *cursor - '1';
-            ++cursor;
-            if (*cursor != ' ' && *cursor != '\0') {
-                return Invalid();
-            }
-            const int32_t semitones = NaturalSemitones(steps) + accidental;
-            if (count == MaximumDegrees || semitones <= previous || semitones > 11 ||
-                (count == 0 && (steps != 0 || semitones != 0)) ||
-                !Interval::FromSteps(steps, semitones).IsValid()) {
-                return Invalid();
-            }
-            pattern._semitones = static_cast<uint16_t>(pattern._semitones | (1u << semitones));
-            pattern._steps[count / 2] = static_cast<uint8_t>(
-                pattern._steps[count / 2] | (steps << ((count % 2) * 4)));
-            previous = semitones;
-            ++count;
         }
         return count == 0 ? Invalid() : pattern;
     }
