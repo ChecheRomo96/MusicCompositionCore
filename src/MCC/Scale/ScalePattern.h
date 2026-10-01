@@ -43,7 +43,7 @@ private:
     constexpr int32_t SemitonesAt(uint8_t index) const noexcept {
         uint8_t seen = 0;
         for (int32_t k = 0; k < 12; ++k) {
-            if ((_semitones >> k) & 1u) {
+            if ((static_cast<uint32_t>(_semitones) >> k) & 1u) {
                 if (seen == index) {
                     return k;
                 }
@@ -119,7 +119,7 @@ public:
     constexpr uint8_t DegreeCount() const noexcept {
         uint8_t count = 0;
         for (int32_t k = 0; k < 12; ++k) {
-            count = static_cast<uint8_t>(count + ((_semitones >> k) & 1u));
+            count = static_cast<uint8_t>(count + ((static_cast<uint32_t>(_semitones) >> k) & 1u));
         }
         return count;
     }
@@ -142,7 +142,7 @@ public:
      */
     constexpr bool ContainsSemitone(int32_t semitones) const noexcept {
         const int32_t reduced = ((semitones % 12) + 12) % 12;
-        return IsValid() && ((_semitones >> reduced) & 1u) != 0;
+        return IsValid() && ((static_cast<uint32_t>(_semitones) >> reduced) & 1u) != 0;
     }
 
     /** @brief Compares degrees, including their written steps. */
