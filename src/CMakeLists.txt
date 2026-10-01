@@ -47,6 +47,11 @@ if(MCC_TUNING)
         "${CMAKE_CURRENT_LIST_DIR}/MCC_Tuning.h")
 endif()
 
+if(MCC_SCALE)
+    list(APPEND MCC_TOP_LEVEL_HEADERS
+        "${CMAKE_CURRENT_LIST_DIR}/MCC_Scale.h")
+endif()
+
 target_sources(MCC PRIVATE
     "${CMAKE_CURRENT_LIST_DIR}/MCC.cpp"
     ${MCC_TOP_LEVEL_HEADERS})
@@ -77,7 +82,11 @@ if(MCC_TUNING)
     mcc_add_macro(PUBLIC MCC_TUNING)
 endif()
 
-if(MCC_CORE OR MCC_PITCH OR MCC_INTERVAL OR MCC_TUNING)
+if(MCC_SCALE)
+    mcc_add_macro(PUBLIC MCC_SCALE)
+endif()
+
+if(MCC_CORE OR MCC_PITCH OR MCC_INTERVAL OR MCC_TUNING OR MCC_SCALE)
     add_subdirectory(MCC)
 endif()
 

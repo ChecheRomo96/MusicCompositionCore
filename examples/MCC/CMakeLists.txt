@@ -13,3 +13,7 @@ endif()
 if(MCC_TUNING)
     add_subdirectory(Tuning)
 endif()
+
+if(MCC_SCALE)
+    add_subdirectory(Scale)
+endif()

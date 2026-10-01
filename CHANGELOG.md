@@ -3,6 +3,27 @@
 This file records user-visible changes to Music Composition Core (MCC).
 Release dates use the `YYYY-MM-DD` format.
 
+## [Unreleased]
+
+### Added
+
+- **Scale** module (`MCC_SCALE`): `ScalePattern` built from degree formulas,
+  `Scale` with spelling-preserving degrees and explicit enharmonic
+  membership, and the `Scales` catalog of 36 reviewed scales with stable
+  identifiers, families and aliases, read through `Scales::Find()`.
+- The catalog lives in program memory on AVR through Foundation's
+  `FOUNDATION_FLASH`.
+- `MCC_Scale_Scales` example and the SPEC-SCL invariants.
+
+### Changed
+
+- MCC requires Foundation `1.4.0` or a newer `1.x` release.
+
+### Fixed
+
+- Legacy scale data: Byzantine, Hirajoshi, Major Blues, Japanese and Arabic
+  (see `Scale.dox`).
+
 ## [0.2.0] - 2026-09-30
 
 ### Added

@@ -1,0 +1,75 @@
+/**
+ * @defgroup MCC_Scale Scale
+ * @ingroup MCC
+ * @brief Scale patterns, spelled scales and the reviewed scale catalog.
+ *
+ * `MCC::ScalePattern` stores up to twelve ascending degrees as diatonic steps
+ * and semitones above the root, built at compile time from a degree formula
+ * such as `"1 2 b3 4 5 b6 b7"`. `MCC::Scale` spells a pattern from a root
+ * `MCC::NoteName`, so `E` major contains `G#`, never `Ab`. `MCC::Scales`
+ * holds the named catalog in program memory and reads it through
+ * `Foundation::Utils::Flash`, so on AVR neither patterns nor names occupy RAM.
+ * See @ref MCC_Specification (SPEC-SCL-*).
+ *
+ * @code{.cpp}
+ * const MCC::Scale dMinor =
+ *     MCC::Scales::Make(MCC::NoteName(MCC::Letter::D), MCC::Scales::Id::Minor);
+ * MCC::NoteName sixth = dMinor.NoteAt(6);              // Bb
+ * MCC::Scales::Id id = MCC::Scales::Find("Aeolian");   // Id::Minor
+ * @endcode
+ *
+ * Available when `MCC_SCALE` is defined. Requires the Interval module and
+ * Foundation 1.4.0 or newer.
+ *
+ * @section MCCScaleCatalog Catalog and Provenance
+ *
+ * Identifiers are stable. Every legacy definition comes from the historical
+ * MusicCompositionCore `.Scale` files under `ScaleFlash/ScaleDefinitions`; the OLD
+ * MCC tree and the copy vendored in the old MIDILAR repository carry the same
+ * semitone masks. Spellings are shown from C.
+ *
+ * | Id | Name | From C | Family | Provenance |
+ * | -- | ---- | ------ | ------ | ---------- |
+ * | 0 | Chromatic | C C# D D# E F F# G G# A A# B | Symmetric | Legacy `Chromatic` (sharps) |
+ * | 1 | Chromatic (Flats) | C Db D Eb E F Gb G Ab A Bb B | Symmetric | Legacy `Chromatic_Flats` |
+ * | 2 | Major (Ionian) | C D E F G A B | Western | Legacy |
+ * | 3 | Minor (Natural Minor, Aeolian, Ethiopian) | C D Eb F G Ab Bb | Western | Legacy; `Ethiopian` had the same notes and became an alias |
+ * | 4 | Harmonic Minor | C D Eb F G Ab B | Western | Legacy |
+ * | 5 | Melodic Minor | C D Eb F G A B | Western | New |
+ * | 6 | Harmonic Major | C D E F G Ab B | Western | Legacy |
+ * | 7 | Major Pentatonic | C D E G A | Western | Legacy |
+ * | 8 | Minor Pentatonic | C Eb F G Bb | Western | Legacy |
+ * | 9 | Minor Blues | C Eb F Gb G Bb | Western | Legacy |
+ * | 10 | Major Blues | C D Eb E G A | Western | Legacy; its name string wrongly read "Minor Blues" |
+ * | 11 | Dorian | C D Eb F G A Bb | Modal | Legacy |
+ * | 12 | Phrygian | C Db Eb F G Ab Bb | Modal | Legacy |
+ * | 13 | Lydian | C D E F# G A B | Modal | Legacy |
+ * | 14 | Mixolydian | C D E F G A Bb | Modal | Legacy |
+ * | 15 | Locrian | C Db Eb F Gb Ab Bb | Modal | Legacy |
+ * | 16 | Algerian | C D Eb F F# G Ab B | Exotic | Legacy |
+ * | 17 | Arabic | C D E F Gb Ab Bb | Exotic | Legacy semitones; respelled from `F# G#` |
+ * | 18 | Augmented | C Eb E G G# B | Symmetric | Legacy |
+ * | 19 | Pelog | C Db Eb G Ab | Exotic | Legacy (12-TET approximation) |
+ * | 20 | Byzantine (Double Harmonic Major) | C Db E F G Ab B | Exotic | Corrected: the legacy mask duplicated Augmented with 6 notes and 7 spellings |
+ * | 21 | Chinese | C E F# G B | Exotic | Legacy |
+ * | 22 | Diminished (Whole Half Diminished) | C D Eb F F# G# A B | Symmetric | Legacy, including its spelling |
+ * | 23 | Egyptian | C D F G Bb | Exotic | Legacy |
+ * | 24 | Eight Tone Spanish | C Db D# E F Gb Ab Bb | Exotic | Legacy |
+ * | 25 | Enigmatic | C Db E F# G# A# B | Exotic | Legacy |
+ * | 26 | Hindu | C D E F G Ab Bb | Exotic | Legacy |
+ * | 27 | Hirajoshi | C D Eb G Ab | Exotic | Corrected: the legacy semitones were Iwato's, spelled `C Db E# Gb A#` |
+ * | 28 | Iwato | C Db F Gb Bb | Exotic | New, from the legacy Hirajoshi semitones |
+ * | 29 | Hungarian Minor | C D Eb F# G Ab B | Exotic | Legacy |
+ * | 30 | Japanese (In Sen) | C Db F G Bb | Exotic | Legacy semitones; respelled from `A#` |
+ * | 31 | Oriental | C Db E F Gb A Bb | Exotic | Legacy |
+ * | 32 | Whole Tone | C D E F# G# Bb | Symmetric | Legacy |
+ * | 33 | Romanian Minor | C D Eb F# G A Bb | Exotic | Legacy |
+ * | 34 | Spanish Gypsy (Phrygian Dominant) | C Db E F G Ab Bb | Exotic | Legacy |
+ * | 35 | Super Locrian (Altered) | C Db Eb Fb Gb Ab Bb | Exotic | Legacy |
+ *
+ * Names in parentheses are aliases accepted by `MCC::Scales::Find()`.
+ * `ScaleCatalogTests` checks this table, uniqueness of identifiers, names,
+ * aliases and patterns, and spelling from all 35 roots with up to two
+ * accidentals. On AVR the catalog (about 1.4 KB including names and aliases)
+ * is emitted in `.progmem.data`.
+ */

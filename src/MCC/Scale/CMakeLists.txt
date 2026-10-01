@@ -1,0 +1,16 @@
+set(MCC_SCALE_HEADERS
+    "${CMAKE_CURRENT_LIST_DIR}/Scale.h"
+    "${CMAKE_CURRENT_LIST_DIR}/ScalePattern.h"
+    "${CMAKE_CURRENT_LIST_DIR}/Scales.h")
+set(MCC_SCALE_SOURCES
+    "${CMAKE_CURRENT_LIST_DIR}/Scales.cpp")
+
+target_sources(MCC PRIVATE ${MCC_SCALE_HEADERS} ${MCC_SCALE_SOURCES})
+mcc_stage_headers(${MCC_SCALE_HEADERS})
+mcc_add_dox(
+    ${MCC_SCALE_HEADERS}
+    "${CMAKE_CURRENT_LIST_DIR}/Scale.dox")
+
+install(FILES ${MCC_SCALE_HEADERS}
+    DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/MCC/Scale"
+    CONFIGURATIONS Release)

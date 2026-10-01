@@ -294,10 +294,11 @@ Decisions:
 
 ## Phase 6 - Scales and scale catalog
 
+Status: complete (`src/MCC/Scale/`, module macro `MCC_SCALE`)
+
 Implement:
 
 ```cpp
-MCC::ScaleDegree
 MCC::ScalePattern
 MCC::Scale
 MCC::Scales
@@ -305,15 +306,32 @@ MCC::Scales
 
 Actions:
 
-- [ ] Inventory every historical `.Scale` and `.ScaleArray` definition.
-- [ ] Compare definitions across the historical repositories.
-- [ ] Separate canonical names from aliases.
-- [ ] Store reviewed definitions as canonical data files.
-- [ ] Generate static C++ catalog data for desktop and embedded builds.
-- [ ] Preserve the provenance of every migrated definition.
-- [ ] Validate identifiers, aliases, degrees, ordering and duplicates.
-- [ ] Test scale generation from every supported root.
-- [ ] Test enharmonic spelling under an explicit policy or key context.
+- [x] Inventory every historical `.Scale` and `.ScaleArray` definition.
+- [x] Compare definitions across the historical repositories.
+- [x] Separate canonical names from aliases.
+- [x] Store reviewed definitions as canonical data (a `constexpr` degree-formula
+  table in `src/MCC/Scale/Scales.cpp`).
+- [x] Place the static catalog in program memory on AVR through Foundation
+  `1.4.0` `FOUNDATION_FLASH`.
+- [x] Preserve the provenance of every migrated definition (`Scale.dox`).
+- [x] Validate identifiers, aliases, degrees, ordering and duplicates.
+- [x] Test scale generation from every supported root.
+- [x] Test enharmonic spelling under an explicit policy: spelling follows the
+  pattern's steps; enharmonic membership is a separate query.
+
+Decisions:
+
+- The catalog is a reviewed `constexpr` table of degree formulas such as
+  `"1 2 b3 4 5 b6 b7"`, evaluated at compile time. No external data file or
+  generator is used until a larger catalog (chords) justifies one.
+- `ScalePattern` is eight bytes: a 12-bit semitone mask plus one diatonic-step
+  nibble per degree, the same representation in RAM and in flash.
+- `ScaleDegree` was not needed: degrees are 1-based integers, and alterations
+  belong to keys and notation (Phase 8).
+- The legacy data had four defects, now corrected and recorded in `Scale.dox`:
+  Byzantine reused Augmented's mask, Hirajoshi carried Iwato's semitones,
+  Major Blues was named "Minor Blues", and Japanese and Arabic were misspelled.
+  Melodic Minor and Iwato were added; Ethiopian became an alias of Minor.
 
 Initial catalog families:
 

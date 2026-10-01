@@ -24,6 +24,8 @@ It contains music theory only: no MIDI concepts. Available modules:
   `IntervalBetween()` and spelling-preserving transposition
   (`E4 + M3 = G#4`).
 - **Tuning**: `Tuning` and `EqualTemperament` frequencies (`A4 = 440 Hz`).
+- **Scale**: `ScalePattern`, `Scale` and the `Scales` catalog of 36 reviewed
+  scales, stored in program memory on AVR (`E` major spells `G#`).
 - **Core**: version information.
 
 The rules every type follows are in
@@ -33,7 +35,7 @@ The rules every type follows are in
 ## Dependency
 
 MCC consumes the CMake target `Foundation::Foundation` from Foundation
-`1.2.0` or a newer `1.x` release. Configuring MCC resolves it in this order
+`1.4.0` or a newer `1.x` release. Configuring MCC resolves it in this order
 (see `cmake/MCCFoundation.cmake`):
 
 1. A `Foundation::Foundation` target already defined by a parent project.
@@ -43,7 +45,7 @@ MCC consumes the CMake target `Foundation::Foundation` from Foundation
 4. Normal `find_package(Foundation)` rules (`Foundation_DIR`,
    `CMAKE_PREFIX_PATH`).
 5. With `MCC_FETCH_FOUNDATION=ON` (the default), the GitHub Release package
-   for tag `v1.2.0` and the preset, verified against its SHA-256; for presets
+   for tag `v1.4.0` and the preset, verified against its SHA-256; for presets
    without a Release package (AVR, Arm), the Foundation sources at that tag
    are cloned and built with MCC's toolchain.
 
