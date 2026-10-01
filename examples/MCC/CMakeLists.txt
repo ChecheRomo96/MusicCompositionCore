@@ -21,3 +21,7 @@ endif()
 if(MCC_CHORD)
     add_subdirectory(Chord)
 endif()
+
+if(MCC_KEY AND MCC_NOTATION AND MCC_CHORD)
+    add_subdirectory(Key)
+endif()

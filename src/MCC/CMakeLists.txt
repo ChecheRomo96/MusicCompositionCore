@@ -24,6 +24,14 @@ if(MCC_CHORD)
     list(APPEND MCC_MODULE_HEADERS "${CMAKE_CURRENT_LIST_DIR}/Chord.h")
 endif()
 
+if(MCC_KEY)
+    list(APPEND MCC_MODULE_HEADERS "${CMAKE_CURRENT_LIST_DIR}/Key.h")
+endif()
+
+if(MCC_NOTATION)
+    list(APPEND MCC_MODULE_HEADERS "${CMAKE_CURRENT_LIST_DIR}/Notation.h")
+endif()
+
 target_sources(MCC PRIVATE ${MCC_MODULE_HEADERS})
 mcc_stage_headers(${MCC_MODULE_HEADERS})
 mcc_add_dox(${MCC_MODULE_HEADERS})
@@ -54,4 +62,12 @@ endif()
 
 if(MCC_CHORD)
     add_subdirectory(Chord)
+endif()
+
+if(MCC_KEY)
+    add_subdirectory(Key)
+endif()
+
+if(MCC_NOTATION)
+    add_subdirectory(Notation)
 endif()

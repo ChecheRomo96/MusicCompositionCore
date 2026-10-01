@@ -57,6 +57,16 @@ if(MCC_CHORD)
         "${CMAKE_CURRENT_LIST_DIR}/MCC_Chord.h")
 endif()
 
+if(MCC_KEY)
+    list(APPEND MCC_TOP_LEVEL_HEADERS
+        "${CMAKE_CURRENT_LIST_DIR}/MCC_Key.h")
+endif()
+
+if(MCC_NOTATION)
+    list(APPEND MCC_TOP_LEVEL_HEADERS
+        "${CMAKE_CURRENT_LIST_DIR}/MCC_Notation.h")
+endif()
+
 target_sources(MCC PRIVATE
     "${CMAKE_CURRENT_LIST_DIR}/MCC.cpp"
     ${MCC_TOP_LEVEL_HEADERS})
@@ -95,7 +105,15 @@ if(MCC_CHORD)
     mcc_add_macro(PUBLIC MCC_CHORD)
 endif()
 
-if(MCC_CORE OR MCC_PITCH OR MCC_INTERVAL OR MCC_TUNING OR MCC_SCALE OR MCC_CHORD)
+if(MCC_KEY)
+    mcc_add_macro(PUBLIC MCC_KEY)
+endif()
+
+if(MCC_NOTATION)
+    mcc_add_macro(PUBLIC MCC_NOTATION)
+endif()
+
+if(MCC_CORE OR MCC_PITCH OR MCC_INTERVAL OR MCC_TUNING OR MCC_SCALE OR MCC_CHORD OR MCC_KEY OR MCC_NOTATION)
     add_subdirectory(MCC)
 endif()
 
