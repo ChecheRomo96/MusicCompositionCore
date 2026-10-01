@@ -17,3 +17,7 @@ endif()
 if(MCC_SCALE)
     add_subdirectory(Scale)
 endif()
+
+if(MCC_CHORD)
+    add_subdirectory(Chord)
+endif()

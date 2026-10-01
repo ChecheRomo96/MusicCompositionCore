@@ -3,6 +3,29 @@
 This file records user-visible changes to Music Composition Core (MCC).
 Release dates use the `YYYY-MM-DD` format.
 
+## [Unreleased]
+
+### Added
+
+- **Chord** module (`MCC_CHORD`): `ChordPattern` built from chord formulas up
+  to the thirteenth, `Chord` with spelling-preserving tones, explicit
+  enharmonic membership and close-position inversions, and the `Chords`
+  catalog of 28 reviewed chords with symbols and aliases in program memory.
+- `Chords::FromScale()`, which lists every catalog chord written in a scale
+  (the historical chord pool).
+- `MCC_Chord_Chords` example and the SPEC-CHD invariants.
+
+### Changed
+
+- `NaturalSemitone()` and interval quality computation derive the major-scale
+  semitones arithmetically, so AVR builds no longer copy a lookup table into
+  RAM.
+
+### Fixed
+
+- Legacy chord data: Diminished, Minor Sixth, Half Diminished Seventh and
+  Diminished Seventh (see `Chord.dox`).
+
 ## [0.3.0] - 2026-10-01
 
 ### Added
