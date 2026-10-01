@@ -1,3 +1,7 @@
+// The Arduino builder only discovers libraries included from the sketch.
+#include <Foundation.h>
+#include <MCC.h>
+
 #include "Shared.h"
 
 void setup() {

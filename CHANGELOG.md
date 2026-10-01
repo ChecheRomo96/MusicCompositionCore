@@ -13,9 +13,14 @@ Release dates use the `YYYY-MM-DD` format.
   into the library for every target, including AVR and Arm.
 - clang-tidy static analysis (`.clang-tidy`, `scripts/analyze.sh`,
   `scripts/analyze.ps1`) with warnings as errors, and a CI job running it.
+- `scripts/test-arduino.sh` and `scripts/test-arduino.ps1`, and an Arduino CI
+  job on Linux and Windows, compiling every example sketch for the Arduino
+  Uno with `-std=gnu++17` against the pinned Foundation release.
 
 ### Fixed
 
+- Example sketches include `<Foundation.h>` and `<MCC.h>` so the Arduino
+  builder discovers both libraries; previously no sketch compiled.
 - Two implementation-defined narrowing conversions in `Pitch` and
   `KeySignature` found by clang-tidy.
 
