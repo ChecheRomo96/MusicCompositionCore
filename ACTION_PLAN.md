@@ -394,12 +394,33 @@ MCC::Notation
 
 Actions:
 
-- [ ] Model tonic, mode and key signature separately from a scale.
-- [ ] Resolve degree spelling from the key context.
-- [ ] Format note names, pitches, intervals, scales and chords.
-- [ ] Support ASCII output and optional Unicode symbols.
-- [ ] Support caller-provided fixed buffers for embedded builds.
-- [ ] Avoid mandatory `std::string` allocation in the core API.
+- [x] Model tonic, mode and key signature separately from a scale.
+- [x] Resolve degree spelling from the key context.
+- [x] Format note names, pitches, intervals, scales and chords.
+- [x] Support ASCII output and optional Unicode symbols.
+- [x] Support caller-provided fixed buffers for embedded builds.
+- [x] Avoid mandatory `std::string` allocation in the core API.
+
+Status: complete (`src/MCC/Key/`, `src/MCC/Notation/`, module macros
+`MCC_KEY` and `MCC_NOTATION`)
+
+Decisions:
+
+- `KeyMode` covers the seven diatonic modes; `Key` derives its signature from
+  the circle of fifths and maps each mode to its catalog scale.
+- `Key::Spell()` writes pitch classes and chromatic indices in context: the
+  key's letters first, then the fewest accidentals, then the key's direction.
+  This is the spelling MIDILAR will need for incoming MIDI notes.
+- `Notation` is a namespace of `Format`/`Parse` functions rather than a class.
+  It formats scales, chords and keys only when those modules are enabled, and
+  keeps every text constant in program memory on AVR.
+- Accidental symbols (ASCII or Unicode) are an option, and the encoding
+  follows the buffer type: `char` (ASCII/UTF-8), `char16_t` (UTF-16) or
+  `char32_t` (UTF-32), all instantiated in the library. A code-point sink
+  overload writes without any buffer.
+- Parsing is deliberately lenient where it is unambiguous: every output form
+  in every encoding, either letter case, `x` for double sharp, and `+`/`-`
+  on intervals.
 
 ## Phase 9 - Musical rhythm
 

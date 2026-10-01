@@ -3,6 +3,22 @@
 This file records user-visible changes to Music Composition Core (MCC).
 Release dates use the `YYYY-MM-DD` format.
 
+## [Unreleased]
+
+### Added
+
+- **Key** module (`MCC_KEY`): `KeySignature` and `Key` in the seven diatonic
+  modes, `Key::FromSignature()`, and `Key::Spell()` for pitch classes and
+  chromatic indices in the key's context.
+- **Notation** module (`MCC_NOTATION`): allocation-free `Format` and `Parse`
+  for note names, pitches and intervals, plus formatting of catalog scales,
+  chord symbols and keys, with ASCII or Unicode accidentals and explicit
+  naturals, encoded as ASCII/UTF-8 (`char`), UTF-16 (`char16_t`) or UTF-32
+  (`char32_t`) according to the buffer type, or sent code point by code
+  point to a callback without a buffer. Parsing reads the same encodings and
+  symbols, either letter case, `x` double sharps and signed intervals.
+- `MCC_Key_Keys` example and the SPEC-KEY invariants.
+
 ## [0.4.0] - 2026-10-01
 
 ### Added

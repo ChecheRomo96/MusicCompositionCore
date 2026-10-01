@@ -27,4 +27,12 @@
     #include <MCC_Chord.h>
 #endif
 
+#if __has_include(<MCC_Key.h>)
+    #include <MCC_Key.h>
+#endif
+
+#if __has_include(<MCC_Notation.h>)
+    #include <MCC_Notation.h>
+#endif
+
 #endif // MCC_H
