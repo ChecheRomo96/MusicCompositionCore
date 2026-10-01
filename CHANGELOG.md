@@ -3,6 +3,20 @@
 This file records user-visible changes to Music Composition Core (MCC).
 Release dates use the `YYYY-MM-DD` format.
 
+## [Unreleased]
+
+### Added
+
+- Sanitizer CI job: the Debug suite under AddressSanitizer and
+  UndefinedBehaviorSanitizer on Linux GCC/Clang and macOS.
+- Size-budget and trivial-copyability checks for every value type, compiled
+  into the library for every target, including AVR and Arm.
+
+### Changed
+
+- MCC and its tests build with Foundation's warning set as errors when
+  testing is enabled.
+
 ## [0.5.0] - 2026-10-01
 
 ### Added

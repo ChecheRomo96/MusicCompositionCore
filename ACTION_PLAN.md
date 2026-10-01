@@ -490,10 +490,15 @@ Status: in progress (`.github/workflows/`)
 - [x] Add CI for macOS, Linux and Windows native builds.
 - [x] Add AVR and Arm cross-compilation checks.
 - [x] Run installed-package consumer tests in CI.
-- [ ] Add compiler-warning and static-analysis profiles.
-- [ ] Add desktop sanitizer builds.
-- [ ] Add compile-time and object-size checks for embedded value types.
-- [ ] Validate all catalog data during CI.
+- [x] Add compiler warnings as errors for MCC and its tests (the Foundation
+  warning set: `-Wall -Wextra -Wpedantic -Wshadow -Wconversion
+  -Wsign-conversion ...`, `/W4 /permissive-` on MSVC).
+- [ ] Add a static-analysis profile.
+- [x] Add desktop sanitizer builds (ASan + UBSan on Linux GCC/Clang and macOS).
+- [x] Add compile-time and object-size checks for embedded value types
+  (`src/MCC.cpp`, built for every target).
+- [x] Validate all catalog data during CI (`ScaleCatalogTests`,
+  `ChordCatalogTests`).
 - [x] Generate and verify API documentation.
 
 ## Proposed releases

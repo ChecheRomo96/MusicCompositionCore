@@ -84,6 +84,7 @@ endif()
 if(MCC_TESTING)
     include(cmake/BuildTests.cmake)
     add_subdirectory(tests)
+    mcc_enable_warnings(MCC)
 endif()
 
 configure_package_config_file(
