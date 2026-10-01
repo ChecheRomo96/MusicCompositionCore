@@ -69,27 +69,41 @@ void Run(PrintFunction print) noexcept {
 
     print("[3] TEXT IN, TEXT OUT\n");
     print("------------------------------------------------------------\n");
-    const MCC::Pitch parsed = MCC::Notation::ParsePitch("F#3");
-    const MCC::Interval third = MCC::Notation::ParseInterval("m3");
-    print("  F#3 + m3 ............... ");
-    PrintValue(print, parsed + third);
-    print("\n  Chord on Bb ............ ");
+    print("  Read text, compute, write text:\n");
+    print("    ParsePitch(\"F#3\") + ParseInterval(\"m3\")\n");
+    print("    -> ");
+    PrintValue(print, MCC::Notation::ParsePitch("F#3") + MCC::Notation::ParseInterval("m3"));
+    print("   (F#3 up a minor third)\n\n");
+
+    print("  Write a chord symbol:\n");
+    print("    Format(text, size, Bb, Chords::Id::MajorNinth)\n");
+    print("    -> ");
     char symbol[16];
     MCC::Notation::Format(symbol, sizeof(symbol),
         NoteName(Letter::B, MCC::Accidental::Flat()), MCC::Chords::Id::MajorNinth);
     print(symbol);
-    print("\n  Unicode ................ ");
+    print("\n\n");
+
+    print("  Choose the accidental symbols (input \"bb3\" is B-flat 3):\n");
+    const MCC::Pitch bFlat = MCC::Notation::ParsePitch("bb3");
     MCC::NotationOptions unicode;
     unicode.symbols = MCC::NotationSymbols::Unicode;
     char text[16];
-    MCC::Notation::Format(text, sizeof(text), parsed + third, unicode);
+    print("    ASCII   -> ");
+    PrintValue(print, bFlat);
+    print("\n    Unicode -> ");
+    MCC::Notation::Format(text, sizeof(text), bFlat, unicode);
     print(text);
-    print("\n  Straight to the output .. ");
-    // A sink writes code points without a buffer; here they are ASCII.
+    print("   (UTF-8 in a char buffer)\n\n");
+
+    print("  Write without a buffer, one character at a time:\n");
+    print("    Format(sink, context, ParsePitch(\"eb5\"))\n");
+    print("    -> ");
+    // A sink receives each code point; here every one is ASCII.
     MCC::Notation::Format(
         [](uint32_t codePoint, void* context) {
-            const char text[2] = {static_cast<char>(codePoint), '\0'};
-            (*static_cast<PrintFunction*>(context))(text);
+            const char character[2] = {static_cast<char>(codePoint), '\0'};
+            (*static_cast<PrintFunction*>(context))(character);
         },
         &print, MCC::Notation::ParsePitch("eb5"));
     print("\n");
