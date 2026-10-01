@@ -29,6 +29,11 @@ It contains music theory only: no MIDI concepts. Available modules:
 - **Chord**: `ChordPattern`, `Chord` with close-position inversions, the
   `Chords` catalog of 28 reviewed chords with symbols, and
   `Chords::FromScale()` to list the chords of a scale.
+- **Key**: `KeySignature` and `Key` in the seven diatonic modes, with
+  spelling of pitch classes and MIDI-style chromatic indices in context.
+- **Notation**: allocation-free `Format`/`Parse` of note names, pitches,
+  intervals, scales, chord symbols and keys (`C#4`, `AA4`, `C#m7b5`), with
+  ASCII or Unicode accidentals in UTF-8, UTF-16 or UTF-32.
 - **Core**: version information.
 
 The rules every type follows are in
