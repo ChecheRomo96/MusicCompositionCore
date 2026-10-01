@@ -16,6 +16,9 @@ namespace Detail {
 // Unicode code point.
 template <typename Derived>
 class Output {
+    friend Derived;
+    Output() noexcept = default;
+
     Derived& Self() noexcept { return static_cast<Derived&>(*this); }
 
 public:

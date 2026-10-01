@@ -485,7 +485,7 @@ Integration actions:
 
 ## Phase 11 - Quality and release readiness
 
-Status: in progress (`.github/workflows/`)
+Status: complete (`.github/workflows/`, `.clang-tidy`)
 
 - [x] Add CI for macOS, Linux and Windows native builds.
 - [x] Add AVR and Arm cross-compilation checks.
@@ -493,7 +493,8 @@ Status: in progress (`.github/workflows/`)
 - [x] Add compiler warnings as errors for MCC and its tests (the Foundation
   warning set: `-Wall -Wextra -Wpedantic -Wshadow -Wconversion
   -Wsign-conversion ...`, `/W4 /permissive-` on MSVC).
-- [ ] Add a static-analysis profile.
+- [x] Add a static-analysis profile (`.clang-tidy`, `scripts/analyze.sh` and
+  `scripts/analyze.ps1`, and a clang-tidy CI job).
 - [x] Add desktop sanitizer builds (ASan + UBSan on Linux GCC/Clang and macOS).
 - [x] Add compile-time and object-size checks for embedded value types
   (`src/MCC.cpp`, built for every target).

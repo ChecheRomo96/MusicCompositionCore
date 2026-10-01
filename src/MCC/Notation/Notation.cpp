@@ -310,7 +310,9 @@ MCC_NOTATION_FORMAT(NoteName root MCC_NOTATION_COMMA Chords::Id id, root MCC_NOT
 MCC_NOTATION_FORMAT(Key key, key)
 #endif
 
-// The supported code units: UTF-8 (or ASCII), UTF-16 and UTF-32.
+// The supported code units: UTF-8 (or ASCII), UTF-16 and UTF-32. Template
+// arguments cannot be parenthesized, so the macro-parentheses check is off.
+// NOLINTBEGIN(bugprone-macro-parentheses)
 #if __has_include(<MCC/Scale/Scales.h>)
     #define MCC_NOTATION_INSTANTIATE_SCALE(CharT) \
         template size_t Format<CharT>(CharT*, size_t, NoteName, Scales::Id, NotationOptions) noexcept;
@@ -346,6 +348,7 @@ MCC_NOTATION_FORMAT(Key key, key)
 MCC_NOTATION_INSTANTIATE(char)
 MCC_NOTATION_INSTANTIATE(char16_t)
 MCC_NOTATION_INSTANTIATE(char32_t)
+// NOLINTEND(bugprone-macro-parentheses)
 
 } // namespace Notation
 } // namespace MCC
