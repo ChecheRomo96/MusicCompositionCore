@@ -1,0 +1,16 @@
+set(MCC_CHORD_HEADERS
+    "${CMAKE_CURRENT_LIST_DIR}/Chord.h"
+    "${CMAKE_CURRENT_LIST_DIR}/ChordPattern.h"
+    "${CMAKE_CURRENT_LIST_DIR}/Chords.h")
+set(MCC_CHORD_SOURCES
+    "${CMAKE_CURRENT_LIST_DIR}/Chords.cpp")
+
+target_sources(MCC PRIVATE ${MCC_CHORD_HEADERS} ${MCC_CHORD_SOURCES})
+mcc_stage_headers(${MCC_CHORD_HEADERS})
+mcc_add_dox(
+    ${MCC_CHORD_HEADERS}
+    "${CMAKE_CURRENT_LIST_DIR}/Chord.dox")
+
+install(FILES ${MCC_CHORD_HEADERS}
+    DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/MCC/Chord"
+    CONFIGURATIONS Release)

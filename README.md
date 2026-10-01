@@ -26,6 +26,9 @@ It contains music theory only: no MIDI concepts. Available modules:
 - **Tuning**: `Tuning` and `EqualTemperament` frequencies (`A4 = 440 Hz`).
 - **Scale**: `ScalePattern`, `Scale` and the `Scales` catalog of 36 reviewed
   scales, stored in program memory on AVR (`E` major spells `G#`).
+- **Chord**: `ChordPattern`, `Chord` with close-position inversions, the
+  `Chords` catalog of 28 reviewed chords with symbols, and
+  `Chords::FromScale()` to list the chords of a scale.
 - **Core**: version information.
 
 The rules every type follows are in
