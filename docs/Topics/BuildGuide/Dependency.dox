@@ -4,7 +4,7 @@
  * @brief Foundation package resolution and compatibility contract.
  *
  * MCC links `Foundation::Foundation` publicly and requires Foundation
- * `1.2.0` or a newer `1.x` release. MCC rejects a package whose recorded
+ * `1.4.0` or a newer `1.x` release. MCC rejects a package whose recorded
  * platform differs from the selected MCC preset.
  *
  * Resolution order (`cmake/MCCFoundation.cmake`):

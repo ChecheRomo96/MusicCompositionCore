@@ -19,4 +19,8 @@
     #include <MCC_Tuning.h>
 #endif
 
+#if __has_include(<MCC_Scale.h>)
+    #include <MCC_Scale.h>
+#endif
+
 #endif // MCC_H
