@@ -466,8 +466,9 @@ Decisions:
   models theory and notation while MIDILAR owns playback and sequencing.
 - The historical Euclidean sequence (`OLD MCC`
   `MusicalUtilityCore/Sequences/Euclidean`) is not classical music theory and
-  does not belong in MCC: the generic k-in-n distribution goes to Foundation
-  and the sequencer that plays it goes to MIDILAR.
+  does not belong in MCC. Decision (2026-10-02): the k-in-n distribution
+  lives in MIDILAR next to its step sequencer (`EuclideanPattern`,
+  `StepSequencer`), not in Foundation.
 
 ## Phase 10 - Required MIDILAR integration
 
