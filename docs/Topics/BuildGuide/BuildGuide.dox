@@ -44,5 +44,9 @@
  * stock AVR core and its default C++11 mode. All seven example sketches
  * compiled, uploaded, and produced their expected serial output. This is
  * runtime hardware evidence in addition to the automated Arduino Uno compile
- * gate. Physical-board execution is not yet automated in CI.
+ * gate. On 2026-10-02 `Scale/Scales` and `Chord/Chords` were run again on the
+ * same board, reading the catalogs from program memory, and matched the
+ * desktop output. The three `Rhythm` sketches added after 0.5.2 are compiled
+ * for the Uno in CI but have not run on hardware yet. Physical-board
+ * execution is not yet automated in CI.
  */
