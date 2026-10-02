@@ -42,4 +42,10 @@ MCC_CHECK_VALUE_TYPE(MCC::KeySignature, 1);
 MCC_CHECK_VALUE_TYPE(MCC::Key, 4);
 #endif
 
+#if defined(MCC_RHYTHM)
+MCC_CHECK_VALUE_TYPE(MCC::NoteValue, 2);
+MCC_CHECK_VALUE_TYPE(MCC::Note, 6);
+MCC_CHECK_VALUE_TYPE(MCC::Meter, 3);
+#endif
+
 #undef MCC_CHECK_VALUE_TYPE

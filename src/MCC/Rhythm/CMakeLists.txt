@@ -1,0 +1,14 @@
+set(MCC_RHYTHM_HEADERS
+    "${CMAKE_CURRENT_LIST_DIR}/NoteValue.h"
+    "${CMAKE_CURRENT_LIST_DIR}/Note.h"
+    "${CMAKE_CURRENT_LIST_DIR}/Meter.h")
+
+target_sources(MCC PRIVATE ${MCC_RHYTHM_HEADERS})
+mcc_stage_headers(${MCC_RHYTHM_HEADERS})
+mcc_add_dox(
+    ${MCC_RHYTHM_HEADERS}
+    "${CMAKE_CURRENT_LIST_DIR}/Rhythm.dox")
+
+install(FILES ${MCC_RHYTHM_HEADERS}
+    DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/MCC/Rhythm"
+    CONFIGURATIONS Release)

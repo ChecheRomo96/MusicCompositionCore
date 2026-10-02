@@ -32,6 +32,10 @@ if(MCC_NOTATION)
     list(APPEND MCC_MODULE_HEADERS "${CMAKE_CURRENT_LIST_DIR}/Notation.h")
 endif()
 
+if(MCC_RHYTHM)
+    list(APPEND MCC_MODULE_HEADERS "${CMAKE_CURRENT_LIST_DIR}/Rhythm.h")
+endif()
+
 target_sources(MCC PRIVATE ${MCC_MODULE_HEADERS})
 mcc_stage_headers(${MCC_MODULE_HEADERS})
 mcc_add_dox(${MCC_MODULE_HEADERS})
@@ -70,4 +74,8 @@ endif()
 
 if(MCC_NOTATION)
     add_subdirectory(Notation)
+endif()
+
+if(MCC_RHYTHM)
+    add_subdirectory(Rhythm)
 endif()
