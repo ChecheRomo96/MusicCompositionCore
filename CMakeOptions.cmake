@@ -12,6 +12,7 @@ option(MCC_SCALE "Enable MCC scales and the scale catalog" ON)
 option(MCC_CHORD "Enable MCC chords and the chord catalog" ON)
 option(MCC_KEY "Enable MCC keys and key signatures" ON)
 option(MCC_NOTATION "Enable MCC text formatting and parsing" ON)
+option(MCC_RHYTHM "Enable MCC written rhythm primitives" ON)
 
 if(MCC_FULL_BUILD)
     set(MCC_CORE ON CACHE BOOL "Enable MCC::Core" FORCE)
@@ -22,10 +23,15 @@ if(MCC_FULL_BUILD)
     set(MCC_CHORD ON CACHE BOOL "Enable MCC chords and the chord catalog" FORCE)
     set(MCC_KEY ON CACHE BOOL "Enable MCC keys and key signatures" FORCE)
     set(MCC_NOTATION ON CACHE BOOL "Enable MCC text formatting and parsing" FORCE)
+    set(MCC_RHYTHM ON CACHE BOOL "Enable MCC written rhythm primitives" FORCE)
 endif()
 
 if(MCC_INTERVAL AND NOT MCC_PITCH)
     message(FATAL_ERROR "MCC_INTERVAL requires MCC_PITCH")
+endif()
+
+if(MCC_RHYTHM AND NOT MCC_PITCH)
+    message(FATAL_ERROR "MCC_RHYTHM requires MCC_PITCH")
 endif()
 
 if(MCC_KEY AND NOT MCC_SCALE)

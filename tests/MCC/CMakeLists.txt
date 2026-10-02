@@ -29,3 +29,7 @@ endif()
 if(MCC_NOTATION)
     add_subdirectory(Notation)
 endif()
+
+if(MCC_RHYTHM)
+    add_subdirectory(Rhythm)
+endif()

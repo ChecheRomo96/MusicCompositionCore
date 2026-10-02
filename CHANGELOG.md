@@ -5,6 +5,21 @@ Release dates use the `YYYY-MM-DD` format.
 
 ## [Unreleased]
 
+### Added
+
+- **Rhythm** module (`MCC_RHYTHM`) beginning with `NoteValue`, a compact,
+  allocation-free representation of whole through 256th note bases and zero
+  to four augmentation dots as exact fractions of a whole note.
+- `Note`, a compact written `Pitch + NoteValue`, with constructors from pitch,
+  note name, natural letter, or letter + accidental, and copy-style pitch and
+  value changes.
+- `Meter`, a three-byte written time signature with simple, compound and
+  irregular classification, exact measure duration and explicit beat
+  derivation without tempo or PPQN state.
+- Native and Arduino `MCC_Rhythm_NoteValues`, `MCC_Rhythm_Notes` and
+  `MCC_Rhythm_Meters` examples, plus exhaustive tests for their supported
+  values and construction paths.
+
 ## [0.5.2] - 2026-10-01
 
 ### Fixed
