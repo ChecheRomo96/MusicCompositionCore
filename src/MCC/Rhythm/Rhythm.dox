@@ -1,0 +1,11 @@
+/**
+ * @defgroup MCC_Rhythm Rhythm
+ * @ingroup MCC
+ * @brief Exact written durations, independent of playback time.
+ *
+ * MCC::NoteValue records a power-of-two note base and its augmentation dots.
+ * MCC::Note combines that exact value with a spelling-preserving MCC::Pitch.
+ * MCC::Meter preserves a written time signature and derives simple or
+ * compound beats without guessing irregular groupings. None depends on tempo,
+ * clocks, PPQN or MIDI.
+ */

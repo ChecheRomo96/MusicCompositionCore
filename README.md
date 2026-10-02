@@ -35,6 +35,10 @@ It contains music theory only: no MIDI concepts. Available modules:
 - **Notation**: allocation-free `Format`/`Parse` of note names, pitches,
   intervals, scales, chord symbols and keys (`C#4`, `AA4`, `C#m7b5`), with
   ASCII or Unicode accidentals in UTF-8, UTF-16 or UTF-32.
+- **Rhythm**: `NoteValue`, an exact written duration from whole through 256th
+  notes with zero to four augmentation dots, and `Note` as a compact,
+  spelling-preserving `Pitch + NoteValue`; `Meter` preserves simple, compound
+  and irregular signatures. All remain independent of tempo and PPQN.
 - **Core**: version information.
 
 The rules every type follows are in

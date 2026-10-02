@@ -27,6 +27,9 @@
  * | `MCC_Key_Keys` | Key signatures, the same sounds spelled in two keys, and text parsing and formatting |
  * | `MCC_Chord_Chords` | Catalog chords with extensions, close-position inversions and the seventh chords of a scale |
  * | `MCC_Scale_Scales` | Catalog scales spelled from several roots, written versus enharmonic membership and lookup by name or alias |
+ * | `MCC_Rhythm_NoteValues` | Named note values and augmentation dots as exact fractions of a whole note |
+ * | `MCC_Rhythm_Notes` | Four spelling-preserving note constructors, the default quarter value and copy-style pitch/value changes |
+ * | `MCC_Rhythm_Meters` | Simple, compound and irregular signatures, derived beats and written identity versus equal measure duration |
  *
  * Build and run one on the desktop:
  *

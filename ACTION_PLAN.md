@@ -426,6 +426,8 @@ Decisions:
 
 ## Phase 9 - Musical rhythm
 
+Status: in progress (`src/MCC/Rhythm/`, module macro `MCC_RHYTHM`)
+
 Implement theory and composition concepts only:
 
 ```cpp
@@ -438,16 +440,30 @@ MCC::RhythmPattern
 
 Actions:
 
-- [ ] Represent note values and dotted values exactly.
-- [ ] Combine a pitch with a note value into `MCC::Note`.
-- [ ] Represent simple and compound meter.
+- [x] Represent note values and dotted values exactly.
+- [x] Combine a pitch with a note value into `MCC::Note`.
+- [x] Represent simple and compound meter.
 - [ ] Represent tuplets independently of runtime timing.
 - [ ] Keep clocks, scheduling, callbacks and PPQN execution outside MCC.
 
 Decisions:
 
-- Deferred until the MIDILAR migration is planned, so rhythm types are
-  designed together with their first consumer (MIDILAR's sequencer).
+- `NoteValue` is a two-byte written value: a power-of-two base from whole
+  through 256th and zero to four augmentation dots. It exposes the exact
+  reduced fraction of a whole note and has no tempo, clock or PPQN concerns.
+- `Note` is at most six bytes and accepts a `Pitch`, `NoteName`, natural
+  `Letter`, or `Letter + Accidental`, each with octave and an optional value;
+  omitting the value means a quarter note. Copy-style changes preserve the
+  other component.
+- MCC does not conditionally depend on MIDILAR. MIDILAR will own an adapter
+  such as `ToNote(MidiNote, Key, NoteValue)`, because the MIDI number needs an
+  explicit key or other spelling policy before it can become an MCC pitch.
+- `Meter` is a three-byte written time signature. It classifies simple and
+  compound meter, derives their beat count and value, and accepts irregular
+  signatures without guessing their grouping. Written equality stays distinct
+  from equal measure duration.
+- The remaining rhythm types stay planned with their first consumers so MCC
+  models theory and notation while MIDILAR owns playback and sequencing.
 - The historical Euclidean sequence (`OLD MCC`
   `MusicalUtilityCore/Sequences/Euclidean`) is not classical music theory and
   does not belong in MCC: the generic k-in-n distribution goes to Foundation

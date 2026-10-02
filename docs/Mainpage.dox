@@ -16,6 +16,16 @@
  *   spelling-preserving transposition (`E4 + M3 = G#4`).
  * - @ref MCC_Tuning "Tuning": `Tuning` and `EqualTemperament` frequencies
  *   (`A4 = 440 Hz`); the only module that uses `float`.
+ * - @ref MCC_Scale "Scale": spelling-preserving `ScalePattern`, `Scale` and
+ *   the reviewed `Scales` catalog.
+ * - @ref MCC_Chord "Chord": `ChordPattern`, `Chord`, close-position
+ *   inversions and the reviewed `Chords` catalog.
+ * - @ref MCC_Key "Key": `KeySignature` and diatonic-mode `Key` spelling.
+ * - @ref MCC_Notation "Notation": allocation-free formatting and parsing in
+ *   ASCII, UTF-8, UTF-16 and UTF-32.
+ * - @ref MCC_Rhythm "Rhythm": exact written `NoteValue` lengths from whole
+ *   notes through 256th notes, `Note` as `Pitch + NoteValue`, and written
+ *   simple, compound or irregular `Meter` signatures.
  * - @ref MCC_Core "Core": version information.
  *
  * Every rule these types follow is defined in the

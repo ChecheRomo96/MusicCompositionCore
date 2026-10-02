@@ -35,4 +35,8 @@
     #include <MCC_Notation.h>
 #endif
 
+#if __has_include(<MCC_Rhythm.h>)
+    #include <MCC_Rhythm.h>
+#endif
+
 #endif // MCC_H
