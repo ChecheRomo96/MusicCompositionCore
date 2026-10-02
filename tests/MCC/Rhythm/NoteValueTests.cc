@@ -70,7 +70,7 @@ TEST(NoteValueTests, DotsProduceExactReducedFractions) {
 }
 
 TEST(NoteValueTests, EverySupportedValueMatchesTheDotFormula) {
-    for (uint16_t base = 1u; base <= 256u; base <<= 1u) {
+    for (uint16_t base = 1u; base <= 256u; base = static_cast<uint16_t>(base << 1u)) {
         for (uint16_t dots = 0u; dots <= NoteValue::MaximumDots; ++dots) {
             const NoteValue value = NoteValue::FromDenominator(base, dots);
             EXPECT_TRUE(value.IsValid());
