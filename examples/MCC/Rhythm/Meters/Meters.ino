@@ -1,6 +1,4 @@
-// The Arduino builder only discovers libraries included from the sketch.
-#include <Foundation.h>
-#include <MCC.h>
+#include <MCC_Rhythm.h>
 
 #include "Shared.h"
 

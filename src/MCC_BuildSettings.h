@@ -1,6 +1,10 @@
 #ifndef MCC_BUILD_SETTINGS_H
 #define MCC_BUILD_SETTINGS_H
 
+// The libraries this one depends on. Including them from their src root
+// lets the Arduino builder find them from any header of this library.
+#include <Foundation_BuildSettings.h>
+
 #ifndef MCC_VERSION
     #define MCC_VERSION "0.5.2"
 #endif

@@ -144,13 +144,13 @@ The generated documentation starts at
 
 ## Arduino
 
-Install both Foundation and MCC as Arduino libraries, then include both from
-the sketch itself, because the Arduino builder only discovers libraries that
-the sketch includes:
+Install both Foundation and MCC as Arduino libraries, then include MCC, or
+only the modules the sketch uses. Every MCC header also brings in Foundation,
+so the Arduino builder finds both libraries:
 
 ```cpp
-#include <Foundation.h>
-#include <MCC.h>
+#include <MCC.h>        // every module
+#include <MCC_Scale.h>  // or only the scale module
 ```
 
 No language-standard override is required. Arduino source mode supports the
