@@ -20,6 +20,13 @@ Release dates use the `YYYY-MM-DD` format.
   `MCC_Rhythm_Meters` examples, plus exhaustive tests for their supported
   values and construction paths.
 
+### Changed
+
+- Arduino sketches no longer need to include `<Foundation.h>`: every MCC
+  header brings in Foundation, so including `<MCC.h>` or a single module
+  header such as `<MCC_Scale.h>` is enough for the Arduino builder to find
+  both libraries. The examples include only the module they demonstrate.
+
 ## [0.5.2] - 2026-10-01
 
 ### Fixed

@@ -1,6 +1,8 @@
 #ifndef MCC_KEY_TOP_LEVEL_H
 #define MCC_KEY_TOP_LEVEL_H
 
+#include <MCC_BuildSettings.h>
+
 #if __has_include(<MCC/Key.h>)
     #ifndef MCC_KEY
         #define MCC_KEY
