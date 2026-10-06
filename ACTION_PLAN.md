@@ -434,8 +434,8 @@ Implement theory and composition concepts only:
 MCC::NoteValue
 MCC::Note
 MCC::Meter
-MCC::Tuplet
 MCC::RhythmPattern
+MCC::Rhythms
 ```
 
 Actions:
@@ -443,7 +443,8 @@ Actions:
 - [x] Represent note values and dotted values exactly.
 - [x] Combine a pitch with a note value into `MCC::Note`.
 - [x] Represent simple and compound meter.
-- [ ] Represent tuplets independently of runtime timing.
+- [x] Represent a rhythm as an onset/rest step pattern (`RhythmPattern`).
+- [ ] Add the reviewed catalog of named traditional rhythms (`Rhythms`).
 - [ ] Keep clocks, scheduling, callbacks and PPQN execution outside MCC.
 
 Decisions:
@@ -462,13 +463,81 @@ Decisions:
   compound meter, derives their beat count and value, and accepts irregular
   signatures without guessing their grouping. Written equality stays distinct
   from equal measure duration.
-- The remaining rhythm types stay planned with their first consumers so MCC
-  models theory and notation while MIDILAR owns playback and sequencing.
+- `RhythmPattern` is a bit set (1 = onset, 0 = rest) whose step count, 1 to
+  65535, is chosen and changed at runtime (decision 2026-10-03). Like a vector
+  it keeps the step count and a capacity in whole bytes, so resizing within
+  the capacity never reallocates and `Append` doubles a full one. The steps
+  are a `Foundation::Containers::BitVector` (added in Foundation 1.5.0
+  together with `Vector<T>`, decision 2026-10-03, replacing a 32-step inline
+  buffer): owned on the heap, or a caller buffer handed in with `Attach()`
+  that the pattern never reallocates or frees. In-place `Parse`, `Rotate`,
+  `Invert` and `Append` work inside an attached buffer without allocating.
+  `RhythmPattern` adds nothing to the bit vector's footprint. Like
+  `ScalePattern`, it is structure only: the step value and `Meter` belong to
+  each `Rhythms` catalog entry, so MIDILAR's Euclidean generator can return a
+  pattern without inventing a meter. It has no tempo, clock or PPQN: MIDILAR's
+  step sequencer decides when each step plays. Operations stay structural
+  (step query, `SetOnset`, `Resize`, `Reserve`, `Append`, `ShrinkToFit`,
+  `Attach`, `Release`, onset count, `Rotated(n)`, `IsRotationOf(other)`,
+  complement, concatenation) and keep the canonical invalid value rules.
+  `Rotated(n)` starts the cycle `n` steps later; `IsRotationOf` tells whether
+  two patterns are the same necklace (Toussaint ch. 14). Playback offsets
+  against time or another voice belong to MIDILAR.
+- `Rhythms` is a reviewed catalog of named traditional rhythms, stored as
+  data like the scale and chord catalogs and validated in CI. Entries that
+  coincide with a Euclidean distribution (tresillo = E(3,8)) are still
+  stored as written data. Initial entries (`x` = onset, `.` = rest; page
+  numbers refer to Toussaint, 2nd ed.):
+
+  | Entry | Steps | Pattern | Intervals | Source |
+  | --- | --- | --- | --- | --- |
+  | Son clave 3-2 | 16 | `x..x..x...x.x...` | 3-3-4-2-4 | ch. 6-7, pp. 23-27 |
+  | Son clave 2-3 | 16 | `..x.x...x..x..x.` | rotation of 3-2 | ch. 13, p. 64 n. 13; ch. 14, p. 72 |
+  | Rumba clave 3-2 | 16 | `x..x...x..x.x...` | 3-4-3-2-4 | ch. 7, p. 28 |
+  | Rumba clave 2-3 | 16 | `..x.x...x..x...x` | rotation of 3-2 | derived; see note below |
+  | Shiko | 16 | `x...x.x...x.x...` | 4-2-4-2-4 | ch. 7, pp. 27-28 |
+  | Soukous | 16 | `x..x..x...xx....` | 3-3-4-1-5 | ch. 7, pp. 28-29 |
+  | Gahu | 16 | `x..x..x...x...x.` | 3-3-4-4-2 | ch. 7, p. 29 |
+  | Bossa nova | 16 | `x..x..x...x..x..` | 3-3-4-3-3 | ch. 7, p. 29 |
+  | Tresillo | 8 | `x..x..x.` | 3-3-2 | ch. 3, p. 15 |
+  | Habanera | 8 | `x..xx.x.` | 3-1-2-2 | ch. 3, p. 15 |
+  | Cinquillo | 8 | `x.xx.xx.` | 2-1-2-1-2 | ch. 7, p. 28 |
+  | Bembe | 12 | `x.x.xx.x.x.x` | 2-2-1-2-2-2-1 | ch. 14, p. 69 |
+  | Four-on-the-floor | 16 | `x...x...x...x...` | 4-4-4-4 | isochronous, ch. 2, p. 7 |
+  | Backbeat | 8 | `..x...x.` | 4-4 (beats 2 and 4) | ch. 28, p. 187 |
+
+- Rumba clave 2-3 note: Toussaint ch. 7, p. 30 n. 14 says the guaguanco
+  clave starts on the second half of the measure but prints
+  `..x.x...x..x..x.`, which is the son 2-3. Rotating the rumba 3-2 by half a
+  measure gives `..x.x...x..x...x`; confirm against Malabe & Weiner before
+  the entry ships.
+- Rotation rule: the catalog stores each rhythm's canonical form as written
+  in the source. A rotation becomes its own entry only when musicians name
+  and use it as such (the 2-3 claves; candidates such as the timini or
+  kromanti rotations of the shiko, ch. 7 p. 28). Other rotations are
+  obtained with `Rotated(n)`.
+- MIDILAR's Euclidean generator is tested against Toussaint's E(k,n) table
+  of traditional rhythms (ch. 21, p. 139 onward).
+- Catalog sources: the primary reference is Godfried T. Toussaint, *The
+  Geometry of Musical Rhythm: What Makes a "Good" Rhythm Good?*, 2nd ed.
+  (CRC Press, 2019, ISBN 978-0-8153-7097-0), whose timelines are already
+  written as onset/rest steps. Entries are cross-checked against style
+  method books: Frank Malabe and Bob Weiner, *Afro-Cuban Rhythms for
+  Drumset* (Manhattan Music/Alfred), and Duduka da Fonseca and Bob Weiner,
+  *Brazilian Rhythms for Drumset* (Manhattan Music/Alfred). Each entry's
+  documentation cites its source.
+- The catalog holds single-voice timelines only. Swing/shuffle is a
+  performance feel applied by MIDILAR, and multi-voice drum grooves are out
+  of scope for this phase.
+- `Tuplet` is dropped from this phase (decision 2026-10-02): a sequencer
+  triplet is a pattern whose step lasts 1/12, which MIDILAR decides. It may
+  return later only if notation needs written tuplets.
 - The historical Euclidean sequence (`OLD MCC`
   `MusicalUtilityCore/Sequences/Euclidean`) is not classical music theory and
   does not belong in MCC. Decision (2026-10-02): the k-in-n distribution
   lives in MIDILAR next to its step sequencer (`EuclideanPattern`,
-  `StepSequencer`), not in Foundation.
+  `StepSequencer`), not in Foundation. MIDILAR's generator returns an
+  `MCC::RhythmPattern`, so generated and catalog rhythms share one type.
 
 ## Phase 10 - Required MIDILAR integration
 

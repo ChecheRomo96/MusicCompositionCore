@@ -46,6 +46,11 @@ MCC_CHECK_VALUE_TYPE(MCC::Key, 4);
 MCC_CHECK_VALUE_TYPE(MCC::NoteValue, 2);
 MCC_CHECK_VALUE_TYPE(MCC::Note, 6);
 MCC_CHECK_VALUE_TYPE(MCC::Meter, 3);
+// RhythmPattern owns or borrows its step storage through a
+// Foundation::Containers::BitVector, so it is not trivially copyable; it adds
+// nothing to the bit vector's footprint.
+static_assert(sizeof(MCC::RhythmPattern) == sizeof(Foundation::Containers::BitVector),
+              "MCC::RhythmPattern must stay a thin wrapper over BitVector");
 #endif
 
 #undef MCC_CHECK_VALUE_TYPE
