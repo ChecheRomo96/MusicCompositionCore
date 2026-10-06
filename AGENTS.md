@@ -29,8 +29,11 @@ unless the user explicitly includes it.
   or toolchain changes belong in RoModularBuild; updating the gitlink is a
   separate, explicit dependency change.
 - Preserve C++17 for CMake packages and direct source builds.
-- Keep embedded code allocation-conscious, exception-free, and independent of
-  mandatory full-STL facilities.
+- Keep embedded code exception-free and independent of mandatory full-STL
+  facilities. Operations that change a container's size may
+  allocate; the library makes no real-time assumptions about the caller, and
+  implementers reserve space beforehand for time-critical code. Allocation
+  failure is reported through results.
 - Preserve the dependency direction: MCC may consume Foundation, Foundation
   must never consume MCC, and MIDI protocol or transport concepts belong in
   MIDILAR.
