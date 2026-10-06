@@ -466,11 +466,12 @@ Decisions:
 - `RhythmPattern` is a bit set (1 = onset, 0 = rest) whose step count, 1 to
   65535, is chosen and changed at runtime (decision 2026-10-03). Like a vector
   it keeps the step count and a capacity in whole bytes, so resizing within
-  the capacity never reallocates and `Append` doubles a full one. The steps
-  are a `Foundation::Containers::BitVector` (added in Foundation 1.5.0
-  together with `Vector<T>`, decision 2026-10-03, replacing a 32-step inline
-  buffer): owned on the heap, or a caller buffer handed in with `Attach()`
-  that the pattern never reallocates or frees. In-place `Parse`, `Rotate`,
+  the capacity never reallocates and `Append` grows a full one. The steps
+  are a `Foundation::Containers::BitVector` (Foundation 2.0.0, decision
+  2026-10-03, replacing a 32-step inline buffer; since 2026-10-06 it stores
+  its bytes in a `cpstd::vector<uint8_t>` from CPSTL): owned on the heap, or
+  a caller buffer handed in with a non-null pointer to `Attach()` that the
+  pattern never reallocates or frees. In-place `Parse`, `Rotate`,
   `Invert` and `Append` work inside an attached buffer without allocating.
   `RhythmPattern` adds nothing to the bit vector's footprint. Like
   `ScalePattern`, it is structure only: the step value and `Meter` belong to

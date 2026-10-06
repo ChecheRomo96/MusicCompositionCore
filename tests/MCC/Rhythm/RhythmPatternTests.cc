@@ -267,9 +267,10 @@ TEST(RhythmPatternTests, KeepsCapacityLikeAVector) {
     EXPECT_TRUE(pattern.Resize(40));
     EXPECT_FALSE(pattern.IsOnset(39));
 
-    // Growing past the capacity allocates exactly what the steps need.
+    // Growing past the capacity reallocates; how much is the vector's choice.
     EXPECT_TRUE(pattern.Resize(41));
-    EXPECT_EQ(pattern.Capacity(), 48u);
+    EXPECT_GE(pattern.Capacity(), 48u);
+    EXPECT_EQ(pattern.Capacity() % 8u, 0u);
 
     EXPECT_TRUE(pattern.Resize(12));
     EXPECT_TRUE(pattern.ShrinkToFit());
@@ -454,12 +455,15 @@ TEST(RhythmPatternTests, AssignsIntoAnAttachedBuffer) {
     EXPECT_EQ(buffer[0], 0x49u);  // releasing leaves the buffer as it is
 }
 
-TEST(RhythmPatternTests, RejectsUnusableBuffers) {
+TEST(RhythmPatternTests, UsesEveryNonNullBuffer) {
     uint8_t buffer[4];
     RhythmPattern pattern;
-    EXPECT_FALSE(pattern.Attach(nullptr, 4));
-    EXPECT_FALSE(pattern.Attach(buffer, 0));
+    EXPECT_TRUE(pattern.Attach(buffer, 0));  // a non-null buffer is used, even empty
     EXPECT_EQ(pattern.Capacity(), 0u);
+    EXPECT_FALSE(pattern.Resize(1));
+    EXPECT_TRUE(pattern.Attach(nullptr, 4));  // null: back to owned storage
+    EXPECT_TRUE(pattern.Resize(4));
+    EXPECT_TRUE(pattern.OwnsStorage());
 
     RhythmPattern owned(8);
     EXPECT_TRUE(owned.Attach(buffer, sizeof buffer));  // frees its heap storage
