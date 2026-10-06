@@ -1,9 +1,12 @@
 set(MCC_RHYTHM_HEADERS
     "${CMAKE_CURRENT_LIST_DIR}/NoteValue.h"
     "${CMAKE_CURRENT_LIST_DIR}/Note.h"
-    "${CMAKE_CURRENT_LIST_DIR}/Meter.h")
+    "${CMAKE_CURRENT_LIST_DIR}/Meter.h"
+    "${CMAKE_CURRENT_LIST_DIR}/RhythmPattern.h")
+set(MCC_RHYTHM_SOURCES
+    "${CMAKE_CURRENT_LIST_DIR}/RhythmPattern.cpp")
 
-target_sources(MCC PRIVATE ${MCC_RHYTHM_HEADERS})
+target_sources(MCC PRIVATE ${MCC_RHYTHM_HEADERS} ${MCC_RHYTHM_SOURCES})
 mcc_stage_headers(${MCC_RHYTHM_HEADERS})
 mcc_add_dox(
     ${MCC_RHYTHM_HEADERS}

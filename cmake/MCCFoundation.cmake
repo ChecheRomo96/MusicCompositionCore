@@ -22,7 +22,7 @@
 # and the internal cache entry MCC_FOUNDATION_RESOLVED_PREFIX (empty when
 # Foundation is built from source and installed alongside MCC).
 
-set(MCC_FOUNDATION_VERSION "1.4.0")
+set(MCC_FOUNDATION_VERSION "2.0.0")
 set(MCC_FOUNDATION_REPOSITORY "ChecheRomo96/Foundation" CACHE STRING
     "GitHub repository (owner/name) used to fetch Foundation")
 option(MCC_FETCH_FOUNDATION
@@ -154,7 +154,7 @@ if(NOT TARGET Foundation::Foundation AND NOT MCC_FOUNDATION_PREFIX STREQUAL "")
     if(NOT TARGET Foundation::Foundation)
         message(FATAL_ERROR
             "MCC_FOUNDATION_PREFIX='${MCC_FOUNDATION_PREFIX}' does not contain "
-            "a Foundation ${MCC_FOUNDATION_VERSION}+ (1.x) package.")
+            "a Foundation ${MCC_FOUNDATION_VERSION}+ (2.x) package.")
     endif()
     set(MCC_FOUNDATION_SOURCE "prefix")
     set(MCC_FOUNDATION_RESOLVED_PREFIX "${MCC_FOUNDATION_PREFIX}")
@@ -172,7 +172,7 @@ if(NOT TARGET Foundation::Foundation)
         else()
             message(WARNING
                 "Ignoring ${sibling_prefix}: it is not a compatible Foundation "
-                "${MCC_FOUNDATION_VERSION}+ (1.x) package. Re-export it or "
+                "${MCC_FOUNDATION_VERSION}+ (2.x) package. Re-export it or "
                 "let MCC fetch Foundation.")
         endif()
     endif()
@@ -249,7 +249,7 @@ endif()
 
 if(NOT TARGET Foundation::Foundation)
     message(FATAL_ERROR
-        "MCC requires Foundation ${MCC_FOUNDATION_VERSION}+ (1.x) for the "
+        "MCC requires Foundation ${MCC_FOUNDATION_VERSION}+ (2.x) for the "
         "same platform and ABI. Set MCC_FOUNDATION_PREFIX to a Foundation "
         "package, export ../Foundation/dist/${MCC_PLATFORM}, or enable "
         "MCC_FETCH_FOUNDATION.")
