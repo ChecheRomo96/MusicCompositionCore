@@ -23,7 +23,7 @@
  * @endcode
  *
  * Available when `MCC_CHORD` is defined. Requires the Scale module and
- * Foundation 1.4.0 or newer.
+ * Foundation 2.0.0 or newer.
  *
  * @section MCCChordCatalog Catalog and Provenance
  *

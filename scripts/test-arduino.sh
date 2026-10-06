@@ -5,13 +5,15 @@ SCRIPT_DIR=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
 . "$SCRIPT_DIR/common.sh"
 
 usage() {
-    printf '%s\n' "Usage: $0 [--fqbn <board>] [--foundation <source-directory>]"
+    printf '%s\n' "Usage: $0 [--fqbn <board>] [--foundation <source-directory>] [--cpstl <source-directory>]"
     printf '%s\n' "Foundation defaults to MCC_FOUNDATION_SOURCE or the sibling ../Foundation."
+    printf '%s\n' "CPSTL defaults to MCC_CPSTL_SOURCE or the sibling ../CPSTL."
 }
 
 # The validated Arduino source-mode board. Other cores are not validated here.
 FQBN=arduino:avr:uno
 FOUNDATION=${MCC_FOUNDATION_SOURCE:-$MCC_ROOT/../Foundation}
+CPSTL=${MCC_CPSTL_SOURCE:-$MCC_ROOT/../CPSTL}
 
 while [ "$#" -gt 0 ]; do
     case "$1" in
@@ -23,6 +25,11 @@ while [ "$#" -gt 0 ]; do
         --foundation)
             mcc_require_value "$1" "${2:-}"
             FOUNDATION=$2
+            shift 2
+            ;;
+        --cpstl)
+            mcc_require_value "$1" "${2:-}"
+            CPSTL=$2
             shift 2
             ;;
         -h|--help)
@@ -39,6 +46,9 @@ command -v arduino-cli >/dev/null 2>&1 || mcc_die "arduino-cli not found"
 [ -f "$FOUNDATION/library.properties" ] || \
     mcc_die "Foundation Arduino library not found at $FOUNDATION"
 FOUNDATION=$(mcc_absolute_path "$FOUNDATION")
+[ -f "$CPSTL/library.properties" ] || \
+    mcc_die "CPSTL Arduino library not found at $CPSTL"
+CPSTL=$(mcc_absolute_path "$CPSTL")
 
 BUILD_ROOT="$MCC_ROOT/build/arduino/$(printf '%s' "$FQBN" | tr ':' '_')"
 rm -rf "$BUILD_ROOT"
@@ -58,6 +68,7 @@ for SKETCH in "$MCC_ROOT"/examples/MCC/*/*/*.ino; do
         --fqbn "$FQBN" \
         --library "$MCC_ROOT" \
         --library "$FOUNDATION" \
+        --library "$CPSTL" \
         --build-path "$BUILD_ROOT/$NAME" \
         --warnings default \
         "$SKETCH_DIR" >"$LOG" 2>&1 || STATUS=$?

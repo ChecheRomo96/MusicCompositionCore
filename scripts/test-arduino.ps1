@@ -1,6 +1,7 @@
 param(
     [string]$Fqbn = "arduino:avr:uno",
-    [string]$Foundation = ""
+    [string]$Foundation = "",
+    [string]$Cpstl = ""
 )
 
 $ErrorActionPreference = "Stop"
@@ -21,6 +22,14 @@ if (-not (Test-Path -LiteralPath (Join-Path $Foundation "library.properties"))) 
     throw "Foundation Arduino library not found at $Foundation"
 }
 $Foundation = (Resolve-Path -LiteralPath $Foundation).Path
+# CPSTL defaults to MCC_CPSTL_SOURCE or the sibling ../CPSTL.
+if (-not $Cpstl) {
+    $Cpstl = if ($env:MCC_CPSTL_SOURCE) { $env:MCC_CPSTL_SOURCE } else { Join-Path $root "../CPSTL" }
+}
+if (-not (Test-Path -LiteralPath (Join-Path $Cpstl "library.properties"))) {
+    throw "CPSTL Arduino library not found at $Cpstl"
+}
+$Cpstl = (Resolve-Path -LiteralPath $Cpstl).Path
 
 $examplesRoot = Join-Path $root "examples/MCC"
 $buildRoot = Join-Path $root ("build/arduino/" + ($Fqbn -replace ":", "_"))
@@ -48,6 +57,7 @@ foreach ($sketch in $sketches) {
         --fqbn $Fqbn `
         --library $root `
         --library $Foundation `
+        --library $Cpstl `
         --build-path (Join-Path $buildRoot $name) `
         --warnings default `
         $sketch.DirectoryName *> $log
