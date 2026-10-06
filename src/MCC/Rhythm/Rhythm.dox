@@ -6,6 +6,8 @@
  * MCC::NoteValue records a power-of-two note base and its augmentation dots.
  * MCC::Note combines that exact value with a spelling-preserving MCC::Pitch.
  * MCC::Meter preserves a written time signature and derives simple or
- * compound beats without guessing irregular groupings. None depends on tempo,
- * clocks, PPQN or MIDI.
+ * compound beats without guessing irregular groupings. MCC::RhythmPattern
+ * records which steps of a cyclic grid are onsets, in the box and
+ * interonset-interval notations of Toussaint's *The Geometry of Musical
+ * Rhythm*. None depends on tempo, clocks, PPQN or MIDI.
  */
