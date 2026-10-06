@@ -20,13 +20,14 @@ namespace MCC {
  *
  * - **Owned:** heap storage that grows on demand. Like a vector, the
  *   pattern keeps a step count and a larger or equal Capacity(); changing
- *   the step count within the capacity never reallocates, and Append()
- *   doubles a full capacity. Capacity counts whole bytes, so it is a
+ *   the step count within the capacity never reallocates, and growing past
+ *   it lets the underlying `cpstd::vector` choose the new capacity. Capacity counts whole bytes, so it is a
  *   multiple of eight steps (capped at MaximumSteps).
- * - **Attached:** Attach() hands the pattern a caller-owned buffer. The
- *   pattern never allocates, reallocates nor frees it; anything that would
- *   need more than the buffer returns `false` and changes nothing. The
- *   caller keeps the buffer alive while attached.
+ * - **Attached:** a non-null buffer passed to Attach() (or the buffer
+ *   constructor) is caller-owned storage. The pattern never allocates,
+ *   reallocates nor frees it; anything that would need more than the buffer
+ *   returns `false` and changes nothing. The caller keeps the buffer alive
+ *   while attached. A null buffer selects owned storage.
  *
  * Copy assignment, and move assignment into an attached pattern, copy the
  * steps into the existing storage, so an attached pattern stays attached. The
@@ -71,8 +72,8 @@ public:
     explicit RhythmPattern(int32_t steps) noexcept;
 
     /**
-     * @brief Creates an empty (invalid) pattern attached to `buffer`; see
-     * Attach(). Without a usable buffer it has no storage.
+     * @brief Creates an empty (invalid) pattern attached to `buffer`, or with
+     * owned storage when `buffer` is null; see Attach().
      */
     RhythmPattern(uint8_t* buffer, size_t bytes) noexcept : _steps(buffer, bytes) {}
 
@@ -104,8 +105,9 @@ public:
      * Releases any owned storage and leaves an empty (invalid) pattern with a
      * capacity of `bytes * 8` steps (reported up to MaximumSteps); use
      * Resize(), Append() or Parse() to fill it. The buffer's bytes are
-     * written as steps are added. Returns `false` and changes nothing for a
-     * null buffer, zero bytes, or this pattern's own owned storage.
+     * written as steps are added. A null `buffer` returns to empty owned
+     * storage instead. Returns `false` and changes nothing only for this
+     * pattern's own owned storage.
      */
     bool Attach(uint8_t* buffer, size_t bytes) noexcept { return _steps.Attach(buffer, bytes); }
 
@@ -183,8 +185,8 @@ public:
     /**
      * @brief Changes the step count, keeping existing steps and adding rests.
      *
-     * Reallocates owned storage only when `steps` exceeds Capacity(), and then
-     * to exactly the bytes `steps` needs; shrinking never reallocates. Returns
+     * Reallocates owned storage only when `steps` exceeds Capacity() (to at
+     * least the bytes `steps` needs); shrinking never reallocates. Returns
      * `false` and changes nothing when `steps` is outside `[1, MaximumSteps]`
      * or the storage cannot hold it.
      */
@@ -198,8 +200,9 @@ public:
     bool Reserve(int32_t steps) noexcept;
 
     /**
-     * @brief Adds one step at the end. Owned storage doubles when full;
-     * `false` and unchanged at MaximumSteps or when the storage cannot grow.
+     * @brief Adds one step at the end. Owned storage grows geometrically when
+     * full; `false` and unchanged at MaximumSteps or when the storage cannot
+     * grow.
      */
     bool Append(bool onset = false) noexcept;
 
@@ -211,9 +214,9 @@ public:
     bool Append(const RhythmPattern& other) noexcept;
 
     /**
-     * @brief Shrinks owned storage to exactly the bytes the steps need (none
-     * for the invalid pattern). Attached storage is left as is. Returns
-     * `false` and changes nothing when storage cannot be allocated.
+     * @brief Asks owned storage to shrink to the bytes the steps need, as
+     * `cpstd::vector::shrink_to_fit()` does. Attached storage is left as is.
+     * Returns `true`.
      */
     bool ShrinkToFit() noexcept;
 

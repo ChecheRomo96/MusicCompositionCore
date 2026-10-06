@@ -5,9 +5,15 @@ Release dates use the `YYYY-MM-DD` format.
 
 ## [Unreleased]
 
+Planned as MCC 0.6.0.
+
 ### Changed
 
-- MCC requires Foundation 1.5.0 for `Foundation::Containers::BitVector`.
+- MCC requires Foundation 2.0.0 or a newer 2.x release, for
+  `Foundation::Containers::BitVector`. Foundation 2 builds on CPSTL 1.1.0 (the
+  `cpstd` standard vocabulary); Arduino users install CPSTL next to
+  Foundation, and `scripts/test-arduino.sh` and `.ps1` take `--cpstl`
+  (default `MCC_CPSTL_SOURCE` or `../CPSTL`).
 - Arduino sketches no longer need to include `<Foundation.h>`: every MCC
   header brings in Foundation, so including `<MCC.h>` or a single module
   header such as `<MCC_Scale.h>` is enough for the Arduino builder to find

@@ -239,13 +239,14 @@
  *   bytes (multiples of eight steps); changing the step count within the
  *   capacity never reallocates. The steps are a
  *   `Foundation::Containers::BitVector`, so storage is either owned (heap,
- *   grown on demand, appending doubles a full capacity) or a caller-provided
- *   buffer attached with `Attach()`, which the pattern never reallocates or
+ *   a `cpstd::vector` grown on demand) or a caller-provided buffer attached
+ *   with a non-null pointer to `Attach()`, which the pattern never reallocates or
  *   frees;
  *   in-place operations (`Parse`, `Rotate`, `Invert`, `Append`) work inside
  *   it without allocating. A request the storage cannot hold, including an
- *   allocation failure, yields the invalid pattern or a `false` result that
- *   leaves the pattern unchanged. A
+ *   allocation failure under CPSTL's own implementation, yields the invalid
+ *   pattern or a `false` result that leaves the pattern unchanged (in CPSTL's
+ *   STL mode an allocation failure follows `std::vector`). A
  *   pattern without onsets is valid; only the zero-step pattern is invalid.
  *   Box notation (`x` onset, `.` rest) and interonset intervals (`3-3-4-2-4`,
  *   first onset on step 0) describe the same patterns; malformed text or more
