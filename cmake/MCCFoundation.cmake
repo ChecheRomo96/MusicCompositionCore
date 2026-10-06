@@ -22,7 +22,7 @@
 # and the internal cache entry MCC_FOUNDATION_RESOLVED_PREFIX (empty when
 # Foundation is built from source and installed alongside MCC).
 
-set(MCC_FOUNDATION_VERSION "1.4.0")
+set(MCC_FOUNDATION_VERSION "1.5.0")
 set(MCC_FOUNDATION_REPOSITORY "ChecheRomo96/Foundation" CACHE STRING
     "GitHub repository (owner/name) used to fetch Foundation")
 option(MCC_FETCH_FOUNDATION

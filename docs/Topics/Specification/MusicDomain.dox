@@ -233,6 +233,33 @@
  *   fraction of a whole note. It contains no tempo, clock, PPQN or playback
  *   state. A compound signature with denominator `1` is unsupported because
  *   its beat would exceed the largest current `NoteValue`.
+ * - SPEC-RHY-11: A `RhythmPattern` is a cyclic grid of one to 65535 equal
+ *   steps, each an onset or a rest, whose step count is chosen and changed at
+ *   runtime. Like a vector, it keeps a step count and a capacity in whole
+ *   bytes (multiples of eight steps); changing the step count within the
+ *   capacity never reallocates. The steps are a
+ *   `Foundation::Containers::BitVector`, so storage is either owned (heap,
+ *   grown on demand, appending doubles a full capacity) or a caller-provided
+ *   buffer attached with `Attach()`, which the pattern never reallocates or
+ *   frees;
+ *   in-place operations (`Parse`, `Rotate`, `Invert`, `Append`) work inside
+ *   it without allocating. A request the storage cannot hold, including an
+ *   allocation failure, yields the invalid pattern or a `false` result that
+ *   leaves the pattern unchanged. A
+ *   pattern without onsets is valid; only the zero-step pattern is invalid.
+ *   Box notation (`x` onset, `.` rest) and interonset intervals (`3-3-4-2-4`,
+ *   first onset on step 0) describe the same patterns; malformed text or more
+ *   than 65535 steps is invalid.
+ * - SPEC-RHY-12: Step queries reduce modulo the step count. `Rotated(n)`
+ *   starts the cycle `n` steps later, so step `i` of the result is step
+ *   `i + n` of the source; rotating by the step count is the identity.
+ * - SPEC-RHY-13: Two patterns are rotations of each other (the same
+ *   necklace) when their step counts match and some rotation makes them
+ *   equal. Equality itself is exact: the 3-2 and 2-3 claves are rotations
+ *   but not equal.
+ * - SPEC-RHY-14: A `RhythmPattern` is structure only. It records no step
+ *   value, meter, tempo, clock or PPQN; written context belongs to the
+ *   catalog entry and playback to MIDILAR.
  *
  * @section MCCSpecText Text formatting and buffer policy
  *
@@ -273,4 +300,5 @@
  * | SPEC-RHY-1..4 | `NoteValueTests` (all bases and dot counts) | 9 |
  * | SPEC-RHY-5..7 | `NoteTests` (constructors, invalid state, spelling and movement) | 9 |
  * | SPEC-RHY-8..10 | `MeterTests` (all numerators and denominators, beat derivation) | 9 |
+ * | SPEC-RHY-11..14 | `RhythmPatternTests` (both notations, capacity, rotation, necklaces, invalid state) | 9 |
  */
