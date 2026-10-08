@@ -19,7 +19,7 @@
  * @endcode
  *
  * Available when `MCC_SCALE` is defined. Requires the Interval module and
- * Foundation 1.4.0 or newer.
+ * Foundation 2.0.5 or newer.
  *
  * @section MCCScaleCatalog Catalog and Provenance
  *

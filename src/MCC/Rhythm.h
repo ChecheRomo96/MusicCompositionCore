@@ -4,5 +4,6 @@
 #include <MCC/Rhythm/NoteValue.h>
 #include <MCC/Rhythm/Note.h>
 #include <MCC/Rhythm/Meter.h>
+#include <MCC/Rhythm/RhythmPattern.h>
 
 #endif // MCC_RHYTHM_H
