@@ -3,9 +3,7 @@
 This file records user-visible changes to Music Composition Core (MCC).
 Release dates use the `YYYY-MM-DD` format.
 
-## [Unreleased]
-
-Planned as MCC 0.6.0.
+## [0.6.0] - 2026-10-08
 
 ### Changed
 
