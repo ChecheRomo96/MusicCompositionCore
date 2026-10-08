@@ -5,6 +5,20 @@ Release dates use the `YYYY-MM-DD` format.
 
 ## [Unreleased]
 
+Planned as MCC 0.6.0.
+
+### Changed
+
+- MCC requires Foundation 2.0.5 or a newer 2.x release, for
+  `Foundation::Containers::BitVector`. Foundation 2 builds on CPSTL 1.1.5 (the
+  `cpstd` standard vocabulary); Arduino users install CPSTL next to
+  Foundation, and `scripts/test-arduino.sh` and `.ps1` take `--cpstl`
+  (default `MCC_CPSTL_SOURCE` or `../CPSTL`).
+- Arduino sketches no longer need to include `<Foundation.h>`: every MCC
+  header brings in Foundation, so including `<MCC.h>` or a single module
+  header such as `<MCC_Scale.h>` is enough for the Arduino builder to find
+  both libraries. The examples include only the module they demonstrate.
+
 ### Added
 
 - **Rhythm** module (`MCC_RHYTHM`) beginning with `NoteValue`, a compact,
@@ -19,13 +33,18 @@ Release dates use the `YYYY-MM-DD` format.
 - Native and Arduino `MCC_Rhythm_NoteValues`, `MCC_Rhythm_Notes` and
   `MCC_Rhythm_Meters` examples, plus exhaustive tests for their supported
   values and construction paths.
-
-### Changed
-
-- Arduino sketches no longer need to include `<Foundation.h>`: every MCC
-  header brings in Foundation, so including `<MCC.h>` or a single module
-  header such as `<MCC_Scale.h>` is enough for the Arduino builder to find
-  both libraries. The examples include only the module they demonstrate.
+- `RhythmPattern`, a cyclic onset/rest pattern whose step count (1 to 65535)
+  is chosen and changed at runtime. Like a vector it keeps a step count and
+  a byte-granular capacity (`Capacity`, `Reserve`, `Append`, `ShrinkToFit`),
+  so resizing within the capacity never reallocates. The steps are a
+  `Foundation::Containers::BitVector`: owned on the heap or attached from a
+  caller buffer (`Attach`, `BytesFor`, `Release`) that is never reallocated;
+  in-place `Parse`, `ParseIntervals`, `Rotate`, `Invert` and `Append` work
+  there without allocating. Parsed from box notation (`"x..x..x...x.x..."`) or interonset
+  intervals (`"3-3-4-2-4"`), with step editing, `Resize`, onset queries,
+  interonset intervals, rotation, necklace equality (`IsRotationOf`),
+  complement and concatenation, plus the native and Arduino
+  `MCC_Rhythm_RhythmPatterns` example.
 
 ## [0.5.2] - 2026-10-01
 
