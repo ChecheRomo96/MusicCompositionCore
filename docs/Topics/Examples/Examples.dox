@@ -30,6 +30,7 @@
  * | `MCC_Rhythm_NoteValues` | Named note values and augmentation dots as exact fractions of a whole note |
  * | `MCC_Rhythm_Notes` | Four spelling-preserving note constructors, the default quarter value and copy-style pitch/value changes |
  * | `MCC_Rhythm_Meters` | Simple, compound and irregular signatures, derived beats and written identity versus equal measure duration |
+ * | `MCC_Rhythm_RhythmPatterns` | Box and interval notation, the 3-2 and 2-3 claves as rotations, necklace equality, a step count changed at runtime, complement and concatenation |
  *
  * Build and run one on the desktop:
  *

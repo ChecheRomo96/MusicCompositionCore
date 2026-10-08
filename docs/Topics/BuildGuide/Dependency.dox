@@ -4,7 +4,9 @@
  * @brief Foundation package resolution and compatibility contract.
  *
  * MCC links `Foundation::Foundation` publicly and requires Foundation
- * `1.4.0` or a newer `1.x` release. MCC rejects a package whose recorded
+ * `2.0.5` or a newer `2.x` release. Foundation 2 builds on CPSTL 1.1.5 or
+ * newer, which a Foundation package carries or finds; Arduino users install
+ * the CPSTL library next to Foundation. MCC rejects a package whose recorded
  * platform differs from the selected MCC preset.
  *
  * Resolution order (`cmake/MCCFoundation.cmake`):
