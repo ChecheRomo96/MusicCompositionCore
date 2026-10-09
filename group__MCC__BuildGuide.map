@@ -1,0 +1,5 @@
+<map id="Build Guide" name="Build Guide">
+<area shape="rect" id="Node000001" title="Configure MCC against a matching Foundation package." alt="" coords="5,31,103,56"/>
+<area shape="rect" id="Node000002" href="$group__MCC__BuildGuide__Dependency.html" title="Foundation package resolution and compatibility contract." alt="" coords="151,5,329,31"/>
+<area shape="rect" id="Node000003" href="$group__MCC__BuildGuide__Platforms.html" title="Public MCC presets backed by pinned RoModularBuild profiles." alt="" coords="175,55,305,80"/>
+</map>

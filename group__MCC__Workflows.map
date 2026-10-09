@@ -1,0 +1,6 @@
+<map id="Workflows" name="Workflows">
+<area shape="rect" id="Node000001" title="Repeatable configure, build, test, documentation, install, and export." alt="" coords="5,55,95,80"/>
+<area shape="rect" id="Node000004" href="$group__MCC__Workflows__Migration.html" title="Controlled reconstruction plan for the historical MCC codebases." alt="" coords="165,5,355,31"/>
+<area shape="rect" id="Node000003" href="$group__MCC__Workflows__PackageConsumer.html" title="Validate MCC exactly as an independent downstream project uses it." alt="" coords="143,55,377,80"/>
+<area shape="rect" id="Node000002" href="$group__MCC__Workflows__SharedInfrastructure.html" title="MCC&#39;s pinned RoModularBuild integration and ownership boundary." alt="" coords="162,104,358,129"/>
+</map>
