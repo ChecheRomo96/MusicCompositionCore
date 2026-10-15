@@ -4,20 +4,10 @@ MCC is the music-theory library of the RoModular ecosystem. Keep it
 independently buildable for desktop and embedded consumers, and preserve the
 dependency direction `Foundation <- MCC <- MIDILAR`.
 
-## Shared RoModular guidance
+## Scope
 
-Before starting work, look for the shared guidance in
-`../RoModularAgents`.
-
-- If it exists and is readable, read `AGENTS.md` and `CONTRACT.md` completely.
-- Read `repositories/MCC.md` for the canonical repository adapter.
-- Use the relevant skill under `skills/` when the request matches one.
-- If the sibling repository is unavailable, continue with the rules in this
-  file and report that the shared guidance was not loaded.
-
-Shared guidance does not expand the user's requested scope. Do not modify
-Foundation, MIDILAR, RoModular, RoModularBuild, or another sibling repository
-unless the user explicitly includes it.
+Do not modify Foundation, MIDILAR, RoModular, RoModularBuild, or another
+sibling repository unless the user explicitly includes it.
 
 ## Repository rules
 
