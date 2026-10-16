@@ -3,6 +3,15 @@
 This file records user-visible changes to Music Composition Core (MCC).
 Release dates use the `YYYY-MM-DD` format.
 
+## [0.6.2] - 2026-10-16
+
+### Changed
+
+- Add small, commented musical walkthroughs with computed output shared by desktop and Arduino.
+- Remove the redundant library-name directory from examples and update build and Arduino entry points.
+- Share the Core version output across both platforms and compute meter comparisons instead of printing fixed answers.
+- Require Foundation 2.0.8 and validate against CPSTL 1.1.12 in embedded CI.
+
 ## [0.6.1] - 2026-10-16
 
 ### Changed

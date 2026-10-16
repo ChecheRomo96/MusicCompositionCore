@@ -56,9 +56,9 @@ rm -rf "$BUILD_ROOT"
 # Compile each sketch against the repository and Foundation as libraries,
 # exactly as an Arduino user who installed both would.
 COUNT=0
-for SKETCH in "$MCC_ROOT"/examples/MCC/*/*/*.ino; do
+for SKETCH in "$MCC_ROOT"/examples/*/*/*.ino; do
     SKETCH_DIR=$(dirname -- "$SKETCH")
-    NAME=${SKETCH_DIR#"$MCC_ROOT/examples/MCC/"}
+    NAME=${SKETCH_DIR#"$MCC_ROOT/examples/"}
     LOG="$BUILD_ROOT/$NAME.log"
     mkdir -p -- "$(dirname -- "$LOG")"
     printf '%s\n' "== $NAME ($FQBN)"
