@@ -6,7 +6,7 @@
 #include <Foundation_BuildSettings.h>
 
 #ifndef MCC_VERSION
-    #define MCC_VERSION "0.6.0"
+    #define MCC_VERSION "0.6.1"
 #endif
 
 #ifndef MCC_CPLUSPLUS
