@@ -1,5 +1,7 @@
 # Music Composition Core (MCC)
 
+**Documentation:** [API and build guide](https://checheromo96.github.io/MusicCompositionCore/) · [API class index](https://checheromo96.github.io/MusicCompositionCore/annotated.html)
+
 MCC is a portable music-composition library. CMake packages and direct source
 builds use C++17; Arduino source builds also support the C++11 mode selected by
 stock cores. This repository is a clean reconstruction of earlier Music
