@@ -24,8 +24,8 @@ Release dates use the `YYYY-MM-DD` format.
 
 ### Changed
 
-- MCC requires Foundation 2.0.5 or a newer 2.x release, for
-  `Foundation::Containers::BitVector`. Foundation 2 builds on CPSTL 1.1.5 (the
+- MCC requires Foundation 2.0.10 or a newer 2.x release, for
+  `Foundation::Containers::BitVector`. Foundation 2 builds on CPSTL 1.1.12 (the
   `cpstd` standard vocabulary); Arduino users install CPSTL next to
   Foundation, and `scripts/test-arduino.sh` and `.ps1` take `--cpstl`
   (default `MCC_CPSTL_SOURCE` or `../CPSTL`).
