@@ -50,7 +50,7 @@ The rules every type follows are in
 ## Dependency
 
 MCC consumes the CMake target `Foundation::Foundation` from Foundation
-`2.0.5` or a newer `2.x` release, which builds on CPSTL 1.1.5 or newer (the
+`2.0.10` or a newer `2.x` release, which builds on CPSTL 1.1.12 or newer (the
 `cpstd` standard vocabulary). Configuring MCC resolves it in this order
 (see `cmake/MCCFoundation.cmake`):
 
@@ -61,7 +61,7 @@ MCC consumes the CMake target `Foundation::Foundation` from Foundation
 4. Normal `find_package(Foundation)` rules (`Foundation_DIR`,
    `CMAKE_PREFIX_PATH`).
 5. With `MCC_FETCH_FOUNDATION=ON` (the default), the GitHub Release package
-   for tag `v2.0.5` and the preset, verified against its SHA-256; for presets
+   for tag `v2.0.10` and the preset, verified against its SHA-256; for presets
    without a Release package (AVR, Arm), the Foundation sources at that tag
    are cloned and built with MCC's toolchain.
 
