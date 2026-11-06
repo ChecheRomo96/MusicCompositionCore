@@ -1,0 +1,12 @@
+<map id="Music Composition Core" name="Music Composition Core">
+<area shape="rect" id="Node000001" title="Portable music&#45;composition primitives built on Foundation." alt="" coords="5,203,185,228"/>
+<area shape="rect" id="Node000007" href="$group__MCC__Chord.html" title="Chord patterns, spelled chords, inversions and the reviewed chord catalog." alt="" coords="243,5,303,31"/>
+<area shape="rect" id="Node000002" href="$group__MCC__Core.html" title="Root module for the reconstructed music domain." alt="" coords="247,55,299,80"/>
+<area shape="rect" id="Node000004" href="$group__MCC__Interval.html" title="Directed intervals and spelling&#45;preserving transposition." alt="" coords="237,104,309,129"/>
+<area shape="rect" id="Node000008" href="$group__MCC__Key.html" title="Key signatures, keys in the seven diatonic modes and spelling in a key." alt="" coords="249,153,296,179"/>
+<area shape="rect" id="Node000009" href="$group__MCC__Notation.html" title="Text formatting and parsing into caller&#45;provided buffers." alt="" coords="233,203,312,228"/>
+<area shape="rect" id="Node000003" href="$group__MCC__Pitch.html" title="Written pitch primitives: letters, accidentals, note names and pitches." alt="" coords="245,252,300,277"/>
+<area shape="rect" id="Node000010" href="$group__MCC__Rhythm.html" title="Exact written durations, independent of playback time." alt="" coords="236,301,309,327"/>
+<area shape="rect" id="Node000006" href="$group__MCC__Scale.html" title="Scale patterns, spelled scales and the reviewed scale catalog." alt="" coords="244,351,301,376"/>
+<area shape="rect" id="Node000005" href="$group__MCC__Tuning.html" title="Frequencies of written pitches under an explicit tuning." alt="" coords="241,400,305,425"/>
+</map>
