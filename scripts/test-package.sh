@@ -5,21 +5,15 @@ SCRIPT_DIR=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
 . "$SCRIPT_DIR/common.sh"
 
 usage() {
-    printf '%s\n' "Usage: $0 <preset> [--foundation-prefix <path>] [--parallel <jobs>] [--fresh]"
+    printf '%s\n' "Usage: $0 <preset> [--parallel <jobs>] [--fresh]"
 }
 
 PRESET=""
-FOUNDATION_PREFIX=""
 PARALLEL=""
 FRESH=0
 
 while [ "$#" -gt 0 ]; do
     case "$1" in
-        --foundation-prefix)
-            mcc_require_value "$1" "${2:-}"
-            FOUNDATION_PREFIX=$2
-            shift 2
-            ;;
         --parallel)
             mcc_require_value "$1" "${2:-}"
             PARALLEL=$2
@@ -53,31 +47,10 @@ case "$PRESET" in
         ;;
 esac
 
-# Without an explicit prefix, MCC resolves Foundation itself: sibling export,
-# GitHub Release package or sources (see cmake/MCCFoundation.cmake).
-if [ -z "$FOUNDATION_PREFIX" ]; then
-    FOUNDATION_PREFIX=${MCC_FOUNDATION_PREFIX:-}
-fi
-if [ -n "$FOUNDATION_PREFIX" ]; then
-    FOUNDATION_PREFIX=$(mcc_absolute_path "$FOUNDATION_PREFIX")
-    FOUNDATION_CONFIG="$FOUNDATION_PREFIX/lib/cmake/Foundation/FoundationConfig.cmake"
-    [ -f "$FOUNDATION_CONFIG" ] || \
-        mcc_die "Foundation package not found at $FOUNDATION_PREFIX"
-fi
-
 set -- "$SCRIPT_DIR/export.sh" "$PRESET"
 [ "$FRESH" -eq 0 ] || set -- "$@" --fresh
 [ -z "$PARALLEL" ] || set -- "$@" --parallel "$PARALLEL"
-if [ -n "$FOUNDATION_PREFIX" ]; then
-    set -- "$@" -- -DMCC_FOUNDATION_PREFIX="$FOUNDATION_PREFIX"
-fi
 "$@"
-
-# The Foundation package MCC used; empty when Foundation was built from
-# sources and installed next to MCC.
-RESOLVED_FOUNDATION_PREFIX=$(sed -n \
-    's/^MCC_FOUNDATION_RESOLVED_PREFIX:INTERNAL=//p' \
-    "$(mcc_build_dir "$PRESET")/CMakeCache.txt")
 
 MCC_PREFIX="$MCC_DIST_ROOT/$PRESET"
 CONSUMER_SOURCE="$MCC_ROOT/tests/PackageConsumer"
@@ -109,7 +82,7 @@ set -- cmake \
     -B "$CONSUMER_BUILD" \
     -G "$GENERATOR" \
     -DMCC_DIR="$MCC_PREFIX/lib/cmake/MCC" \
-    -DCMAKE_PREFIX_PATH="$MCC_PREFIX;$RESOLVED_FOUNDATION_PREFIX"
+    -DCMAKE_PREFIX_PATH="$MCC_PREFIX"
 
 [ -z "$GENERATOR_PLATFORM" ] || set -- "$@" -A "$GENERATOR_PLATFORM"
 [ -z "$OSX_ARCHITECTURES" ] || \

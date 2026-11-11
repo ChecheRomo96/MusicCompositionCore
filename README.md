@@ -51,20 +51,9 @@ The rules every type follows are in
 
 MCC 0.0.1 is the active RoModular baseline. It consumes the CMake target
 `Foundation::Foundation` from Foundation `0.0.1` or newer, which builds on
-CPSTL 0.0.1 or newer (the
-`cpstd` standard vocabulary). Configuring MCC resolves it in this order
-(see `cmake/MCCFoundation.cmake`):
-
-1. A `Foundation::Foundation` target already defined by a parent project.
-2. `-DMCC_FOUNDATION_PREFIX=<prefix>` or the `MCC_FOUNDATION_PREFIX`
-   environment variable.
-3. A sibling export in `../Foundation/dist/<preset>`.
-4. Normal `find_package(Foundation)` rules (`Foundation_DIR`,
-   `CMAKE_PREFIX_PATH`).
-5. With `MCC_FETCH_FOUNDATION=ON` (the default), the GitHub Release package
-for tag `v0.0.1` and the preset, verified against its SHA-256; for presets
-   without a Release package (AVR, Arm), the Foundation sources at that tag
-   are cloned and built with MCC's toolchain.
+CPSTL 0.0.1 or newer (the `cpstd` standard vocabulary). A parent project may
+provide that target; otherwise MCC fetches Foundation source at `v0.0.1` with
+its own toolchain.
 
 Downloads are kept in `build/<preset>/_deps/` and reused. No setup is needed
 on a fresh machine:
@@ -73,16 +62,15 @@ on a fresh machine:
 ./scripts/configure.sh macos_arm64 --fresh
 ```
 
-To develop both libraries together, export Foundation next to MCC or build
-your working copy directly:
+To develop both libraries together, use a local Foundation working copy:
 
 ```bash
 ./scripts/configure.sh macos_arm64 --fresh -- \
   -DFETCHCONTENT_SOURCE_DIR_FOUNDATION=../Foundation
 ```
 
-Use `-DMCC_FETCH_FOUNDATION=OFF` to forbid network access. MCC rejects
-Foundation packages recorded for a different platform preset.
+Use `-DMCC_FETCH_FOUNDATION=OFF` to require a parent-provided target. Exported
+Release packages retain their CMake package dependency for distribution.
 
 ## Build and test
 
@@ -139,8 +127,7 @@ installed next to MCC.
 
 ```bash
 ./scripts/export.sh macos_arm64 --fresh --examples-on
-MCC_FOUNDATION_PREFIX=../Foundation/dist/macos_arm64 \
-  ./scripts/docs.sh --fresh
+./scripts/docs.sh --fresh
 ```
 
 The generated documentation starts at

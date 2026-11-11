@@ -1,31 +1,22 @@
 /**
  * @defgroup MCC_BuildGuide_Dependency Foundation Dependency
  * @ingroup MCC_BuildGuide
- * @brief Foundation package resolution and compatibility contract.
+ * @brief Foundation source dependency contract.
  *
- * MCC links `Foundation::Foundation` publicly and requires Foundation
- * `2.0.10` or a newer `2.x` release. Foundation 2 builds on CPSTL 1.1.12 or
- * newer, which a Foundation package carries or finds; Arduino users install
- * the CPSTL library next to Foundation. MCC rejects a package whose recorded
- * platform differs from the selected MCC preset.
+ * MCC links `Foundation::Foundation` publicly. Its pinned source baseline is
+ * Foundation `0.0.1`, which brings CPSTL `0.0.1` with it.
  *
- * Resolution order (`cmake/MCCFoundation.cmake`):
+ * For a source build, `cmake/MCCFoundation.cmake` first reuses a
+ * `Foundation::Foundation` target supplied by the parent project. Otherwise,
+ * with `MCC_FETCH_FOUNDATION` enabled (the default), it obtains the Foundation
+ * sources at tag `v0.0.1` with `FetchContent` and builds them with MCC's
+ * toolchain.
  *
- * 1. A `Foundation::Foundation` target defined by a parent project.
- * 2. `-DMCC_FOUNDATION_PREFIX=<prefix>` or the `MCC_FOUNDATION_PREFIX`
- *    environment variable. An unusable explicit prefix is an error.
- * 3. `../Foundation/dist/<preset>` for sibling repositories. An incompatible
- *    sibling export is ignored with a warning.
- * 4. Normal `find_package(Foundation CONFIG)` search rules.
- * 5. When `MCC_FETCH_FOUNDATION` is `ON` (default):
- *    - the GitHub Release package `Foundation-<version>-<preset>` for tag
- *      `v<version>`, verified against its published SHA-256 file;
- *    - otherwise the Foundation sources at that tag, fetched with
- *      `FetchContent` and built with MCC's toolchain. Installing MCC then
- *      also installs Foundation into the same prefix.
+ * `FETCHCONTENT_SOURCE_DIR_FOUNDATION` substitutes a local Foundation working
+ * copy for the download. Set `MCC_FETCH_FOUNDATION=OFF` only when the parent
+ * project already provides `Foundation::Foundation`.
  *
- * Fetched content lives in `build/<preset>/_deps/` and is reused across
- * reconfigurations. `FETCHCONTENT_SOURCE_DIR_FOUNDATION` builds a local
- * Foundation working copy instead of cloning, and
- * `-DMCC_FETCH_FOUNDATION=OFF` disables network access.
+ * An exported MCC Release package is a separate distribution workflow. Its
+ * `MCCConfig.cmake` uses `find_dependency(Foundation)` when a downstream
+ * project consumes the package.
  */
